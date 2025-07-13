@@ -2,6 +2,7 @@ import { Tabs } from 'expo-router';
 import React from 'react';
 import { Platform, StyleSheet } from 'react-native';
 
+
 import { HapticTab } from '@/components/HapticTab';
 import { IconSymbol } from '@/components/ui/IconSymbol';
 import TabBarBackground from '@/components/ui/TabBarBackground';
@@ -12,6 +13,7 @@ export default function TabLayout() {
   const colorScheme = useColorScheme();
 
   return (
+
     // tab é a barra de navegação
     <Tabs 
       screenOptions={{
@@ -29,6 +31,13 @@ export default function TabLayout() {
           default: {},
         }),
       }}>
+      <Tabs.Screen
+        name="cadastro"
+        options={{
+          title: 'Cadastro',
+          tabBarIcon: ({ color }) => <IconSymbol size={28} name="house.fill" color={color} />,
+        }}
+      />
       <Tabs.Screen
         name="index"
         options={{

@@ -1,3 +1,4 @@
+
 // Fallback for using MaterialIcons on Android and web.
 
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
@@ -15,8 +16,9 @@ type IconSymbolName = keyof typeof MAPPING;
  */
 const MAPPING = {
   'house.fill': 'home',
-  'paperplane.fill': 'send',
+  'paperplane.fill': 'explore',
   'arrow.right': 'arrow-circle-right',
+  'arrow.left': 'arrow-circle-left', // Adicionei o ícone de seta para a esquerda
   'chevron.left.forwardslash.chevron.right': 'code',
   'chevron.right': 'chevron-right',
 } as IconMapping;

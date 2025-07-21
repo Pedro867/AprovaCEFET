@@ -13,14 +13,18 @@ export default function RootLayout() {
   });
 
   if (!loaded) {
-    // Async font loading only occurs in development.
     return null;
   }
 
   return (
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
+      <Stack initialRouteName="(telas)">
+        {/*telas antes do login */}
+        <Stack.Screen name="(telas)" options={{ headerShown: false }} />
+        
+        {/*telas apos o login */}
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+        
         <Stack.Screen name="+not-found" />
       </Stack>
       <StatusBar style="auto" />

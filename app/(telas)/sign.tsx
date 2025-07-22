@@ -155,7 +155,7 @@ const styles = StyleSheet.create({
     borderColor: '#005F6B',
   },
   buttonText: {
-    color: Colors.light.buttonText,
+    color: Colors.light.verdeClaro,
     fontSize: 18,
     fontWeight: 'bold',
   },

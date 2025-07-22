@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
     borderColor: Colors.light.tint,
   },
   buttonText: {
-    color: Colors.light.buttonText,
+    color: Colors.light.verdeClaro,
     fontSize: 22,
     fontWeight: 'bold',
     lineHeight: 30

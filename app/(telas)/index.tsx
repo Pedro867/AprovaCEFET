@@ -13,28 +13,39 @@ export default function InitialScreen() {
   return (
     <ThemedView style={styles.container}>
       <View style={styles.content}>
-        <ThemedText type="title" style={styles.title}>AprovaCEFET</ThemedText>
-        <ThemedText style={styles.subtitle}>Sua plataforma de estudos para o CEFET-MG</ThemedText>
         <Image
-          source={require('@/assets/images/logoTemporario.png')}
+          source={require('@/assets/images/gifLogoAprovaCef.gif')}
           style={styles.logoImage}
           contentFit="contain" // mostra a img toda, sem cortar
         />
       </View>
 
       <View style={styles.buttonContainer}>
-        <Link href="/login">
-          <TouchableOpacity style={[styles.button, styles.loginButton]}>
-            <ThemedText style={styles.buttonText}>Logar</ThemedText>
+        {/*Botão de Entrar */}
+        <Link href="/login" asChild>
+          <TouchableOpacity>
+            <View style={styles.buttonWrapper}>
+              {/* Sombra do botão */}
+              <View style={styles.buttonShadow} />
+              {/* Botão principal */}
+              <View style={styles.button}>
+                <Text style={styles.buttonText}>ENTRAR</Text>
+              </View>
+            </View>
           </TouchableOpacity>
         </Link>
-        <Link href="/sign">
-          <View style={[styles.button, styles.signButton]}>
-            <ThemedText style={[styles.buttonText]}>Criar Conta</ThemedText>
-          </View>
 
-          {/* <Button title="Cadastrar" onPress={() => console.log("ola")} /> */}
-
+        <Link href="/sign" asChild>
+          <TouchableOpacity>
+            <View style={styles.buttonWrapper}>
+              {/* Sombra do botão */}
+              <View style={styles.buttonShadow} />
+              {/* Botão principal */}
+              <View style={styles.button}>
+                <Text style={styles.buttonText}>REGISTRAR</Text>
+              </View>
+            </View>
+          </TouchableOpacity>
         </Link>
       </View>
     </ThemedView>
@@ -54,58 +65,40 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  title: {
-    fontSize: 50,
-    fontWeight: 'bold',
-    color: '',
-    marginBottom: 10,
-    lineHeight: 100,
-  },
-  subtitle: {
-    fontSize: 18,
-    color: '',
-    textAlign: 'center',
-    marginBottom: 40,
-  },
   logoImage: {
     width: 250,
     height: 250,
     marginBottom: 40,
   },
   buttonContainer: {
-    width: '100%',
     paddingHorizontal: 20,
     paddingBottom: 80,
     gap: 50,
   },
+  buttonWrapper: {
+    width: 232,
+    height: 64, 
+  },
   button: {
-    paddingVertical: 20,
-    borderRadius: 10,
-    alignItems: 'center',
     width: '100%',
-    shadowColor: '#000', // Cor da sombra
-    shadowOffset: {
-      width: 0,
-      height: 4, // Deslocamento vertical da sombra
-    },
-    shadowOpacity: 0.5, // Opacidade da sombra
-    shadowRadius: 5, // Raio do desfoque da sombra
-    elevation: 8, // Elevação para Android (simula sombra)
-    borderWidth: 1, 
-    borderColor: '#005F6B',
+    height: '100%',
+    backgroundColor: '#003869',
+    borderRadius: 7,
+    justifyContent: 'center',
+    alignItems: 'center',
+    position: 'absolute', //para ficar sobre a sombra
   },
-  loginButton: {
-    backgroundColor: Colors.light.tint,
-  },
-  signButton: {
-    backgroundColor: 'transparent',
-    borderWidth: 1,
-    borderColor: Colors.light.tint,
+  buttonShadow: {
+    width: '100%',
+    height: '100%',
+    backgroundColor: '#004ef75e', // Cor da "sombra" com transparência
+    borderRadius: 7,
+    position: 'absolute', 
+    top: 4,
   },
   buttonText: {
-    color: Colors.light.verdeClaro,
-    fontSize: 22,
+    color: '#FFFFFF',
+    fontSize: 20, // text-xl
     fontWeight: 'bold',
-    lineHeight: 30
   },
 });

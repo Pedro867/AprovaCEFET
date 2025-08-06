@@ -12,12 +12,13 @@ import { Link, useNavigation } from 'expo-router';
 import { LinearGradient } from 'expo-linear-gradient'; 
 import { validaLogin } from '../api/conexaoFetch';
 import Feather from '@expo/vector-icons/Feather';
+import { useRouter } from 'expo-router'; //router pega o path todo, o navigate olha so o nome do arquivo
 
 export default function LoginScreen() {
   const [senha, setSenha] = useState('');
   const [email, setEmail] = useState('');
   const [showPassword, setShowPassword] = useState(false); // estado para o olho da senha
-  const navigation = useNavigation();
+  const router = useRouter();
 
   const handleLogin = async () => { //funcao assincrona, chamada quando o botao entrar é pressionado
     if (!email.trim() || !senha.trim()) {
@@ -26,7 +27,7 @@ export default function LoginScreen() {
     }
     const sucesso = await validaLogin(email, senha);
     if (sucesso) {
-      navigation.navigate('(tabs)/secao');
+      router.replace('/(tabs)/secao');
     } else {
     }
   };

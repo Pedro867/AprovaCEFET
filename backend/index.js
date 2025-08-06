@@ -3,8 +3,6 @@ import cors from "cors";
 import dotenv from "dotenv";
 import mysql from "mysql2/promise";
 
-//import {validaCadastro} from './validacaoCadastro.js'
-
 dotenv.config();
 
 const app = express();
@@ -93,6 +91,7 @@ app.post("/login", async (req, res) => {
             success: true,
             message: "Login realizado!",
         });
+        return true;
     } catch (err) {
         console.error(err);
         res.status(500).json({

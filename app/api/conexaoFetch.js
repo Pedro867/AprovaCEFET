@@ -30,6 +30,7 @@ export async function validaCadastro(nome, email, senha) {
 
         if (data.success) {
             Alert.alert("Sucesso", data.message);
+            return true;
         } else {
             Alert.alert("Erro", data.message || "Erro ao cadastrar.");
         }
@@ -66,6 +67,7 @@ export async function validaLogin(email, senha) {
 
         if (data.success) {
             Alert.alert("Sucesso", data.message);
+            return true;
         } else {
             Alert.alert("Erro", data.message || "Erro ao conectar ao BD.");
         }

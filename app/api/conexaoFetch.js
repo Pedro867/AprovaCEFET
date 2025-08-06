@@ -4,7 +4,8 @@ import {
 
 export async function validaCadastro(nome, email, senha) {
     try {
-        const response = await fetch("http://192.168.100.16:8081/register", {
+        //ESSE FETCH TA NO RENDER
+        const response = await fetch("https://backend-aprovacefet.onrender.com/register", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -42,7 +43,7 @@ export async function validaCadastro(nome, email, senha) {
 
 export async function validaLogin(email, senha) {
     try {
-        const response = await fetch("http://192.168.100.16:8081/login", {
+        const response = await fetch("https://backend-aprovacefet.onrender.com/login", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

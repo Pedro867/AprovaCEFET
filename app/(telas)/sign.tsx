@@ -33,13 +33,13 @@ export default function SignScreen() {
       return;
     }
 
-    // chama a API de cadastro
-    const sucesso = await validaCadastro(nome, email, senha);
-    if (sucesso) {
-      Alert.alert('Sucesso!', 'Sua conta foi criada. Faça o login para continuar.');
-      navigation.navigate('login');
-    } else {
-    }
+    // chama a API de cadastro 
+    //comentado para testes com bd desligado
+    //const sucesso = await validaCadastro(nome, email, senha);
+    //if (sucesso) {
+      navigation.navigate('registerDate');
+    //} else {
+    //}
   };
 
   return (
@@ -171,7 +171,7 @@ const styles = StyleSheet.create({
     lineHeight: 30,
   },
   subtitle: {
-    fontSize: 16,
+    fontSize: 17,
     color: '#003869',
     lineHeight: 30,
   },

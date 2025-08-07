@@ -3,8 +3,6 @@ import cors from "cors";
 import dotenv from "dotenv";
 import mysql from "mysql2/promise";
 
-//import {validaCadastro} from './validacaoCadastro.js'
-
 dotenv.config();
 
 const app = express();
@@ -18,18 +16,21 @@ app.post("/register", async (req, res) => {
         senha
     } = req.body;
 
+    //mysql://root:yYvSsJUUdmehuFwxTMzNGWKFHCHdYlye@trolley.proxy.rlwy.net:16798/railway
+
     try {
         const conn = await mysql.createConnection({
-            host: process.env.DB_HOST,
+            host: "trolley.proxy.rlwy.net",
+            port: "16798",
             user: "root",
-            password: process.env.DB_PASSWORD,
-            database: "aprovacefet",
-            port: 3306,
+            password: "yYvSsJUUdmehuFwxTMzNGWKFHCHdYlye",
+            database: "railway",
         });
 
+        const id = gerarIdNumerico(email);
         const [result] = await conn.execute(
-            "INSERT INTO aluno (nome, email, senha) VALUES (?, ?, ?)",
-            [nome, email, senha]
+            "INSERT INTO alunos (id, nome, email, senha) VALUES (?, ?, ?, ?)",
+            [Number(id), nome, email, senha]
         );
 
         await conn.end();
@@ -50,6 +51,25 @@ app.post("/register", async (req, res) => {
     }
 });
 
+async function gerarIdNumerico(email) {
+    const encoder = new TextEncoder();
+    const data = encoder.encode(email);
+
+    const hashBuffer = await crypto.subtle.digest("SHA-256", data);
+    const hashArray = Array.from(new Uint8Array(hashBuffer));
+
+    const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('').slice(0, 16);
+
+    const asciiNumerico = hashHex
+        .split('')
+        .map(char => char.charCodeAt(0))
+        .join('');
+
+    const numeroSeguro = Number(asciiNumerico.slice(0, 15));
+
+    return numeroSeguro;
+}
+
 app.post("/login", async (req, res) => {
     const {
         email,
@@ -58,15 +78,15 @@ app.post("/login", async (req, res) => {
 
     try {
         const conn = await mysql.createConnection({
-            host: process.env.DB_HOST,
+            host: "trolley.proxy.rlwy.net",
+            port: "16798",
             user: "root",
-            password: process.env.DB_PASSWORD,
-            database: "aprovacefet",
-            port: 3306,
+            password: "yYvSsJUUdmehuFwxTMzNGWKFHCHdYlye",
+            database: "railway",
         });
 
         const [rows] = await conn.execute(
-            "SELECT * FROM aluno WHERE email = ?",
+            "SELECT * FROM alunos WHERE email = ?",
             [email]
         );
 
@@ -82,7 +102,7 @@ app.post("/login", async (req, res) => {
         const aluno = rows[0];
 
         //exemplo com texto normal, substituir por bcrypt se usar hash
-        if (aluno.Senha !== senha) {
+        if (aluno.senha !== senha) {
             return res.status(401).json({
                 success: false,
                 message: "Senha incorreta.",
@@ -93,6 +113,7 @@ app.post("/login", async (req, res) => {
             success: true,
             message: "Login realizado!",
         });
+        return true;
     } catch (err) {
         console.error(err);
         res.status(500).json({

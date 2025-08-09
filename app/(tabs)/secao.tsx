@@ -4,16 +4,17 @@ import { ThemedText } from '@/components/ThemedText';
 import { Colors } from '@/constants/Colors';
 import { Link, useNavigation } from 'expo-router';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
+import { useRouter } from 'expo-router';
 
 export default function HomeScreen() {
-  const navigation = useNavigation();
+  const router = useRouter();
 
   return (
     <Animated.ScrollView contentContainerStyle={styles.scrollViewContent}>
     <View style={styles.container}>
 
       <View style={styles.titleContainer}>
-        <TouchableOpacity onPress={() => navigation.navigate('(telas)')} style={styles.backButton}>
+        <TouchableOpacity onPress={() => router.replace('/(telas)')} style={styles.backButton}>
           <MaterialIcons name="exit-to-app" size={30} color={Colors.light.text} />
         </TouchableOpacity>
 
@@ -21,25 +22,25 @@ export default function HomeScreen() {
       </View>
 
       <View style={styles.buttonContainer}>
-        <Link href="/(tabs)/matematica" asChild>
+        <Link href="/(matematica)/matematica" asChild>
           <TouchableOpacity style={matematica.buttonMatematica}>
             <ThemedText style={styles.buttonText}>Matemática</ThemedText>
           </TouchableOpacity>
         </Link>
 
-        <Link href="/(tabs)/linguagens" asChild>
+        <Link href="/(linguagens)/linguagens" asChild>
           <TouchableOpacity style={linguagens.buttonLinguagens}>
             <ThemedText style={styles.buttonText}>Linguagens</ThemedText>
           </TouchableOpacity>
         </Link>
 
-        <Link href="/(tabs)/cienciasNatureza" asChild>
+        <Link href="/(natureza)/cienciasNatureza" asChild>
           <TouchableOpacity style={cienciasNatureza.buttonCienciasNatureza}>
             <ThemedText style={styles.buttonText}>Ciencias da Natureza</ThemedText>
           </TouchableOpacity>
         </Link>
 
-        <Link href="/(tabs)/ciencasHumanas" asChild>
+        <Link href="/(humanas)/cienciasHumanas" asChild>
           <TouchableOpacity style={cienciasHumanas.buttonCienciasHumanas}>
             <ThemedText style={styles.buttonText}>Ciencias Humanas</ThemedText>
           </TouchableOpacity>

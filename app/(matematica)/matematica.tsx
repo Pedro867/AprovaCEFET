@@ -4,20 +4,20 @@ import { ThemedText } from '@/components/ThemedText';
 import { Colors } from '@/constants/Colors';
 import { Link, useNavigation } from 'expo-router';
 import { IconSymbol } from '@/components/ui/IconSymbol';
+import { useRouter } from 'expo-router';
 
 export default function HomeScreen() {
-  const navigation = useNavigation();
+  const router = useRouter();
 
   return (
     <Animated.ScrollView contentContainerStyle={styles.scrollViewContent}>
       <View style={styles.container}>
-        {/* Botão de voltar */}
 
         <View style={styles.titleContainer}>
-          <TouchableOpacity onPress={() => navigation.navigate('secao')} style={styles.backButton}>
+          <TouchableOpacity onPress={() => router.replace('/(tabs)/secao')} style={styles.backButton}>
             <IconSymbol name="arrow.left" size={24} color={Colors.light.text} />
           </TouchableOpacity>
-          <ThemedText type="title" style={styles.title}>Ciencias da Natureza</ThemedText>
+          <ThemedText type="title" style={styles.title}>Matemática</ThemedText>
         </View>
         <View style={styles.subtitleContainer}>
           <ThemedText type="subtitle" style={styles.subtitle}>Unidades</ThemedText>
@@ -25,45 +25,45 @@ export default function HomeScreen() {
 
         <View style={styles.buttonContainer}>
           {/* O Link para matematica*/}
-          <Link href="/(tabs)/unidade" asChild>
+          <Link href="/(matematica)/unidade" asChild>
             <TouchableOpacity style={styles.button}>
-              <ThemedText style={styles.buttonText}>Unidade 1</ThemedText>
+              <ThemedText style={styles.buttonText}>Notações e Medidas</ThemedText>
             </TouchableOpacity>
           </Link>
 
-          <Link href="/(tabs)/unidade" asChild>
+          <Link href="/(matematica)/unidade" asChild>
             <TouchableOpacity style={styles.button}>
-              <ThemedText style={styles.buttonText}>Unidade 2</ThemedText>
+              <ThemedText style={styles.buttonText}>Conjuntos</ThemedText>
             </TouchableOpacity>
           </Link>
 
-          <Link href="/(tabs)/unidade" asChild>
+          <Link href="/(matematica)/unidade" asChild>
             <TouchableOpacity style={styles.button}>
-              <ThemedText style={styles.buttonText}>Unidade 3</ThemedText>
+              <ThemedText style={styles.buttonText}>Grandezas e Medidas</ThemedText>
             </TouchableOpacity>
           </Link>
 
-          <Link href="/(tabs)/unidade" asChild>
+          <Link href="/(matematica)/unidade" asChild>
             <TouchableOpacity style={styles.button}>
-              <ThemedText style={styles.buttonText}>Unidade 4</ThemedText>
+              <ThemedText style={styles.buttonText}>Estatística</ThemedText>
             </TouchableOpacity>
           </Link>
 
-          <Link href="/(tabs)/unidade" asChild>
+          <Link href="/(matematica)/unidade" asChild>
             <TouchableOpacity style={styles.button}>
-              <ThemedText style={styles.buttonText}>Unidade 5</ThemedText>
+              <ThemedText style={styles.buttonText}>Álgebra</ThemedText>
             </TouchableOpacity>
           </Link>
 
-          <Link href="/(tabs)/unidade" asChild>
+          <Link href="/(matematica)/unidade" asChild>
             <TouchableOpacity style={styles.button}>
-              <ThemedText style={styles.buttonText}>Unidade 6</ThemedText>
+              <ThemedText style={styles.buttonText}>Funções</ThemedText>
             </TouchableOpacity>
           </Link>
 
-          <Link href="/(tabs)/unidade" asChild>
+          <Link href="/(matematica)/unidade" asChild>
             <TouchableOpacity style={styles.button}>
-              <ThemedText style={styles.buttonText}>Unidade 7</ThemedText>
+              <ThemedText style={styles.buttonText}>Probabilidade</ThemedText>
             </TouchableOpacity>
           </Link>
 
@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
     zIndex: 1,
   },
   titleContainer: {
-    backgroundColor: Colors.light.azul,
+    backgroundColor: Colors.light.vermelho,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',

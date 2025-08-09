@@ -1,21 +1,13 @@
-import { Image } from 'expo-image';
-import { Platform, StyleSheet, TouchableOpacity, View } from 'react-native';
-
-import { Collapsible } from '@/components/Collapsible';
-import { ExternalLink } from '@/components/ExternalLink';
-import ParallaxScrollView from '@/components/ParallaxScrollView';
+import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
 import { Colors } from '@/constants/Colors';
 import { Link, useNavigation } from 'expo-router';
-import { IconSymbol } from '@/components/ui/IconSymbol';
 
 export default function HomeScreen() {
-  const navigation = useNavigation();
+  //const router = useRouter();
 
   return (
     <View style={styles.container}>
-      {/* Botão de voltar */}
 
       <View>
         <ThemedText type="title" style={styles.title}>Não implementado ainda!</ThemedText>

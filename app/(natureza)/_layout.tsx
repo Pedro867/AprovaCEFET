@@ -12,9 +12,7 @@ export default function TabLayout() {
   const colorScheme = useColorScheme();
 
   return (
-    // a barra de navegação agora só aparece para as telas DENTRO de (tabs)
     <Tabs
-      // a tela inicial, depois do login, será a 'home'
       screenOptions={{
         tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
         headerShown: false,
@@ -23,33 +21,11 @@ export default function TabLayout() {
         tabBarBackground: TabBarBackground,
       }}>
       <Tabs.Screen
-        name="secao"
+        name="cienciasNatureza"
         options={{
-          title: 'Home',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="house.fill" color={color} />,
-        }}
-      />
-      <Tabs.Screen
-        name="matematica"
-        options={{
-          title: 'Matematica',
+          title: 'Natureza',
           tabBarIcon: ({ color }) => <IconSymbol size={28} name="house.fill" color={color} />,
           href: null, 
-        }}
-      />
-      <Tabs.Screen
-        name="unidade"
-        options={{
-          title: 'Unidade',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="house.fill" color={color} />,
-          href: null, 
-        }}
-      />
-       <Tabs.Screen
-        name="profile"
-        options={{
-          title: 'Perfil',
-          tabBarIcon: ({ color }) => <FontAwesome5 name="user-graduate" size={22} color={color} />,
         }}
       />
     </Tabs>

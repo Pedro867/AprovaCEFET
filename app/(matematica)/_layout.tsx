@@ -23,13 +23,6 @@ export default function TabLayout() {
         tabBarBackground: TabBarBackground,
       }}>
       <Tabs.Screen
-        name="secao"
-        options={{
-          title: 'Home',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="house.fill" color={color} />,
-        }}
-      />
-      <Tabs.Screen
         name="matematica"
         options={{
           title: 'Matematica',
@@ -43,13 +36,6 @@ export default function TabLayout() {
           title: 'Unidade',
           tabBarIcon: ({ color }) => <IconSymbol size={28} name="house.fill" color={color} />,
           href: null, 
-        }}
-      />
-       <Tabs.Screen
-        name="profile"
-        options={{
-          title: 'Perfil',
-          tabBarIcon: ({ color }) => <FontAwesome5 name="user-graduate" size={22} color={color} />,
         }}
       />
     </Tabs>

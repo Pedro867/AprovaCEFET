@@ -13,7 +13,7 @@ export default function TabLayout() {
   return (
     // a barra de navegação agora só aparece para as telas DENTRO de (tabs)
     <Tabs
-      // a tela inicial, depois do login, será a 'home'
+      // a tela inicial, depois do login, será a 'secao'
       screenOptions={{
         tabBarActiveTintColor: Colors[colorScheme ?? "light"].tint,
         headerShown: false,

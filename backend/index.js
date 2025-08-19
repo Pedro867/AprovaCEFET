@@ -5,6 +5,8 @@ import mysql from "mysql2/promise";
 
 dotenv.config();
 
+export const nomeUsuario = "";
+
 const app = express();
 app.use(cors());
 app.use(express.json());
@@ -18,56 +20,50 @@ app.post("/register", async (req, res) => {
 
     //mysql://root:yYvSsJUUdmehuFwxTMzNGWKFHCHdYlye@trolley.proxy.rlwy.net:16798/railway
 
-    try {
-        const conn = await mysql.createConnection({
-            host: "trolley.proxy.rlwy.net",
-            port: "16798",
-            user: "root",
-            password: "yYvSsJUUdmehuFwxTMzNGWKFHCHdYlye",
-            database: "railway",
-        });
+    //const emailValido = validaEmail(email);
 
-        const id = gerarIdNumerico(email);
-        const [result] = await conn.execute(
-            "INSERT INTO alunos (id, nome, email, senha) VALUES (?, ?, ?, ?)",
-            [Number(id), nome, email, senha]
-        );
-
-        await conn.end();
-
+    /*if (!emailValido) {
         res.json({
-            success: true,
-            message: "Cadastro realizado!",
-            id: result.insertId,
-        });
-
-        return true;
-    } catch (err) {
-        console.error(err);
-        res.status(500).json({
             success: false,
-            message: "Erro ao cadastrar.",
+            message: "Email inválido!",
         });
-    }
+        return false;
+    } else {*/
+        try {
+            const conn = await mysql.createConnection({
+                host: "trolley.proxy.rlwy.net",
+                port: "16798",
+                user: "root",
+                password: "yYvSsJUUdmehuFwxTMzNGWKFHCHdYlye",
+                database: "railway",
+            });
+
+            const [result] = await conn.execute(
+                "INSERT INTO alunos (pontuacao, streak, nome, email, senha) VALUES (?, ?, ?, ?, ?)",
+                [0, 0, nome, email, senha]
+            );
+
+            await conn.end();
+
+            res.json({
+                success: true,
+                message: "Cadastro realizado!",
+                id: result.insertId,
+            });
+
+            return true;
+        } catch (err) {
+            console.error(err);
+            res.status(500).json({
+                success: false,
+                message: "Erro ao cadastrar.",
+            });
+        }
+    //}
 });
 
-async function gerarIdNumerico(email) {
-    const encoder = new TextEncoder();
-    const data = encoder.encode(email);
+function validaEmail(email) {
 
-    const hashBuffer = await crypto.subtle.digest("SHA-256", data);
-    const hashArray = Array.from(new Uint8Array(hashBuffer));
-
-    const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('').slice(0, 16);
-
-    const asciiNumerico = hashHex
-        .split('')
-        .map(char => char.charCodeAt(0))
-        .join('');
-
-    const numeroSeguro = Number(asciiNumerico.slice(0, 15));
-
-    return numeroSeguro;
 }
 
 app.post("/login", async (req, res) => {
@@ -113,6 +109,7 @@ app.post("/login", async (req, res) => {
             success: true,
             message: "Login realizado!",
         });
+        nomeUsuario = aluno.nome;
         return true;
     } catch (err) {
         console.error(err);
@@ -121,6 +118,11 @@ app.post("/login", async (req, res) => {
             message: "Erro no login.",
         });
     }
+});
+
+app.post("/getNome", (req, res) => {
+    res.json({ success: true, nome: nomeUsuario });  // Resposta em JSON
+    return true;
 });
 
 app.listen(8081, "0.0.0.0", () => {

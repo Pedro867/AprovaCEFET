@@ -18,6 +18,7 @@ import { BotaoCustomizado } from "@/components/ui/ButtomCustom";
 import { CalendarioCustomizado } from "@/components/ui/CalendarCustom";
 import { BlurView } from "expo-blur";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { nomeUsuario } from "../(telas)/login";
 
 const { width: screenWidth } = Dimensions.get("window");
 
@@ -50,9 +51,9 @@ const subjectAreas = [
     id: 4,
     title: "Matemática",
     disciplines: "1 Disciplina",
-    image: require("@/assets/images/math-class--calculator--and-other-supplies.png"),
+    image: require("@/assets/images/matematica/math-class--calculator--and-other-supplies.png"),
     color: "rgba(137,161,212,0.64)",
-    route: "/(matematica)/matematica",
+    route: "/(matematica)/telaUnidades",
   },
 ];
 
@@ -131,7 +132,7 @@ export default function TelaSecao() {
             />
             <View style={styles.headerText}>
               {/*torres --> precisa pegar o nome do user no bd pra exibir na tela !!!*/ }
-              <Text style={styles.greeting}>Olá, nomeUsuario</Text> 
+              <Text style={styles.greeting}>Olá, {nomeUsuario}</Text> 
 
               <Text style={styles.subtitle}>Vamos começar a aprender!</Text>
             </View>

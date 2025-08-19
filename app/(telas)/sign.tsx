@@ -59,7 +59,7 @@ export default function SignScreen() {
     <KeyboardAvoidingView
       style={styles.keyboard}
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-      keyboardVerticalOffset={Platform.OS === 'ios' ? 60 : 10} // Ajuste este valor se tiver um header
+      keyboardVerticalOffset={Platform.OS === 'ios' ? 60 : 20} // Ajuste este valor se tiver um header
     >
       <Animated.ScrollView contentContainerStyle={styles.scrollViewContent}>
         <LinearGradient

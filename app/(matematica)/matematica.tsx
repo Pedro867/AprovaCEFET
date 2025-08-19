@@ -31,7 +31,7 @@ export default function HomeScreen() {
             </TouchableOpacity>
           </Link>
 
-          <Link href="/(matematica)/unidade" asChild>
+          <Link href="/(matematica)/testeQuiz" asChild>
             <TouchableOpacity style={styles.button}>
               <ThemedText style={styles.buttonText}>Conjuntos</ThemedText>
             </TouchableOpacity>

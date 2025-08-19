@@ -1,12 +1,11 @@
-import { Tabs } from 'expo-router';
-import React from 'react';
+import { Tabs } from "expo-router";
+import React from "react";
 
-import { HapticTab } from '@/components/HapticTab';
-import { IconSymbol } from '@/components/ui/IconSymbol';
-import TabBarBackground from '@/components/ui/TabBarBackground';
-import { Colors } from '@/constants/Colors';
-import { useColorScheme } from '@/hooks/useColorScheme';
-import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
+import { HapticTab } from "@/components/HapticTab";
+import { IconSymbol } from "@/components/ui/IconSymbol";
+import { Colors } from "@/constants/Colors";
+import { useColorScheme } from "@/hooks/useColorScheme";
+import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
@@ -16,40 +15,35 @@ export default function TabLayout() {
     <Tabs
       // a tela inicial, depois do login, será a 'home'
       screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
+        tabBarActiveTintColor: Colors[colorScheme ?? "light"].tint,
         headerShown: false,
-        tabBarPosition:'bottom',
+        tabBarPosition: "bottom",
         tabBarButton: HapticTab,
-        tabBarBackground: TabBarBackground,
-      }}>
+
+        tabBarStyle: {
+          position: "absolute", 
+          backgroundColor: "transparent", 
+          borderTopWidth: 0, // remove a linha superior
+          elevation: 0, // tira sombra android
+        },
+      }}
+    >
       <Tabs.Screen
         name="secao"
         options={{
-          title: 'Home',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="house.fill" color={color} />,
+          title: "Home",
+          tabBarIcon: ({ color }) => (
+            <IconSymbol size={28} name="house.fill" color={color} />
+          ),
         }}
       />
       <Tabs.Screen
-        name="matematica"
-        options={{
-          title: 'Matematica',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="house.fill" color={color} />,
-          href: null, 
-        }}
-      />
-      <Tabs.Screen
-        name="unidade"
-        options={{
-          title: 'Unidade',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="house.fill" color={color} />,
-          href: null, 
-        }}
-      />
-       <Tabs.Screen
         name="profile"
         options={{
-          title: 'Perfil',
-          tabBarIcon: ({ color }) => <FontAwesome5 name="user-graduate" size={22} color={color} />,
+          title: "Perfil",
+          tabBarIcon: ({ color }) => (
+            <FontAwesome5 name="user-graduate" size={22} color={color} />
+          ),
         }}
       />
     </Tabs>

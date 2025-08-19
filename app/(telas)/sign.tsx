@@ -7,6 +7,8 @@ import {
   Text,
   Alert,
   Image,
+  KeyboardAvoidingView,
+  Platform,
 } from "react-native";
 import { Link, useNavigation } from "expo-router";
 import { LinearGradient } from "expo-linear-gradient";
@@ -16,6 +18,7 @@ import { validaCadastro } from "../api/conexaoFetch";
 import { Spacing, Fonts, Colors } from "@/constants/Colors";
 import { BotaoCustomizado } from "@/components/ui/ButtomCustom";
 import { InputCustomizado } from "@/components/ui/InputCustom";
+import Animated from 'react-native-reanimated';
 
 export default function SignScreen() {
   const [nome, setNome] = useState("");
@@ -53,70 +56,84 @@ export default function SignScreen() {
   };
 
   return (
-    <LinearGradient
-      colors={[Colors.gradientStart, Colors.gradientEnd]}
-      style={styles.container}
+    <KeyboardAvoidingView
+      style={styles.keyboard}
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      keyboardVerticalOffset={Platform.OS === 'ios' ? 60 : 10} // Ajuste este valor se tiver um header
     >
-      <View style={styles.headerContainer}>
-        <Image
-          source={require("@/assets/images/logoAprovaCefet.png")}
-          style={styles.logo}
-        />
-        <Text style={styles.title}>BEM VINDO!</Text>
-        <Text style={styles.subtitle}>Preencha seus dados para continuar</Text>
-      </View>
+      <Animated.ScrollView contentContainerStyle={styles.scrollViewContent}>
+        <LinearGradient
+          colors={[Colors.gradientStart, Colors.gradientEnd]}
+          style={styles.container}
+        >
+          <View style={styles.headerContainer}>
+            <Image
+              source={require("@/assets/images/logoAprovaCefet.png")}
+              style={styles.logo}
+            />
+            <Text style={styles.title}>BEM VINDO!</Text>
+            <Text style={styles.subtitle}>Preencha seus dados para continuar</Text>
+          </View>
 
-      <View style={styles.formContainer}>
-        <InputCustomizado
-          label="Nome Completo"
-          value={nome}
-          onChangeText={setNome}
-          placeholder="Digite seu nome completo"
-          keyboardType="default"
-          autoCapitalize="words"
-        />
-        <InputCustomizado
-          label="Endereço de email"
-          value={email}
-          onChangeText={setEmail}
-          placeholder="Digite seu email"
-          keyboardType="email-address"
-          autoCapitalize="none"
-        />
+          <View style={styles.formContainer}>
+            <InputCustomizado
+              label="Nome Completo"
+              value={nome}
+              onChangeText={setNome}
+              placeholder="Digite seu nome completo"
+              keyboardType="default"
+              autoCapitalize="words"
+            />
+            <InputCustomizado
+              label="Endereço de email"
+              value={email}
+              onChangeText={setEmail}
+              placeholder="Digite seu email"
+              keyboardType="email-address"
+              autoCapitalize="none"
+            />
 
-        <InputCustomizado
-          label="Senha"
-          value={senha}
-          onChangeText={setSenha}
-          placeholder="Digite sua senha"
-          isPassword
-        />
+            <InputCustomizado
+              label="Senha"
+              value={senha}
+              onChangeText={setSenha}
+              placeholder="Digite sua senha"
+              isPassword
+            />
 
-        <InputCustomizado
-          label="Confirmar senha"
-          value={confirmarSenha}
-          onChangeText={setConfirmarSenha}
-          placeholder="Digite sua senha novamente"
-          isPassword
-        />
-      </View>
+            <InputCustomizado
+              label="Confirmar senha"
+              value={confirmarSenha}
+              onChangeText={setConfirmarSenha}
+              placeholder="Digite sua senha novamente"
+              isPassword
+            />
+          </View>
 
-      <View style={styles.footerContainer}>
-        <BotaoCustomizado title="CADASTRAR" onPress={handleRegister} />
-        <View style={styles.loginContainer}>
-          <Text style={styles.loginText}>Já possui uma conta? </Text>
-          <Link href="/login" asChild>
-            <TouchableOpacity>
-              <Text style={styles.loginLink}>Faça Login</Text>
-            </TouchableOpacity>
-          </Link>
-        </View>
-      </View>
-    </LinearGradient>
+          <View style={styles.footerContainer}>
+            <BotaoCustomizado title="CADASTRAR" onPress={handleRegister} />
+            <View style={styles.loginContainer}>
+              <Text style={styles.loginText}>Já possui uma conta? </Text>
+              <Link href="/login" asChild>
+                <TouchableOpacity>
+                  <Text style={styles.loginLink}>Faça Login</Text>
+                </TouchableOpacity>
+              </Link>
+            </View>
+          </View>
+        </LinearGradient>
+      </Animated.ScrollView>
+    </KeyboardAvoidingView>
   );
 }
 
 const styles = StyleSheet.create({
+  keyboard: {
+    flex: 1, // Permite que a view ocupe todo o espaço disponível
+  },
+  scrollViewContent: {
+    flexGrow: 1, // Allows the content to grow and fill the available space
+  },
   container: {
     flex: 1,
     padding: Spacing.large,

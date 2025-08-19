@@ -77,3 +77,35 @@ export async function validaLogin(email, senha) {
         Alert.alert("Erro", "Erro ao conectar no servidor.");
     }
 }
+
+export async function getNomeUsuario() {
+    try {
+        const response = await fetch("https://backend-aprovacefet.onrender.com/getNome", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            }
+        });
+
+        const text = await response.text();
+        console.log("Resposta crua:", text);
+
+        let data;
+        try {
+            data = JSON.parse(text);
+        } catch (err) {
+            console.error("Resposta não era JSON:", text);
+            Alert.alert("Erro", "O servidor retornou algo inesperado.", [{text: "ok", onPress: ()=> console.log("jhsvafhgk")}] );
+            return;
+        }
+
+        if (data.success) {
+            return data.nome;
+        } else {
+            Alert.alert("Erro", data.message || "Erro ao conectar ao BD.");
+        }
+    } catch (error) {
+        console.error(error);
+        Alert.alert("Erro", "Erro ao conectar no servidor.");
+    }
+}

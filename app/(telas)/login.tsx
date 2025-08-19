@@ -13,12 +13,15 @@ import {
 import { Link, useNavigation } from 'expo-router';
 import { LinearGradient } from 'expo-linear-gradient';
 import { validaLogin } from '../api/conexaoFetch';
+import { getNomeUsuario } from '../api/conexaoFetch';
 import Feather from '@expo/vector-icons/Feather';
 import { useRouter } from 'expo-router'; //router pega o path todo, o navigate olha so o nome do arquivo
 
 import { BotaoCustomizado } from '@/components/ui/ButtomCustom';
 import { InputCustomizado } from '@/components/ui/InputCustom';
 import { Colors, Fonts, Spacing } from '@/constants/Colors'
+
+export let nomeUsuario = "teste";
 
 export default function LoginScreen() {
   const [senha, setSenha] = useState('');
@@ -33,6 +36,7 @@ export default function LoginScreen() {
     }
     const sucesso = await validaLogin(email, senha);
     if (sucesso) {
+      nomeUsuario = await getNomeUsuario();
       router.replace('/(tabs)/secao');
     } else {
     }

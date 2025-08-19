@@ -18,6 +18,7 @@ import { BotaoCustomizado } from "@/components/ui/ButtomCustom";
 import { CalendarioCustomizado } from "@/components/ui/CalendarCustom";
 import { BlurView } from "expo-blur";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { nomeUsuario } from "../(telas)/login";
 
 const { width: screenWidth } = Dimensions.get("window");
 
@@ -131,7 +132,7 @@ export default function TelaSecao() {
             />
             <View style={styles.headerText}>
               {/*torres --> precisa pegar o nome do user no bd pra exibir na tela !!!*/ }
-              <Text style={styles.greeting}>Olá, nomeUsuario</Text> 
+              <Text style={styles.greeting}>Olá, {nomeUsuario}</Text> 
 
               <Text style={styles.subtitle}>Vamos começar a aprender!</Text>
             </View>

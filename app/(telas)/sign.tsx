@@ -20,7 +20,6 @@ import { InputCustomizado } from "@/components/ui/InputCustom";
 import Animated from 'react-native-reanimated';
 
 export default function SignScreen() {
-
   const [nome, setNome] = useState("");
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");

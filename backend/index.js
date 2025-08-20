@@ -55,6 +55,7 @@ app.post("/register", async (req, res) => {
 
         await conn.end();
 
+    //if (!emailValido) {
         res.json({
             success: true,
             message: "Cadastro realizado!",
@@ -71,7 +72,7 @@ app.post("/register", async (req, res) => {
         console.error(err);
         res.status(500).json({
             success: false,
-            message: "Erro ao cadastrar.",
+            message: "Email inválido!",
         });
     }
     //}

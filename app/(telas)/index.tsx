@@ -1,14 +1,28 @@
-import { ThemedText } from '@/components/ThemedText';
+import React, { useEffect } from "react";
 import { ThemedView } from '@/components/ThemedView';
-import { Link, useNavigation } from 'expo-router';
-import React from 'react';
-import { Image } from 'expo-image'; //componente para colocar a img da logo
-import { Button, StyleSheet, TouchableOpacity, View, Text } from 'react-native';
-import { Colors } from '@/constants/Colors';
-import { navigate } from 'expo-router/build/global-state/routing';
+import { Link } from 'expo-router';
+import { Image } from 'expo-image';
+import { StyleSheet, View } from 'react-native';
+import { Spacing } from '@/constants/Colors'; 
+import { useRouter } from 'expo-router';
+import { checksessao } from "../api/conexaoFetch";
 
-export default function InitialScreen() {
-  const navigation = useNavigation();
+
+import { BotaoCustomizado } from '@/components/ui/ButtomCustom';
+
+export default function HomeScreen() {
+  const router = useRouter();
+
+  useEffect(() => {
+    const verificarSessao = async () => {
+      const temConta = await checksessao();
+      if (temConta) {
+        router.replace('/(tabs)/secao');
+      }
+    };
+
+    verificarSessao();
+  }, []);
 
   return (
     <ThemedView style={styles.container}>
@@ -16,36 +30,17 @@ export default function InitialScreen() {
         <Image
           source={require('@/assets/images/gifLogoAprovaCef.gif')}
           style={styles.logoImage}
-          contentFit="contain" // mostra a img toda, sem cortar
+          contentFit="contain"
         />
       </View>
 
       <View style={styles.buttonContainer}>
-        {/*Botão de Entrar */}
         <Link href="/login" asChild>
-          <TouchableOpacity>
-            <View style={styles.buttonWrapper}>
-              {/* Sombra do botão */}
-              <View style={styles.buttonShadow} />
-              {/* Botão principal */}
-              <View style={styles.button}>
-                <Text style={styles.buttonText}>ENTRAR</Text>
-              </View>
-            </View>
-          </TouchableOpacity>
+          <BotaoCustomizado title="ENTRAR" />
         </Link>
 
         <Link href="/sign" asChild>
-          <TouchableOpacity>
-            <View style={styles.buttonWrapper}>
-              {/* Sombra do botão */}
-              <View style={styles.buttonShadow} />
-              {/* Botão principal */}
-              <View style={styles.button}>
-                <Text style={styles.buttonText}>REGISTRAR</Text>
-              </View>
-            </View>
-          </TouchableOpacity>
+          <BotaoCustomizado title="REGISTRAR" />
         </Link>
       </View>
     </ThemedView>
@@ -57,8 +52,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    padding: 20,
-    backgroundColor: Colors.light.background,
+    padding: Spacing.large,
   },
   content: {
     flex: 1,
@@ -68,37 +62,11 @@ const styles = StyleSheet.create({
   logoImage: {
     width: 250,
     height: 250,
-    marginBottom: 40,
+    marginBottom: Spacing.giga,
   },
   buttonContainer: {
-    paddingHorizontal: 20,
-    paddingBottom: 80,
-    gap: 50,
-  },
-  buttonWrapper: {
-    width: 232,
-    height: 64, 
-  },
-  button: {
-    width: '100%',
-    height: '100%',
-    backgroundColor: '#003869',
-    borderRadius: 7,
-    justifyContent: 'center',
-    alignItems: 'center',
-    position: 'absolute', //para ficar sobre a sombra
-  },
-  buttonShadow: {
-    width: '100%',
-    height: '100%',
-    backgroundColor: '#004ef75e', // Cor da "sombra" com transparência
-    borderRadius: 7,
-    position: 'absolute', 
-    top: 4,
-  },
-  buttonText: {
-    color: '#FFFFFF',
-    fontSize: 20, // text-xl
-    fontWeight: 'bold',
+    paddingHorizontal: Spacing.large,
+    paddingBottom: 100, 
+    gap: Spacing.buttonContainer,
   },
 });

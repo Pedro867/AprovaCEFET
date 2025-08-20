@@ -6,13 +6,22 @@ import {
   TouchableOpacity,
   Text,
   Alert,
-  Image, 
+  Image,
+  KeyboardAvoidingView,
+  Platform,
 } from 'react-native';
 import { Link, useNavigation } from 'expo-router';
-import { LinearGradient } from 'expo-linear-gradient'; 
+import { LinearGradient } from 'expo-linear-gradient';
 import { validaLogin } from '../api/conexaoFetch';
+//import { getNomeUsuario } from '../api/conexaoFetch';
 import Feather from '@expo/vector-icons/Feather';
 import { useRouter } from 'expo-router'; //router pega o path todo, o navigate olha so o nome do arquivo
+
+import { BotaoCustomizado } from '@/components/ui/ButtomCustom';
+import { InputCustomizado } from '@/components/ui/InputCustom';
+import { Colors, Fonts, Spacing } from '@/constants/Colors'
+
+export let nomeUsuario = "teste";
 
 export default function LoginScreen() {
   const [senha, setSenha] = useState('');
@@ -27,86 +36,74 @@ export default function LoginScreen() {
     }
     const sucesso = await validaLogin(email, senha);
     if (sucesso) {
+      //nomeUsuario = await getNomeUsuario();
       router.replace('/(tabs)/secao');
     } else {
     }
   };
 
   return (
-    <LinearGradient
-      colors={['rgba(137, 161, 212, 0.8)', 'rgba(248, 248, 248, 0.8)']}
-      style={styles.container}
+    <KeyboardAvoidingView
+      style={styles.keyboard}
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      keyboardVerticalOffset={Platform.OS === 'ios' ? 60 : 10} // Ajuste este valor se tiver um header
     >
-      <View style={styles.headerContainer}>
-        <Image
-          source={require('@/assets/images/logoAprovaCefet.png')} 
-          style={styles.logo}
-        />
-        <Text style={styles.title}>BEM VINDO DE VOLTA!</Text>
-        <Text style={styles.subtitle}>Preencha os dados para continuar</Text>
-      </View>
+      <LinearGradient colors={[Colors.gradientStart, Colors.gradientEnd]} style={styles.container}>
 
-      <View style={styles.formContainer}>
-        {/* Input de Email */}
-        <View style={styles.inputGroup}>
-          <Text style={styles.label}>Endereço de email</Text>
-          <TextInput
-            style={styles.input}
-            onChangeText={setEmail}
-            value={email}
-            placeholder="Digite seu email"
-            placeholderTextColor="#888"
-            keyboardType="email-address"
-            autoCapitalize="none"
+        <View style={styles.headerContainer}>
+          <Image
+            source={require('@/assets/images/logoAprovaCefet.png')}
+            style={styles.logo}
           />
+          <Text style={styles.title}>BEM VINDO DE VOLTA!</Text>
+          <Text style={styles.subtitle}>Preencha os dados para continuar</Text>
         </View>
 
-        {/* Input de Senha */}
-        <View style={styles.inputGroup}>
-          <Text style={styles.label}>Senha</Text>
-          <View style={styles.passwordContainer}>
-            <TextInput
-              style={[styles.input, { flex: 1 }]}
-              onChangeText={setSenha}
-              value={senha}
-              placeholder="Digite sua senha"
-              placeholderTextColor="#888"
-              autoCapitalize="none"
-              secureTextEntry={!showPassword} 
-            />
-            <TouchableOpacity
-              onPress={() => setShowPassword(!showPassword)}
-              style={styles.eyeIcon}
-            >
-              <Feather name={showPassword ? 'eye-off' : 'eye'} size={24} color="#003869" />
-            </TouchableOpacity>
+        <View style={styles.formContainer}>
+          <InputCustomizado
+            label="Endereço de email"
+            value={email}
+            onChangeText={setEmail}
+            placeholder='Digite seu email'
+            keyboardType='email-address'
+            autoCapitalize='none'
+          />
+
+          <InputCustomizado
+            label="Senha"
+            value={senha}
+            onChangeText={setSenha}
+            placeholder='Digite sua senha'
+            isPassword
+          />
+
+
+          <TouchableOpacity>
+            <Text style={styles.forgotPassword}>Esqueceu a senha?</Text>
+          </TouchableOpacity>
+        </View>
+
+        <View style={styles.footerContainer}>
+          <BotaoCustomizado title='ENTRAR' onPress={handleLogin} />
+
+          <View style={styles.registerContainer}>
+            <Text style={styles.registerText}>Não possui uma conta? </Text>
+            <Link href="/sign" asChild>
+              <TouchableOpacity>
+                <Text style={styles.registerLink}>Registre-se agora</Text>
+              </TouchableOpacity>
+            </Link>
           </View>
         </View>
-
-        <TouchableOpacity>
-          <Text style={styles.forgotPassword}>Esqueceu a senha?</Text>
-        </TouchableOpacity>
-      </View>
-
-      <View style={styles.footerContainer}>
-        <TouchableOpacity style={styles.loginButton} onPress={handleLogin}>
-          <Text style={styles.loginButtonText}>ENTRAR</Text>
-        </TouchableOpacity>
-
-        <View style={styles.registerContainer}>
-          <Text style={styles.registerText}>Não possui uma conta? </Text>
-          <Link href="/sign" asChild>
-            <TouchableOpacity>
-              <Text style={styles.registerLink}>Registre-se agora</Text>
-            </TouchableOpacity>
-          </Link>
-        </View>
-      </View>
-    </LinearGradient>
+      </LinearGradient>
+    </KeyboardAvoidingView>
   );
 }
 
 const styles = StyleSheet.create({
+  keyboard: {
+    flex: 1, // Permite que a view ocupe todo o espaço disponível
+  },
   container: {
     flex: 1,
     padding: 20,
@@ -124,73 +121,30 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 18,
-    fontWeight: 'bold',
-    color: '#003869',
+    fontWeight: Fonts.weight.bold as 'bold',
+    color: Colors.primary,
     lineHeight: 30,
   },
   subtitle: {
-    fontSize: 16,
-    color: '#003869',
+    fontSize: Fonts.size.medium,
+    color: Colors.primary,
     lineHeight: 30,
   },
   formContainer: {
     width: '100%',
-    gap: 16,
-  },
-  inputGroup: {
-    gap: 4,
-  },
-  label: {
-    fontSize: 16,
-    fontWeight: '500',
-    color: '#003869',
-    lineHeight: 36,
-  },
-  passwordContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    width: '100%',
-  },
-  input: {
-    height: 44, 
-    borderRadius: 5,
-    paddingHorizontal: 19,
-    color: '#333',
-    backgroundColor: 'white', 
-    fontSize: 14,
-    borderWidth: 1,
-    borderColor: '#004ef75e',
-  },
-  eyeIcon: {
-    position: 'absolute',
-    right: 10,
-    height: '100%',
-    justifyContent: 'center',
-    padding: 5,
+    gap: Spacing.formGap,
   },
   forgotPassword: {
     textAlign: 'right',
-    fontSize: 14,
-    fontWeight: '500',
-    color: '#003869',
+    fontSize: Fonts.size.small,
+    fontWeight: Fonts.weight.medium as '500',
+    color: Colors.primary,
   },
+
   footerContainer: {
     width: '100%',
     alignItems: 'center',
     gap: 20,
-  },
-  loginButton: {
-    width: 236,
-    height: 67,
-    backgroundColor: '#003869',
-    borderRadius: 7,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  loginButtonText: {
-    color: 'white',
-    fontSize: 20,
-    fontWeight: 'bold',
   },
   registerContainer: {
     flexDirection: 'row',
@@ -202,8 +156,8 @@ const styles = StyleSheet.create({
     color: 'black',
   },
   registerLink: {
+    color: '#004ef799',
     fontSize: 14,
     fontWeight: '500',
-    color: '#004ef799',
   },
 });

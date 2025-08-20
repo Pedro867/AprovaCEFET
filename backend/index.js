@@ -2,12 +2,24 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import mysql from "mysql2/promise";
+import session from "express-session";
 
 dotenv.config();
+
+export const nomeUsuario = "";
 
 const app = express();
 app.use(cors());
 app.use(express.json());
+
+app.use(session({
+    secret: "chave-secreta",
+    resave: false,
+    saveUninitialized: true,
+    cookie: {
+        secure: false
+    }
+}));
 
 app.post("/register", async (req, res) => {
     const {
@@ -16,18 +28,29 @@ app.post("/register", async (req, res) => {
         senha
     } = req.body;
 
+    //mysql://root:yYvSsJUUdmehuFwxTMzNGWKFHCHdYlye@trolley.proxy.rlwy.net:16798/railway
+
+    //const emailValido = validaEmail(email);
+
+    /*if (!emailValido) {
+        res.json({
+            success: false,
+            message: "Email inválido!",
+        });
+        return false;
+    } else {*/
     try {
         const conn = await mysql.createConnection({
-            host: process.env.DB_HOST,
+            host: "trolley.proxy.rlwy.net",
+            port: "16798",
             user: "root",
-            password: process.env.DB_PASSWORD,
-            database: "aprovacefet",
-            port: 3306,
+            password: "yYvSsJUUdmehuFwxTMzNGWKFHCHdYlye",
+            database: "railway",
         });
 
         const [result] = await conn.execute(
-            "INSERT INTO aluno (nome, email, senha) VALUES (?, ?, ?)",
-            [nome, email, senha]
+            "INSERT INTO alunos (pontuacao, streak, nome, email, senha) VALUES (?, ?, ?, ?, ?)",
+            [0, 0, nome, email, senha]
         );
 
         await conn.end();
@@ -38,6 +61,11 @@ app.post("/register", async (req, res) => {
             id: result.insertId,
         });
 
+        req.session.nome = nome;
+        req.session.email = email;
+        req.session.streak = 0;
+        req.session.pontuacao = 0;
+
         return true;
     } catch (err) {
         console.error(err);
@@ -46,7 +74,12 @@ app.post("/register", async (req, res) => {
             message: "Erro ao cadastrar.",
         });
     }
+    //}
 });
+
+function validaEmail(email) {
+
+}
 
 app.post("/login", async (req, res) => {
     const {
@@ -56,15 +89,15 @@ app.post("/login", async (req, res) => {
 
     try {
         const conn = await mysql.createConnection({
-            host: process.env.DB_HOST,
+            host: "trolley.proxy.rlwy.net",
+            port: "16798",
             user: "root",
-            password: process.env.DB_PASSWORD,
-            database: "aprovacefet",
-            port: 3306,
+            password: "yYvSsJUUdmehuFwxTMzNGWKFHCHdYlye",
+            database: "railway",
         });
 
         const [rows] = await conn.execute(
-            "SELECT * FROM aluno WHERE email = ?",
+            "SELECT * FROM alunos WHERE email = ?",
             [email]
         );
 
@@ -80,7 +113,7 @@ app.post("/login", async (req, res) => {
         const aluno = rows[0];
 
         //exemplo com texto normal, substituir por bcrypt se usar hash
-        if (aluno.Senha !== senha) {
+        if (aluno.senha !== senha) {
             return res.status(401).json({
                 success: false,
                 message: "Senha incorreta.",
@@ -91,6 +124,12 @@ app.post("/login", async (req, res) => {
             success: true,
             message: "Login realizado!",
         });
+
+        req.session.nome = aluno.nome;
+        req.session.email = aluno.email;
+        req.session.streak = aluno.streak;
+        req.session.pontuacao = aluno.pontuacao;
+
         return true;
     } catch (err) {
         console.error(err);
@@ -99,6 +138,21 @@ app.post("/login", async (req, res) => {
             message: "Erro no login.",
         });
     }
+});
+
+app.get("/getDados", (req, res) => {
+    if (!req.session.nome) {
+        return res.status(401).json({
+            success: false //NAO TEM LOGIN
+        });
+    }
+    res.json({
+        success: true,
+        nome: req.session.nome,
+        email: req.session.email,
+        streak: req.session.streak,
+        pontuacao: req.session.pontuacao
+    });
 });
 
 app.listen(8081, "0.0.0.0", () => {

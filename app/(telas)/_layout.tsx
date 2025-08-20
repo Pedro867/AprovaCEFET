@@ -1,23 +1,46 @@
-// app/telas/_layout.tsx
-import { Stack, Tabs } from 'expo-router';
-import { HapticTab } from '@/components/HapticTab';
-import { IconSymbol } from '@/components/ui/IconSymbol';
-import TabBarBackground from '@/components/ui/TabBarBackground';
-import { Colors } from '@/constants/Colors';
-import { useColorScheme } from '@/hooks/useColorScheme';
-import React from 'react';
+import { Stack } from 'expo-router';
+import React, { useEffect } from 'react';
+import { useFonts, Lexend_400Regular, Lexend_700Bold } from '@expo-google-fonts/lexend'; //fontes dos numeros do calendario
+import * as SplashScreen from 'expo-splash-screen';
+import { LocaleConfig } from 'react-native-calendars'; 
 
-export default function TelasLayout() {
-  const colorScheme = useColorScheme();
+LocaleConfig.locales['pt-br'] = {
+  monthNames: [
+    'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'
+  ],
+  monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+  dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
+  dayNamesShort: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'],
+  today: "Hoje"
+};
+LocaleConfig.defaultLocale = "pt-br";
+
+
+SplashScreen.preventAutoHideAsync(); // impede que a tela seja carregada antes das fontes serem baixadas
+
+export default function RootLayout() {
+  const [fontsLoaded] = useFonts({ //useFonts faz download das fontes e retorna true qnd acaba
+    Lexend_400Regular,
+    Lexend_700Bold,
+  });
+
+  useEffect(() => {
+    if (fontsLoaded) {
+      SplashScreen.hideAsync();
+    }
+  }, [fontsLoaded]);
+
+  if (!fontsLoaded) {
+    return null; // mostra a tela de splash enquanto as fontes carregam
+  }
+
   return (
-    <Stack>
-    {/* Aqui você define as telas dentro da pasta 'telas' */}
-    {/* O 'index' é a tela padrão para este grupo se você navegar para 'telas' */}
-    
-    <Stack.Screen name="index" options={{ headerShown: false, title: "Início" }} />
-    <Stack.Screen name="login" options={{ headerShown: false, title: "Login" }} />
-    <Stack.Screen name="sign" options={{ headerShown: false, title: "Registro" }} />
-
+    //pilha de telas
+    <Stack> 
+        <Stack.Screen name="index" options={{ headerShown: false }} />
+        <Stack.Screen name="login" options={{ headerShown: false }} />
+        <Stack.Screen name="sign" options={{ headerShown: false }} />
+        <Stack.Screen name="registerDate" options={{ headerShown: false }} />
     </Stack>
   );
 }

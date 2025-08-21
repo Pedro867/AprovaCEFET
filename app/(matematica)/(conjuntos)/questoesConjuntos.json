@@ -1,0 +1,27 @@
+[
+  {
+    "id": "1",
+    "question": "Num ponto de ônibus, passa um ônibus para a cidade de Rio das Quadras de 15 em 15 minutos e um ônibus para a cidade Tão Longe de 25 em 25 minutos. Se os dois ônibus passaram juntos às 7h30min, a que horas vão passar juntos novamente?",
+    "options": ["7h45min", "9h10min", "8h45min", "9h30min"],
+    "correctAnswer": "7h45min"
+  },
+  {
+    "id": "2",
+    "question": "Num sítio temos uma rua de laranjeiras e, ao seu lado, uma rua de limoeiros. Os pés de laranja são plantados a cada 4 metros e os de limão, a cada 6 metros. No começo das ruas, foi plantado um pé de laranja em frente a um pé de limão. De quantos em quantos metros isso acontece?",
+    "options": ["24", "12", "10", "2"],
+    "correctAnswer": "24"
+  },
+  {
+    "id": "3",
+    "question": "João tinha 36 abacaxis, 60 abacates e 84 maçãs. Ele quer separá-los em caixas com a mesma quantidade de frutas, sem misturar os três tipos. Qual é o Maior número possível de frutas colocadas em cada caixa? ",
+    "options": ["12", "24", "1260", "180"],
+    "correctAnswer": "12"
+  },
+  {
+    "id": "4",
+    "question": "(CEFET-2008) No trapézio ABCD da figura abaixo, as bases AB e CD estão divididas em partes iguais. Se a área do trapézio é S, então a área do triângulo PQR é",
+    "image": "../../assets/questoes/1.4.png",
+    "options": ["S * 3/5", "S * 5/3", "S * 3/8", "S * 5/8"],
+    "correctAnswer": "S * 3/5"
+  }
+]

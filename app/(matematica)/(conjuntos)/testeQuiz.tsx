@@ -1,55 +1,92 @@
-import React, { useState } from 'react';
-import { StyleSheet, View, Text, TouchableOpacity, Image } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { StyleSheet, View, Text, TouchableOpacity, Image, Alert } from 'react-native';
 import Animated from 'react-native-reanimated';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import Icon from 'react-native-vector-icons/Ionicons';
+import { useRouter } from 'expo-router';
+import initialQuestions from './questoesConjuntos.json';
 
-const questions = [
-  // Use a mesma estrutura de dados do exemplo acima.
-  {
-    id: '1',
-    question: 'Num ponto de ônibus, passa um ônibus para a cidade de Rio das Quadras de 15 em 15 minutos e um ônibus para a cidade Tão Longe de 25 em 25 minutos. Se os dois ônibus passaram juntos às 7h30min, a que horas vão passar juntos novamente?',
-    options: ['7h45min', '9h10min', '8h45min', '9h30min'],
-    correctAnswer: '7h45min',
-  },
-  {
-    id: '2',
-    question: 'Num sítio temos uma rua de laranjeiras e, ao seu lado, uma rua de limoeiros. Os pés de laranja são plantados a cada 4 metros e os de limão, a cada 6 metros. No começo das ruas, foi plantado um pé de laranja em frente a um pé de limão. De quantos em quantos metros isso acontece?',
-    options: ['24', '12', '10', '2'],
-    correctAnswer: '24',
-  },
-  {
-    id: '3',
-    question: 'João tinha 36 abacaxis, 60 abacates e 84 maçãs. Ele quer separá-los em caixas com a mesma quantidade de frutas, sem misturar os três tipos. Qual é o Maior número possível de frutas colocadas em cada caixa? ',
-    options: ['12', '24', '1260', '180'],
-    correctAnswer: '12',
-  },
-  {
-    id: '4',
-    question: '(CEFET-2008) No trapézio ABCD da figura abaixo, as bases AB e CD estão divididas em partes iguais. Se a área do trapézio é S, então a área do triângulo PQR é',
-    image: require('@/assets/questoes/1.4.png'),
-    options: ['S * 3/5', 'S * 5/3', 'S * 3/8', 'S * 5/8'],
-    correctAnswer: 'S * 3/5',
-  },
-];
+const imageMap = {
+  "../../../assets/questoes/1.4.png": require('../../../assets/questoes/1.4.png'),
+};
 
 const QuizScreen = () => {
+  const [questions, setQuestions] = useState(initialQuestions);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState(null);
-  const [isCorrect, setIsCorrect] = useState(null);
   const [score, setScore] = useState(0);
   const [showScore, setShowScore] = useState(false);
+  const [incorrectQuestions, setIncorrectQuestions] = useState([]);
+  const [quizMode, setQuizMode] = useState('initial');
+  const [isLoading, setIsLoading] = useState(true);
+
+  const router = useRouter();
+
+  const QUIZ_STATE_KEY = 'quizState';
+
+  const saveQuizState = async (state) => {
+    try {
+      const jsonValue = JSON.stringify(state);
+      await AsyncStorage.setItem(QUIZ_STATE_KEY, jsonValue);
+    } catch (e) {
+      console.error('Erro ao salvar o estado do quiz:', e);
+    }
+  };
+
+  const loadQuizState = async () => {
+    try {
+      const jsonValue = await AsyncStorage.getItem(QUIZ_STATE_KEY);
+      if (jsonValue != null) {
+        const savedState = JSON.parse(jsonValue);
+        
+        if (savedState.currentQuestionIndex >= savedState.questions.length) {
+          setShowScore(true);
+          setScore(savedState.score);
+        } else {
+          setCurrentQuestionIndex(savedState.currentQuestionIndex);
+          setScore(savedState.score);
+        }
+        
+        setIncorrectQuestions(savedState.incorrectQuestions);
+        setQuizMode(savedState.quizMode);
+        setQuestions(savedState.quizMode === 'initial' ? initialQuestions : savedState.incorrectQuestions);
+      }
+    } catch (e) {
+      console.error('Erro ao carregar o estado do quiz:', e);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    loadQuizState();
+  }, []);
+
+  useEffect(() => {
+    if (!isLoading && !showScore) {
+      const quizState = {
+        currentQuestionIndex,
+        score,
+        incorrectQuestions,
+        quizMode,
+        questions: questions,
+      };
+      saveQuizState(quizState);
+    }
+  }, [currentQuestionIndex, score, incorrectQuestions, quizMode, isLoading, showScore, questions]);
 
   const handleAnswerOptionClick = (answer) => {
-    // Se uma resposta já foi selecionada, não faça nada.
     if (selectedAnswer) {
       return;
     }
 
     setSelectedAnswer(answer);
     const isCorrectAnswer = answer === questions[currentQuestionIndex].correctAnswer;
-    setIsCorrect(isCorrectAnswer);
 
     if (isCorrectAnswer) {
       setScore(score + 1);
+    } else {
+      setIncorrectQuestions([...incorrectQuestions, questions[currentQuestionIndex]]);
     }
   };
 
@@ -58,54 +95,107 @@ const QuizScreen = () => {
     if (nextQuestion < questions.length) {
       setCurrentQuestionIndex(nextQuestion);
       setSelectedAnswer(null);
-      setIsCorrect(null);
     } else {
       setShowScore(true);
+      saveQuizState({
+        currentQuestionIndex: nextQuestion,
+        score: score + (selectedAnswer === questions[currentQuestionIndex].correctAnswer ? 1 : 0),
+        incorrectQuestions: selectedAnswer === questions[currentQuestionIndex].correctAnswer ? incorrectQuestions : [...incorrectQuestions, questions[currentQuestionIndex]],
+        quizMode,
+        questions: questions,
+      });
     }
   };
 
-  //BUGADO AINDA
-  const handlePreviusQuestion = () => {
-    const previusQuestion = currentQuestionIndex - 1;
-    if (previusQuestion >= 1) {
-      setCurrentQuestionIndex(previusQuestion);
+  const resetQuiz = async () => {
+    try {
+      await AsyncStorage.removeItem(QUIZ_STATE_KEY);
+      setQuestions(initialQuestions);
+      setCurrentQuestionIndex(0);
+      setScore(0);
+      setShowScore(false);
+      setIncorrectQuestions([]);
       setSelectedAnswer(null);
-      setIsCorrect(null);
-    } else {
-      //nada acontece
+      setQuizMode('initial');
+    } catch (e) {
+      console.error('Erro ao resetar o quiz:', e);
     }
+  };
+
+  const redoIncorrectQuestions = async () => {
+    try {
+      await AsyncStorage.removeItem(QUIZ_STATE_KEY);
+      setQuestions(incorrectQuestions);
+      setCurrentQuestionIndex(0);
+      setScore(0);
+      setShowScore(false);
+      setIncorrectQuestions([]);
+      setSelectedAnswer(null);
+      setQuizMode('review');
+    } catch (e) {
+      console.error('Erro ao refazer o quiz:', e);
+    }
+  };
+
+  if (isLoading) {
+    return (
+      <View style={styles.container}>
+        <Text style={styles.loadingText}>Carregando quiz...</Text>
+      </View>
+    );
   }
 
   if (showScore) {
     return (
       <View style={styles.container}>
+        <TouchableOpacity onPress={() => router.replace('/(matematica)/(conjuntos)/conjuntos')} style={styles.backButton}>
+          <Icon name="arrow-back" size={30} color="#000" />
+        </TouchableOpacity>
         <Text style={styles.scoreText}>Você terminou o quiz!</Text>
-        <Text style={styles.scoreText}>Sua pontuação é de {score} de {questions.length}.</Text>
+        <Text style={styles.scoreText}>Você ganhou {score} pontos!</Text>
+        <TouchableOpacity style={styles.exitButton} onPress={() => router.replace('/(matematica)/(conjuntos)/conjuntos')}>
+          <Text style={styles.continueButtonText}>Sair do Quiz</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.exitButton} onPress={resetQuiz}>
+          <Text style={styles.continueButtonText}>Refazer</Text>
+        </TouchableOpacity>
+        {incorrectQuestions.length > 0 && (
+          <TouchableOpacity style={styles.redoButton} onPress={redoIncorrectQuestions}>
+            <Text style={styles.continueButtonText}>Refazer Questões Erradas</Text>
+          </TouchableOpacity>
+        )}
       </View>
     );
   }
 
   const currentQuestion = questions[currentQuestionIndex];
 
+  // Adiciona a verificação aqui para evitar o erro de 'undefined'
+  if (!currentQuestion) {
+    return (
+      <View style={styles.container}>
+        <Text style={styles.loadingText}>Quiz inválido ou concluído.</Text>
+        {/* Você pode adicionar um botão para voltar ou refazer o quiz aqui */}
+      </View>
+    );
+  }
+
   return (
     <Animated.ScrollView contentContainerStyle={styles.scrollViewContent}>
       <View style={styles.container}>
-        {/* Exibe o numero da questão */}
-        <Text style={styles.questionText}>Questão {currentQuestion.id}</Text>
+        <TouchableOpacity onPress={() => router.replace('/(matematica)/(conjuntos)/conjuntos')} style={styles.backButton}>
+          <Icon name="arrow-back" size={30} color="#000" />
+        </TouchableOpacity>
 
-        {/* Exibe a imagem da pergunta, se houver */}
-        {currentQuestion.image && <Image source={currentQuestion.image} style={styles.image} />}
-
-        {/* Exibe a pergunta */}
+        <Text style={styles.questionText}>Questão {currentQuestionIndex + 1}</Text>
+        {currentQuestion.image && <Image source={imageMap[currentQuestion.image]} style={styles.image} />}
         <Text style={styles.questionText}>{currentQuestion.question}</Text>
-
-        {/* Opções de resposta */}
         {currentQuestion.options.map((option, index) => (
           <TouchableOpacity
             key={index}
             style={[
               styles.optionButton,
-              selectedAnswer === option && (isCorrect ? styles.correctButton : styles.incorrectButton),
+              selectedAnswer === option && (selectedAnswer === currentQuestion.correctAnswer ? styles.correctButton : styles.incorrectButton),
             ]}
             onPress={() => handleAnswerOptionClick(option)}
             disabled={!!selectedAnswer}
@@ -113,18 +203,10 @@ const QuizScreen = () => {
             <Text style={styles.optionText}>{option}</Text>
           </TouchableOpacity>
         ))}
-
-        {/* Botão para continuar, visível apenas após a resposta */}
         {selectedAnswer && (
-          <View style={styles.buttonContainer}>
-            <TouchableOpacity style={styles.continueButton} onPress={handlePreviusQuestion}>
-              <Text style={styles.continueButtonText}>Anterior</Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity style={styles.continueButton} onPress={handleNextQuestion}>
-              <Text style={styles.continueButtonText}>Próximo</Text>
-            </TouchableOpacity>
-          </View>
+          <TouchableOpacity style={styles.continueButton} onPress={handleNextQuestion}>
+            <Text style={styles.continueButtonText}>Próxima</Text>
+          </TouchableOpacity>
         )}
       </View>
     </Animated.ScrollView>
@@ -133,7 +215,8 @@ const QuizScreen = () => {
 
 const styles = StyleSheet.create({
   scrollViewContent: {
-    flexGrow: 1, // Allows the content to grow and fill the available space
+    flexGrow: 1,
+    paddingTop: 50,
   },
   container: {
     flex: 1,
@@ -141,6 +224,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     padding: 20,
+  },
+  backButton: {
+    position: 'absolute',
+    top: 20,
+    left: 20,
+    zIndex: 10,
   },
   questionText: {
     fontSize: 24,
@@ -163,20 +252,12 @@ const styles = StyleSheet.create({
     color: '#333',
   },
   correctButton: {
-    backgroundColor: '#d4edda', // Verde claro
-    borderColor: '#28a745', // Verde escuro
+    backgroundColor: '#d4edda',
+    borderColor: '#28a745',
   },
   incorrectButton: {
-    backgroundColor: '#f8d7da', // Vermelho claro
-    borderColor: '#dc3545', // Vermelho escuro
-  },
-  buttonContainer: {
-    flexDirection: 'row', // Define a direção do layout para linha
-    gap: 30,             // Adiciona um espaçamento de 10 pixels entre os botões
-    justifyContent: 'center', // Opcional: centraliza os botões horizontalmente
-    alignItems: 'center',     // Opcional: centraliza os botões verticalmente
-    marginTop: 10, 
-    marginBottom: 10, 
+    backgroundColor: '#f8d7da',
+    borderColor: '#dc3545',
   },
   continueButton: {
     backgroundColor: '#007bff',
@@ -203,6 +284,26 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'center',
   },
+  exitButton: {
+    backgroundColor: '#6c757d',
+    padding: 15,
+    borderRadius: 10,
+    marginTop: 20,
+    width: '100%',
+    alignItems: 'center',
+  },
+  redoButton: {
+    backgroundColor: '#ffc107',
+    padding: 15,
+    borderRadius: 10,
+    marginTop: 10,
+    width: '100%',
+    alignItems: 'center',
+  },
+  loadingText: {
+    fontSize: 24,
+    fontWeight: 'bold',
+  }
 });
 
 export default QuizScreen;

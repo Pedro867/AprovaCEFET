@@ -18,7 +18,9 @@ import { BotaoCustomizado } from "@/components/ui/ButtomCustom";
 import { CalendarioCustomizado } from "@/components/ui/CalendarCustom";
 import { BlurView } from "expo-blur";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { nomeUsuario } from "../(telas)/login";
+
+
+//import { nome } from "../(telas)/sign";
 
 const { width: screenWidth } = Dimensions.get("window");
 
@@ -132,7 +134,7 @@ export default function TelaSecao() {
             />
             <View style={styles.headerText}>
               {/*torres --> precisa pegar o nome do user no bd pra exibir na tela !!!*/ }
-              <Text style={styles.greeting}>Olá, {nomeUsuario}</Text> 
+              <Text style={styles.greeting}>Olá, Pele</Text> 
 
               <Text style={styles.subtitle}>Vamos começar a aprender!</Text>
             </View>
@@ -141,7 +143,14 @@ export default function TelaSecao() {
                 source={require("@/assets/images/foguin--ativado-.png")}
                 style={styles.streakIcon}
               />
-              <Text style={styles.streakNumber}>1</Text>
+              <Text style={styles.streakNumber}>0</Text>
+            </View>
+            <View style={styles.streakContainer}>
+              <Image
+                source={require("@/assets/images/pontos.png")}
+                style={styles.streakIcon}
+              />
+              <Text style={styles.streakNumber}>0</Text>
             </View>
           </View>
 
@@ -179,7 +188,7 @@ export default function TelaSecao() {
               <TouchableOpacity
                 key={area.id}
                 style={styles.subjectCard}
-                onPress={() => router.push(area.route)}
+                onPress={() => router.push(area.route as any)}
               >
                 <Card style={styles.subjectCardInner}>
                   <View style={styles.subjectImageContainer}>

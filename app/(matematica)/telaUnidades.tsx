@@ -13,68 +13,9 @@ import { Colors } from "@/constants/Colors";
 import { IconSymbol } from "@/components/ui/IconSymbol";
 import { ThemedText } from "@/components/ThemedText";
 import { Avatar } from "@/components/ui/Avatar";
+import { unidadesMatematica } from "@/constants/dadosUnidades"
 
-// importacao dos icons em svg (maior qualidade)
-import IconConjuntos from "@/assets/images/matematica/vector.svg";
-import IconPotencia from "@/assets/images/matematica/math-formula.svg";
-import IconFatoracao from "@/assets/images/matematica/group.svg";
-import IconEquacao from "@/assets/images/matematica/graphic-designing.svg";
-import IconFuncoes from "@/assets/images/matematica/graphic-designing.svg";
-import IconRegraDeTres from "@/assets/images/matematica/graphic-designing.svg";
-import IconGeometria from "@/assets/images/matematica/graphic-designing.svg";
 
-//array de unidades
-const unidadesData = [
-  {
-    title: "Conjuntos",
-    description:
-      "Conceitos básicos, tipos de conjuntos numéricos (naturais, inteiros, racionais, etc.) e operações como MMC e MDC.",
-    Icon: IconConjuntos,
-    route: "/(matematica)/testeQuiz", //rota para testeQuiz por enquanto
-  },
-  {
-    title: "Potenciação e Radiciação",
-    description:
-      "Propriedades e regras das operações, notação científica e racionalização de denominadores.",
-    Icon: IconPotencia,
-    route: "/(matematica)/testeQuiz",
-  },
-  {
-    title: "Fatoração e Sistemas Lineares",
-    description:
-      "Simplificação de expressões algébricas e métodos de adição e substituição para resolver sistemas.",
-    Icon: IconFatoracao,
-    route: "/(matematica)/testeQuiz",
-  },
-  {
-    title: "Equação do 2º Grau",
-    description:
-      "Resolução por fatoração e Bhaskara, relação de soma e produto entre as raízes e equações biquadradas.",
-    Icon: IconEquacao,
-    route: "/(matematica)/testeQuiz",
-  },
-  {
-    title: "Funções",
-    description:
-      "Características, propriedades e gráficos das funções de 1º e 2º grau. Análise de raízes e vértices.",
-    Icon: IconFuncoes,
-    route: "/(matematica)/testeQuiz",
-  },
-  {
-    title: "Grandezas Proporcionais e Regra de três",
-    description:
-      "Esta unidade explora as relações entre grandezas direta e inversamente proporcionais. Em seguida, aplica esses conceitos para resolver problemas práticos através da regra de três simples e composta.",
-    Icon: IconRegraDeTres,
-    route: "/(matematica)/testeQuiz",
-  },
-  {
-    title: "Geometria",
-    description:
-      "Geometria plana, Teorema de Tales, semelhança de triângulos, Teorema de Pitágoras e cálculo de áreas.",
-    Icon: IconGeometria,
-    route: "/(matematica)/testeQuiz",
-  },
-];
 
 export default function TelaUnidadesMatematica() {
   const router = useRouter();
@@ -82,7 +23,7 @@ export default function TelaUnidadesMatematica() {
   return (
     <LinearGradient
       style={styles.container}
-      colors={["rgba(255, 255, 255, 0.8)", "rgba(107, 145, 226, 0.8)"]}
+      colors={[Colors.gradientEnd, Colors.gradientStart]}
     >
       <View style={styles.headerUser}>
         <Avatar
@@ -117,14 +58,14 @@ export default function TelaUnidadesMatematica() {
       >
         {/* Lista de Unidades */}
         <View style={styles.unitsListContainer}>
-          {unidadesData.map((unidade, index) => {
+          {unidadesMatematica.map((unidade, index) => {
             //percorre o array de unidades
             const Icon = unidade.Icon;
             return (
               <TouchableOpacity
                 key={index}
                 style={styles.cardShadow}
-                onPress={() => router.push(unidade.route)}
+                onPress={() => router.push(unidade.route as any)}
               >
                 <LinearGradient
                   colors={["#89A1D4", "#89A1D4"]}
@@ -174,11 +115,13 @@ const styles = StyleSheet.create({
   headerUnidade: {
     flexDirection: "row",
     alignItems: 'center', 
+    justifyContent: "center",
     paddingHorizontal: 20,
     marginBottom: 20,
     borderBottomWidth: 1,
     borderColor: "rgba(0, 0, 0, 0.1)",
     paddingBottom: 15,
+    position :"relative",
   },
   avatar: {
     marginRight: 10,
@@ -199,7 +142,8 @@ const styles = StyleSheet.create({
     textShadowRadius: 4,
   },
   backButton: {
-    marginRight: 80,
+    position: "absolute",
+    left: 20,
   },
   headerTitle: {
     fontSize: 30,

@@ -78,13 +78,16 @@ export async function validaLogin(email, senha) {
     }
 }
 
-export async function getNomeUsuario() {
+    let nome;
+    let email;
+    let streak;
+    let pontuacao;
+
+export async function checksessao() {
     try {
-        const response = await fetch("https://backend-aprovacefet.onrender.com/getNome", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            }
+        const response = await fetch("https://backend-aprovacefet.onrender.com/getDados", {
+            method: "GET",
+            credentials: "include",
         });
 
         const text = await response.text();
@@ -94,18 +97,22 @@ export async function getNomeUsuario() {
         try {
             data = JSON.parse(text);
         } catch (err) {
-            console.error("Resposta não era JSON:", text);
-            Alert.alert("Erro", "O servidor retornou algo inesperado.", [{text: "ok", onPress: ()=> console.log("jhsvafhgk")}] );
-            return;
+            //NAO TINHA SESSAO
+            return false;
         }
 
         if (data.success) {
-            return data.nome;
+            nome = data.nome;
+            email = data.email;
+            streak = data.streak;
+            pontuacao = data.pontuacao;
+            return true;
         } else {
             Alert.alert("Erro", data.message || "Erro ao conectar ao BD.");
         }
     } catch (error) {
         console.error(error);
         Alert.alert("Erro", "Erro ao conectar no servidor.");
+        return false;
     }
 }

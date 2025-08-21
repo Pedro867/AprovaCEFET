@@ -1,13 +1,29 @@
+import React, { useEffect } from "react";
 import { ThemedView } from '@/components/ThemedView';
 import { Link } from 'expo-router';
-import React from 'react';
 import { Image } from 'expo-image';
 import { StyleSheet, View } from 'react-native';
 import { Spacing } from '@/constants/Colors'; 
+import { useRouter } from 'expo-router';
+import { checksessao } from "../api/conexaoFetch";
+
 
 import { BotaoCustomizado } from '@/components/ui/ButtomCustom';
 
-export default function InitialScreen() {
+export default function HomeScreen() {
+  const router = useRouter();
+
+  useEffect(() => {
+    const verificarSessao = async () => {
+      const temConta = await checksessao();
+      if (temConta) {
+        router.replace('/(tabs)/secao');
+      }
+    };
+
+    verificarSessao();
+  }, []);
+
   return (
     <ThemedView style={styles.container}>
       <View style={styles.content}>

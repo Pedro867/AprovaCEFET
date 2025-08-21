@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   StyleSheet,
   TextInput,
@@ -14,7 +14,6 @@ import { Link, useNavigation } from "expo-router";
 import { LinearGradient } from "expo-linear-gradient";
 import { Feather } from "@expo/vector-icons";
 import { validaCadastro } from "../api/conexaoFetch";
-
 import { Spacing, Fonts, Colors } from "@/constants/Colors";
 import { BotaoCustomizado } from "@/components/ui/ButtomCustom";
 import { InputCustomizado } from "@/components/ui/InputCustom";
@@ -48,11 +47,11 @@ export default function SignScreen() {
 
     // chama a API de cadastro
     //comentado para testes com bd desligado
-    //const sucesso = await validaCadastro(nome, email, senha);
-    //if (sucesso) {
+    const sucesso = await validaCadastro(nome, email, senha);
+    if (sucesso) {
     navigation.navigate("registerDate");
-    //} else {
-    //}
+    } else {
+    }
   };
 
   return (

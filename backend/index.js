@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import mysql from "mysql2/promise";
+import session from "express-session";
 
 dotenv.config();
 
@@ -10,6 +11,15 @@ export const nomeUsuario = "";
 const app = express();
 app.use(cors());
 app.use(express.json());
+
+app.use(session({
+    secret: "chave-secreta",
+    resave: false,
+    saveUninitialized: true,
+    cookie: {
+        secure: false
+    }
+}));
 
 app.post("/register", async (req, res) => {
     const {
@@ -29,36 +39,42 @@ app.post("/register", async (req, res) => {
         });
         return false;
     } else {*/
-        try {
-            const conn = await mysql.createConnection({
-                host: "trolley.proxy.rlwy.net",
-                port: "16798",
-                user: "root",
-                password: "yYvSsJUUdmehuFwxTMzNGWKFHCHdYlye",
-                database: "railway",
-            });
+    try {
+        const conn = await mysql.createConnection({
+            host: "trolley.proxy.rlwy.net",
+            port: "16798",
+            user: "root",
+            password: "yYvSsJUUdmehuFwxTMzNGWKFHCHdYlye",
+            database: "railway",
+        });
 
-            const [result] = await conn.execute(
-                "INSERT INTO alunos (pontuacao, streak, nome, email, senha) VALUES (?, ?, ?, ?, ?)",
-                [0, 0, nome, email, senha]
-            );
+        const [result] = await conn.execute(
+            "INSERT INTO alunos (pontuacao, streak, nome, email, senha) VALUES (?, ?, ?, ?, ?)",
+            [0, 0, nome, email, senha]
+        );
 
-            await conn.end();
+        await conn.end();
 
-            res.json({
-                success: true,
-                message: "Cadastro realizado!",
-                id: result.insertId,
-            });
+    //if (!emailValido) {
+        res.json({
+            success: true,
+            message: "Cadastro realizado!",
+            id: result.insertId,
+        });
 
-            return true;
-        } catch (err) {
-            console.error(err);
-            res.status(500).json({
-                success: false,
-                message: "Erro ao cadastrar.",
-            });
-        }
+        req.session.nome = nome;
+        req.session.email = email;
+        req.session.streak = 0;
+        req.session.pontuacao = 0;
+
+        return true;
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({
+            success: false,
+            message: "Email inválido!",
+        });
+    }
     //}
 });
 
@@ -109,7 +125,12 @@ app.post("/login", async (req, res) => {
             success: true,
             message: "Login realizado!",
         });
-        nomeUsuario = aluno.nome;
+
+        req.session.nome = aluno.nome;
+        req.session.email = aluno.email;
+        req.session.streak = aluno.streak;
+        req.session.pontuacao = aluno.pontuacao;
+
         return true;
     } catch (err) {
         console.error(err);
@@ -120,9 +141,19 @@ app.post("/login", async (req, res) => {
     }
 });
 
-app.post("/getNome", (req, res) => {
-    res.json({ success: true, nome: nomeUsuario });  // Resposta em JSON
-    return true;
+app.get("/getDados", (req, res) => {
+    if (!req.session.nome) {
+        return res.status(401).json({
+            success: false //NAO TEM LOGIN
+        });
+    }
+    res.json({
+        success: true,
+        nome: req.session.nome,
+        email: req.session.email,
+        streak: req.session.streak,
+        pontuacao: req.session.pontuacao
+    });
 });
 
 app.listen(8081, "0.0.0.0", () => {

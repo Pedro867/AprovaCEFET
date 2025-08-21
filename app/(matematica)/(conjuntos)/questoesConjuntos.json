@@ -2,26 +2,100 @@
   {
     "id": "1",
     "question": "Num ponto de ônibus, passa um ônibus para a cidade de Rio das Quadras de 15 em 15 minutos e um ônibus para a cidade Tão Longe de 25 em 25 minutos. Se os dois ônibus passaram juntos às 7h30min, a que horas vão passar juntos novamente?",
-    "options": ["7h45min", "9h10min", "8h45min", "9h30min"],
-    "correctAnswer": "7h45min"
+    "options": [
+      "7h45min",
+      "9h10min",
+      "8h45min",
+      "9h30min"
+    ],
+    "correctAnswer": ""
   },
   {
     "id": "2",
     "question": "Num sítio temos uma rua de laranjeiras e, ao seu lado, uma rua de limoeiros. Os pés de laranja são plantados a cada 4 metros e os de limão, a cada 6 metros. No começo das ruas, foi plantado um pé de laranja em frente a um pé de limão. De quantos em quantos metros isso acontece?",
-    "options": ["24", "12", "10", "2"],
-    "correctAnswer": "24"
+    "options": [
+      "24",
+      "12",
+      "10",
+      "2"
+    ],
+    "correctAnswer": ""
   },
   {
     "id": "3",
-    "question": "João tinha 36 abacaxis, 60 abacates e 84 maçãs. Ele quer separá-los em caixas com a mesma quantidade de frutas, sem misturar os três tipos. Qual é o Maior número possível de frutas colocadas em cada caixa? ",
-    "options": ["12", "24", "1260", "180"],
-    "correctAnswer": "12"
+    "question": "João tinha 36 abacaxis, 60 abacates e 84 maçãs. Ele quer separá-los em caixas com a mesma quantidade de frutas, sem misturar os três tipos. Qual é o Maior número possível de frutas colocadas em cada caixa?",
+    "options": [
+      "12",
+      "24",
+      "1260",
+      "180"
+    ],
+    "correctAnswer": ""
   },
   {
     "id": "4",
-    "question": "(CEFET-2008) No trapézio ABCD da figura abaixo, as bases AB e CD estão divididas em partes iguais. Se a área do trapézio é S, então a área do triângulo PQR é",
-    "image": "../../assets/questoes/1.4.png",
-    "options": ["S * 3/5", "S * 5/3", "S * 3/8", "S * 5/8"],
-    "correctAnswer": "S * 3/5"
+    "question": "No trapézio ABCD da figura abaixo, as bases AB e CD estão divididas em partes iguais. Se a área do trapézio é S, então a área do triângulo PQR é",
+    "options": [
+      "3/5 S",
+      "3/8 S",
+      "1/3 S",
+      "5/8 S"
+    ],
+    "correctAnswer": ""
+  },
+  {
+    "id": "5",
+    "question": "Num laboratório, foram realizadas as misturas com os líquidos I (L1) e II (L2), obtendo-se as soluções S1, S2, S3 e S4 da seguinte forma:\n\n• em S1, foi usado somente L1.\n\n• em S2, 90% de S1 e 10% de L2.\n\n• em S3, 90% de S2 e 10% de L2.\n\n• em S4, 90% de S3 e 10% de L2.\n\nDesse modo, S4 apresentará uma concentração de L2 igual a",
+    "options": [
+      "25,6%",
+      "27,1%",
+      "32,4%",
+      "35,8%"
+    ],
+    "correctAnswer": ""
+  },
+  {
+    "id": "6",
+    "question": "Nas operações com elementos do conjunto Z, afirma-se:\n\nI- O produto de dois números inteiros ímpares é ímpar.\n\nII- Sejam n e m dois números inteiros, com n > m e m ≠ 0. Se n : m = p, então p é inteiro.\n\nIII- Se k é um número inteiro, então k² + k é necessariamente múltiplo de 2.\n\nIV- Se m e n, com m ≠ n, são dois números primos entre si, então necessariamente m e n são primos.\n\nV- Qualquer número inteiro escrito na forma 4n + 1, com n ∈ Z, é ímpar.\n\nSão FALSAS apenas as afirmativas",
+    "options": [
+      "II e IV.",
+      "III e V.",
+      "I, II e IV.",
+      "II, III e IV."
+    ],
+    "correctAnswer": ""
+  },
+  {
+    "id": "7",
+    "question": "Na divisão de dois números inteiros e positivos, o quociente obtido é 18 e o resto é igual ao divisor menos 2 unidades. Sendo a diferença entre o dividendo e o divisor igual a 106, o resto é um número",
+    "options": [
+      "primo",
+      "ímpar",
+      "múltiplo de 2",
+      "par e maior que 8"
+    ],
+    "correctAnswer": ""
+  },
+  {
+    "id": "8",
+    "question": "Um cliente de uma companhia telefônica foi oferecido o seguinte plano:\n\ngratuidade em 10 horas de ligação por mês\nR$ 38,00 pela assinatura mensal\nR$ 0,02 por minuto que exceder as 10 horas\n\nConsiderando que o cliente contratou esse plano, e que o consumo foi de 17 horas e 23 minutos em outubro, e de 8 horas e 45 minutos em novembro, logo, sua despesa nos dois meses foi de",
+    "options": [
+      "R$ 84,86",
+      "R$ 95,36",
+      "R$ 96,86",
+      "R$ 107,36"
+    ],
+    "correctAnswer": ""
+  },
+  {
+    "id": "9",
+    "question": "Considere os conjuntos A = {6, 7, 8, 9, 10} e B = {1, 2, 3, 4, 5}.\n\nO número (a² + b²) / (a - b), em que a ∈ A e b ∈ B, NÃO pode ser",
+    "options": [
+      "inteiro.",
+      "negativo.",
+      "positivo menor que 10.",
+      "positivo maior que 10."
+    ],
+    "correctAnswer": ""
   }
 ]

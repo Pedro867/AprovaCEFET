@@ -19,9 +19,6 @@ import { CalendarioCustomizado } from "@/components/ui/CalendarCustom";
 import { BlurView } from "expo-blur";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-
-//import { nome } from "../(telas)/sign";
-
 const { width: screenWidth } = Dimensions.get("window");
 
 const subjectAreas = [
@@ -60,6 +57,21 @@ const subjectAreas = [
 ];
 
 export default function TelaSecao() {
+   const [nomeUsuario, setNomeUsuario] = useState(null);
+
+  useEffect(() => {
+    const carregarNomeUsuario = async () => {
+      try {
+        const nome = await AsyncStorage.getItem("userNome");
+        setNomeUsuario(nome);
+      } catch (error) {
+        console.error("Erro ao carregar o nome do usuário", error);
+      }
+    };
+
+    carregarNomeUsuario();
+  }, []); //o array vazio significa que essa função será chamada apenas uma vez
+
   const router = useRouter();
   const [diasFaltando, setDiasFaltando] = useState(0);
   const [progresso, setProgresso] = useState(0);
@@ -134,7 +146,7 @@ export default function TelaSecao() {
             />
             <View style={styles.headerText}>
               {/*torres --> precisa pegar o nome do user no bd pra exibir na tela !!!*/ }
-              <Text style={styles.greeting}>Olá, Pele</Text> 
+              <Text style={styles.greeting}>Olá, {nomeUsuario}</Text> 
 
               <Text style={styles.subtitle}>Vamos começar a aprender!</Text>
             </View>

@@ -2,24 +2,14 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import mysql from "mysql2/promise";
-import session from "express-session";
+import jwt from "jsonwebtoken";
+const SECRET = "chave-secreta";
 
 dotenv.config();
-
-export const nomeUsuario = "";
 
 const app = express();
 app.use(cors());
 app.use(express.json());
-
-app.use(session({
-    secret: "chave-secreta",
-    resave: false,
-    saveUninitialized: true,
-    cookie: {
-        secure: false
-    }
-}));
 
 app.post("/register", async (req, res) => {
     const {
@@ -55,17 +45,28 @@ app.post("/register", async (req, res) => {
 
         await conn.end();
 
-    //if (!emailValido) {
+        const token = jwt.sign({
+                id: result.insertId,
+                nome,
+                email
+            }, // payload
+            SECRET, // chave secreta (colocar no .env)
+            {
+                expiresIn: "7d"
+            } // validade
+        );
+
+        //if (!emailValido) {
         res.json({
             success: true,
             message: "Cadastro realizado!",
             id: result.insertId,
+            token,
+            nome,
+            email,
+            pontuacao: '0',
+            streak: '0',
         });
-
-        req.session.nome = nome;
-        req.session.email = email;
-        req.session.streak = 0;
-        req.session.pontuacao = 0;
 
         return true;
     } catch (err) {
@@ -126,10 +127,10 @@ app.post("/login", async (req, res) => {
             message: "Login realizado!",
         });
 
-        req.session.nome = aluno.nome;
-        req.session.email = aluno.email;
-        req.session.streak = aluno.streak;
-        req.session.pontuacao = aluno.pontuacao;
+        nomeUsuario = aluno.nome;
+        emailUsuario = aluno.email;
+        streakUsuario = aluno.streak;
+        pontuacaoUsuario = aluno.pontuacao;
 
         return true;
     } catch (err) {
@@ -141,18 +142,26 @@ app.post("/login", async (req, res) => {
     }
 });
 
-app.get("/getDados", (req, res) => {
-    if (!req.session.nome) {
+app.get("/perfil", (req, res) => {
+    const authHeader = req.headers["authorization"];
+    if (!authHeader)
         return res.status(401).json({
-            success: false //NAO TEM LOGIN
+            error: "Token não fornecido"
         });
-    }
-    res.json({
-        success: true,
-        nome: req.session.nome,
-        email: req.session.email,
-        streak: req.session.streak,
-        pontuacao: req.session.pontuacao
+
+    const token = authHeader.split(" ")[1];
+
+    jwt.verify(token, SECRET, (err, user) => {
+        if (err) return res.status(403).json({
+            error: "Token inválido"
+        });
+
+        // aqui o user é o payload do token
+        res.json({
+            success: true,
+            mensagem: `Bem-vindo, ${user.nome}!`,
+            dados: user, // { id, nome, email }
+        });
     });
 });
 

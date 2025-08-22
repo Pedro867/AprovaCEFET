@@ -8,7 +8,7 @@
       "8h45min",
       "9h30min"
     ],
-    "correctAnswer": ""
+    "correctAnswer": "7h45min"
   },
   {
     "id": "2",
@@ -19,7 +19,7 @@
       "10",
       "2"
     ],
-    "correctAnswer": ""
+    "correctAnswer": "24"
   },
   {
     "id": "3",
@@ -30,7 +30,7 @@
       "1260",
       "180"
     ],
-    "correctAnswer": ""
+    "correctAnswer": "12"
   },
   {
     "id": "4",
@@ -41,7 +41,8 @@
       "1/3 S",
       "5/8 S"
     ],
-    "correctAnswer": ""
+    "image": "./q4.png",
+    "correctAnswer": "3/5 S"
   },
   {
     "id": "5",
@@ -52,7 +53,7 @@
       "32,4%",
       "35,8%"
     ],
-    "correctAnswer": ""
+    "correctAnswer": "25,6%"
   },
   {
     "id": "6",
@@ -63,7 +64,7 @@
       "I, II e IV.",
       "II, III e IV."
     ],
-    "correctAnswer": ""
+    "correctAnswer": "II e IV."
   },
   {
     "id": "7",
@@ -74,7 +75,7 @@
       "múltiplo de 2",
       "par e maior que 8"
     ],
-    "correctAnswer": ""
+    "correctAnswer": "primo"
   },
   {
     "id": "8",
@@ -85,7 +86,7 @@
       "R$ 96,86",
       "R$ 107,36"
     ],
-    "correctAnswer": ""
+    "correctAnswer": "R$ 84,86"
   },
   {
     "id": "9",
@@ -96,6 +97,6 @@
       "positivo menor que 10.",
       "positivo maior que 10."
     ],
-    "correctAnswer": ""
+    "correctAnswer": "inteiro."
   }
 ]

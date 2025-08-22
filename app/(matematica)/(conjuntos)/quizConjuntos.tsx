@@ -4,10 +4,12 @@ import Animated from 'react-native-reanimated';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { useRouter } from 'expo-router';
+import { LinearGradient } from "expo-linear-gradient";
+import { Colors } from "@/constants/Colors";
 import initialQuestions from './questoesConjuntos.json';
 
 const imageMap = {
-  "../../../assets/questoes/1.4.png": require('../../../assets/questoes/1.4.png'),
+  "./q4.png": require('./q4.png'),
 };
 
 const QuizScreen = () => {
@@ -38,7 +40,7 @@ const QuizScreen = () => {
       const jsonValue = await AsyncStorage.getItem(QUIZ_STATE_KEY);
       if (jsonValue != null) {
         const savedState = JSON.parse(jsonValue);
-        
+
         if (savedState.currentQuestionIndex >= savedState.questions.length) {
           setShowScore(true);
           setScore(savedState.score);
@@ -46,7 +48,7 @@ const QuizScreen = () => {
           setCurrentQuestionIndex(savedState.currentQuestionIndex);
           setScore(savedState.score);
         }
-        
+
         setIncorrectQuestions(savedState.incorrectQuestions);
         setQuizMode(savedState.quizMode);
         setQuestions(savedState.quizMode === 'initial' ? initialQuestions : savedState.incorrectQuestions);
@@ -147,10 +149,22 @@ const QuizScreen = () => {
 
   if (showScore) {
     return (
-      <View style={styles.container}>
+      <LinearGradient
+        style={styles.container}
+        colors={[Colors.gradientEnd, Colors.gradientStart]}
+      >
         <TouchableOpacity onPress={() => router.replace('/(matematica)/(conjuntos)/conjuntos')} style={styles.backButton}>
           <Icon name="arrow-back" size={30} color="#000" />
         </TouchableOpacity>
+
+        <View style={styles.streakContainer}>
+          <Image
+            source={require("@/assets/images/pontos.png")}
+            style={styles.streakIcon}
+          />
+          <Text style={styles.streakNumber}>0</Text>
+        </View>
+
         <Text style={styles.scoreText}>Você terminou o quiz!</Text>
         <Text style={styles.scoreText}>Você ganhou {score} pontos!</Text>
         <TouchableOpacity style={styles.exitButton} onPress={() => router.replace('/(matematica)/(conjuntos)/conjuntos')}>
@@ -164,7 +178,7 @@ const QuizScreen = () => {
             <Text style={styles.continueButtonText}>Refazer Questões Erradas</Text>
           </TouchableOpacity>
         )}
-      </View>
+      </LinearGradient>
     );
   }
 
@@ -173,19 +187,33 @@ const QuizScreen = () => {
   // Adiciona a verificação aqui para evitar o erro de 'undefined'
   if (!currentQuestion) {
     return (
-      <View style={styles.container}>
+      <LinearGradient
+        style={styles.container}
+        colors={[Colors.gradientEnd, Colors.gradientStart]}
+      >
         <Text style={styles.loadingText}>Quiz inválido ou concluído.</Text>
         {/* Você pode adicionar um botão para voltar ou refazer o quiz aqui */}
-      </View>
+      </LinearGradient>
     );
   }
 
   return (
     <Animated.ScrollView contentContainerStyle={styles.scrollViewContent}>
-      <View style={styles.container}>
+      <LinearGradient
+        style={styles.container}
+        colors={[Colors.gradientEnd, Colors.gradientStart]}
+      >
         <TouchableOpacity onPress={() => router.replace('/(matematica)/(conjuntos)/conjuntos')} style={styles.backButton}>
           <Icon name="arrow-back" size={30} color="#000" />
         </TouchableOpacity>
+
+        <View style={styles.streakContainer}>
+          <Image
+            source={require("@/assets/images/pontos.png")}
+            style={styles.streakIcon}
+          />
+          <Text style={styles.streakNumber}>0</Text>
+        </View>
 
         <Text style={styles.questionText}>Questão {currentQuestionIndex + 1}</Text>
         {currentQuestion.image && <Image source={imageMap[currentQuestion.image]} style={styles.image} />}
@@ -208,7 +236,7 @@ const QuizScreen = () => {
             <Text style={styles.continueButtonText}>Próxima</Text>
           </TouchableOpacity>
         )}
-      </View>
+      </LinearGradient>
     </Animated.ScrollView>
   );
 };
@@ -303,7 +331,22 @@ const styles = StyleSheet.create({
   loadingText: {
     fontSize: 24,
     fontWeight: 'bold',
-  }
+  },
+  streakContainer: {
+    alignItems: "center",
+  },
+  streakIcon: {
+    width: 40,
+    height: 40,
+  },
+  streakNumber: {
+    fontSize: 12,
+    color: "#060302",
+    fontWeight: "bold",
+    textShadowColor: "rgba(0,0,0,0.25)",
+    textShadowOffset: { width: 0, height: 4 },
+    textShadowRadius: 4,
+  },
 });
 
 export default QuizScreen;

@@ -11,7 +11,7 @@ import { getToken } from "../api/manipulacaoTokens";
 import { BotaoCustomizado } from '@/components/ui/ButtomCustom';
 
 export default function HomeScreen() {
-  const [loading, setLoading] = useState(true);
+  /*const [loading, setLoading] = useState(true);
   const router = useRouter();
 
   useEffect(() => {
@@ -28,7 +28,7 @@ export default function HomeScreen() {
   if (loading) {
     return <ThemedView><Text>Carregando...</Text></ThemedView>;
     // pode ser splash screen também
-  }
+  }*/
 
   return (
     <ThemedView style={styles.container}>

@@ -40,8 +40,8 @@ export async function validaCadastro(nome, email, senha) {
             await saveToken(data.token);
             await AsyncStorage.setItem("userNome", data.nome);
             await AsyncStorage.setItem("userEmail", data.email);
-            await AsyncStorage.setItem("userPontuacao", data.pontuacao);
-            await AsyncStorage.setItem("userStreak", data.streak);
+            await AsyncStorage.setItem("userPontuacao", data.pontuacao.toString()); //tem q ser string pra salvar
+            await AsyncStorage.setItem("userStreak", data.streak.toString());
             Alert.alert("Sucesso", data.message);
             return true;
         } else {
@@ -82,6 +82,11 @@ export async function validaLogin(email, senha) {
         }
 
         if (data.success) {
+            await saveToken(data.token);
+            await AsyncStorage.setItem("userNome", data.nome);
+            await AsyncStorage.setItem("userEmail", data.email);
+            await AsyncStorage.setItem("userPontuacao", data.pontuacao.toString()); //tem q ser string pra salvar
+            await AsyncStorage.setItem("userStreak", data.streak.toString());
             Alert.alert("Sucesso", data.message);
             return true;
         } else {
@@ -93,7 +98,7 @@ export async function validaLogin(email, senha) {
     }
 }
 
-const getPerfil = async () => {
+/*const getPerfil = async () => {
     const token = await getToken();
 
     const response = await fetch("https://backend-aprovacefet.onrender.com/perfil", {
@@ -110,4 +115,4 @@ const getPerfil = async () => {
     } else {
         console.log("Erro:", data.error);
     }
-};
+};*/

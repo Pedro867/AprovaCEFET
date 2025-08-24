@@ -57,15 +57,31 @@ const subjectAreas = [
 ];
 
 export default function TelaSecao() {
-   const [nomeUsuario, setNomeUsuario] = useState(null);
+
+  const [nomeUsuario, setNomeUsuario] = useState(null);
+  const [streakUsuario, setStreakUsuario] = useState(null);
+  const [coinsUsuario, setCoinsUsuario] = useState(null);
 
   useEffect(() => {
     const carregarNomeUsuario = async () => {
+      //EU SEI QUE TUDO PODE SER FEITO EM 1 TRY CATCH MAS SE 1 DER ERRADO O CONSOLE.ERROR DIZ QUAL EH
       try {
         const nome = await AsyncStorage.getItem("userNome");
         setNomeUsuario(nome);
       } catch (error) {
         console.error("Erro ao carregar o nome do usuário", error);
+      }
+      try {
+        const streak = await AsyncStorage.getItem("userStreak");
+        setStreakUsuario(streak);
+      } catch (error) {
+        console.error("Erro ao carregar o streak do usuário", error);
+      }
+      try {
+        const coins = await AsyncStorage.getItem("userPontuacao");
+        setCoinsUsuario(coins);
+      } catch (error) {
+        console.error("Erro ao carregar as coins do usuário", error);
       }
     };
 
@@ -155,14 +171,14 @@ export default function TelaSecao() {
                 source={require("@/assets/images/foguin--ativado-.png")}
                 style={styles.streakIcon}
               />
-              <Text style={styles.streakNumber}>0</Text>
+              <Text style={styles.streakNumber}>{streakUsuario}</Text>
             </View>
             <View style={styles.streakContainer}>
               <Image
                 source={require("@/assets/images/pontos.png")}
                 style={styles.streakIcon}
               />
-              <Text style={styles.streakNumber}>0</Text>
+              <Text style={styles.streakNumber}>{coinsUsuario}</Text>
             </View>
           </View>
 

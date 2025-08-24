@@ -15,8 +15,6 @@ import { ThemedText } from "@/components/ThemedText";
 import { Avatar } from "@/components/ui/Avatar";
 import { unidadesMatematica } from "@/constants/dadosUnidades"
 
-
-
 export default function TelaUnidadesMatematica() {
   const router = useRouter();
 
@@ -36,7 +34,7 @@ export default function TelaUnidadesMatematica() {
             source={require("@/assets/images/foguin--ativado-.png")}
             style={styles.streakIcon}
           />
-          <Text style={styles.streakNumber}>1</Text>
+          <Text style={styles.streakNumber}>pegar a variavel dps</Text>
         </View>
       </View>
       <View style={styles.headerUnidade}>

@@ -9,7 +9,7 @@ import {
   Dimensions,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
-import { Avatar } from "@/components/ui/Avatar";
+import { Personagem } from "@/components/ui/Personagem";
 import { Card } from "@/components/ui/Card";
 import { ProgressBar } from "@/components/ui/ProgressBar";
 import { useRouter } from "expo-router";
@@ -18,9 +18,6 @@ import { BotaoCustomizado } from "@/components/ui/ButtomCustom";
 import { CalendarioCustomizado } from "@/components/ui/CalendarCustom";
 import { BlurView } from "expo-blur";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-
-
-//import { nome } from "../(telas)/sign";
 
 const { width: screenWidth } = Dimensions.get("window");
 
@@ -60,6 +57,37 @@ const subjectAreas = [
 ];
 
 export default function TelaSecao() {
+
+  const [nomeUsuario, setNomeUsuario] = useState(null);
+  const [streakUsuario, setStreakUsuario] = useState(null);
+  const [coinsUsuario, setCoinsUsuario] = useState(null);
+
+  useEffect(() => {
+    const carregarNomeUsuario = async () => {
+      //EU SEI QUE TUDO PODE SER FEITO EM 1 TRY CATCH MAS SE 1 DER ERRADO O CONSOLE.ERROR DIZ QUAL EH
+      try {
+        const nome = await AsyncStorage.getItem("userNome");
+        setNomeUsuario(nome);
+      } catch (error) {
+        console.error("Erro ao carregar o nome do usuário", error);
+      }
+      try {
+        const streak = await AsyncStorage.getItem("userStreak");
+        setStreakUsuario(streak);
+      } catch (error) {
+        console.error("Erro ao carregar o streak do usuário", error);
+      }
+      try {
+        const coins = await AsyncStorage.getItem("userPontuacao");
+        setCoinsUsuario(coins);
+      } catch (error) {
+        console.error("Erro ao carregar as coins do usuário", error);
+      }
+    };
+
+    carregarNomeUsuario();
+  }, []); //o array vazio significa que essa função será chamada apenas uma vez
+
   const router = useRouter();
   const [diasFaltando, setDiasFaltando] = useState(0);
   const [progresso, setProgresso] = useState(0);
@@ -119,6 +147,18 @@ export default function TelaSecao() {
       console.error("Erro ao atualizar a data", error);
     }
   };
+  //customizacao do personagem
+  const customizacoes = {
+    background: 'cor1', 
+    ears: 'orelha1',
+    cheeks: 'bochecha1',
+    face: 'rosto1',
+    eyes: 'olhos1',
+    mouth: 'boca1',
+    bangs: 'franja1',
+    hair: 'cabelo1',
+    nose: 'nariz1',
+  };
   return (
     <View style={styles.rootContainer}>
       <LinearGradient
@@ -127,14 +167,10 @@ export default function TelaSecao() {
       >
         <ScrollView showsVerticalScrollIndicator={false}>
           <View style={styles.header}>
-            <Avatar
-              source={require("@/assets/images/avatar.png")}
-              size={36}
-              style={styles.avatar}
-            />
+            {/*<Personagem size={32} customizations={customizacoes} />*/}
             <View style={styles.headerText}>
               {/*torres --> precisa pegar o nome do user no bd pra exibir na tela !!!*/ }
-              <Text style={styles.greeting}>Olá, Pele</Text> 
+              <Text style={styles.greeting}>Olá, {nomeUsuario}</Text> 
 
               <Text style={styles.subtitle}>Vamos começar a aprender!</Text>
             </View>
@@ -143,14 +179,14 @@ export default function TelaSecao() {
                 source={require("@/assets/images/foguin--ativado-.png")}
                 style={styles.streakIcon}
               />
-              <Text style={styles.streakNumber}>0</Text>
+              <Text style={styles.streakNumber}>{streakUsuario}</Text>
             </View>
             <View style={styles.streakContainer}>
               <Image
                 source={require("@/assets/images/pontos.png")}
                 style={styles.streakIcon}
               />
-              <Text style={styles.streakNumber}>0</Text>
+              <Text style={styles.streakNumber}>{coinsUsuario}</Text>
             </View>
           </View>
 

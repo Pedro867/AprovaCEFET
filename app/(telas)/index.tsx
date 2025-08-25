@@ -1,28 +1,34 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { ThemedView } from '@/components/ThemedView';
 import { Link } from 'expo-router';
 import { Image } from 'expo-image';
-import { StyleSheet, View } from 'react-native';
-import { Spacing } from '@/constants/Colors'; 
+import { StyleSheet, View, Text } from 'react-native';
+import { Spacing } from '@/constants/Colors';
 import { useRouter } from 'expo-router';
-import { checksessao } from "../api/conexaoFetch";
+import { getToken } from "../api/manipulacaoTokens";
 
 
 import { BotaoCustomizado } from '@/components/ui/ButtomCustom';
 
 export default function HomeScreen() {
+  /*const [loading, setLoading] = useState(true);
   const router = useRouter();
 
   useEffect(() => {
-    const verificarSessao = async () => {
-      const temConta = await checksessao();
-      if (temConta) {
-        router.replace('/(tabs)/secao');
+    const checkToken = async () => {
+      const token = await getToken();
+      if (token) {
+        router.replace('/(tabs)/secao'); // logado
       }
+      setLoading(false);
     };
-
-    verificarSessao();
+    checkToken();
   }, []);
+
+  if (loading) {
+    return <ThemedView><Text>Carregando...</Text></ThemedView>;
+    // pode ser splash screen também
+  }*/
 
   return (
     <ThemedView style={styles.container}>
@@ -66,7 +72,7 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     paddingHorizontal: Spacing.large,
-    paddingBottom: 100, 
+    paddingBottom: 100,
     gap: Spacing.buttonContainer,
   },
 });

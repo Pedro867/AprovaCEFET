@@ -1,6 +1,10 @@
 import {
     Alert
 } from "react-native";
+import {
+    saveToken, getToken
+} from "./manipulacaoTokens";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export async function validaCadastro(nome, email, senha) {
     try {
@@ -25,11 +29,19 @@ export async function validaCadastro(nome, email, senha) {
             data = JSON.parse(text);
         } catch (err) {
             console.error("Resposta não era JSON:", text);
-            Alert.alert("Erro", "O servidor retornou algo inesperado.", [{text: "ok", onPress: ()=> console.log("jhsvafhgk")}] );
+            Alert.alert("Erro", "O servidor retornou algo inesperado.", [{
+                text: "ok",
+                onPress: () => console.log("jhsvafhgk")
+            }]);
             return;
         }
 
         if (data.success) {
+            await saveToken(data.token);
+            await AsyncStorage.setItem("userNome", data.nome);
+            await AsyncStorage.setItem("userEmail", data.email);
+            await AsyncStorage.setItem("userPontuacao", data.pontuacao.toString()); //tem q ser string pra salvar
+            await AsyncStorage.setItem("userStreak", data.streak.toString());
             Alert.alert("Sucesso", data.message);
             return true;
         } else {
@@ -62,11 +74,19 @@ export async function validaLogin(email, senha) {
             data = JSON.parse(text);
         } catch (err) {
             console.error("Resposta não era JSON:", text);
-            Alert.alert("Erro", "O servidor retornou algo inesperado.", [{text: "ok", onPress: ()=> console.log("jhsvafhgk")}] );
+            Alert.alert("Erro", "O servidor retornou algo inesperado.", [{
+                text: "ok",
+                onPress: () => console.log("jhsvafhgk")
+            }]);
             return;
         }
 
         if (data.success) {
+            await saveToken(data.token);
+            await AsyncStorage.setItem("userNome", data.nome);
+            await AsyncStorage.setItem("userEmail", data.email);
+            await AsyncStorage.setItem("userPontuacao", data.pontuacao.toString()); //tem q ser string pra salvar
+            await AsyncStorage.setItem("userStreak", data.streak.toString());
             Alert.alert("Sucesso", data.message);
             return true;
         } else {
@@ -78,41 +98,21 @@ export async function validaLogin(email, senha) {
     }
 }
 
-    let nome;
-    let email;
-    let streak;
-    let pontuacao;
+/*const getPerfil = async () => {
+    const token = await getToken();
 
-export async function checksessao() {
-    try {
-        const response = await fetch("https://backend-aprovacefet.onrender.com/getDados", {
-            method: "GET",
-            credentials: "include",
-        });
+    const response = await fetch("https://backend-aprovacefet.onrender.com/perfil", {
+        headers: {
+            Authorization: `Bearer ${token}`
+        },
+    });
 
-        const text = await response.text();
-        console.log("Resposta crua:", text);
+    const data = await response.json();
 
-        let data;
-        try {
-            data = JSON.parse(text);
-        } catch (err) {
-            //NAO TINHA SESSAO
-            return false;
-        }
-
-        if (data.success) {
-            nome = data.nome;
-            email = data.email;
-            streak = data.streak;
-            pontuacao = data.pontuacao;
-            return true;
-        } else {
-            Alert.alert("Erro", data.message || "Erro ao conectar ao BD.");
-        }
-    } catch (error) {
-        console.error(error);
-        Alert.alert("Erro", "Erro ao conectar no servidor.");
-        return false;
+    if (response.ok) {
+        console.log("Nome do usuário:", data.dados.nome);
+        // aqui vc pode fazer setUserName(data.dados.nome) no state
+    } else {
+        console.log("Erro:", data.error);
     }
-}
+};*/

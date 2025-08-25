@@ -1,78 +1,46 @@
-import { Image } from 'expo-image';
-import { Platform, StyleSheet, TouchableOpacity, View } from 'react-native';
-
-import { Collapsible } from '@/components/Collapsible';
-import { ExternalLink } from '@/components/ExternalLink';
-import ParallaxScrollView from '@/components/ParallaxScrollView';
-import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
+import React, { useState } from 'react';
+import { View, StyleSheet, SafeAreaView } from 'react-native';
+import { Personagem } from '@/components/ui/Personagem'
 import { Colors } from '@/constants/Colors';
-import { Link, useNavigation } from 'expo-router';
-import { IconSymbol } from '@/components/ui/IconSymbol';
+import { ThemedText } from '@/components/ThemedText';
 
-export default function HomeScreen() {
-  const navigation = useNavigation();
+export default function ProfileScreen() {
+  const customizacoes = {
+    background: 'cor1', 
+    ears: 'orelha1',
+    cheeks: 'bochecha1',
+    face: 'rosto1',
+    eyes: 'olhos1',
+    mouth: 'boca1',
+    bangs: 'franja1',
+    hair: 'cabelo1',
+    nose: 'nariz1',
+  };
 
   return (
-    <View style={styles.container}>
-
-      <View style={styles.titleContainer}>
-        <ThemedText type="title" style={styles.title}>Profile</ThemedText>
+    <SafeAreaView style={styles.safeArea}>
+      <View style={styles.container}>
+        <ThemedText style={styles.title}>Teste do Personagem</ThemedText>
+        <Personagem size={300} customizations={customizacoes} />
       </View>
-
-      <View style={styles.buttonContainer}>
-        {/* O Link para maetmatica*/}
-        <Link href="/(tabs)/matematica" asChild>
-          <TouchableOpacity style={styles.button}>
-            <ThemedText style={styles.buttonText}>Matemática</ThemedText>
-          </TouchableOpacity>
-        </Link>
-      </View>
-    </View>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
+  safeArea: {
     flex: 1,
     backgroundColor: Colors.light.background,
   },
-  backButton: {
-    position: 'absolute',
-    top: 60,
-    left: 20,
-    zIndex: 1,
-  },
-  titleContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
+  container: {
+    flex: 1,
     justifyContent: 'center',
-    marginTop: 50,
-    gap: 8,
+    alignItems: 'center',
+    backgroundColor: Colors.light.background,
   },
   title: {
-    fontSize: 50,
+    fontSize: 24,
     fontWeight: 'bold',
-    color: Colors.light.text,
-
-    marginBottom: 10,
-    lineHeight: 100,
-  },
-  buttonContainer: {
-    width: '100%',
-    marginTop: 100,
-    alignItems: 'center',
-  },
-  button: {
-    backgroundColor: Colors.light.tint,
-    paddingVertical: 50,
-    paddingHorizontal: 50,
-    borderRadius: 100,
-    alignItems: 'center',
-  },
-  buttonText: {
-    color: Colors.light.verdeClaro,
-    fontSize: 18,
-    fontWeight: 'bold',
+    marginBottom: 50,
   },
 });

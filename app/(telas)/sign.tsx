@@ -18,6 +18,7 @@ import { Spacing, Fonts, Colors } from "@/constants/Colors";
 import { BotaoCustomizado } from "@/components/ui/ButtomCustom";
 import { InputCustomizado } from "@/components/ui/InputCustom";
 import Animated from 'react-native-reanimated';
+import { useRouter } from 'expo-router';
 
 export default function SignScreen() {
   const [nome, setNome] = useState("");
@@ -26,7 +27,7 @@ export default function SignScreen() {
   const [confirmarSenha, setConfirmarSenha] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const navigation = useNavigation();
+  const router = useRouter();
 
   const handleRegister = async () => {
     //funcao assincrona, chamada quando o botao registrar é pressionado
@@ -48,8 +49,9 @@ export default function SignScreen() {
     // chama a API de cadastro
     //comentado para testes com bd desligado
     const sucesso = await validaCadastro(nome, email, senha);
+    //const sucesso = true;
     if (sucesso) {
-    navigation.navigate("registerDate");
+      router.replace('/(telas)/registerDate')
     } else {
     }
   };

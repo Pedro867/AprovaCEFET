@@ -18,17 +18,17 @@ import { Feather } from "@expo/vector-icons";
 const opcoesDaUnidade = [
   {
     title: "Material Teórico",
-    route: "/(matematica)/testeQuiz", 
+    route: "/(matematica)/(conjuntos)/quizConjuntos", 
     locked: false,
   },
   {
     title: "Videoaulas",
-    route: "/(matematica)/testeQuiz",
+    route: "/(matematica)/(conjuntos)/quizConjuntos",
     locked: false,
   },
   {
     title: "Exercícios",
-    route: "/(matematica)/testeQuiz",
+    route: "/(matematica)/(conjuntos)/quizConjuntos",
     locked: false,
   },
   {

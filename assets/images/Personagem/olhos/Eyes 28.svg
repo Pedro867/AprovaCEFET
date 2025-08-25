@@ -1,0 +1,18 @@
+<svg width="289" height="164" viewBox="0 0 289 164" fill="none" xmlns="http://www.w3.org/2000/svg">
+<ellipse cx="29" cy="17.5" rx="29" ry="17.5" transform="matrix(-1 0 0 1 117 80)" fill="white"/>
+<mask id="mask0_279_1140" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="59" y="80" width="58" height="35">
+<ellipse cx="29" cy="17.5" rx="29" ry="17.5" transform="matrix(-1 0 0 1 117 80)" fill="white"/>
+</mask>
+<g mask="url(#mask0_279_1140)">
+<circle cx="18" cy="18" r="18" transform="matrix(-1 0 0 1 120 80)" fill="black"/>
+</g>
+<path d="M57.0002 43.4099C59.1972 41.8355 71.7548 34 89.9556 34C108.156 34 125.108 41.8354 122.911 43.4099C122.911 61.6107 119.538 43.4095 90.9765 43.4095C60.2182 43.4095 57.0002 61.6107 57.0002 43.4099Z" fill="black"/>
+<path d="M167.883 43.4099C170.08 41.8355 182.638 34 200.838 34C219.039 34 235.991 41.8354 233.794 43.4099C233.794 61.6107 230.421 43.4095 201.859 43.4095C171.101 43.4095 167.883 61.6107 167.883 43.4099Z" fill="black"/>
+<ellipse cx="29" cy="17.5" rx="29" ry="17.5" transform="matrix(-1 0 0 1 227 80)" fill="white"/>
+<mask id="mask1_279_1140" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="169" y="80" width="58" height="35">
+<ellipse cx="29" cy="17.5" rx="29" ry="17.5" transform="matrix(-1 0 0 1 227 80)" fill="white"/>
+</mask>
+<g mask="url(#mask1_279_1140)">
+<circle cx="18" cy="18" r="18" transform="matrix(-1 0 0 1 230 80)" fill="black"/>
+</g>
+</svg>

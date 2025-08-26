@@ -167,7 +167,9 @@ export default function TelaSecao() {
       >
         <ScrollView showsVerticalScrollIndicator={false}>
           <View style={styles.header}>
-            {/*<Personagem size={32} customizations={customizacoes} />*/}
+            <TouchableOpacity onPress={() => router.push('/(tabs)/profile')}>
+                <Personagem size={32} customizations={customizacoes} />
+            </TouchableOpacity>
             <View style={styles.headerText}>
               {/*torres --> precisa pegar o nome do user no bd pra exibir na tela !!!*/ }
               <Text style={styles.greeting}>Olá, {nomeUsuario}</Text> 
@@ -285,6 +287,7 @@ const styles = StyleSheet.create({
     marginRight: 12,
   },
   headerText: {
+    marginLeft:10,
     flex: 1,
   },
   greeting: {
@@ -415,6 +418,7 @@ const styles = StyleSheet.create({
     color: "#727272",
     fontFamily: "Kumbh Sans",
   },
+
   //estilos mudar data prova
   blurContainer: {
     ...StyleSheet.absoluteFillObject, // Faz o blur cobrir a tela inteira

@@ -1,11 +1,9 @@
 import { Tabs } from "expo-router";
 import React from "react";
-
 import { HapticTab } from "@/components/HapticTab";
-import { IconSymbol } from "@/components/ui/IconSymbol";
 import { Colors } from "@/constants/Colors";
 import { useColorScheme } from "@/hooks/useColorScheme";
-import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
+import Octicons from '@expo/vector-icons/Octicons';
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
@@ -15,14 +13,14 @@ export default function TabLayout() {
     <Tabs
       // a tela inicial, depois do login, será a 'secao'
       screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? "light"].tint,
+        tabBarActiveTintColor: Colors.primary,
+        tabBarInactiveTintColor: '#8e8e93ff',
         headerShown: false,
         tabBarPosition: "bottom",
         tabBarButton: HapticTab,
-
         tabBarStyle: {
           position: "absolute", 
-          backgroundColor: "transparent", 
+          backgroundColor: "#ffffffea", 
           borderTopWidth: 0, // remove a linha superior
           elevation: 0, // tira sombra android
         },
@@ -31,9 +29,22 @@ export default function TabLayout() {
       <Tabs.Screen
         name="secao"
         options={{
-          title: "Home",
+          title: "Tela Inicial",
+          tabBarActiveTintColor: Colors.primary,
+          tabBarInactiveTintColor: Colors.text,
           tabBarIcon: ({ color }) => (
-            <IconSymbol size={28} name="house.fill" color={color} />
+           <Octicons name="home" size={26} color= {color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="store"
+        options={{
+          title: "Loja",
+          tabBarActiveTintColor: Colors.primary,
+          tabBarInactiveTintColor: Colors.text,
+          tabBarIcon: ({ color }) => (
+            <Octicons name="gift" size={26} color={color} />
           ),
         }}
       />
@@ -41,8 +52,10 @@ export default function TabLayout() {
         name="profile"
         options={{
           title: "Perfil",
+          tabBarActiveTintColor: Colors.primary,
+          tabBarInactiveTintColor: Colors.text,
           tabBarIcon: ({ color }) => (
-            <FontAwesome5 name="user-graduate" size={22} color={color} />
+            <Octicons name="person" size={26} color={color} />
           ),
         }}
       />

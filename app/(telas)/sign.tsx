@@ -27,6 +27,7 @@ export default function SignScreen() {
   const [confirmarSenha, setConfirmarSenha] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
 
   const handleRegister = async () => {
@@ -46,6 +47,8 @@ export default function SignScreen() {
       return;
     }
 
+    setIsLoading(true);
+
     // chama a API de cadastro
     //comentado para testes com bd desligado
     const sucesso = await validaCadastro(nome, email, senha);
@@ -54,7 +57,18 @@ export default function SignScreen() {
       router.replace('/(telas)/registerDate')
     } else {
     }
+    setIsLoading(false);
   };
+
+  if (isLoading) {
+      return (
+        <LinearGradient colors={[Colors.gradientStart, Colors.gradientEnd]} style={styles.container}>
+          <View style={styles.loadingContainer}>
+            <Text style={styles.title}>Carregando...</Text>
+          </View>
+        </LinearGradient>
+      );
+    }
 
   return (
     <KeyboardAvoidingView

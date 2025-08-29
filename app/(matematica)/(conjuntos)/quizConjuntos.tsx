@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { StyleSheet, View, Text, TouchableOpacity, Image, Alert } from 'react-native';
 import Animated, { FadeIn, FadeOut } from 'react-native-reanimated';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import Icon from 'react-native-vector-icons/Ionicons';
 import { useRouter } from 'expo-router';
 import { LinearGradient } from "expo-linear-gradient";
+import { IconSymbol } from "@/components/ui/IconSymbol";
 import { Colors } from "@/constants/Colors";
 import initialQuestions from './questoesConjuntos.json';
 
@@ -22,7 +22,7 @@ const QuizScreen = () => {
   const [incorrectQuestions, setIncorrectQuestions] = useState([]);
   const [quizMode, setQuizMode] = useState('initial');
   const [isLoading, setIsLoading] = useState(true);
-  const [streak, setStreak] = useState(0);
+  const [coins, setCoinsUsuario] = useState(0);
   const [showStreakIncrease, setShowStreakIncrease] = useState(false);
   const [streakIncreaseAmount, setStreakIncreaseAmount] = useState(0);
 
@@ -42,7 +42,7 @@ const QuizScreen = () => {
 
   const saveStreak = async (newStreak) => {
     try {
-      await AsyncStorage.setItem(STREAK_KEY, newStreak.toString());
+      await AsyncStorage.setItem("userPontuacao", newStreak);
     } catch (e) {
       console.error('Erro ao salvar o streak:', e);
     }
@@ -64,10 +64,10 @@ const QuizScreen = () => {
         setQuizMode(savedState.quizMode);
         setQuestions(savedState.quizMode === 'initial' ? initialQuestions : savedState.incorrectQuestions);
       }
-      const streakValue = await AsyncStorage.getItem(STREAK_KEY);
-      if (streakValue != null) {
-        setStreak(parseInt(streakValue, 10));
-      }
+      // const streakValue = await AsyncStorage.getItem(STREAK_KEY);
+      // if (streakValue != null) {
+      //   setStreak(parseInt(streakValue, 10));
+      // }
     } catch (e) {
       console.error('Erro ao carregar o estado do quiz:', e);
     } finally {
@@ -76,6 +76,16 @@ const QuizScreen = () => {
   };
 
   useEffect(() => {
+    const carregaCoins = async () => {
+      try {
+        const coins = await AsyncStorage.getItem("userPontuacao");
+        setCoinsUsuario(parseInt(coins));
+      } catch (error) {
+        console.error("Erro ao carregar as coins do usuário", error);
+      }
+    };
+    
+    carregaCoins();
     loadQuizState();
   }, []);
 
@@ -94,9 +104,9 @@ const QuizScreen = () => {
 
   useEffect(() => {
     if (!isLoading) {
-      saveStreak(streak);
+      saveStreak(coins);
     }
-  }, [streak, isLoading]);
+  }, [coins, isLoading]);
 
   const handleOptionSelect = (answer) => {
     setSelectedAnswer(answer);
@@ -120,8 +130,8 @@ const QuizScreen = () => {
       } else if (quizMode === 'review') {
         pointsToAdd = 3;
       }
-      const newStreak = streak + pointsToAdd;
-      setStreak(newStreak);
+      const newCoins = coins + pointsToAdd;
+      setCoinsUsuario(newCoins);
       setStreakIncreaseAmount(pointsToAdd);
       setShowStreakIncrease(true);
       setTimeout(() => {
@@ -162,7 +172,7 @@ const QuizScreen = () => {
       setSelectedAnswer(null);
       setAnswered(false);
       setQuizMode('initial');
-      setStreak(0);
+      setCoinsUsuario(0);
     } catch (e) {
       console.error('Erro ao resetar o quiz:', e);
     }
@@ -199,18 +209,18 @@ const QuizScreen = () => {
         colors={[Colors.gradientEnd, Colors.gradientStart]}
       >
         <TouchableOpacity onPress={() => router.replace('/(matematica)/(conjuntos)/conjuntos')} style={styles.backButton}>
-          <Icon name="arrow-back" size={30} color="#000" />
+          <IconSymbol name="arrow.left" size={32} color={Colors.light.text} />
         </TouchableOpacity>
         <View style={styles.streakContainerScore}>
           <Image
             source={require("@/assets/images/pontos.png")}
             style={styles.streakIcon}
           />
-          <Text style={styles.streakNumber}>{streak}</Text>
+          <Text style={styles.streakNumber}>{coins}</Text>
         </View>
         <Text style={styles.scoreText}>Você terminou o quiz!</Text>
         <Text style={styles.scoreText}>Você acertou {score} de {questions.length} questões!</Text>
-        <Text style={styles.scoreText}>Você ganhou um total de {streak} CefetCoins!</Text>
+        <Text style={styles.scoreText}>Você ganhou um total de {coins} CefetCoins!</Text>
         <TouchableOpacity style={styles.exitButton} onPress={() => router.replace('/(matematica)/(conjuntos)/conjuntos')}>
           <Text style={styles.continueButtonText}>Sair do Quiz</Text>
         </TouchableOpacity>
@@ -244,14 +254,14 @@ const QuizScreen = () => {
       colors={[Colors.gradientEnd, Colors.gradientStart]}
     >
       <TouchableOpacity onPress={() => router.replace('/(matematica)/(conjuntos)/conjuntos')} style={styles.backButton}>
-        <Icon name="arrow-back" size={30} color="#000" />
+        <IconSymbol name="arrow.left" size={32} color={Colors.light.text} />
       </TouchableOpacity>
       <View style={styles.streakContainer}>
         <Image
           source={require("@/assets/images/pontos.png")}
           style={styles.streakIcon}
         />
-        <Text style={styles.streakNumber}>{streak}</Text>
+        <Text style={styles.streakNumber}>{coins}</Text>
         {showStreakIncrease && (
           <Animated.Text entering={FadeIn.duration(500)} exiting={FadeOut.duration(500)} style={styles.streakIncrease}>
             +{streakIncreaseAmount}

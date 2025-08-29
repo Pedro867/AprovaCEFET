@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   StyleSheet,
   View,
@@ -15,16 +15,34 @@ import { ThemedText } from "@/components/ThemedText";
 import { Personagem } from "@/components/ui/Personagem";
 import { Colors, Fonts, Spacing } from "@/constants/Colors";
 import { useRouter } from "expo-router";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function ProfileScreen() {
   const router = useRouter();
 
-  // dados do usuário (fixos para o teste, sem integração com o banco)
-  const user = {
-    nome: "Rafael Ferreira",
-    melhorStreak: 12,
-    cefetCoins: 500,
-  };
+    const [nomeUsuario, setNomeUsuario] = useState(null);
+    const [streakUsuario, setStreakUsuario] = useState(0);
+    const [coinsUsuario, setCoinsUsuario] = useState(0);
+  
+    useEffect(() => {
+      const carregarNomeUsuario = async () => {
+        //EU SEI QUE TUDO PODE SER FEITO EM 1 TRY CATCH MAS SE 1 DER ERRADO O CONSOLE.ERROR DIZ QUAL EH
+        try {
+          const nome = await AsyncStorage.getItem("userNome");
+          setNomeUsuario(nome);
+        } catch (error) {
+          console.error("Erro ao carregar o nome do usuário", error);
+        }
+        try {
+          const coins = await AsyncStorage.getItem("userPontuacao");
+          setCoinsUsuario(coins);
+        } catch (error) {
+          console.error("Erro ao carregar as coins do usuário", error);
+        }
+      };
+  
+      carregarNomeUsuario();
+    }, []); //o array vazio significa que essa função será chamada apenas uma vez
 
   // personagem (ainda fixo, sem interação com nada do banco)
   const customizacoesPersonagem = {
@@ -62,7 +80,7 @@ export default function ProfileScreen() {
         {/* INFORMAÇÕES DO USUÁRIO, PERSONAGEM E BOTÃO */}
         <View style={styles.profileSection}>
           <Personagem size={150} customizations={customizacoesPersonagem} />
-          <ThemedText style={styles.profileName}>{user.nome}</ThemedText>
+          <ThemedText style={styles.profileName}>{nomeUsuario}</ThemedText>
 
           <TouchableOpacity style={styles.editButton} onPress={() => {}}>
             <Feather name="edit-2" size={20} color={Colors.white} />
@@ -79,7 +97,7 @@ export default function ProfileScreen() {
               style={styles.statsIcon}
             />
             <ThemedText style={styles.statValue}>
-              {user.melhorStreak}
+              {streakUsuario}
             </ThemedText>
             <ThemedText style={styles.statLabel}>Melhor streak</ThemedText>
           </View>
@@ -89,7 +107,7 @@ export default function ProfileScreen() {
               source={require("@/assets/images/pontos.png")}
               style={styles.statsIcon}
             />
-            <ThemedText style={styles.statValue}>{user.cefetCoins}</ThemedText>
+            <ThemedText style={styles.statValue}>{coinsUsuario}</ThemedText>
             <ThemedText style={styles.statLabel}>CefetCoins</ThemedText>
           </View>
         </Card>

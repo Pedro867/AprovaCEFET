@@ -27,6 +27,7 @@ export default function LoginScreen() {
   const [senha, setSenha] = useState('');
   const [email, setEmail] = useState('');
   const [showPassword, setShowPassword] = useState(false); // estado para o olho da senha
+  const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
 
   const handleLogin = async () => { //funcao assincrona, chamada quando o botao entrar é pressionado
@@ -34,13 +35,27 @@ export default function LoginScreen() {
       Alert.alert('Erro', 'Preencha todos os campos.');
       return;
     }
+
+    setIsLoading(true);
+
     const sucesso = await validaLogin(email, senha);
     if (sucesso) {
       //nomeUsuario = await getNomeUsuario();
       router.replace('/(tabs)/secao');
     } else {
     }
+    setIsLoading(false);
   };
+
+  if (isLoading) {
+    return (
+      <LinearGradient colors={[Colors.gradientStart, Colors.gradientEnd]} style={styles.container}>
+        <View style={styles.loadingContainer}>
+          <Text style={styles.title}>Carregando...</Text>
+        </View>
+      </LinearGradient>
+    );
+  }
 
   return (
     <KeyboardAvoidingView
@@ -101,6 +116,11 @@ export default function LoginScreen() {
 }
 
 const styles = StyleSheet.create({
+  loadingContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   keyboard: {
     flex: 1, // Permite que a view ocupe todo o espaço disponível
   },

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   StyleSheet,
   View,
@@ -12,29 +12,52 @@ import { useRouter } from "expo-router";
 import { Colors } from "@/constants/Colors";
 import { IconSymbol } from "@/components/ui/IconSymbol";
 import { ThemedText } from "@/components/ThemedText";
-import { Avatar } from "@/components/ui/Avatar";
+import { Personagem } from "@/components/ui/Personagem";
 import { unidadesMatematica } from "@/constants/dadosUnidades"
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function TelaUnidadesMatematica() {
   const router = useRouter();
 
-  return (
+  const [streakUsuario, setStreakUsuario] = useState(0);
+
+  useEffect(() => {
+    const carregarDados = async () => {
+      try {
+        const streak = await AsyncStorage.getItem("userStreak");
+        setStreakUsuario(streak);
+      } catch (error) {
+        console.error("Erro ao carregar o streak do usuário", error);
+      }
+    }
+  }, []);
+
+  //customizacao do personagem
+  const customizacoes = {
+    background: 'cor1', 
+    ears: 'orelha1',
+    cheeks: 'bochecha1',
+    face: 'rosto1',
+    eyes: 'olhos1',
+    mouth: 'boca1',
+    bangs: 'franja1',
+    hair: 'cabelo1',
+    nose: 'nariz1',
+  };
+
+  return (    
     <LinearGradient
       style={styles.container}
       colors={[Colors.gradientEnd, Colors.gradientStart]}
     >
       <View style={styles.headerUser}>
-        <Avatar
-          source={require("@/assets/images/avatar.png")}
-          size={36}
-          style={styles.avatar}
-        />
+        <Personagem size={32} customizations={customizacoes} />
         <View style={styles.streakContainer}>
           <Image
             source={require("@/assets/images/foguin--ativado-.png")}
             style={styles.streakIcon}
           />
-          <Text style={styles.streakNumber}>pegar a variavel dps</Text>
+          <Text style={styles.streakNumber}>{streakUsuario}</Text>
         </View>
       </View>
       <View style={styles.headerUnidade}>
@@ -120,9 +143,6 @@ const styles = StyleSheet.create({
     borderColor: "rgba(0, 0, 0, 0.1)",
     paddingBottom: 15,
     position :"relative",
-  },
-  avatar: {
-    marginRight: 10,
   },
   streakContainer: {
     alignItems: "center",

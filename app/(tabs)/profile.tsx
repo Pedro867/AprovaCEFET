@@ -69,7 +69,7 @@ export default function ProfileScreen() {
         {/* CABEÇALHO */}
         <View style={styles.header}>
           <TouchableOpacity
-            onPress={() => router.back()}
+            onPress={() => router.replace('/(tabs)/secao')}
             style={styles.backButton}
           >
             <Feather name="arrow-left" size={24} color={Colors.text} />

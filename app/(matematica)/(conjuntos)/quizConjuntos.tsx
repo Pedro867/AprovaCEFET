@@ -7,6 +7,8 @@ import { LinearGradient } from "expo-linear-gradient";
 import { IconSymbol } from "@/components/ui/IconSymbol";
 import { Colors } from "@/constants/Colors";
 import initialQuestions from './questoesConjuntos.json';
+// import MathView from "react-native-math-view"
+
 
 const imageMap = {
   "./q4.png": require('./q4.png'),
@@ -23,13 +25,18 @@ const QuizScreen = () => {
   const [quizMode, setQuizMode] = useState('initial');
   const [isLoading, setIsLoading] = useState(true);
   const [coins, setCoinsUsuario] = useState(0);
-  const [showStreakIncrease, setShowStreakIncrease] = useState(false);
-  const [streakIncreaseAmount, setStreakIncreaseAmount] = useState(0);
+  const [showCoinsIncrease, setShowCoinsIncrease] = useState(false);
+  const [coinsIncreaseAmount, setCoinsIncreaseAmount] = useState(0);
+  const [lastStreakDate, setLastStreakDate] = useState(0);
+  const [streak, setStreak] = useState(0);
 
   const router = useRouter();
 
+  /* TORRES, essas KEYS provavelmente sao o nome dos campos do BD, algo assim */
   const QUIZ_STATE_KEY = 'quizState';
-  const STREAK_KEY = 'quizStreak';
+  const COINS_KEY = 'userPontuacao';
+  const STREAK_KEY = 'userStreak';
+  const LAST_STREAK_DATE_KEY = 'lastStreakDate';
 
   const saveQuizState = async (state) => {
     try {
@@ -40,11 +47,27 @@ const QuizScreen = () => {
     }
   };
 
+  const saveCoins = async (newCoin) => {
+    try {
+      await AsyncStorage.setItem(COINS_KEY, newCoin);
+    } catch (e) {
+      console.error('Erro ao salvar o coin:', e);
+    }
+  };
+
   const saveStreak = async (newStreak) => {
     try {
-      await AsyncStorage.setItem("userPontuacao", newStreak);
+      await AsyncStorage.setItem(STREAK_KEY, newStreak);
     } catch (e) {
       console.error('Erro ao salvar o streak:', e);
+    }
+  };
+
+  const saveLastStreakDate = async (date) => {
+    try {
+      await AsyncStorage.setItem(LAST_STREAK_DATE_KEY, date.toISOString());
+    } catch (e) {
+      console.error('Erro ao salvar a data do streak:', e);
     }
   };
 
@@ -64,9 +87,9 @@ const QuizScreen = () => {
         setQuizMode(savedState.quizMode);
         setQuestions(savedState.quizMode === 'initial' ? initialQuestions : savedState.incorrectQuestions);
       }
-      // const streakValue = await AsyncStorage.getItem(STREAK_KEY);
-      // if (streakValue != null) {
-      //   setStreak(parseInt(streakValue, 10));
+      // const coinValue = await AsyncStorage.getItem(coin_KEY);
+      // if (coinValue != null) {
+      //   setCoinsUsuario(parseInt(coinValue, 10));
       // }
     } catch (e) {
       console.error('Erro ao carregar o estado do quiz:', e);
@@ -80,11 +103,21 @@ const QuizScreen = () => {
       try {
         const coins = await AsyncStorage.getItem("userPontuacao");
         setCoinsUsuario(parseInt(coins));
+
+        // Lógica para carregar a streak e a data
+        const streakValue = await AsyncStorage.getItem(STREAK_KEY);
+        if (streakValue != null) {
+          setStreak(parseInt(streakValue, 10));
+        }
+        const lastStreakDate = await AsyncStorage.getItem(LAST_STREAK_DATE_KEY);
+        if (lastStreakDate != null) {
+          setLastStreakDate(new Date(lastStreakDate));
+        }
       } catch (error) {
         console.error("Erro ao carregar as coins do usuário", error);
       }
     };
-    
+
     carregaCoins();
     loadQuizState();
   }, []);
@@ -104,7 +137,7 @@ const QuizScreen = () => {
 
   useEffect(() => {
     if (!isLoading) {
-      saveStreak(coins);
+      saveCoins(coins);
     }
   }, [coins, isLoading]);
 
@@ -132,11 +165,25 @@ const QuizScreen = () => {
       }
       const newCoins = coins + pointsToAdd;
       setCoinsUsuario(newCoins);
-      setStreakIncreaseAmount(pointsToAdd);
-      setShowStreakIncrease(true);
+      setCoinsIncreaseAmount(pointsToAdd);
+      setShowCoinsIncrease(true);
       setTimeout(() => {
-        setShowStreakIncrease(false);
+        setShowCoinsIncrease(false);
       }, 1000);
+
+      // Lógica da streak diária
+      const today = new Date();
+      const isNewDay = !lastStreakDate || today.toDateString() !== lastStreakDate.toDateString();
+
+      // LÓGICA DE AUMENTAR SÓ UMA VEZ POR DIA
+      if (isNewDay) {
+        setStreak(prevStreak => prevStreak + 1);
+        setLastStreakDate(today);
+        saveStreak(streak + 1);
+        saveLastStreakDate(today);
+      }
+      // saveStreak(streak + 1);
+
     } else {
       setIncorrectQuestions([...incorrectQuestions, questions[currentQuestionIndex]]);
     }
@@ -163,7 +210,7 @@ const QuizScreen = () => {
   const resetQuiz = async () => {
     try {
       await AsyncStorage.removeItem(QUIZ_STATE_KEY);
-      await AsyncStorage.removeItem(STREAK_KEY);
+      await AsyncStorage.removeItem(COINS_KEY);
       setQuestions(initialQuestions);
       setCurrentQuestionIndex(0);
       setScore(0);
@@ -211,12 +258,12 @@ const QuizScreen = () => {
         <TouchableOpacity onPress={() => router.replace('/(matematica)/(conjuntos)/conjuntos')} style={styles.backButton}>
           <IconSymbol name="arrow.left" size={32} color={Colors.light.text} />
         </TouchableOpacity>
-        <View style={styles.streakContainerScore}>
+        <View style={styles.coinContainerScore}>
           <Image
             source={require("@/assets/images/pontos.png")}
-            style={styles.streakIcon}
+            style={styles.coinIcon}
           />
-          <Text style={styles.streakNumber}>{coins}</Text>
+          <Text style={styles.coinNumber}>{coins}</Text>
         </View>
         <Text style={styles.scoreText}>Você terminou o quiz!</Text>
         <Text style={styles.scoreText}>Você acertou {score} de {questions.length} questões!</Text>
@@ -256,19 +303,23 @@ const QuizScreen = () => {
       <TouchableOpacity onPress={() => router.replace('/(matematica)/(conjuntos)/conjuntos')} style={styles.backButton}>
         <IconSymbol name="arrow.left" size={32} color={Colors.light.text} />
       </TouchableOpacity>
-      <View style={styles.streakContainer}>
+      <View style={styles.coinContainer}>
         <Image
           source={require("@/assets/images/pontos.png")}
-          style={styles.streakIcon}
+          style={styles.coinIcon}
         />
-        <Text style={styles.streakNumber}>{coins}</Text>
-        {showStreakIncrease && (
-          <Animated.Text entering={FadeIn.duration(500)} exiting={FadeOut.duration(500)} style={styles.streakIncrease}>
-            +{streakIncreaseAmount}
+        <Text style={styles.coinNumber}>{coins}</Text>
+        {showCoinsIncrease && (
+          <Animated.Text entering={FadeIn.duration(500)} exiting={FadeOut.duration(500)} style={styles.coinIncrease}>
+            +{coinsIncreaseAmount}
           </Animated.Text>
         )}
       </View>
       <Animated.ScrollView contentContainerStyle={styles.scrollViewContent}>
+        {/* <MathView
+          math="Questao /frac{1}{2}"
+          style={styles.questionText}
+        /> */}
         <Text style={styles.questionText}>Questão {currentQuestionIndex + 1}</Text>
         {currentQuestion.image && <Image source={imageMap[currentQuestion.image]} style={styles.image} />}
         <Text style={styles.questionText}>{currentQuestion.question}</Text>
@@ -404,7 +455,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: 'bold',
   },
-  streakContainer: {
+  coinContainer: {
     position: 'absolute',
     top: 50,
     right: 50,
@@ -416,7 +467,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     borderRadius: 20,
   },
-  streakContainerScore: {
+  coinContainerScore: {
     flexDirection: 'row',
     alignItems: 'center',
     marginBottom: 20,
@@ -425,11 +476,11 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     borderRadius: 20,
   },
-  streakIcon: {
+  coinIcon: {
     width: 30,
     height: 30,
   },
-  streakNumber: {
+  coinNumber: {
     fontSize: 20,
     color: "#060302",
     fontWeight: "bold",
@@ -438,7 +489,7 @@ const styles = StyleSheet.create({
     textShadowRadius: 4,
     marginLeft: 5,
   },
-  streakIncrease: {
+  coinIncrease: {
     fontSize: 18,
     color: 'green',
     fontWeight: 'bold',

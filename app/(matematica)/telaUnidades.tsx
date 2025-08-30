@@ -30,6 +30,8 @@ export default function TelaUnidadesMatematica() {
         console.error("Erro ao carregar o streak do usuário", error);
       }
     }
+
+    carregarDados();
   }, []);
 
   //customizacao do personagem
@@ -62,7 +64,7 @@ export default function TelaUnidadesMatematica() {
       </View>
       <View style={styles.headerUnidade}>
         <TouchableOpacity
-          onPress={() => router.back()}
+          onPress={() => router.replace('/(tabs)/secao')}
           style={styles.backButton}
         >
           <IconSymbol name="arrow.left" size={32} color={Colors.light.text} />

@@ -63,7 +63,7 @@ export default function TelaSecao() {
   const [coinsUsuario, setCoinsUsuario] = useState(null);
 
   useEffect(() => {
-    const carregarNomeUsuario = async () => {
+    const carregarDados = async () => {
       //EU SEI QUE TUDO PODE SER FEITO EM 1 TRY CATCH MAS SE 1 DER ERRADO O CONSOLE.ERROR DIZ QUAL EH
       try {
         const nome = await AsyncStorage.getItem("userNome");
@@ -85,7 +85,7 @@ export default function TelaSecao() {
       }
     };
 
-    carregarNomeUsuario();
+    carregarDados();
   }, []); //o array vazio significa que essa função será chamada apenas uma vez
 
   const router = useRouter();

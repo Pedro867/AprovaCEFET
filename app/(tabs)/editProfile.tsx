@@ -9,6 +9,7 @@ import { Colors, Fonts, Spacing } from "@/constants/Colors";
 import { BotaoCustomizado } from "@/components/ui/ButtomCustom";
 import { InputCustomizado } from "@/components/ui/InputCustom";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { updateNomeBD } from "../api/conexaoFetch";
 
 // personagem (ainda fixo, sem interação com nada do banco)
 const customizacoesPersonagem = {
@@ -55,8 +56,8 @@ export default function EditProfileScreen() {
     }
     try {
       // salva o novo nome
-      await AsyncStorage.setItem("userNome", nome);
-
+      await updateNomeBD(nome);
+      
       // salva a nova senha apenas se ela foi alterada
       if (novaSenha !== "") {
         await AsyncStorage.setItem("userSenha", novaSenha); 

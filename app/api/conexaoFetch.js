@@ -38,6 +38,7 @@ export async function validaCadastro(nome, email, senha) {
 
         if (data.success) {
             await saveToken(data.token);
+            await AsyncStorage.setItem("userID", data.id.toString());//tem q ser string pra salvar
             await AsyncStorage.setItem("userNome", data.nome);
             await AsyncStorage.setItem("userEmail", data.email);
             await AsyncStorage.setItem("userPontuacao", data.pontuacao.toString()); //tem q ser string pra salvar
@@ -83,6 +84,7 @@ export async function validaLogin(email, senha) {
 
         if (data.success) {
             await saveToken(data.token);
+            await AsyncStorage.setItem("userID", data.id.toString());//tem q ser string pra salvar
             await AsyncStorage.setItem("userNome", data.nome);
             await AsyncStorage.setItem("userEmail", data.email);
             await AsyncStorage.setItem("userPontuacao", data.pontuacao.toString()); //tem q ser string pra salvar
@@ -98,21 +100,131 @@ export async function validaLogin(email, senha) {
     }
 }
 
-/*const getPerfil = async () => {
-    const token = await getToken();
+export async function updateCoinsBD(newCoin) {
 
-    const response = await fetch("https://backend-aprovacefet.onrender.com/perfil", {
-        headers: {
-            Authorization: `Bearer ${token}`
-        },
-    });
+    let idUser = await AsyncStorage.getItem("userID");
+    idUser = parseInt(idUser);
 
-    const data = await response.json();
+    try {
+        const response = await fetch("https://backend-aprovacefet.onrender.com/updateCoins", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                newCoin,
+                idUser
+            }),
+        });
 
-    if (response.ok) {
-        console.log("Nome do usuário:", data.dados.nome);
-        // aqui vc pode fazer setUserName(data.dados.nome) no state
-    } else {
-        console.log("Erro:", data.error);
+        const text = await response.text();
+        console.log("Resposta crua:", text);
+
+        let data;
+        try {
+            data = JSON.parse(text);
+        } catch (err) {
+            console.error("Resposta não era JSON:", text);
+            Alert.alert("Erro", "O servidor retornou algo inesperado.");
+            return;
+        }
+
+        if (data.success) {
+            await AsyncStorage.setItem("userPontuacao", newCoin.toString()); //tem q ser string pra salvar
+            return true;
+        } else {
+            Alert.alert("Erro", data.message || "Erro ao conectar ao BD.");
+        }
+    } catch (error) {
+        console.error(error);
+        Alert.alert("Erro", "Erro ao conectar no servidor.");
     }
-};*/
+}
+
+export async function updateStreakBD(newStreak) {
+
+    let idUser = await AsyncStorage.getItem("userID");
+    idUser = parseInt(idUser);
+
+    try {
+        const response = await fetch("https://backend-aprovacefet.onrender.com/updateStreak", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                newStreak,
+                idUser
+            }),
+        });
+
+        const text = await response.text();
+        console.log("Resposta crua:", text);
+
+        let data;
+        try {
+            data = JSON.parse(text);
+        } catch (err) {
+            console.error("Resposta não era JSON:", text);
+            Alert.alert("Erro", "O servidor retornou algo inesperado.", [{
+                text: "ok",
+                onPress: () => console.log("jhsvafhgk")
+            }]);
+            return;
+        }
+
+        if (data.success) {
+            await AsyncStorage.setItem("userStreak", newStreak.toString()); //tem q ser string pra salvar
+            return true;
+        } else {
+            Alert.alert("Erro", data.message || "Erro ao conectar ao BD.");
+        }
+    } catch (error) {
+        console.error(error);
+        Alert.alert("Erro", "Erro ao conectar no servidor.");
+    }
+}
+
+export async function updateNomeBD(newNome) {
+
+    let idUser = await AsyncStorage.getItem("userID");
+    idUser = parseInt(idUser);
+
+    try {
+        const response = await fetch("https://backend-aprovacefet.onrender.com/updateNome", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                newNome,
+                idUser
+            }),
+        });
+
+        const text = await response.text();
+        console.log("Resposta crua:", text);
+
+        let data;
+        try {
+            data = JSON.parse(text);
+        } catch (err) {
+            console.error("Resposta não era JSON:", text);
+            Alert.alert("Erro", "O servidor retornou algo inesperado.", [{
+                text: "ok",
+                onPress: () => console.log("jhsvafhgk")
+            }]);
+            return;
+        }
+
+        if (data.success) {
+            await AsyncStorage.setItem("userNome", newNome);
+            return true;
+        } else {
+            Alert.alert("Erro", data.message || "Erro ao conectar ao BD.");
+        }
+    } catch (error) {
+        console.error(error);
+        Alert.alert("Erro", "Erro ao conectar no servidor.");
+    }
+}

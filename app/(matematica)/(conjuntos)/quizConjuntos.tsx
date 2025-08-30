@@ -7,6 +7,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import { IconSymbol } from "@/components/ui/IconSymbol";
 import { Colors } from "@/constants/Colors";
 import initialQuestions from './questoesConjuntos.json';
+import { updateCoinsBD, updateStreakBD } from '@/app/api/conexaoFetch'; 
 // import MathView from "react-native-math-view"
 
 
@@ -39,17 +40,17 @@ const QuizScreen = () => {
   const LAST_STREAK_DATE_KEY = 'lastStreakDate';
 
   const saveQuizState = async (state) => {
-    try {
+    /*try {
       const jsonValue = JSON.stringify(state);
       await AsyncStorage.setItem(QUIZ_STATE_KEY, jsonValue);
     } catch (e) {
       console.error('Erro ao salvar o estado do quiz:', e);
-    }
+    }*/
   };
 
   const saveCoins = async (newCoin) => {
     try {
-      await AsyncStorage.setItem(COINS_KEY, newCoin);
+      await updateCoinsBD(newCoin);
     } catch (e) {
       console.error('Erro ao salvar o coin:', e);
     }
@@ -57,7 +58,8 @@ const QuizScreen = () => {
 
   const saveStreak = async (newStreak) => {
     try {
-      await AsyncStorage.setItem(STREAK_KEY, newStreak);
+      await updateStreakBD(newStreak);
+      console.log(newStreak);
     } catch (e) {
       console.error('Erro ao salvar o streak:', e);
     }
@@ -210,7 +212,7 @@ const QuizScreen = () => {
   const resetQuiz = async () => {
     try {
       await AsyncStorage.removeItem(QUIZ_STATE_KEY);
-      await AsyncStorage.removeItem(COINS_KEY);
+      //await AsyncStorage.removeItem(COINS_KEY);
       setQuestions(initialQuestions);
       setCurrentQuestionIndex(0);
       setScore(0);
@@ -219,7 +221,7 @@ const QuizScreen = () => {
       setSelectedAnswer(null);
       setAnswered(false);
       setQuizMode('initial');
-      setCoinsUsuario(0);
+      //setCoinsUsuario(0);
     } catch (e) {
       console.error('Erro ao resetar o quiz:', e);
     }

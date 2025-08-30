@@ -53,6 +53,7 @@ export const Fonts = {
   family: {
     regular: 'Lexend_400Regular',
     bold: 'Lexend_700Bold',
+    kumbhSans: 'KumbhSans',
   }
 };
 

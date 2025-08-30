@@ -13,7 +13,7 @@ import { Personagem } from "@/components/ui/Personagem";
 import { Card } from "@/components/ui/Card";
 import { ProgressBar } from "@/components/ui/ProgressBar";
 import { useRouter } from "expo-router";
-import { Colors } from "@/constants/Colors";
+import { Colors,Fonts } from "@/constants/Colors";
 import { BotaoCustomizado } from "@/components/ui/ButtomCustom";
 import { CalendarioCustomizado } from "@/components/ui/CalendarCustom";
 import { BlurView } from "expo-blur";
@@ -160,11 +160,7 @@ export default function TelaSecao() {
     nose: 'nariz1',
   };
   return (
-    <View style={styles.rootContainer}>
-      <LinearGradient
-        colors={[Colors.gradientEnd, Colors.gradientStart]}
-        style={styles.container}
-      >
+    <View style={styles.container}>
         <ScrollView showsVerticalScrollIndicator={false}>
           <View style={styles.header}>
             <TouchableOpacity onPress={() => router.push('/(tabs)/profile')}>
@@ -225,17 +221,17 @@ export default function TelaSecao() {
             {subjectAreas.map((area) => (
               <TouchableOpacity
                 key={area.id}
-                style={styles.subjectCard}
+                style={styles.subjectTouchable}
                 onPress={() => router.push(area.route as any)}
               >
-                <Card style={styles.subjectCardInner}>
-                  <View style={styles.subjectImageContainer}>
-                    <LinearGradient
-                      colors={[area.color, "rgba(248, 248, 248, 1)"]}
+                <Card style={styles.subjectCard}>
+                  <LinearGradient
+                      colors={["rgba(34,75,244,0.29)", "rgba(34,75,244,0.29)"]}
                       start={{ x: 0, y: 0 }}
                       end={{ x: 1, y: 0 }}
                       style={styles.subjectImageBackground}
                     />
+                  <View style={styles.subjectImageContainer}>
                     <Image source={area.image} style={styles.subjectImage} />
                   </View>
 
@@ -250,7 +246,6 @@ export default function TelaSecao() {
             ))}
           </View>
         </ScrollView>
-      </LinearGradient>
       {calendarioVisivel && (
         <BlurView intensity={100} tint='systemThinMaterialDark' style={styles.blurContainer}>
           <View style={styles.modalContent}>
@@ -269,16 +264,14 @@ export default function TelaSecao() {
 }
 
 const styles = StyleSheet.create({
-  rootContainer: {
-    flex: 1,
-  },
   container: {
     flex: 1,
+    backgroundColor: "white",
   },
   header: {
     flexDirection: "row",
     alignItems: "center",
-    paddingHorizontal: 24,
+    paddingHorizontal: '5%',
     paddingTop: 20,
     marginBottom: 20,
     marginTop: 20,
@@ -291,15 +284,16 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   greeting: {
-    fontSize: 24.88,
-    fontWeight: "500",
+    fontSize: 25,
+    fontWeight: "700",
     color: "#060302",
-    fontFamily: "DM Sans",
+    fontFamily: Fonts.family.kumbhSans,
   },
   subtitle: {
-    fontSize: 12,
+    fontSize: 14,
     color: "#060302",
-    fontFamily: "DM Sans",
+    fontFamily: Fonts.family.kumbhSans,
+    fontWeight: '600',
     marginTop: 4,
   },
   streakContainer: {
@@ -318,7 +312,7 @@ const styles = StyleSheet.create({
     textShadowRadius: 4,
   },
   progressCard: {
-    marginHorizontal: 24,
+    marginHorizontal: '5%',
     marginBottom: 26,
   },
   progressCardContent: {
@@ -332,12 +326,12 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
   progressLabel: {
-    fontSize: 12.4,
+    fontSize: 14.4,
     color: "#060302",
     fontFamily: "DM Sans",
   },
   changeDate: {
-    fontSize: 12.4,
+    fontSize: 14.4,
     color: "#003869",
     fontFamily: "DM Sans",
   },
@@ -351,7 +345,7 @@ const styles = StyleSheet.create({
     fontFamily: "DM Sans",
   },
   daysLabel: {
-    fontSize: 10.3,
+    fontSize: 13.3,
     color: "#060302",
     fontFamily: "DM Sans",
   },
@@ -362,31 +356,32 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: "700",
     color: "#121212",
-    fontFamily: "Kumbh Sans",
-    marginHorizontal: 60,
+    fontFamily: Fonts.family.kumbhSans,
+    textAlign:'center',
+    marginBottom: 20,
   },
   subjectsGrid: {
     flexDirection: "row",
     flexWrap: "wrap",
-    justifyContent: "space-between",
-    paddingHorizontal: 35,
-    paddingVertical: 50,
-    paddingBottom: 40,
+    justifyContent: "space-around",
+    paddingHorizontal: '5%',
+    paddingBottom: 3,
+    
+  },
+  subjectTouchable: {
+    width: '48%',
+    marginBottom: 20,
+    borderRadius:30,
   },
   subjectCard: {
-    width: (screenWidth - 70 - 19) / 2,
-    marginBottom: 19,
-  },
-  subjectCardInner: {
-    height: 200,
-    padding: 0,
+    borderRadius:30,
   },
   subjectImageContainer: {
-    height: 113,
+    aspectRatio: 1, //mantem proporcao da img
+    width: "80%",
+    alignSelf: 'center',
     margin: 14,
     marginBottom: 8,
-    borderRadius: 5,
-    overflow: "hidden",
     justifyContent: "center",
     alignItems: "center",
   },
@@ -396,6 +391,7 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     bottom: 0,
+    borderRadius:30,
   },
   subjectImage: {
     width: 90,
@@ -405,18 +401,20 @@ const styles = StyleSheet.create({
   subjectInfo: {
     paddingHorizontal: 14,
     paddingBottom: 14,
+    minHeight: 70,
+    justifyContent: "space-between",
   },
   subjectTitle: {
     fontSize: 15,
-    fontWeight: "500",
+    fontWeight: "600",
     color: "#121212",
-    fontFamily: "Kumbh Sans",
+    fontFamily: Fonts.family.kumbhSans,
     marginBottom: 4,
   },
   subjectDisciplines: {
     fontSize: 10,
     color: "#727272",
-    fontFamily: "Kumbh Sans",
+    fontFamily: Fonts.family.kumbhSans,
   },
 
   //estilos mudar data prova

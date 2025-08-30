@@ -71,10 +71,7 @@ export default function UnidadeConjuntos() {
   };
 
   return (
-    <LinearGradient
-      style={styles.container}
-    colors={[Colors.gradientEnd, Colors.gradientStart]}
-    >
+    <View style={styles.container}>
       <View style={styles.headerUser}>
         <Personagem size={32} customizations={customizacoes} />
         <View style={styles.streakContainer}>
@@ -131,7 +128,7 @@ export default function UnidadeConjuntos() {
           );
         })}
       </ScrollView>
-    </LinearGradient>
+    </View>
   );
 }
 
@@ -139,6 +136,7 @@ export default function UnidadeConjuntos() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: "white",
   },
   headerUser: {
     flexDirection: "row",

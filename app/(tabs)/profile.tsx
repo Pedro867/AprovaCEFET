@@ -134,10 +134,11 @@ const styles = StyleSheet.create({
     left: 10,
     zIndex: 1,
   },
-  headerTitle: {
+  headerTitle: { 
+    fontFamily: Fonts.family.kumbhSans,
     fontSize: 24,
     fontWeight: "bold",
-    color: Colors.text,
+    color: "black",
     textAlign: "center",
     flex: 1,
     marginBottom: 20,
@@ -147,8 +148,9 @@ const styles = StyleSheet.create({
     marginBottom: Spacing.giga,
   },
   profileName: {
+    fontFamily: Fonts.family.kumbhSans,
     fontSize: Fonts.size.title,
-    fontWeight: "bold",
+    fontWeight: '800',
     color: Colors.text,
     marginTop: Spacing.xxlarge,
   },
@@ -164,14 +166,16 @@ const styles = StyleSheet.create({
     gap: Spacing.small,
   },
   editButtonText: {
+    fontFamily: Fonts.family.kumbhSans,
     color: Colors.white,
     fontSize: Fonts.size.medium,
-    fontWeight: "bold",
+    fontWeight: "400",
   },
   cardTitle: {
+    fontFamily: Fonts.family.kumbhSans,
     fontSize: Fonts.size.large,
-    fontWeight: "bold",
-    color: Colors.primary,
+    fontWeight: "600",
+    color: Colors.text,
     marginBottom: Spacing.medium,
     textAlign: "center",
   },
@@ -193,12 +197,14 @@ const styles = StyleSheet.create({
     width: 40,
     height: 40,
   },
-  statValue: {
+  statValue: { 
+    fontFamily: 'DM Sans',
     fontSize: Fonts.size.small,
     fontWeight: "bold",
     color: Colors.text,
   },
   statLabel: {
+    fontFamily: Fonts.family.kumbhSans,
     fontSize: Fonts.size.small,
     color: Colors.text,
     textAlign: "center",

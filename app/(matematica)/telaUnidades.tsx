@@ -47,11 +47,8 @@ export default function TelaUnidadesMatematica() {
     nose: 'nariz1',
   };
 
-  return (    
-    <LinearGradient
-      style={styles.container}
-      colors={[Colors.gradientEnd, Colors.gradientStart]}
-    >
+  return ( 
+      <View style={styles.container}>
       <View style={styles.headerUser}>
         <Personagem size={32} customizations={customizacoes} />
         <View style={styles.streakContainer}>
@@ -114,13 +111,14 @@ export default function TelaUnidadesMatematica() {
           })}
         </View>
       </ScrollView>
-    </LinearGradient>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: "white",
   },
   scrollViewContent: {
     paddingTop: 10,

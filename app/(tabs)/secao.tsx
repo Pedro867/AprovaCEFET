@@ -12,7 +12,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import { Personagem } from "@/components/ui/Personagem";
 import { Card } from "@/components/ui/Card";
 import { ProgressBar } from "@/components/ui/ProgressBar";
-import { useRouter } from "expo-router";
+import { useRouter, useFocusEffect } from "expo-router";
 import { Colors,Fonts } from "@/constants/Colors";
 import { BotaoCustomizado } from "@/components/ui/ButtomCustom";
 import { CalendarioCustomizado } from "@/components/ui/CalendarCustom";
@@ -62,7 +62,8 @@ export default function TelaSecao() {
   const [streakUsuario, setStreakUsuario] = useState(null);
   const [coinsUsuario, setCoinsUsuario] = useState(null);
 
-  useEffect(() => {
+  useFocusEffect(
+  useCallback(() => {
     const carregarDados = async () => {
       //EU SEI QUE TUDO PODE SER FEITO EM 1 TRY CATCH MAS SE 1 DER ERRADO O CONSOLE.ERROR DIZ QUAL EH
       try {
@@ -86,7 +87,8 @@ export default function TelaSecao() {
     };
 
     carregarDados();
-  }, []); //o array vazio significa que essa função será chamada apenas uma vez
+  }, [])
+ ); 
 
   const router = useRouter();
   const [diasFaltando, setDiasFaltando] = useState(0);
@@ -98,12 +100,14 @@ export default function TelaSecao() {
 
   const calculaProgresso = useCallback(async () => {
     try {
-      const dataProvaStr = await AsyncStorage.getItem("examDate");
-      const dataInicioStr = await AsyncStorage.getItem("startDate");
+      const dataProvaStr = await AsyncStorage.getItem("dataProva");
+      const dataInicioStr = await AsyncStorage.getItem("inicioEstudo");
 
+      console.log("Data da Prova lida do armazenamento:", dataProvaStr);
+      console.log("Data de Início lida do armazenamento:", dataInicioStr);
       if (dataProvaStr && dataInicioStr) {
         const today = new Date();
-        const examDate = new Date(dataProvaStr + "T00:00:00"); // Adiciona tempo para evitar problemas de fuso horário
+        const examDate = new Date(dataProvaStr + "T00:00:00"); // adiciona tempo para evitar problemas de fuso horário
         const startDate = new Date(dataInicioStr + "T00:00:00");
         today.setHours(0, 0, 0, 0);
 
@@ -111,13 +115,17 @@ export default function TelaSecao() {
         const remainingDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); // converte para dias e arredonda para cima
         setDiasFaltando(remainingDays >= 0 ? remainingDays : 0);
 
+        const oneDay = 1000 * 60 * 60 * 24;
         // calcula o progresso
-        const totalDuration = examDate.getTime() - startDate.getTime();
-        const elapsedDuration = today.getTime() - startDate.getTime();
+        const totalDuration = examDate.getTime() - startDate.getTime() + oneDay;
+        const elapsedDuration = today.getTime() - startDate.getTime() + oneDay;
 
         if (totalDuration > 0) {
-          const progressPercentage = (elapsedDuration / totalDuration) * 100;
+          const progressPercentage = (elapsedDuration / totalDuration) * 100 ;
           setProgresso(Math.min(Math.max(progressPercentage, 0), 100)); // progresso entre 0 e 100
+        }
+        else {
+          setProgresso(100); //se a data ja tiver passado
         }
       }
     } catch (error) {
@@ -126,7 +134,6 @@ export default function TelaSecao() {
   }, []);
 
   useEffect(() => {
-    //aq tem q ficar alguma funcao pra pegar o nome do usuario
     calculaProgresso();
   }, [calculaProgresso]);
 
@@ -138,8 +145,8 @@ export default function TelaSecao() {
     }
     try {
       const today = new Date().toISOString().split("T")[0];
-      await AsyncStorage.setItem("examDate", novaDataSelecionada);
-      await AsyncStorage.setItem("startDate", today); // Reinicia a data de início
+      await AsyncStorage.setItem("dataProva", novaDataSelecionada);
+      await AsyncStorage.setItem("inicioEstudo", today); // Reinicia a data de início
 
       await calculaProgresso(); // recalcula o progresso com a nova data
       setCalendarioVisivel(false); // fecha o modal
@@ -167,7 +174,6 @@ export default function TelaSecao() {
                 <Personagem size={32} customizations={customizacoes} />
             </TouchableOpacity>
             <View style={styles.headerText}>
-              {/*torres --> precisa pegar o nome do user no bd pra exibir na tela !!!*/ }
               <Text style={styles.greeting}>Olá, {nomeUsuario}</Text> 
 
               <Text style={styles.subtitle}>Vamos começar a aprender!</Text>

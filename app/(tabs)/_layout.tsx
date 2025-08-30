@@ -59,6 +59,13 @@ export default function TabLayout() {
           ),
         }}
       />
+      <Tabs.Screen
+        name="editProfile" 
+        options={{
+          href: null,
+          tabBarStyle: { display: "none" },
+        }}
+      />
     </Tabs>
   );
 }

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import {
   StyleSheet,
   View,
@@ -14,7 +14,7 @@ import { Card } from "@/components/ui/Card";
 import { ThemedText } from "@/components/ThemedText";
 import { Personagem } from "@/components/ui/Personagem";
 import { Colors, Fonts, Spacing } from "@/constants/Colors";
-import { useRouter } from "expo-router";
+import { useRouter, useFocusEffect } from "expo-router";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function ProfileScreen() {
@@ -23,9 +23,10 @@ export default function ProfileScreen() {
     const [nomeUsuario, setNomeUsuario] = useState(null);
     const [streakUsuario, setStreakUsuario] = useState(0);
     const [coinsUsuario, setCoinsUsuario] = useState(0);
-  
-    useEffect(() => {
-      const carregarNomeUsuario = async () => {
+
+    useFocusEffect( //recarrega os dads sempre que a tela for forcada (caso o usuario altere o nome)
+    useCallback(() => {
+      const carregarDadosUsuario = async () => {
         //EU SEI QUE TUDO PODE SER FEITO EM 1 TRY CATCH MAS SE 1 DER ERRADO O CONSOLE.ERROR DIZ QUAL EH
         try {
           const nome = await AsyncStorage.getItem("userNome");
@@ -41,8 +42,9 @@ export default function ProfileScreen() {
         }
       };
   
-      carregarNomeUsuario();
-    }, []); //o array vazio significa que essa função será chamada apenas uma vez
+      carregarDadosUsuario();
+    }, [])
+   ); 
 
   // personagem (ainda fixo, sem interação com nada do banco)
   const customizacoesPersonagem = {
@@ -82,7 +84,7 @@ export default function ProfileScreen() {
           <Personagem size={150} customizations={customizacoesPersonagem} />
           <ThemedText style={styles.profileName}>{nomeUsuario}</ThemedText>
 
-          <TouchableOpacity style={styles.editButton} onPress={() => {}}>
+          <TouchableOpacity style={styles.editButton} onPress={() => router.push('/(tabs)/editProfile')}>
             <Feather name="edit-2" size={20} color={Colors.white} />
             <Text style={styles.editButtonText}>Editar perfil</Text>
           </TouchableOpacity>

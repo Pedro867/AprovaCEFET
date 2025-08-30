@@ -26,6 +26,7 @@ export let nomeUsuario = "teste";
 export default function LoginScreen() {
   const [senha, setSenha] = useState('');
   const [email, setEmail] = useState('');
+  const [nomeUsuario, setNomeUsuario] = useState(null);
   const [showPassword, setShowPassword] = useState(false); // estado para o olho da senha
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
@@ -40,7 +41,7 @@ export default function LoginScreen() {
 
     const sucesso = await validaLogin(email, senha);
     if (sucesso) {
-      //nomeUsuario = await getNomeUsuario();
+      //setNomeUsuario = await getNomeUsuario();
       router.replace('/(tabs)/secao');
     } else {
     }

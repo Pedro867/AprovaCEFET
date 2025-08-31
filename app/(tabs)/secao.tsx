@@ -67,8 +67,8 @@ export default function TelaSecao() {
     const carregarDados = async () => {
       //EU SEI QUE TUDO PODE SER FEITO EM 1 TRY CATCH MAS SE 1 DER ERRADO O CONSOLE.ERROR DIZ QUAL EH
       try {
-        const nome = await AsyncStorage.getItem("userNome");
-        setNomeUsuario(nome);
+        const primeiroNome = await AsyncStorage.getItem("userPrimeiroNome");
+        setNomeUsuario(primeiroNome);
       } catch (error) {
         console.error("Erro ao carregar o nome do usuário", error);
       }

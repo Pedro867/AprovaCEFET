@@ -40,6 +40,7 @@ export async function validaCadastro(nome, email, senha) {
             await saveToken(data.token);
             await AsyncStorage.setItem("userID", data.id.toString());//tem q ser string pra salvar
             await AsyncStorage.setItem("userNome", data.nome);
+            await AsyncStorage.setItem("userPrimeiroNome", data.primeiroNome);
             await AsyncStorage.setItem("userEmail", data.email);
             await AsyncStorage.setItem("userPontuacao", data.pontuacao.toString()); //tem q ser string pra salvar
             await AsyncStorage.setItem("userStreak", data.streak.toString());
@@ -86,6 +87,7 @@ export async function validaLogin(email, senha) {
             await saveToken(data.token);
             await AsyncStorage.setItem("userID", data.id.toString());//tem q ser string pra salvar
             await AsyncStorage.setItem("userNome", data.nome);
+            await AsyncStorage.setItem("userPrimeiroNome", data.primeiroNome);
             await AsyncStorage.setItem("userEmail", data.email);
             await AsyncStorage.setItem("userPontuacao", data.pontuacao.toString()); //tem q ser string pra salvar
             await AsyncStorage.setItem("userStreak", data.streak.toString());

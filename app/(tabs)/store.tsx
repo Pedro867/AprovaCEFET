@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, View, Text, SafeAreaView, FlatList,TouchableOpacity, } from 'react-native';
+import { StyleSheet, View, Text, SafeAreaView, FlatList,TouchableOpacity, ScrollView, } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Personagem } from '@/components/ui/Personagem';
 import { Colors, Fonts, Spacing } from '@/constants/Colors';
@@ -39,56 +39,39 @@ export default function LojaScreen() {
   }, []);
 
   const handleItemSelect = async (itemId: string) => {
-    // a chave da categoria é o que está em selectedCategory (ex: 'rosto')
+    // a chave da categoria é o que ta em selectedCategory (ex: 'rosto')
     const newCustomizations = { ...customizacoes, [selectedCategory]: itemId };
     setCustomizacoes(newCustomizations);
     await AsyncStorage.setItem('userCharacter', JSON.stringify(newCustomizations));
   };
 
-  // cabeçalho da lista
-  const renderHeader = () => (
-    <>
-      <ThemedText style={styles.title}>Loja de Recompensas</ThemedText>
-      <View style={styles.coinContainer}><Text style={styles.coinText}>{cefetCoins}</Text></View>
-      <View style={styles.personagemContainer}>
-        <Personagem size={200} customizations={customizacoes} />
-      </View>
-      <View style={styles.customizationHeader}>
-        <CategoriaTab
-          categories={LOJA_CATEGORIAS}
-          selectedCategory={selectedCategory}
-          onSelectCategory={setSelectedCategory}
-        />
-      </View>
-    </>
-  );
-
   return (
     <SafeAreaView style={styles.safeArea}>
-      <View style={styles.container}>
-        <LinearGradient colors={[Colors.gradientEnd, Colors.gradientStart]} style={styles.container}>
-        <FlatList
-          ListHeaderComponent={renderHeader}
-          data={LOJA_ITENS[selectedCategory as keyof typeof LOJA_ITENS]}
-          renderItem={({ item }) => {
-            const ThumbnailComponent = item.thumbnail;
-            const isSelected = customizacoes[selectedCategory as keyof CustomizacoesType] === item.id;
-            return (
-              <TouchableOpacity
-                style={[styles.itemContainer, isSelected && styles.selectedItemContainer]}
-                onPress={() => handleItemSelect(item.id)}
-              >
-                <ThumbnailComponent width="80%" height="80%" />
-              </TouchableOpacity>
-            );
-          }}
-          keyExtractor={(item) => item.id}
-          numColumns={3}
-          contentContainerStyle={styles.grid}
-          showsVerticalScrollIndicator={false}
-        />
-        </LinearGradient>
-      </View>
+      <LinearGradient colors={[Colors.gradientEnd, Colors.gradientStart]} style={styles.safeArea}>
+      <ScrollView contentContainerStyle={styles.container}>
+        <ThemedText style={styles.title}>Loja de Recompensas</ThemedText>
+
+        <View style={styles.coinContainer}><Text style={styles.coinText}>{cefetCoins}</Text></View>
+
+        <View style={styles.personagemContainer}>
+          <Personagem size={200} customizations={customizacoes} />
+        </View>
+
+        <View style={styles.customizationContainer}>
+          <CategoriaTab
+            categories={LOJA_CATEGORIAS}
+            selectedCategory={selectedCategory}
+            onSelectCategory={setSelectedCategory}
+          />
+          <GradeItems
+            items={LOJA_ITENS[selectedCategory as keyof typeof LOJA_ITENS]}
+            selectedItemId={customizacoes[selectedCategory as keyof CustomizacoesType]}
+            onSelectItem={handleItemSelect}
+          />
+        </View>
+        
+      </ScrollView>
+      </LinearGradient>
     </SafeAreaView>
   );
 }
@@ -96,10 +79,10 @@ export default function LojaScreen() {
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
-    //backgroundColor: 'transparent',
+    //backgroundColor: 'white',
   },
   container: {
-    flex: 1,
+    padding: Spacing.medium,
   },
   title: {
     fontSize: Fonts.size.small,
@@ -122,32 +105,11 @@ const styles = StyleSheet.create({
   personagemContainer: {
     alignItems: 'center',
     marginBottom: Spacing.large,
+    marginTop: Spacing.large,
   },
-  customizationHeader: {
-    backgroundColor: Colors.gradientEnd,
-    borderTopLeftRadius: 20,
-    borderTopRightRadius: 20,
-    padding: Spacing.medium,
-  },
-  grid: {
-    backgroundColor: Colors.gradientEnd,
-    borderBottomLeftRadius: 20,
-    borderBottomRightRadius: 20,
-    alignItems: 'center',
-    paddingBottom: Spacing.large,
-  },
-  itemContainer: {
-    width: 80,
-    height: 80,
-    margin: Spacing.small,
-    backgroundColor: 'rgba(255, 255, 255, 0.5)',
-    borderRadius: 15,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  selectedItemContainer: {
-    borderWidth: 2,
-    borderColor: '#fff',
-    borderStyle: 'dotted',
+  customizationContainer: {
+    marginTop: 80,
+    padding: Spacing.xsmall,
+    height: 450, // altura fixa para o container da grade
   },
 });

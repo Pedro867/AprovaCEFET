@@ -12,6 +12,7 @@ export function CategoriaTab({ categories, selectedCategory, onSelectCategory }:
   return (
     <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.scrollView}>
       {categories.map((category) => (
+        //botao para cada categoria
         <TouchableOpacity
           key={category.id}
           style={[
@@ -34,27 +35,28 @@ export function CategoriaTab({ categories, selectedCategory, onSelectCategory }:
 
 const styles = StyleSheet.create({
   scrollView: {
-    maxHeight: 50,
-    marginBottom: Spacing.medium,
+    maxHeight: 40,
+    //marginBottom: Spacing.medium,
   },
   tab: {
     paddingVertical: Spacing.small,
-    paddingHorizontal: Spacing.large,
-    marginHorizontal: Spacing.xsmall,
-    borderRadius: 20,
-    backgroundColor: '#fff',
+    paddingHorizontal: Spacing.xlarge,
+    marginHorizontal: Spacing.small,
+    borderRadius: 10,
+    backgroundColor: '#a3a0a0ff',
     justifyContent: 'center',
     alignItems: 'center',
+    
   },
   selectedTab: {
-    backgroundColor: Colors.primary,
+    backgroundColor: 'white',
   },
   tabText: {
     fontSize: Fonts.size.medium,
-    color: Colors.text,
+    color: Colors.primary,
   },
   selectedTabText: {
-    color: '#fff',
+    color: Colors.primary,
     fontWeight: "bold",
   },
 });

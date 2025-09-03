@@ -1,6 +1,7 @@
 import React from 'react';
-import { StyleSheet, View, TouchableOpacity, FlatList } from 'react-native';
-import { Spacing } from '@/constants/Colors';
+import { StyleSheet, View, TouchableOpacity, FlatList, ScrollView } from 'react-native';
+
+import { Colors, Fonts, Spacing } from '@/constants/Colors';
 
 interface ItemGridProps {
   items: { id: string; thumbnail: any }[];
@@ -9,48 +10,47 @@ interface ItemGridProps {
 }
 
 export function GradeItems({ items, selectedItemId, onSelectItem }: ItemGridProps) {
-  const renderItem = ({ item }: { item: { id: string, thumbnail: any } }) => {
-    const isSelected = selectedItemId === item.id;
-    const ThumbnailComponent = item.thumbnail;
-
-    return (
-      <TouchableOpacity
-        style={[styles.itemContainer, isSelected && styles.selectedItemContainer]}
-        onPress={() => onSelectItem(item.id)}
-      >
-        <ThumbnailComponent width="80%" height="80%" />
-      </TouchableOpacity>
-    );
-  };
-
   return (
-    <FlatList
-      data={items}
-      renderItem={renderItem}
-      keyExtractor={(item) => item.id}
-      numColumns={3}
-      contentContainerStyle={styles.grid}
-    />
+    <ScrollView contentContainerStyle={styles.grid}>
+      {items.map((item) => {
+        const isSelected = selectedItemId === item.id;
+        const ThumbnailComponent = item.thumbnail;
+
+        return (
+          <TouchableOpacity
+            key={item.id} 
+            style={[styles.itemContainer, isSelected && styles.selectedItemContainer]}
+            onPress={() => onSelectItem(item.id)}
+          >
+            <ThumbnailComponent width="80%" height="80%" />
+          </TouchableOpacity>
+        );
+      })}
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
   grid: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
     justifyContent: 'center',
     alignItems: 'center',
+    
   },
   itemContainer: {
-    width: 80,
-    height: 80,
-    margin: Spacing.small,
+    width: 107,
+    height: 107,
+    margin: 5,
     backgroundColor: 'rgba(255, 255, 255, 0.5)',
     borderRadius: 15,
     justifyContent: 'center',
     alignItems: 'center',
+    
   },
   selectedItemContainer: {
     borderWidth: 2,
-    borderColor: '#fff',
+    borderColor: 'white',
     borderStyle: 'dotted',
   },
 });

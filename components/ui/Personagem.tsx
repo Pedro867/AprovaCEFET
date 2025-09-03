@@ -3,13 +3,24 @@ import { View, Image, StyleSheet } from 'react-native';
 import background1 from '@/assets/images/Personagem/background/1.svg';
 import orelha1 from '@/assets/images/Personagem/orelhas/1.svg';
 import bochecha1 from '@/assets/images/Personagem/bochechas/1.svg';
-import rosto1 from '@/assets/images/Personagem/rosto/1.svg';
+
 import olhos1 from '@/assets/images/Personagem/olhos/1.svg';
 import boca1 from '@/assets/images/Personagem/boca/2.svg';
 import franja1 from '@/assets/images/Personagem/franja/1.svg';
 import cabelo1 from '@/assets/images/Personagem/cabelo/2.svg';
 import nariz1 from '@/assets/images/Personagem/nariz/1.svg';
 
+// --- ROSTOS ---
+import rosto1 from '@/assets/images/Personagem/rosto/1.svg';
+import rosto2 from '@/assets/images/Personagem/rosto/2.svg';
+import rosto3 from '@/assets/images/Personagem/rosto/3.svg';
+import rosto4 from '@/assets/images/Personagem/rosto/4.svg';
+import rosto5 from '@/assets/images/Personagem/rosto/5.svg';
+import rosto6 from '@/assets/images/Personagem/rosto/6.svg';
+import rosto7 from '@/assets/images/Personagem/rosto/7.svg';
+import rosto8 from '@/assets/images/Personagem/rosto/8.svg';
+import rosto9 from '@/assets/images/Personagem/rosto/9.svg';
+import rosto10 from '@/assets/images/Personagem/rosto/10.svg';
 
 const partesPersonagem = {
   background: {
@@ -23,6 +34,15 @@ const partesPersonagem = {
   },
   rosto: {
     'rosto1': rosto1,
+    'rosto2': rosto2,
+    'rosto3': rosto3,
+    'rosto4': rosto4,
+    'rosto5': rosto5,
+    'rosto6': rosto6,
+    'rosto7': rosto7,
+    'rosto8': rosto8,
+    'rosto9': rosto9,
+    'rosto10': rosto10,
   },
   olhos: {
     'olhos1': olhos1,

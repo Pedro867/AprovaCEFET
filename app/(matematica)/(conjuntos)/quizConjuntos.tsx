@@ -7,8 +7,8 @@ import { LinearGradient } from "expo-linear-gradient";
 import { IconSymbol } from "@/components/ui/IconSymbol";
 import { Colors } from "@/constants/Colors";
 import initialQuestions from './questoesConjuntos.json';
-import { updateCoinsBD, updateStreakBD } from '@/app/api/conexaoFetch'; 
-// import MathView from "react-native-math-view"
+import { updateCoinsBD, updateStreakBD } from '@/app/api/conexaoFetch';
+import { MathJaxSvg } from 'react-native-mathjax-html-to-svg';
 
 
 const imageMap = {
@@ -297,6 +297,58 @@ const QuizScreen = () => {
     );
   }
 
+  const parseAndRenderMath = (text, fontSize) => {
+    // Regex para encontrar equações inline ($...$) e em display ($$...$$)
+    const parts = text.split(/(\$.*?\$|\$\$[\s\S]*?\$\$)/);
+
+    return parts.map((part, index) => {
+      // Se a parte começar com $, é uma equação MathJax
+      if (part.startsWith('$')) {
+        return (
+          <MathJaxSvg key={index} fontSize={2}>
+            {part}
+          </MathJaxSvg>
+        );
+      }
+      // Caso contrário, é texto normal
+      else {
+        return (
+          <Text key={index} style={{ fontSize: fontSize }}>
+            {part}
+          </Text>
+        );
+      }
+    });
+  };
+
+  /* PRECISA MUDAR A FUNÇÃO PARA RETORNAR A STRING DAS OPÇÕES PQ É UM TOUCHABLEOPACITY */
+  const parseAndRenderMathOptions = (text, fontSize) => {
+    // Regex para encontrar equações inline ($...$) e em display ($$...$$)
+    const parts = text.split(/(\$.*?\$|\$\$[\s\S]*?\$\$)/);
+
+    return parts.map((part, index) => {
+      // Se a parte começar com $, é uma equação MathJax
+      if (part.startsWith('$')) {
+        return (
+          <MathJaxSvg key={index} fontSize={2}>
+            {part}
+          </MathJaxSvg>
+        );
+      }
+      // Caso contrário, é texto normal
+      else {
+        return (
+          <Text key={index} style={{ fontSize: fontSize }}>
+            {part}
+          </Text>
+        );
+      }
+    });
+  };
+  const exampleText =
+    `Olá! A fórmula da área do círculo é $A = \\pi r^2$. A soma de uma progressão ` +
+    `aritmética é $ S_n = \\frac{n(a_1 + a_n)}{2} $. Esta é a demonstração.`;
+
   return (
     <LinearGradient
       style={styles.container}
@@ -318,13 +370,9 @@ const QuizScreen = () => {
         )}
       </View>
       <Animated.ScrollView contentContainerStyle={styles.scrollViewContent}>
-        {/* <MathView
-          math="Questao /frac{1}{2}"
-          style={styles.questionText}
-        /> */}
-        <Text style={styles.questionText}>Questão {currentQuestionIndex + 1}</Text>
+        <Text style={styles.questionText}>Questão {currentQuestionIndex + 1} de {questions.length}</Text>
         {currentQuestion.image && <Image source={imageMap[currentQuestion.image]} style={styles.image} />}
-        <Text style={styles.questionText}>{currentQuestion.question}</Text>
+        <Text style={styles.questionText}>{parseAndRenderMath(currentQuestion.question, 24)}</Text>
         {currentQuestion.options.map((option, index) => (
           <TouchableOpacity
             key={index}

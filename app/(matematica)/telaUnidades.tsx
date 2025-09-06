@@ -50,7 +50,7 @@ export default function TelaUnidadesMatematica() {
   return ( 
       <View style={styles.container}>
       <View style={styles.headerUser}>
-        <Personagem size={32} customizations={customizacoes} />
+        {/* <Personagem size={32} customizations={customizacoes} /> */}
         <View style={styles.streakContainer}>
           <Image
             source={require("@/assets/images/foguin--ativado-.png")}

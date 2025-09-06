@@ -19,7 +19,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 const opcoesDaUnidade = [
   {
     title: "Material Teórico",
-    route: "/(matematica)/(conjuntos)/quizConjuntos", 
+    route: "/(matematica)/(conjuntos)/teoriaConjuntos", 
     locked: false,
   },
   {
@@ -73,7 +73,7 @@ export default function UnidadeConjuntos() {
   return (
     <View style={styles.container}>
       <View style={styles.headerUser}>
-        <Personagem size={32} customizations={customizacoes} />
+        {/* <Personagem size={32} customizations={customizacoes} /> */}
         <View style={styles.streakContainer}>
           <Image
             source={require("@/assets/images/foguin--ativado-.png")}

@@ -13,6 +13,7 @@ export default function StackLayout() {
         <Stack.Screen name="conjuntos" options={{ headerShown: false }} />
         <Stack.Screen name="questoesConjuntos" options={{ headerShown: false }} />
         <Stack.Screen name="q4" options={{ headerShown: false }} />
+        <Stack.Screen name="teoriaConjuntos" options={{ headerShown: false }} />
     </Stack>
   );
 }

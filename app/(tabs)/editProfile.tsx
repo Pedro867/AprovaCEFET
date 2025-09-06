@@ -13,7 +13,7 @@ import { updateNomeBD } from "../api/conexaoFetch";
 
 // personagem (ainda fixo, sem interação com nada do banco)
 const customizacoesPersonagem = {
-  background: "cor1",
+  background: "background1",
   ears: "orelha1",
   cheeks: "bochecha1",
   face: "rosto1",

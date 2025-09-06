@@ -156,7 +156,7 @@ export default function TelaSecao() {
   };
   //customizacao do personagem
   const customizacoes = {
-    background: 'cor1', 
+    background: 'background1', 
     ears: 'orelha1',
     cheeks: 'bochecha1',
     face: 'rosto1',

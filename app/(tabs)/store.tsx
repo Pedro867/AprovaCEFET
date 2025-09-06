@@ -16,7 +16,7 @@ export default function LojaScreen() {
   const [selectedCategory, setSelectedCategory] = useState(LOJA_CATEGORIAS[0].id);
   
   const [customizacoes, setCustomizacoes] = useState<CustomizacoesType>({
-    background: 'cor1', 
+    background: 'background1', 
     ears: 'orelha1',
     cheeks: 'bochecha1',
     face: 'rosto1',

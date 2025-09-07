@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Image, StyleSheet } from "react-native";
 import orelha1 from "@/assets/images/Personagem/orelhas/1.svg";
-// -- bochechaS -- 
+// -- bochechaS --
 import bochecha1 from "@/assets/images/Personagem/bochechas/1.svg";
 import bochecha2 from "@/assets/images/Personagem/bochechas/2.svg";
 import bochecha3 from "@/assets/images/Personagem/bochechas/3.svg";
@@ -141,7 +141,7 @@ import cabelo38 from "@/assets/images/Personagem/cabelo/38.svg";
 import cabelo39 from "@/assets/images/Personagem/cabelo/39.svg";
 import cabelo40 from "@/assets/images/Personagem/cabelo/40.svg";
 
-//-- nariz -- 
+//-- nariz --
 import nariz1 from "@/assets/images/Personagem/nariz/1.svg";
 import nariz2 from "@/assets/images/Personagem/nariz/2.svg";
 import nariz3 from "@/assets/images/Personagem/nariz/3.svg";
@@ -166,7 +166,7 @@ import rosto8 from "@/assets/images/Personagem/rosto/8.svg";
 import rosto9 from "@/assets/images/Personagem/rosto/9.svg";
 import rosto10 from "@/assets/images/Personagem/rosto/10.svg";
 
-//-- backgroundS -- 
+//-- backgroundS --
 import background1 from "@/assets/images/Personagem/background/1.svg";
 import background2 from "@/assets/images/Personagem/background/2.svg";
 import background3 from "@/assets/images/Personagem/background/3.svg";
@@ -405,36 +405,56 @@ export function Personagem({ size, customizations }: CharacterProps) {
 
   return (
     <View style={[styles.avatarContainer, { width: size, height: size }]}>
-      <View style={[styles.backgroundLayer, { zIndex: 1 }]}>
-        <BackgroundComponent width="100%" height="100%" />
-      </View>
-      <View style={[styles.earRightLayer, { zIndex: 5 }]}>
-        <EarsComponent width="50%" height="50%" />
-      </View>
-      <View style={[styles.earLeftLayer, { zIndex: 5 }]}>
-        <EarsComponent width="50%" height="50%" />
-      </View>
-      <View style={[styles.cheekLayer, { zIndex: 7 }]}>
-        <CheeksComponent width="100%" height="100%" />
-      </View>
-      <View style={[styles.noseLayer, { zIndex: 4 }]}>
-        <NoseComponent width="100%" height="100%" />
-      </View>
-      <View style={[styles.faceLayer, { zIndex: 3 }]}>
-        <FaceComponent width="100%" height="100%" />
-      </View>
-      <View style={[styles.eyesLayer, { zIndex: 6 }]}>
-        <EyesComponent width="100%" height="100%" />
-      </View>
-      <View style={[styles.mouthLayer, { zIndex: 4 }]}>
-        <MouthComponent width="100%" height="100%" />
-      </View>
-      <View style={[styles.frontHairLayer, { zIndex: 8 }]}>
-        <BangsComponent width="100%" height="100%" />
-      </View>
-      <View style={[styles.hairLayer, { zIndex: 2 }]}>
-        <HairComponent width="100%" height="100%" />
-      </View>
+      {BackgroundComponent && (
+        <View style={[styles.backgroundLayer, { zIndex: 1 }]}>
+          <BackgroundComponent width="100%" height="100%" />
+        </View>
+      )}
+      {EarsComponent && (
+        <View style={[styles.earRightLayer, { zIndex: 5 }]}>
+          <EarsComponent width="50%" height="50%" />
+        </View>
+      )}
+      {EarsComponent && (
+        <View style={[styles.earLeftLayer, { zIndex: 5 }]}>
+          <EarsComponent width="50%" height="50%" />
+        </View>
+      )}
+      {CheeksComponent && (
+        <View style={[styles.cheekLayer, { zIndex: 7 }]}>
+          <CheeksComponent width="100%" height="100%" />
+        </View>
+      )}
+      {NoseComponent && (
+        <View style={[styles.noseLayer, { zIndex: 4 }]}>
+          <NoseComponent width="100%" height="100%" />
+        </View>
+      )}
+      {FaceComponent && (
+        <View style={[styles.faceLayer, { zIndex: 3 }]}>
+          <FaceComponent width="100%" height="100%" />
+        </View>
+      )}
+      {EyesComponent && (
+        <View style={[styles.eyesLayer, { zIndex: 6 }]}>
+          <EyesComponent width="100%" height="100%" />
+        </View>
+      )}
+      {MouthComponent && (
+        <View style={[styles.mouthLayer, { zIndex: 4 }]}>
+          <MouthComponent width="100%" height="100%" />
+        </View>
+      )}
+      {BangsComponent && (
+        <View style={[styles.frontHairLayer, { zIndex: 8 }]}>
+          <BangsComponent width="100%" height="100%" />
+        </View>
+      )}
+      {HairComponent && (
+        <View style={[styles.hairLayer, { zIndex: 2 }]}>
+          <HairComponent width="100%" height="100%" />
+        </View>
+      )}
     </View>
   );
 }

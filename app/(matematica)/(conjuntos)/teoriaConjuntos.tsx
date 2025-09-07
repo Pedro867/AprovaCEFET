@@ -258,7 +258,7 @@ const QuizScreen = () => {
         <Text style={styles.textStyle}>Quantos divisores possui o número 528?</Text>
         <Text style={styles.textStyle}>Resolução:</Text>
         <Text style={styles.textStyle}>A forma fatorada do número 528 é {' '}
-          <MathJaxSvg fontSize={2} style={styles.textStyle}>{' $2^4 \\cdot 3^1 \\cdot 11^1$ '}</MathJaxSvg> {espaco}
+          <MathJaxSvg fontSize={2} style={styles.textStyle}>{'$2^4 \\cdot 3^1 \\cdot 11^1$'}</MathJaxSvg> {espaco}
           como vimos no exemplo anterior. Portanto, para encontrarmos o número de divisores de 528 vamos proceder da seguinte forma: {' '}
           <MathJaxSvg fontSize={2} style={styles.inlineMath}>{'$(4+1) \\cdot (1+1) \\cdot (1+1) = 5 \\cdot 2 \\cdot 2 = 20$'}</MathJaxSvg> {espaco}
           divisores positivos.</Text>

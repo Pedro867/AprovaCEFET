@@ -21,7 +21,7 @@ export const unidadesMatematica = [
     description:
       "Propriedades e regras das operações, notação científica e racionalização de denominadores.",
     Icon: IconPotencia,
-    route: "/(matematica)/(conjuntos)/testeQuiz",
+    route: "/(matematica)/(potencia_radiciacao)/pot_rad",
   },
   {
     title: "Fatoração e Sistemas Lineares",

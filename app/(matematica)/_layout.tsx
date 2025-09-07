@@ -11,6 +11,7 @@ export default function StackLayout() {
     <Stack>
         <Stack.Screen name="telaUnidades" options={{ headerShown: false }} /> 
         <Stack.Screen name="(conjuntos)" options={{ headerShown: false }} />  
+        <Stack.Screen name="(potencia_radiciacao)" options={{ headerShown: false }} />  
     </Stack>
-  );
+  );  
 }

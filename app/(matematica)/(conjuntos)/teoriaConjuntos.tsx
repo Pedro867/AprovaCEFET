@@ -114,13 +114,13 @@ const QuizScreen = () => {
         </Text>
         <Text style={styles.titulo3}>Exemplo 1.1</Text>
         <Text style={styles.textStyle}>A = {chavesAbertas}1, 2, 3{chavesFechadas} {enter} {enter}
-          Dois conjuntos são iguais se contêm os mesmos elementos. (Em uma definição, "se" significa, na
+          Dois conjuntos são <Text style={{ fontWeight: 'bold' }}>iguais</Text> se contêm os mesmos elementos. (Em uma definição, "se" significa, na
           verdade, "se, e somente se", portanto dois conjuntos são iguais se, e somente se, eles contêm os mesmos
           elementos.)
         </Text>
         <Text style={styles.titulo3}>Exemplo 1.2</Text>
         <Text style={styles.textStyle}>A = {chavesAbertas}1, 2{chavesFechadas} e B = {chavesAbertas}2, 1{chavesFechadas}, então A = B {enter} {enter}
-          Podemos representar um conjunto por meio de uma propriedade.
+          Podemos representar um conjunto por meio de uma <Text style={{ fontWeight: 'bold' }}>propriedade</Text>.
         </Text>
         <Text style={styles.titulo3}>Exemplo 1.3</Text>
         <Text style={styles.textStyle}>Sendo {espaco}
@@ -134,8 +134,7 @@ const QuizScreen = () => {
           Podemos notar que, primeiramente o conjunto A foi representado por uma propriedade, que nos levou a
           descrever todos os elementos do referido conjunto. Também destacamos que o conjunto {espaco}
           <MathJaxSvg fontSize={2} style={styles.textStyle}>{'$\\mathbb{N}$'}</MathJaxSvg>
-          , neste exemplo,
-          é chamado de conjunto universo.
+          , neste exemplo, é chamado de <Text style={{ fontWeight: 'bold' }}>conjunto universo</Text>.
           Um conjunto universo é o conjunto ao qual pertencem todos os elementos que podemos utilizar no
           problema
         </Text>
@@ -186,9 +185,9 @@ const QuizScreen = () => {
           são exemplos de números racionais.</Text>
         <Text style={styles.textStyle}>Destacamos que o número {espaco}
           <MathJaxSvg fontSize={2} style={styles.textStyle}>{'$\\frac{2}{5} = 0,4$'}</MathJaxSvg>
-          {espaco} é chamado de decimal exato. Já o número {espaco}
+          {espaco} é chamado de <Text style={{ fontWeight: 'bold' }}>decimal exato</Text>. Já o número {espaco}
           <MathJaxSvg fontSize={2} style={styles.textStyle}>{'$-\\frac{1}{3} = -0,3333...$ '}</MathJaxSvg> {espaco}
-          chamamos de dízima periódica.</Text>
+          chamamos de <Text style={{ fontWeight: 'bold' }}>dízima periódica</Text>.</Text>
 
         <Text style={styles.titulo3}>Exemplo 1.6</Text>
         <Text style={styles.textStyle}>Vamos obter uma representação decimal para os números:</Text>
@@ -219,9 +218,10 @@ const QuizScreen = () => {
         </Text>
         <Text style={styles.textStyle}>Com estes exemplos, podemos perceber que toda dízima periódica é um número racional. Existem dízimas não-periódicas. Essas dízimas são os números irracionais.</Text>
 
-        {/* --- Section on Irrational and Real Numbers --- */}
         <Text style={styles.titulo3}>1.2.4 Conjunto dos números irracionais</Text>
-        {/* <Text style={styles.textStyle}>O conjunto será denotado por $\mathbb{I}$. O conjunto dos números irracionais é constituído pelas dízimas não-periódicas. Como exemplos de números irracionais, podemos citar:</Text> */}
+        <Text style={styles.textStyle}>O conjunto será denotado por {espaco}
+          <MathJaxSvg fontSize={2} style={styles.textStyle}>{'$\\mathbb{I}$'}</MathJaxSvg>
+          . O conjunto dos números irracionais é constituído pelas dízimas não-periódicas. Como exemplos de números irracionais, podemos citar:</Text>
         <Text style={styles.textStyle}><MathJaxSvg fontSize={2} style={styles.textStyle}>{'$\\pi = 3,1415926535...$'}</MathJaxSvg></Text>
         <Text style={styles.textStyle}><MathJaxSvg fontSize={2} style={styles.textStyle}>{'$\\sqrt{2} = 1,4142135623...$'}</MathJaxSvg></Text>
         <Text style={styles.textStyle}><MathJaxSvg fontSize={2} style={styles.textStyle}>{'$\\sqrt{3} = 1,7320508075...$'}</MathJaxSvg></Text>
@@ -233,10 +233,92 @@ const QuizScreen = () => {
         <Text style={styles.textStyle}>Os conjuntos numéricos podem ser representados esquematicamente pela Figura 1.1</Text>
 
         <View style={styles.imageView}>
-            <Image source={require('@/app/(matematica)/(conjuntos)/fig1.1.png')} style={styles.image}></Image>
+          <Image source={require('@/app/(matematica)/(conjuntos)/fig1.1.png')} style={styles.image}></Image>
         </View>
 
         <Text style={styles.imageSubtitle}>Figura 1.1: Representação dos conjuntos numéricos.</Text>
+
+        <Text style={styles.titulo2}>1.3 Aritmética dos inteiros</Text>
+        <Text style={styles.textStyle}>Nesta seção, vamos relembrar como escrever um número inteiro na sua forma fatorada, calcular o Mínimo Múltiplo Comum e o Máximo Divisor Comum entre números inteiros. Vejamos estes conceitos por meio de exemplos.</Text>
+
+        <Text style={styles.titulo3}>Exemplo 1.8</Text>
+        <Text style={styles.textStyle}>Qual a forma fatorada de 528?</Text>
+        <Text style={styles.textStyle}>Resolução:</Text>
+        <Text style={[styles.textStyle, styles.preFormattedText]}>
+          528 | 2
+          {'\n'}264 | 2
+          {'\n'}132 | 2
+          {'\n'} 66 | 2  {' '} <MathJaxSvg fontSize={2} style={styles.inlineMath}>{'$\\rightarrow 2^4 \\cdot 3^1 \\cdot 11^1$'}</MathJaxSvg>
+          {'\n'} 33 | 3
+          {'\n'} 11 | 11
+          {'\n'}  1 |
+        </Text>
+
+        <Text style={styles.titulo3}>Exemplo 1.9</Text>
+        <Text style={styles.textStyle}>Quantos divisores possui o número 528?</Text>
+        <Text style={styles.textStyle}>Resolução:</Text>
+        <Text style={styles.textStyle}>A forma fatorada do número 528 é {' '}
+          <MathJaxSvg fontSize={2} style={styles.textStyle}>{' $2^4 \\cdot 3^1 \\cdot 11^1$ '}</MathJaxSvg> {espaco}
+          como vimos no exemplo anterior. Portanto, para encontrarmos o número de divisores de 528 vamos proceder da seguinte forma: {' '}
+          <MathJaxSvg fontSize={2} style={styles.inlineMath}>{'$(4+1) \\cdot (1+1) \\cdot (1+1) = 5 \\cdot 2 \\cdot 2 = 20$'}</MathJaxSvg> {espaco}
+          divisores positivos.</Text>
+        <Text style={styles.textStyle}>Sendo {' '}
+          <MathJaxSvg fontSize={2} style={styles.inlineMath}>{'$p_1^{\\alpha_1}, p_2^{\\alpha_2}, \\dots, p_n^{\\alpha_n}$'}</MathJaxSvg>
+          a forma fatorada de um número natural n, pode-se concluir que o número de divisores positivos de n é {' '}
+          <MathJaxSvg fontSize={2} style={styles.inlineMath}>{'$(\\alpha_1+1)(\\alpha_2+1)\\dots(\\alpha_n+1)$'}</MathJaxSvg>
+          .</Text>
+
+        <Text style={styles.titulo3}>Exemplo 1.10</Text>
+        <Text style={styles.textStyle}>Qual é o mínimo múltiplo comum entre os números 20 e 55?</Text>
+        <Text style={styles.textStyle}>Resolução:</Text>
+        <Text style={[styles.textStyle, styles.preFormattedText]}>
+          20, 55 | 2
+          {'\n'}10, 55 | 2
+          {'\n'} 5, 55 | 5  {' '} <MathJaxSvg fontSize={2} style={styles.inlineMath}>{'$\\rightarrow 2 \\cdot 2 \\cdot 5 \\cdot 11 = 220$'}</MathJaxSvg>
+          {'\n'} 1, 11 | 11
+          {'\n'} 1, 1  |
+        </Text>
+        <Text style={styles.textStyle}>Portanto, <MathJaxSvg fontSize={2} style={styles.inlineMath}>{'$mmc(20, 55) = 220$'}</MathJaxSvg>.</Text>
+
+        <Text style={styles.titulo3}>Exemplo 1.11</Text>
+        <Text style={styles.textStyle}>Qual é o máximo divisor comum entre os números 20 e 60?</Text>
+        <Text style={styles.textStyle}>Resolução:</Text>
+        <Text style={[styles.textStyle, styles.preFormattedText]}>
+          20, 60 | 2
+          {'\n'}10, 30 | 2
+          {'\n'} 5, 15 | 3  {' '} <MathJaxSvg fontSize={2} style={styles.inlineMath}>{'$\\rightarrow 2 \\cdot 2 \\cdot 5 = 20$'}</MathJaxSvg>
+          {'\n'} 5,  5 | 5
+          {'\n'} 1,  1 |
+        </Text>
+        <Text style={styles.textStyle}>Portanto, <MathJaxSvg fontSize={2} style={styles.inlineMath}>{'$mdc(20, 60) = 20$'}</MathJaxSvg>.</Text>
+        <Text style={styles.textStyle}>Podemos resolver muitos problemas utilizando o mínimo múltiplo comum e o máximo divisor comum de números inteiros, como vamos apresentar nos dois exemplos a seguir:</Text>
+
+        <Text style={styles.titulo3}>Exemplo 1.12</Text>
+        <Text style={styles.textStyle}>De um aeroporto, partem todos os dias, 3 aviões que fazem rotas internacionais. O primeiro avião faz a rota de ida e volta em 4 dias, o segundo em 5 dias e o terceiro em 10 dias. Se num certo dia os três aviões partem simultaneamente, depois de quantos dias esses aviões partirão novamente no mesmo dia?</Text>
+        <Text style={styles.textStyle}>Resolução:</Text>
+        <Text style={styles.textStyle}>Para resolvermos esse problema, basta encontrar o <MathJaxSvg fontSize={2} style={styles.inlineMath}>{'$mmc(3, 4, 5, 10)$'}</MathJaxSvg>.</Text>
+        <Text style={[styles.textStyle, styles.preFormattedText]}>
+          3, 4, 5, 10 | 2
+          {'\n'}3, 2, 5,  5 | 2
+          {'\n'}3, 1, 5,  5 | 3  {' '} <MathJaxSvg fontSize={2} style={styles.inlineMath}>{'$\\rightarrow 2 \\cdot 2 \\cdot 3 \\cdot 5 = 60$'}</MathJaxSvg>
+          {'\n'}1, 1, 5,  5 | 5
+          {'\n'}1, 1, 1,  1 |
+        </Text>
+        <Text style={styles.textStyle}>Portanto, esses aviões partirão novamente no mesmo dia daqui 60 dias.</Text>
+
+        <Text style={styles.titulo3}>Exemplo 1.13</Text>
+        <Text style={styles.textStyle}>Um terreno retangular de 221 m por 117 m será cercado. Em toda a volta deste cercado serão plantadas árvores igualmente espaçadas. Qual o maior espaço possível entre as árvores?</Text>
+        <Text style={styles.textStyle}>Resolução:</Text>
+        <Text style={styles.textStyle}>Neste problema, queremos dividir no maior número possível, então basta encontrarmos o <MathJaxSvg fontSize={2} style={styles.inlineMath}>{'$mdc(221, 117)$'}</MathJaxSvg>.</Text>
+        <Text style={[styles.textStyle, styles.preFormattedText]}>
+          221, 117 | 3
+          {'\n'}221,  39 | 3
+          {'\n'}221,  13 | 13 {' '} <MathJaxSvg fontSize={2} style={styles.inlineMath}>{'$\\rightarrow 13$'}</MathJaxSvg>
+          {'\n'} 17,   1 | 17
+          {'\n'}  1,   1 |
+        </Text>
+        <Text style={styles.textStyle}>Portanto, o maior espaço possível entre as árvores será 13 m.</Text>
+        <Text style={styles.textStyle}>Observação: Dois números inteiros quaisquer são ditos <Text style={{ fontWeight: 'bold' }}>primos entre si</Text> se, e somente se, o seu mdc for 1, ou seja, se o único divisor comum entre eles for o 1. Por exemplo, 6 e 25 são números primos entre si.</Text>
 
       </Animated.ScrollView>
 
@@ -312,7 +394,7 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
   },
   imageView: {
-    alignItems  : 'center',
+    alignItems: 'center',
   },
   coinContainer: {
     position: 'absolute',
@@ -348,6 +430,15 @@ const styles = StyleSheet.create({
     textShadowRadius: 4,
     marginLeft: 5,
   },
+  preFormattedText: {
+    fontFamily: 'monospace', // Usar uma fonte de largura fixa para alinhamento
+    // whiteSpace: 'pre',      // Preservar espaços e quebras de linha
+    lineHeight: 20,         // Ajuste a altura da linha conforme necessário
+  },
+  inlineMath: {
+    // Estilo para o MathJax para que ele se ajuste na mesma linha do texto
+    // `lineHeight` pode precisar ser ajustado para alinhar com o texto
+  }
 });
 
 export default QuizScreen;

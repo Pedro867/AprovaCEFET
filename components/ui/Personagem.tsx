@@ -1,6 +1,14 @@
 import React from "react";
 import { View, Image, StyleSheet } from "react-native";
+// -- orelhas --
 import orelha1 from "@/assets/images/Personagem/orelhas/1.svg";
+import orelha2 from "@/assets/images/Personagem/orelhas/2.svg";
+import orelha3 from "@/assets/images/Personagem/orelhas/3.svg";
+import orelha4 from "@/assets/images/Personagem/orelhas/4.svg";
+import orelha5 from "@/assets/images/Personagem/orelhas/5.svg";
+import orelha6 from "@/assets/images/Personagem/orelhas/6.svg";
+import orelha7 from "@/assets/images/Personagem/orelhas/7.svg";
+import orelha8 from "@/assets/images/Personagem/orelhas/8.svg";
 // -- bochechaS --
 import bochecha1 from "@/assets/images/Personagem/bochechas/1.svg";
 import bochecha2 from "@/assets/images/Personagem/bochechas/2.svg";
@@ -201,6 +209,13 @@ const partesPersonagem = {
   },
   orelha: {
     orelha1: orelha1,
+    orelha2: orelha2,
+    orelha3: orelha3,
+    orelha4: orelha4,
+    orelha5: orelha5,
+    orelha6: orelha6,
+    orelha7: orelha7,
+    orelha8: orelha8,
   },
   bochecha: {
     bochecha1: bochecha1,
@@ -467,7 +482,7 @@ const styles = StyleSheet.create({
   },
   backgroundLayer: {
     ...StyleSheet.absoluteFillObject, //atalho pra camada ocupar todo o espaço do conteiner
-    transform: [{ scale: 1.3 }],
+    transform: [{ scale: 1.5 }],
   },
   hairLayer: {
     ...StyleSheet.absoluteFillObject,

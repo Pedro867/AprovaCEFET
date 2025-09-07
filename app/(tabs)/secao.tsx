@@ -13,7 +13,7 @@ import { Personagem } from "@/components/ui/Personagem";
 import { Card } from "@/components/ui/Card";
 import { ProgressBar } from "@/components/ui/ProgressBar";
 import { useRouter, useFocusEffect } from "expo-router";
-import { Colors,Fonts } from "@/constants/Colors";
+import { Colors, Fonts } from "@/constants/Colors";
 import { BotaoCustomizado } from "@/components/ui/ButtomCustom";
 import { CalendarioCustomizado } from "@/components/ui/CalendarCustom";
 import { BlurView } from "expo-blur";
@@ -24,9 +24,9 @@ const { width: screenWidth } = Dimensions.get("window");
 const subjectAreas = [
   {
     id: 1,
-    title: "Ciências da natureza",
+    title: "Ciências da Natureza",
     disciplines: "3 Disciplinas",
-    image: require("@/assets/images/natural-science-and-school-supplies.png"),
+    image: require("@/assets/images/naturezas.png"),
     color: "rgba(137, 161, 212, 0.66)",
     route: "/(natureza)/cienciasNatureza",
   },
@@ -34,7 +34,7 @@ const subjectAreas = [
     id: 2,
     title: "Ciências Humanas",
     disciplines: "2 Disciplinas",
-    image: require("@/assets/images/studying-geography-with-a-globe.png"),
+    image: require("@/assets/images/humanas.png"),
     color: "rgba(137,161,212,0.64)",
     route: "/(humanas)/cienciasHumanas",
   },
@@ -42,7 +42,7 @@ const subjectAreas = [
     id: 3,
     title: "Linguagens",
     disciplines: "1 Disciplina",
-    image: require("@/assets/images/books.png"),
+    image: require("@/assets/images/linguagens.png"),
     color: "rgba(137,161,212,0.64)",
     route: "/(linguagens)/linguagens",
   },
@@ -50,45 +50,68 @@ const subjectAreas = [
     id: 4,
     title: "Matemática",
     disciplines: "1 Disciplina",
-    image: require("@/assets/images/matematica/math-class--calculator--and-other-supplies.png"),
+    image: require("@/assets/images/matematica.png"),
     color: "rgba(137,161,212,0.64)",
     route: "/(matematica)/telaUnidades",
   },
 ];
 
-export default function TelaSecao() {
+// estado inicial do personagem
+const personagemInicial = {
+  background: "background1",
+  ears: "orelha1",
+  cheeks: "bochecha1",
+  face: "rosto1",
+  eyes: "olhos1",
+  mouth: "boca1",
+  bangs: "franja1",
+  hair: "cabelo1",
+  nose: "nariz1",
+};
 
+export default function TelaSecao() {
   const [nomeUsuario, setNomeUsuario] = useState(null);
   const [streakUsuario, setStreakUsuario] = useState(null);
   const [coinsUsuario, setCoinsUsuario] = useState(null);
+  const [customizacoes, setCustomizacoes] = useState(personagemInicial);
 
   useFocusEffect(
-  useCallback(() => {
-    const carregarDados = async () => {
-      //EU SEI QUE TUDO PODE SER FEITO EM 1 TRY CATCH MAS SE 1 DER ERRADO O CONSOLE.ERROR DIZ QUAL EH
-      try {
-        const primeiroNome = await AsyncStorage.getItem("userPrimeiroNome");
-        setNomeUsuario(primeiroNome);
-      } catch (error) {
-        console.error("Erro ao carregar o nome do usuário", error);
-      }
-      try {
-        const streak = await AsyncStorage.getItem("userStreak");
-        setStreakUsuario(streak);
-      } catch (error) {
-        console.error("Erro ao carregar o streak do usuário", error);
-      }
-      try {
-        const coins = await AsyncStorage.getItem("userPontuacao");
-        setCoinsUsuario(coins);
-      } catch (error) {
-        console.error("Erro ao carregar as coins do usuário", error);
-      }
-    };
+    useCallback(() => {
+      const carregarDados = async () => {
+        //EU SEI QUE TUDO PODE SER FEITO EM 1 TRY CATCH MAS SE 1 DER ERRADO O CONSOLE.ERROR DIZ QUAL EH
+        try {
+          const primeiroNome = await AsyncStorage.getItem("userPrimeiroNome");
+          setNomeUsuario(primeiroNome);
+        } catch (error) {
+          console.error("Erro ao carregar o nome do usuário", error);
+        }
+        try {
+          const streak = await AsyncStorage.getItem("userStreak");
+          setStreakUsuario(streak);
+        } catch (error) {
+          console.error("Erro ao carregar o streak do usuário", error);
+        }
+        try {
+          const coins = await AsyncStorage.getItem("userPontuacao");
+          setCoinsUsuario(coins);
+        } catch (error) {
+          console.error("Erro ao carregar as coins do usuário", error);
+        }
+        try {
+          const savedCustomizations = await AsyncStorage.getItem(
+            "userCharacter"
+          );
+          if (savedCustomizations) {
+            setCustomizacoes(JSON.parse(savedCustomizations));
+          }
+        } catch (error) {
+          console.error("Erro ao carregar o personagem do usuário", error);
+        }
+      };
 
-    carregarDados();
-  }, [])
- ); 
+      carregarDados();
+    }, [])
+  );
 
   const router = useRouter();
   const [diasFaltando, setDiasFaltando] = useState(0);
@@ -121,10 +144,9 @@ export default function TelaSecao() {
         const elapsedDuration = today.getTime() - startDate.getTime() + oneDay;
 
         if (totalDuration > 0) {
-          const progressPercentage = (elapsedDuration / totalDuration) * 100 ;
+          const progressPercentage = (elapsedDuration / totalDuration) * 100;
           setProgresso(Math.min(Math.max(progressPercentage, 0), 100)); // progresso entre 0 e 100
-        }
-        else {
+        } else {
           setProgresso(100); //se a data ja tiver passado
         }
       }
@@ -154,106 +176,98 @@ export default function TelaSecao() {
       console.error("Erro ao atualizar a data", error);
     }
   };
-  //customizacao do personagem
-  const customizacoes = {
-    background: 'background1', 
-    ears: 'orelha1',
-    cheeks: 'bochecha1',
-    face: 'rosto1',
-    eyes: 'olhos1',
-    mouth: 'boca1',
-    bangs: 'franja1',
-    hair: 'cabelo1',
-    nose: 'nariz1',
-  };
   return (
     <View style={styles.container}>
-        <ScrollView showsVerticalScrollIndicator={false}>
-          <View style={styles.header}>
-            <TouchableOpacity onPress={() => router.push('/(tabs)/profile')}>
-                <Personagem size={32} customizations={customizacoes} />
-            </TouchableOpacity>
-            <View style={styles.headerText}>
-              <Text style={styles.greeting}>Olá, {nomeUsuario}</Text> 
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <View style={styles.header}>
+          <TouchableOpacity onPress={() => router.push("/(tabs)/profile")}>
+            <Personagem size={32} customizations={customizacoes} />
+          </TouchableOpacity>
+          <View style={styles.headerText}>
+            <Text style={styles.greeting}>Olá, {nomeUsuario}</Text>
 
-              <Text style={styles.subtitle}>Vamos começar a aprender!</Text>
-            </View>
-            <View style={styles.streakContainer}>
-              <Image
-                source={require("@/assets/images/foguin--ativado-.png")}
-                style={styles.streakIcon}
-              />
-              <Text style={styles.streakNumber}>{streakUsuario}</Text>
-            </View>
-            <View style={styles.streakContainer}>
-              <Image
-                source={require("@/assets/images/pontos.png")}
-                style={styles.streakIcon}
-              />
-              <Text style={styles.streakNumber}>{coinsUsuario}</Text>
-            </View>
+            <Text style={styles.subtitle}>Vamos começar a aprender!</Text>
           </View>
+          <View style={styles.streakContainer}>
+            <Image
+              source={require("@/assets/images/foguin--ativado-.png")}
+              style={styles.streakIcon}
+            />
+            <Text style={styles.streakNumber}>{streakUsuario}</Text>
+          </View>
+          <View style={styles.streakContainer}>
+            <Image
+              source={require("@/assets/images/pontos.png")}
+              style={styles.streakIcon}
+            />
+            <Text style={styles.streakNumber}>{coinsUsuario}</Text>
+          </View>
+        </View>
 
-          {/* CARD PROGRESSO DIAS ATÉ A PROVA */}
-          <Card style={styles.progressCard}>
-            <LinearGradient
-              colors={["rgba(34,75,244,0.29)", "rgba(34,75,244,0.29)"]}
-              style={styles.progressCardContent}
-            >
-              <View style={styles.progressHeader}>
-                <Text style={styles.progressLabel}>Faltam</Text>
-                <TouchableOpacity onPress={() => setCalendarioVisivel(true)}>
-                  <Text style={styles.changeDate}>Alterar data</Text>
-                </TouchableOpacity>
-              </View>
-
-              <View style={styles.daysContainer}>
-                <Text style={styles.daysNumber}>{diasFaltando} dias</Text>
-                <Text style={styles.daysLabel}>para a sua prova!</Text>
-              </View>
-
-              <ProgressBar
-                progress={progresso}
-                style={styles.progressBar}
-                progressColor="#6B91E2"
-              />
-            </LinearGradient>
-          </Card>
-
-          {/* ÁREA DE SEÇÕES */}
-          <Text style={styles.sectionTitle}>Áreas de conhecimento</Text>
-
-          <View style={styles.subjectsGrid}>
-            {subjectAreas.map((area) => (
-              <TouchableOpacity
-                key={area.id}
-                style={styles.subjectTouchable}
-                onPress={() => router.push(area.route as any)}
-              >
-                <Card style={styles.subjectCard}>
-                  <LinearGradient
-                      colors={["rgba(34,75,244,0.29)", "rgba(34,75,244,0.29)"]}
-                      start={{ x: 0, y: 0 }}
-                      end={{ x: 1, y: 0 }}
-                      style={styles.subjectImageBackground}
-                    />
-                  <View style={styles.subjectImageContainer}>
-                    <Image source={area.image} style={styles.subjectImage} />
-                  </View>
-
-                  <View style={styles.subjectInfo}>
-                    <Text style={styles.subjectTitle}>{area.title}</Text>
-                    <Text style={styles.subjectDisciplines}>
-                      {area.disciplines}
-                    </Text>
-                  </View>
-                </Card>
+        {/* CARD PROGRESSO DIAS ATÉ A PROVA */}
+        <Card style={styles.progressCard}>
+          <LinearGradient
+            colors={["rgba(34,75,244,0.29)", "rgba(34,75,244,0.29)"]}
+            style={styles.progressCardContent}
+          >
+            <View style={styles.progressHeader}>
+              <Text style={styles.progressLabel}>Faltam</Text>
+              <TouchableOpacity onPress={() => setCalendarioVisivel(true)}>
+                <Text style={styles.changeDate}>Alterar data</Text>
               </TouchableOpacity>
-            ))}
-          </View>
-        </ScrollView>
+            </View>
+
+            <View style={styles.daysContainer}>
+              <Text style={styles.daysNumber}>{diasFaltando} dias</Text>
+              <Text style={styles.daysLabel}>para a sua prova!</Text>
+            </View>
+
+            <ProgressBar
+              progress={progresso}
+              style={styles.progressBar}
+              progressColor="#6B91E2"
+            />
+          </LinearGradient>
+        </Card>
+
+        {/* ÁREA DE SEÇÕES */}
+        <Text style={styles.sectionTitle}>Áreas de conhecimento</Text>
+
+        <View style={styles.subjectsGrid}>
+          {subjectAreas.map((area) => (
+            <TouchableOpacity
+              key={area.id}
+              style={styles.subjectTouchable}
+              onPress={() => router.push(area.route as any)}
+            >
+              <Card style={styles.subjectCard}>
+                <LinearGradient
+                  colors={["rgba(34,75,244,0.29)", "rgba(34,75,244,0.29)"]}
+                  start={{ x: 0, y: 0 }}
+                  end={{ x: 1, y: 0 }}
+                  style={styles.subjectImageBackground}
+                />
+                <View style={styles.subjectImageContainer}>
+                  <Image source={area.image} style={styles.subjectImage} />
+                </View>
+
+                <View style={styles.subjectInfo}>
+                  <Text style={styles.subjectTitle}>{area.title}</Text>
+                  <Text style={styles.subjectDisciplines}>
+                    {area.disciplines}
+                  </Text>
+                </View>
+              </Card>
+            </TouchableOpacity>
+          ))}
+        </View>
+      </ScrollView>
       {calendarioVisivel && (
-        <BlurView intensity={100} tint='systemThinMaterialDark' style={styles.blurContainer}>
+        <BlurView
+          intensity={100}
+          tint="systemThinMaterialDark"
+          style={styles.blurContainer}
+        >
           <View style={styles.modalContent}>
             <CalendarioCustomizado onDateSelect={setNovaDataSelecionada} />
           </View>
@@ -277,7 +291,7 @@ const styles = StyleSheet.create({
   header: {
     flexDirection: "row",
     alignItems: "center",
-    paddingHorizontal: '5%',
+    paddingHorizontal: "5%",
     paddingTop: 20,
     marginBottom: 20,
     marginTop: 20,
@@ -286,7 +300,7 @@ const styles = StyleSheet.create({
     marginRight: 12,
   },
   headerText: {
-    marginLeft:10,
+    marginLeft: 10,
     flex: 1,
   },
   greeting: {
@@ -299,7 +313,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: "#060302",
     fontFamily: Fonts.family.kumbhSans,
-    fontWeight: '600',
+    fontWeight: "600",
     marginTop: 4,
   },
   streakContainer: {
@@ -318,7 +332,7 @@ const styles = StyleSheet.create({
     textShadowRadius: 4,
   },
   progressCard: {
-    marginHorizontal: '5%',
+    marginHorizontal: "5%",
     marginBottom: 26,
   },
   progressCardContent: {
@@ -363,29 +377,28 @@ const styles = StyleSheet.create({
     fontWeight: "700",
     color: "#121212",
     fontFamily: Fonts.family.kumbhSans,
-    textAlign:'center',
+    textAlign: "center",
     marginBottom: 20,
   },
   subjectsGrid: {
     flexDirection: "row",
     flexWrap: "wrap",
     justifyContent: "space-around",
-    paddingHorizontal: '5%',
+    paddingHorizontal: "5%",
     paddingBottom: 3,
-    
   },
   subjectTouchable: {
-    width: '48%',
+    width: "48%",
     marginBottom: 20,
-    borderRadius:30,
+    borderRadius: 30,
   },
   subjectCard: {
-    borderRadius:30,
+    borderRadius: 30,
   },
   subjectImageContainer: {
     aspectRatio: 1, //mantem proporcao da img
     width: "80%",
-    alignSelf: 'center',
+    alignSelf: "center",
     margin: 14,
     marginBottom: 8,
     justifyContent: "center",
@@ -397,7 +410,7 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     bottom: 0,
-    borderRadius:30,
+    borderRadius: 30,
   },
   subjectImage: {
     width: 90,

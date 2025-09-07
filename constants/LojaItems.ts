@@ -181,15 +181,26 @@ import bochecha4 from "@/assets/images/Personagem/bochechas/4.svg";
 import bochecha5 from "@/assets/images/Personagem/bochechas/5.svg";
 import bochecha6 from "@/assets/images/Personagem/bochechas/6.svg";
 
+// -- orelhas --
+import orelha1 from "@/assets/images/Personagem/orelhas/1.svg";
+import orelha2 from "@/assets/images/Personagem/orelhas/2.svg";
+import orelha3 from "@/assets/images/Personagem/orelhas/3.svg";
+import orelha4 from "@/assets/images/Personagem/orelhas/4.svg";
+import orelha5 from "@/assets/images/Personagem/orelhas/5.svg";
+import orelha6 from "@/assets/images/Personagem/orelhas/6.svg";
+import orelha7 from "@/assets/images/Personagem/orelhas/7.svg";
+import orelha8 from "@/assets/images/Personagem/orelhas/8.svg";
+
 export const LOJA_CATEGORIAS = [
-  { id: "face", nome: "Rosto", icone: rosto1 },
+  { id: "face", nome: "Rosto", icone: rosto2 },
   { id: "hair", nome: "Cabelo", icone: cabelo1 },
+  { id: "ears", nome: "Orelhas", icone: orelha1},
   { id: "bangs", nome: "Franja", icone: franja1 },
-  { id: "mouth", nome: "Boca", icone: boca1 },
-  { id: "eyes", nome: "Olhos", icone: olhos1 },
-  { id: "nose", nome: "Nariz", icone: nariz1 },
-  { id: "cheeks", nome: "Bochechas", icone: bochecha1 },
-  { id: "background", nome: "Fundos", icone: background1 },
+  { id: "mouth", nome: "Boca", icone: boca4 },
+  { id: "eyes", nome: "Olhos", icone: olhos19 },
+  { id: "nose", nome: "Nariz", icone: nariz10 },
+  { id: "cheeks", nome: "Bochechas", icone: bochecha2 },
+  { id: "background", nome: "Fundos", icone: background3 },
 ];
 
 export const LOJA_ITENS = {
@@ -204,6 +215,16 @@ export const LOJA_ITENS = {
     { id: "rosto8", thumbnail: rosto8, preco: 50 },
     { id: "rosto9", thumbnail: rosto9, preco: 50 },
     { id: "rosto10", thumbnail: rosto10, preco: 50 },
+  ],
+  ears: [
+    { id: "orelha1", thumbnail: orelha1, preco: 0 },
+    { id: "orelha2", thumbnail: orelha2, preco: 50 },
+    { id: "orelha3", thumbnail: orelha3, preco: 50 },
+    { id: "orelha4", thumbnail: orelha4, preco: 50 },
+    { id: "orelha5", thumbnail: orelha5, preco: 50 },
+    { id: "orelha6", thumbnail: orelha6, preco: 50 },
+    { id: "orelha7", thumbnail: orelha7, preco: 50 },
+    { id: "orelha8", thumbnail: orelha8, preco: 50 },
   ],
   hair: [
     { id: "cabelo1", thumbnail: cabelo1, preco: 0 },
@@ -248,7 +269,8 @@ export const LOJA_ITENS = {
     { id: "cabelo40", thumbnail: cabelo40, preco: 100 },
   ],
   mouth: [
-   { id: "boca1", thumbnail: boca1, preco: 0 },
+    { id: "boca39", thumbnail: boca39, preco: 0 },
+    { id: "boca1", thumbnail: boca1, preco: 5 },
     { id: "boca2", thumbnail: boca2, preco: 5 },
     { id: "boca3", thumbnail: boca3, preco: 5 },
     { id: "boca4", thumbnail: boca4, preco: 5 },
@@ -286,7 +308,6 @@ export const LOJA_ITENS = {
     { id: "boca36", thumbnail: boca36, preco: 5 },
     { id: "boca37", thumbnail: boca37, preco: 5 },
     { id: "boca38", thumbnail: boca38, preco: 5 },
-    { id: "boca39", thumbnail: boca39, preco: 5 },
     { id: "boca40", thumbnail: boca40, preco: 5 },
     { id: "boca41", thumbnail: boca41, preco: 5 },
     { id: "boca42", thumbnail: boca42, preco: 5 },
@@ -294,37 +315,37 @@ export const LOJA_ITENS = {
   ],
   eyes: [
     {id: "olhos1", thumbnail: olhos1, preco:0},
-    {id: "olhos2", thumbnail: olhos2, preco:0},
-    {id: "olhos3", thumbnail: olhos3, preco:0},
-    {id: "olhos4", thumbnail: olhos4, preco:0},
-    {id: "olhos5", thumbnail: olhos5, preco:0},
-    {id: "olhos6", thumbnail: olhos6, preco:0},
-    {id: "olhos7", thumbnail: olhos7, preco:0},
-    {id: "olhos8", thumbnail: olhos8, preco:0},
-    {id: "olhos9", thumbnail: olhos9, preco:0},
-    {id: "olhos10", thumbnail: olhos10, preco:0},
-    {id: "olhos11", thumbnail: olhos11, preco:0},
-    {id: "olhos12", thumbnail: olhos12, preco:0},
-    {id: "olhos13", thumbnail: olhos13, preco:0},
-    {id: "olhos14", thumbnail: olhos14, preco:0},
-    {id: "olhos15", thumbnail: olhos15, preco:0},
-    {id: "olhos16", thumbnail: olhos16, preco:0},
-    {id: "olhos17", thumbnail: olhos17, preco:0},
-    {id: "olhos18", thumbnail: olhos18, preco:0},
-    {id: "olhos19", thumbnail: olhos19, preco:0},
-    {id: "olhos20", thumbnail: olhos20, preco:0},
-    {id: "olhos21", thumbnail: olhos21, preco:0},
-    {id: "olhos22", thumbnail: olhos22, preco:0},
-    {id: "olhos23", thumbnail: olhos23, preco:0},
-    {id: "olhos24", thumbnail: olhos24, preco:0},
-    {id: "olhos25", thumbnail: olhos25, preco:0},
-    {id: "olhos26", thumbnail: olhos26, preco:0},
-    {id: "olhos27", thumbnail: olhos27, preco:0},
-    {id: "olhos28", thumbnail: olhos28, preco:0},
-    {id: "olhos29", thumbnail: olhos29, preco:0},
-    {id: "olhos30", thumbnail: olhos30, preco:0},
-    {id: "olhos31", thumbnail: olhos31, preco:0},
-    {id: "olhos32", thumbnail: olhos32, preco:0},
+    {id: "olhos2", thumbnail: olhos2, preco:10},
+    {id: "olhos3", thumbnail: olhos3, preco:10},
+    {id: "olhos4", thumbnail: olhos4, preco:10},
+    {id: "olhos5", thumbnail: olhos5, preco:10},
+    {id: "olhos6", thumbnail: olhos6, preco:10},
+    {id: "olhos7", thumbnail: olhos7, preco:10},
+    {id: "olhos8", thumbnail: olhos8, preco:10},
+    {id: "olhos9", thumbnail: olhos9, preco:10},
+    {id: "olhos10", thumbnail: olhos10, preco:10},
+    {id: "olhos11", thumbnail: olhos11, preco:10},
+    {id: "olhos12", thumbnail: olhos12, preco:10},
+    {id: "olhos13", thumbnail: olhos13, preco:10},
+    {id: "olhos14", thumbnail: olhos14, preco:10},
+    {id: "olhos15", thumbnail: olhos15, preco:10},
+    {id: "olhos16", thumbnail: olhos16, preco:10},
+    {id: "olhos17", thumbnail: olhos17, preco:10},
+    {id: "olhos18", thumbnail: olhos18, preco:10},
+    {id: "olhos19", thumbnail: olhos19, preco:10},
+    {id: "olhos20", thumbnail: olhos20, preco:10},
+    {id: "olhos21", thumbnail: olhos21, preco:10},
+    {id: "olhos22", thumbnail: olhos22, preco:10},
+    {id: "olhos23", thumbnail: olhos23, preco:10},
+    {id: "olhos24", thumbnail: olhos24, preco:10},
+    {id: "olhos25", thumbnail: olhos25, preco:10},
+    {id: "olhos26", thumbnail: olhos26, preco:10},
+    {id: "olhos27", thumbnail: olhos27, preco:10},
+    {id: "olhos28", thumbnail: olhos28, preco:10},
+    {id: "olhos29", thumbnail: olhos29, preco:10},
+    {id: "olhos30", thumbnail: olhos30, preco:10},
+    {id: "olhos31", thumbnail: olhos31, preco:10},
+    {id: "olhos32", thumbnail: olhos32, preco:10},
   ],
   bangs: [
     { id: "franja1", thumbnail: franja1, preco: 0 },

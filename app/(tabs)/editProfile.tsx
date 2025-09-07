@@ -11,8 +11,9 @@ import { InputCustomizado } from "@/components/ui/InputCustom";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { updateNomeBD } from "../api/conexaoFetch";
 
-// personagem (ainda fixo, sem interação com nada do banco)
-const customizacoesPersonagem = {
+
+// estado inicial do personagem
+const personagemInicial = {
   background: "background1",
   ears: "orelha1",
   cheeks: "bochecha1",
@@ -31,7 +32,8 @@ export default function EditProfileScreen() {
   const [novaSenha, setNovaSenha] = useState("");
   const [confirmarSenha, setConfirmarSenha] = useState("");
   const [nomeOriginal, setNomeOriginal] = useState("Carregando...");
-
+  const [customizacoes, setCustomizacoes] = useState(personagemInicial);
+  
   useEffect(() => {
     const carregarNomeUsuario = async () => {
       try {
@@ -42,7 +44,16 @@ export default function EditProfileScreen() {
         }
       } catch (error) {
         console.error("Erro ao carregar o nome do usuário", error);
-      }
+      }try {
+          const savedCustomizations = await AsyncStorage.getItem(
+            "userCharacter"
+          );
+          if (savedCustomizations) {
+            setCustomizacoes(JSON.parse(savedCustomizations));
+          }
+        } catch (error) {
+          console.error("Erro ao carregar o personagem do usuário", error);
+        }
     };
 
     carregarNomeUsuario();
@@ -87,7 +98,7 @@ export default function EditProfileScreen() {
           <ThemedText style={styles.headerTitle}>PERFIL</ThemedText>
         </View>
         <View style={styles.profilePicture}>
-          <Personagem size={120} customizations={customizacoesPersonagem} />
+          <Personagem size={120} customizations={customizacoes} />
         </View>
         <View style={styles.formContainer}>
         <ThemedText style={styles.sectionTitle}>Alterar Nome</ThemedText>

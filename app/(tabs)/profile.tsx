@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useCallback } from "react";
 import {
   StyleSheet,
   View,
@@ -17,14 +17,28 @@ import { Colors, Fonts, Spacing } from "@/constants/Colors";
 import { useRouter, useFocusEffect } from "expo-router";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
+ // estado inicial do personagem
+  const personagemInicial = {
+    background: "background1",
+    ears: "orelha1",
+    cheeks: "bochecha1",
+    face: "rosto1",
+    eyes: "olhos1",
+    mouth: "boca1",
+    bangs: "franja1",
+    hair: "cabelo1",
+    nose: "nariz1",
+  };
+
 export default function ProfileScreen() {
   const router = useRouter();
 
     const [nomeUsuario, setNomeUsuario] = useState(null);
     const [streakUsuario, setStreakUsuario] = useState(0);
     const [coinsUsuario, setCoinsUsuario] = useState(0);
+    const [customizacoes, setCustomizacoes] = useState(personagemInicial);
 
-    useFocusEffect( //recarrega os dads sempre que a tela for forcada (caso o usuario altere o nome)
+    useFocusEffect( //recarrega os dads sempre que a tela for forcada (caso o usuario altere o nome ou personagem)
     useCallback(() => {
       const carregarDadosUsuario = async () => {
         //EU SEI QUE TUDO PODE SER FEITO EM 1 TRY CATCH MAS SE 1 DER ERRADO O CONSOLE.ERROR DIZ QUAL EH
@@ -40,27 +54,19 @@ export default function ProfileScreen() {
         } catch (error) {
           console.error("Erro ao carregar as coins do usuário", error);
         }
+        try {
+          const savedCustomizations = await AsyncStorage.getItem("userCharacter");
+          if (savedCustomizations) {
+            setCustomizacoes(JSON.parse(savedCustomizations));
+          }
+        }catch (error) {
+          console.error("Erro ao carregar o personagem do usuário", error);
+        }
       };
   
       carregarDadosUsuario();
     }, [])
    ); 
-
-  // personagem (ainda fixo, sem interação com nada do banco)
-  const customizacoesPersonagem = {
-    background: "background1",
-    ears: "orelha1",
-    cheeks: "bochecha1",
-    face: "rosto1",
-    eyes: "olhos1",
-    mouth: "boca1",
-    bangs: "franja1",
-    hair: "cabelo1",
-    nose: "nariz1",
-  };
-
-  // Array para os ícones de dias da semana (exemplo)
-  const diasDaSemana = ["S", "T", "Q", "Q", "S"];
 
   return (
     <LinearGradient
@@ -81,7 +87,7 @@ export default function ProfileScreen() {
 
         {/* INFORMAÇÕES DO USUÁRIO, PERSONAGEM E BOTÃO */}
         <View style={styles.profileSection}>
-          <Personagem size={150} customizations={customizacoesPersonagem} />
+          <Personagem size={150} customizations={customizacoes} />
           <ThemedText style={styles.profileName}>{nomeUsuario}</ThemedText>
 
           <TouchableOpacity style={styles.editButton} onPress={() => router.push('/(tabs)/editProfile')}>
@@ -154,7 +160,7 @@ const styles = StyleSheet.create({
     fontSize: Fonts.size.title,
     fontWeight: '800',
     color: Colors.text,
-    marginTop: Spacing.xxlarge,
+    marginTop: 60,
   },
   editButton: {
     flexDirection: "row",

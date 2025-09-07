@@ -1,9 +1,9 @@
 import React from 'react';
-import { StyleSheet, Text, ScrollView, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, ScrollView, TouchableOpacity, View } from 'react-native';
 import { Colors, Fonts, Spacing } from '@/constants/Colors';
 
 interface CategoryTabsProps {
-  categories: { id: string; nome: string }[];
+  categories: { id: string; nome: string, icone: any }[];
   selectedCategory: string;
   onSelectCategory: (categoryId: string) => void;
 }
@@ -11,31 +11,38 @@ interface CategoryTabsProps {
 export function CategoriaTab({ categories, selectedCategory, onSelectCategory }: CategoryTabsProps) {
   return (
     <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.scrollView}>
-      {categories.map((category) => (
-        //botao para cada categoria
-        <TouchableOpacity
-          key={category.id}
-          style={[
-            styles.tab,
-            selectedCategory === category.id && styles.selectedTab,
-          ]}
-          onPress={() => onSelectCategory(category.id)}
-        >
-          <Text style={[
-            styles.tabText,
-            selectedCategory === category.id && styles.selectedTabText,
-          ]}>
-            {category.nome}
-          </Text>
-        </TouchableOpacity>
-      ))}
+      {categories.map((category) => {
+        // 3. Pega o componente do ícone a partir das props
+        const IconeComponente = category.icone;
+
+        return (
+          <TouchableOpacity
+            key={category.id}
+            style={[
+              styles.tab,
+              selectedCategory === category.id && styles.selectedTab,
+            ]}
+            onPress={() => onSelectCategory(category.id)}
+          >
+            <View style={styles.tabContent}>
+              {IconeComponente && <IconeComponente width={24} height={24} />}
+              <Text style={[
+                styles.tabText,
+                selectedCategory === category.id && styles.selectedTabText,
+              ]}>
+                {category.nome}
+              </Text>
+            </View>
+          </TouchableOpacity>
+        );
+      })}
     </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
   scrollView: {
-    maxHeight: 40,
+    maxHeight: 50,
     //marginBottom: Spacing.medium,
   },
   tab: {
@@ -50,6 +57,11 @@ const styles = StyleSheet.create({
   },
   selectedTab: {
     backgroundColor: 'white',
+  },
+  tabContent: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: Spacing.small,
   },
   tabText: {
     fontSize: Fonts.size.medium,

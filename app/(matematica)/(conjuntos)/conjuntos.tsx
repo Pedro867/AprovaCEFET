@@ -57,19 +57,6 @@ export default function UnidadeConjuntos() {
     carregarDados();
   }, []);
 
-  //customizacao do personagem
-  const customizacoes = {
-    background: 'cor1', 
-    ears: 'orelha1',
-    cheeks: 'bochecha1',
-    face: 'rosto1',
-    eyes: 'olhos1',
-    mouth: 'boca1',
-    bangs: 'franja1',
-    hair: 'cabelo1',
-    nose: 'nariz1',
-  };
-
   return (
     <View style={styles.container}>
       <View style={styles.headerUser}>
@@ -103,12 +90,11 @@ export default function UnidadeConjuntos() {
             <TouchableOpacity
               key={index}
               style={styles.cardShadow}
-              // Desabilita o botão se estiver bloqueado
+              // desabilita o botão se estiver bloqueado
               disabled={isLocked}
-              // Navega para a rota definida no array
+              // navega para a rota definida no array
               onPress={() => router.push(opcao.route as any)}
             >
-              {/* Aplicamos um estilo diferente se estiver bloqueado */}
               <View style={[styles.cardBody, isLocked && styles.lockedCardBody]}>
                 {isLocked && (
                   <Feather

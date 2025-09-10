@@ -34,8 +34,10 @@ export const ProgressBar: React.FC<ProgressBarProps> = ({
 
 const styles = StyleSheet.create({
   container: {
-    borderRadius: 22,
-    overflow: 'hidden',
+    flex: 1,
+    borderRadius: 50,
+    overflow: "hidden",
+    marginRight: 12, // espaço pro texto
   },
   progress: {
     borderRadius: 22,

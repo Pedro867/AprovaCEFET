@@ -52,5 +52,6 @@ const styles = StyleSheet.create({
     color: Colors.textLight,
     fontSize: Fonts.size.large,
     fontWeight: Fonts.weight.bold as 'bold',
+    textAlign: "center",
   },
 });

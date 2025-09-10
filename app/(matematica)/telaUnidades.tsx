@@ -50,7 +50,12 @@ export default function TelaUnidadesMatematica() {
   return ( 
       <View style={styles.container}>
       <View style={styles.headerUser}>
-        {/* <Personagem size={32} customizations={customizacoes} /> */}
+        <TouchableOpacity
+          onPress={() => router.replace('/(tabs)/secao')}
+          style={styles.backButton}
+        >
+          <IconSymbol name="arrow.left" size={32} color={Colors.light.text} />
+        </TouchableOpacity>
         <View style={styles.streakContainer}>
           <Image
             source={require("@/assets/images/foguin--ativado-.png")}
@@ -60,12 +65,6 @@ export default function TelaUnidadesMatematica() {
         </View>
       </View>
       <View style={styles.headerUnidade}>
-        <TouchableOpacity
-          onPress={() => router.replace('/(tabs)/secao')}
-          style={styles.backButton}
-        >
-          <IconSymbol name="arrow.left" size={32} color={Colors.light.text} />
-        </TouchableOpacity>
         <View>
           <ThemedText style={styles.headerTitle}>UNIDADES</ThemedText>
           <ThemedText style={styles.headerSubtitle}>Matemática</ThemedText>
@@ -161,7 +160,8 @@ const styles = StyleSheet.create({
   },
   backButton: {
     position: "absolute",
-    left: 20,
+    left: '10%',
+    top: '5%',
   },
   headerTitle: {
     fontSize: 30,

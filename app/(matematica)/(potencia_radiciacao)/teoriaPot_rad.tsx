@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { StyleSheet, View, Text, TouchableOpacity, Image } from 'react-native';
-import Animated, { FadeIn, FadeOut } from 'react-native-reanimated';
+import Animated from 'react-native-reanimated';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useRouter } from 'expo-router';
 import { LinearGradient } from "expo-linear-gradient";
@@ -8,12 +8,11 @@ import { IconSymbol } from "@/components/ui/IconSymbol";
 import { Colors } from "@/constants/Colors";
 import { MathJaxSvg } from 'react-native-mathjax-html-to-svg';
 
-const imageMap = {
-  //   "./q4.png": require('./q4.png'),
-};
-
 const QuizScreen = () => {
   const [coins, setCoinsUsuario] = useState(0);
+  const [page, setPage] = useState(0); // Estado para controlar a página atual
+
+  const scrollViewRef = useRef(null);
 
   const router = useRouter();
 
@@ -26,71 +25,368 @@ const QuizScreen = () => {
         console.error("Erro ao carregar as coins do usuário", error);
       }
     };
-
     carregaCoins();
   }, []);
 
-  const parseAndRenderMath = (text, fontSize) => {
-    // Regex para encontrar equações inline ($...$) e em display ($$...$$)
-    const parts = text.split(/(\$.*?\$|\$\$[\s\S]*?\$\$)/);
+  // Função refatorada para renderizar fórmulas e texto em negrito
+  const parseAndRenderMath = (text) => {
+    const elements = [];
+    const regex = /(\$[^\$]+\$|<Text style={styles.boldText}>[^<]+<\/Text>)/g;
+    let lastIndex = 0;
+    let match;
 
-    return parts.map((part, index) => {
-      // Se a parte começar com $, é uma equação MathJax
-      if (part.startsWith('$')) {
-        return (
-          <MathJaxSvg key={index} fontSize={2}>
-            {part}
+    while ((match = regex.exec(text)) !== null) {
+      if (match.index > lastIndex) {
+        elements.push(<Text key={`text-${lastIndex}`}>{text.substring(lastIndex, match.index)}</Text>);
+      }
+
+      const matchedContent = match[0];
+      if (matchedContent.startsWith('$') && matchedContent.endsWith('$')) {
+        elements.push(
+          <MathJaxSvg key={`math-${match.index}`} fontSize={20} style={styles.inlineMath}>
+            {matchedContent}
           </MathJaxSvg>
         );
+      } else if (matchedContent.startsWith('<Text')) {
+        const boldText = matchedContent.replace(/<Text style={styles.boldText}>|<\/Text>/g, '');
+        elements.push(<Text key={`bold-${match.index}`} style={styles.boldText}>{boldText}</Text>);
       }
-      // Caso contrário, é texto normal
-      else {
-        return (
-          <Text key={index} style={{ fontSize: fontSize }}>
-            {part}
-          </Text>
-        );
-      }
-    });
+
+      lastIndex = regex.lastIndex;
+    }
+
+    if (lastIndex < text.length) {
+      elements.push(<Text key={`text-${lastIndex}`}>{text.substring(lastIndex)}</Text>);
+    }
+
+    return elements;
   };
 
-  /* PRECISA MUDAR A FUNÇÃO PARA RETORNAR A STRING DAS OPÇÕES PQ É UM TOUCHABLEOPACITY */
-  const parseAndRenderMathOptions = (text, fontSize) => {
-    // Regex para encontrar equações inline ($...$) e em display ($$...$$)
-    const parts = text.split(/(\$.*?\$|\$\$[\s\S]*?\$\$)/);
+  const pages = [
+    // Conteúdo da página 1 (Potenciação)
+    <View key="potenciacao">
+      <Text style={styles.titulo2}>2.1 Potenciação</Text>
+      <Text>
+        {parseAndRenderMath('Definição 2.1 Dado um número real $a$ e um número inteiro $n$, com $n > 1$, chama-se **potência enésima de $a$**, que se indica por $a^n$, ao produto de $n$ fatores iguais a $a$. Assim:')}
+      </Text>
+      <Text>
+        {parseAndRenderMath('$a^n = \\underbrace{a.a...a}_{n \\text{ fatores}} $')}
+      </Text>
+      <Text>
+        {parseAndRenderMath('A seguir apresentamos alguns exemplos:')}
+      </Text>
 
-    return parts.map((part, index) => {
-      // Se a parte começar com $, é uma equação MathJax
-      if (part.startsWith('$')) {
-        return (
-          <MathJaxSvg key={index} fontSize={2}>
-            {part}
-          </MathJaxSvg>
-        );
-      }
-      // Caso contrário, é texto normal
-      else {
-        return (
-          <Text key={index} style={{ fontSize: fontSize }}>
-            {part}
-          </Text>
-        );
-      }
-    });
+      <Text style={styles.titulo3}>Exemplo 2.1</Text>
+      <Text>
+        {parseAndRenderMath('a) $2^3 = 2 \\cdot 2 \\cdot 2 = 8$')}
+      </Text>
+      <Text>
+        {parseAndRenderMath('b) $(-2)^3 = (-2) \\cdot (-2) \\cdot (-2) = -8$')}
+      </Text>
+      <Text>
+        {parseAndRenderMath('c) $(-3)^2 = (-3) \\cdot (-3) = 9$')}
+      </Text>
+      <Text>
+        {parseAndRenderMath('d) $(\\frac{2}{3})^2 = \\frac{4}{9}$')}
+      </Text>
+
+      <Text style={styles.titulo3}>Observações:</Text>
+      <Text>
+        {parseAndRenderMath('1) $(-2)^2 \\ne -2^2$, pois: $(-2)^2 = 4$ e $-2^2 = -4$;')}
+      </Text>
+      <Text>
+        {parseAndRenderMath('2) $(-1)^n = 1$, se $n$ é par e $(-1)^n = -1$, se $n$ é ímpar;')}
+      </Text>
+      <Text>
+        {parseAndRenderMath('3) $1^n = 1$;')}
+      </Text>
+      <Text>
+        {parseAndRenderMath('4) $0^n = 0$, se $n \\ne 0$;')}
+      </Text>
+      <Text>
+        {parseAndRenderMath('5) $a^1 = a$;')}
+      </Text>
+      <Text>
+        {parseAndRenderMath('6) $a^0 = 1$;')}
+      </Text>
+      <Text>
+        {parseAndRenderMath('7) $a^{-n} = \\frac{1}{a^n} = (\\frac{1}{a})^n$, $a \\ne 0$.')}
+      </Text>
+
+      <Text style={styles.titulo3}>2.1.1 Propriedades das potências</Text>
+      <Text>
+        {parseAndRenderMath('Para todo $a \\in \\mathbb{R}$, $b \\in \\mathbb{R}$, $m$ e $n$ inteiros, temos:')}
+      </Text>
+      <Text>
+        {parseAndRenderMath('**P1.** $a^m \\cdot a^n = a^{m+n}$')}
+      </Text>
+      <Text>
+        {parseAndRenderMath('**P2.** $\\frac{a^m}{a^n} = a^{m-n}$, $a \\ne 0$')}
+      </Text>
+      <Text>
+        {parseAndRenderMath('**P3.** $(a^m)^n = a^{m \\cdot n}$')}
+      </Text>
+      <Text>
+        {parseAndRenderMath('**P4.** $(\\frac{a}{b})^n = \\frac{a^n}{b^n}$, $b \\ne 0$')}
+      </Text>
+      <Text>
+        {parseAndRenderMath('**P5.** $(a \\cdot b)^n = a^n \\cdot b^n$')}
+      </Text>
+
+      <Text style={styles.titulo3}>Exemplo 2.2</Text>
+      <Text>
+        {parseAndRenderMath('a) $2^7 \\cdot 2^3 = 2^{7+3} = 2^{10}$')}
+      </Text>
+      <Text>
+        {parseAndRenderMath('b) $2^7 \\cdot 2^3 \\cdot 2^{-2} = 2^{7+3+(-2)} = 2^8$')}
+      </Text>
+      <Text>
+        {parseAndRenderMath('c) $\\frac{2^7}{2^3} = 2^{7-3} = 2^4$')}
+      </Text>
+      <Text>
+        {parseAndRenderMath('d) $(2^5)^3 = 2^{5 \\cdot 3} = 2^{15}$')}
+      </Text>
+
+      <Text style={styles.titulo3}>Exemplo 2.3</Text>
+      <Text>
+        {parseAndRenderMath('Calcular:')}
+      </Text>
+      <Text>
+        {parseAndRenderMath('a) $\\frac{(5^3 \\cdot 5^7)^2}{5^{18}} = \\frac{(5^{10})^2}{5^{18}} = \\frac{5^{20}}{5^{18}} = 5^2 = 25$')}
+      </Text>
+      <Text>
+        {parseAndRenderMath('b) $\\frac{(10^{-1})^{3} \\cdot 10^{-7}}{10^{-10}} = \\frac{10^{-3} \\cdot 10^{-7}}{10^{-10}} = \\frac{10^{-10}}{10^{-10}} = 1$')}
+      </Text>
+      <Text>
+        {parseAndRenderMath('c) $3^{2^3} = 3^{(2^3)} = 3^8 = 6561$')}
+      </Text>
+
+      <Text style={styles.titulo3}>2.1.2 Notação científica</Text>
+      <Text>
+        {parseAndRenderMath('Um número escrito na notação científica corresponde ao produto de um número decimal de 1 a 10, excluído o 10, por uma potência de base 10.')}
+      </Text>
+      <Text>
+        {parseAndRenderMath('Por exemplo, os números $2,6 \\cdot 10^6$ e $3 \\cdot 10^{-3}$ estão em notação científica.')}
+      </Text>
+      <Text>
+        {parseAndRenderMath('Para se escrever um número em notação científica, podemos utilizar a seguinte ideia:')}
+      </Text>
+      <Text>
+        {parseAndRenderMath('**P1.** quando deslocamos a vírgula para a **direita**, o expoente do 10 fica **negativo**.')}
+      </Text>
+      <Text>
+        {parseAndRenderMath('**P2.** quando deslocamos a vírgula para a **esquerda**, o expoente do 10 fica **positivo**.')}
+      </Text>
+
+      <Text style={styles.titulo3}>Exemplo 2.4</Text>
+      <Text>
+        {parseAndRenderMath('Vamos escrever os seguintes números em notação científica:')}
+      </Text>
+      <Text>
+        {parseAndRenderMath('a) $1700000 = 1,7 \\cdot 10^7$ (deslocamos 7 casas decimais à esquerda)')}
+      </Text>
+      <Text>
+        {parseAndRenderMath('b) $0,422 = 4,22 \\cdot 10^{-1}$ (deslocamos 1 casa decimal à direita)')}
+      </Text>
+      <Text>
+        {parseAndRenderMath('c) $-60200 = -6,02 \\cdot 10^4$ (deslocamos 4 casas decimais à esquerda)')}
+      </Text>
+      <Text>
+        {parseAndRenderMath('d) $23,49 = 2,349 \\cdot 10^1$ (deslocamos 1 casa decimal à esquerda)')}
+      </Text>
+    </View>,
+
+    // Conteúdo da página 2 (Radiciação)
+    <View key="radiciacao">
+      <Text style={styles.titulo2}>2.2 Radiciação</Text>
+      <Text>
+        {parseAndRenderMath('Para entendermos a ideia de radiciação, vamos observar as seguintes situações:')}
+      </Text>
+      <Text>
+        {parseAndRenderMath('1) Um terreno quadrado tem $900 m^2$ de área. Qual é a medida do seu lado?')}
+      </Text>
+
+      <Text>
+        {parseAndRenderMath('$x^2 = 900$')}
+      </Text>
+      <Text>
+        {parseAndRenderMath('$x = \\sqrt{900}$')}
+      </Text>
+      <Text>
+        {parseAndRenderMath('$x = 30$')}
+      </Text>
+      <Text>
+        {parseAndRenderMath('Logo, a medida de seu lado é **30 m**.')}
+      </Text>
+      <Text>
+        {parseAndRenderMath('2) Um reservatório de água tem a forma cúbica e sua capacidade é de 8 litros $(8 m^3)$. Quanto mede cada aresta desse reservatório?')}
+      </Text>
+
+      <Text>
+        {parseAndRenderMath('$x^3 = 8$')}
+      </Text>
+      <Text>
+        {parseAndRenderMath('$x = \\sqrt[3]{8}$')}
+      </Text>
+      <Text>
+        {parseAndRenderMath('$x = 2$')}
+      </Text>
+      <Text>
+        {parseAndRenderMath('Logo, a medida de cada aresta desse reservatório é 8 m.')}
+      </Text>
+
+      <Text>
+        {parseAndRenderMath('**Definição 2.2** Sendo $a > 0$ e $n \\in \\mathbb{N}^*$, tem-se:')}
+      </Text>
+      <Text style={styles.textCenter}>
+        {parseAndRenderMath('$ \\sqrt[n]{a} = b \\Leftrightarrow b^n = a \\text{ e } b \\ge 0 $')}
+      </Text>
+      <Text>
+        {parseAndRenderMath('onde $b$ é um número real chamado raiz enésima de $a$.')}
+      </Text>
+
+      <Text style={styles.titulo3}>Exemplo 2.5</Text>
+      <Text>
+        {parseAndRenderMath('Usando a definição temos:')}
+      </Text>
+      <Text>
+        {parseAndRenderMath('a) $\\sqrt{9} = 3$, pois $3^2 = 9$ e $3 \\ge 0$.')}
+      </Text>
+      <Text>
+        {parseAndRenderMath('b) $\\sqrt[3]{64} = 4$, pois $4^3 = 64$ e $4 \\ge 0$.')}
+      </Text>
+      <Text>
+        {parseAndRenderMath('c) $\\sqrt[3]{\\frac{8}{27}} = \\frac{2}{3}$, pois $(\\frac{2}{3})^3 = \\frac{8}{27}$ e $\\frac{2}{3} \\ge 0$.')}
+      </Text>
+      <Text>
+        {parseAndRenderMath('**Observação:** Existem dois valores de $x$ que tornam verdadeira a sentença $x^2 = 25$: 5 e -5, pois, $5^2 = 25$ e $(-5)^2 = 25$. Também vale lembrar que, $\\sqrt[n]{-a} = -\\sqrt[n]{a}$ se $n$ for um número ímpar.')}
+      </Text>
+
+      <Text style={styles.titulo3}>2.2.1 Propriedades dos radicais</Text>
+      <Text>
+        {parseAndRenderMath('**P1.** $\\sqrt[n]{a^n} = a$')}
+      </Text>
+      <Text>
+        {parseAndRenderMath('Exemplo: $\\sqrt{3^2} = 3$')}
+      </Text>
+      <Text>
+        {parseAndRenderMath('**P2.** $\\sqrt[n]{a^m} = \\sqrt[n\\div p]{a^{m\\div p}}$ e $\\sqrt[n]{a^m} = \\sqrt[n \\cdot r]{a^{m \\cdot r}}$, com $p \\ne 0$ e $p$ divisor comum de $m$ e $n$.')}
+      </Text>
+      <Text>
+        {parseAndRenderMath('Exemplos: $\\sqrt[6]{2^6} = \\sqrt[6\\div 2]{2^{6\\div 2}} = \\sqrt[3]{2^3}$ e $\\sqrt[3]{3^2} = \\sqrt[3 \\cdot 2]{3^{2 \\cdot 2}} = \\sqrt[6]{3^4}$')}
+      </Text>
+      <Text>
+        {parseAndRenderMath('**P3.** $\\sqrt[n]{a \\cdot b} = \\sqrt[n]{a} \\cdot \\sqrt[n]{b}$')}
+      </Text>
+      <Text>
+        {parseAndRenderMath('Exemplo: $\\sqrt{6 \\cdot 7} = \\sqrt{6} \\cdot \\sqrt{7}$')}
+      </Text>
+      <Text>
+        {parseAndRenderMath('**P4.** $\\sqrt[n]{\\frac{a}{b}} = \\frac{\\sqrt[n]{a}}{\\sqrt[n]{b}}$')}
+      </Text>
+      <Text>
+        {parseAndRenderMath('Exemplo: $\\sqrt[3]{\\frac{3}{4}} = \\frac{\\sqrt[3]{3}}{\\sqrt[3]{4}}$')}
+      </Text>
+      <Text>
+        {parseAndRenderMath('**P5.** $\\sqrt[n]{\\sqrt[m]{a}} = \\sqrt[n \\cdot m]{a}$')}
+      </Text>
+      <Text>
+        {parseAndRenderMath('Exemplo: $\\sqrt[3]{\\sqrt[4]{7}} = \\sqrt[3 \\cdot 4]{7} = \\sqrt[12]{7}$')}
+      </Text>
+
+      <Text>
+        {parseAndRenderMath('Podemos utilizar as propriedades para simplificar os radicais.')}
+      </Text>
+
+      <Text style={styles.titulo3}>Exemplo 2.6</Text>
+      <Text>
+        {parseAndRenderMath('Simplificar os radicais:')}
+      </Text>
+      <Text>
+        {parseAndRenderMath('a) $\\sqrt[3]{320}$ b) $\\sqrt{32}$')}
+      </Text>
+      <Text>
+        {parseAndRenderMath('Resolução:')}
+      </Text>
+      <Text>
+        {parseAndRenderMath('a) Fatorando o 320, temos:')}
+      </Text>
+      <Text style={[styles.textStyle, styles.preFormattedText]}>
+        {'320 | 2 \n160 | 2 \n 80 | 2 \n 40 | 2 \n 20 | 2 \n 10 | 2 \n  5 | 5 \n  1 | '}
+      </Text>
+      <Text>
+        {parseAndRenderMath('Logo, $\\sqrt[3]{320} = 2 \\cdot 2 \\cdot \\sqrt[3]{5} = 4\\sqrt[3]{5}$.')}
+      </Text>
+      <Text>
+        {parseAndRenderMath('b) Fatorando o 32, temos:')}
+      </Text>
+      <Text style={[styles.textStyle, styles.preFormattedText]}>
+        {'32 | 2 \n16 | 2 \n 8 | 2 \n 4 | 2 \n 2 | 2 \n 1 | '}
+      </Text>
+      <Text>
+        {parseAndRenderMath('Logo, $\\sqrt{32} = 2 \\cdot 2 \\cdot \\sqrt{2} = 4\\sqrt{2}$.')}
+      </Text>
+
+      <Text style={styles.titulo3}>2.2.2 Racionalização de denominadores</Text>
+      <Text>
+        {parseAndRenderMath('Vejamos agora como podemos evitar a divisão por números irracionais, ou seja, por radicais.')}
+      </Text>
+
+      <Text style={styles.titulo3}>Exemplo 2.7</Text>
+      <Text>
+        {parseAndRenderMath('Racionalizar o denominador de:')}
+      </Text>
+      <Text>
+        {parseAndRenderMath('a) $\\frac{3}{\\sqrt{2}} = \\frac{3 \\cdot \\sqrt{2}}{\\sqrt{2} \\cdot \\sqrt{2}} = \\frac{3 \\sqrt{2}}{2}$')}
+      </Text>
+      <Text>
+        {parseAndRenderMath('b) $\\frac{5}{\\sqrt[3]{7}} = \\frac{5 \\cdot \\sqrt[3]{7^2}}{\\sqrt[3]{7} \\cdot \\sqrt[3]{7^2}} = \\frac{5 \\sqrt[3]{49}}{7}$')}
+      </Text>
+      <Text>
+        {parseAndRenderMath('c) $\\frac{3}{\\sqrt{7}+2} = \\frac{3(\\sqrt{7}-2)}{(\\sqrt{7}+2)(\\sqrt{7}-2)} = \\frac{3(\\sqrt{7}-2)}{7-4} = \\frac{3(\\sqrt{7}-2)}{3} = \\sqrt{7}-2$')}
+      </Text>
+
+      <Text style={styles.titulo3}>2.2.3 Potência com expoente racional</Text>
+      <Text>
+        {parseAndRenderMath('Na seção anterior estudamos expressões da forma $10^2$, $6^{-1}$ e $2^0$, que são potências com expoente inteiro cujo significado já conhecemos.')}
+      </Text>
+      <Text>
+        {parseAndRenderMath('Qual será, então, o significado de uma potência com expoente fracionário, como, por exemplo, a expressão $2^{\\frac{3}{4}}$?')}
+      </Text>
+      <Text>
+        {parseAndRenderMath('Logo, pode-se demonstrar que')}
+      </Text>
+      <Text style={styles.textCenter}>
+        {parseAndRenderMath('$ 2^{\\frac{3}{4}} = \\sqrt[4]{2^3} $')}
+      </Text>
+      <Text>
+        {parseAndRenderMath('Vejamos outros exemplos:')}
+      </Text>
+
+      <Text style={styles.titulo3}>Exemplo 2.8</Text>
+      <Text>
+        {parseAndRenderMath('Escreva as potências como radicais:')}
+      </Text>
+      <Text>
+        {parseAndRenderMath('a) $5^{\\frac{6}{7}} = \\sqrt[7]{5^6}$')}
+      </Text>
+      <Text>
+        {parseAndRenderMath('b) $9^{0,4} = 9^{\\frac{4}{10}} = 9^{\\frac{2}{5}} = \\sqrt[5]{9^2}$')}
+      </Text>
+    </View>
+  ];
+
+  const handleNavigation = (newPage) => {
+    scrollViewRef.current?.scrollTo({ y: 0, animated: true });
+    setPage(newPage);
   };
-
-  const chavesAbertas = '{';
-  const chavesFechadas = '}';
-  const enter = '\n';
-  const parentesisFechados = ')';
-  const espaco = ' ';
 
   return (
     <LinearGradient
       style={styles.container}
       colors={[Colors.gradientEnd, Colors.gradientStart]}
     >
-      <TouchableOpacity onPress={() => router.replace('/(matematica)/(conjuntos)/conjuntos')} style={styles.backButton}>
+      <TouchableOpacity onPress={() => router.replace('/(matematica)/(potencia_radiciacao)/pot_rad')} style={styles.backButton}>
         <IconSymbol name="arrow.left" size={32} color={Colors.light.text} />
       </TouchableOpacity>
       <View style={styles.coinContainer}>
@@ -101,200 +397,28 @@ const QuizScreen = () => {
         <Text style={styles.coinNumber}>{coins}</Text>
       </View>
 
-      <Animated.ScrollView contentContainerStyle={styles.scrollViewContent}>
-
+      <Animated.ScrollView ref={scrollViewRef} contentContainerStyle={styles.scrollViewContent}>
         <Text style={styles.titulo1}>Potenciação e Radiciação</Text>
+        {pages[page]}
 
-        <Text style={styles.titulo2}>2.1 Potenciação</Text>
-        <Text style={styles.textStyle}>
-          Definição 2.1 Dado um número real <MathJaxSvg fontSize={2} style={styles.textStyle}>{'$a$'}</MathJaxSvg> e um número inteiro <MathJaxSvg fontSize={2} style={styles.textStyle}>{'$n$'}</MathJaxSvg>, {espaco}
-          <MathJaxSvg fontSize={2} style={styles.textStyle}>{'$n > 1$'}</MathJaxSvg>, chama-se <Text style={{ fontWeight: 'bold' }}>potência enésima de <MathJaxSvg fontSize={2} style={styles.textStyle}>{'$a$'}</MathJaxSvg></Text>
-          , que se indica por <MathJaxSvg fontSize={2} style={styles.textStyle}>{'$a^n$'}</MathJaxSvg>, ao produto de <MathJaxSvg fontSize={2} style={styles.textStyle}>{'$n$'}</MathJaxSvg> fatores iguais a <MathJaxSvg fontSize={2} style={styles.textStyle}>{'$a$'}</MathJaxSvg>. Assim:
-        </Text>
-        <Text style={styles.textStyle}>
-          <MathJaxSvg fontSize={2} style={styles.textStyle}>
-            {'$$ a^n = \\underbrace{a.a...a}_{n \\text{ fatores}} $$'}
-          </MathJaxSvg>
-        </Text>
-        <Text style={styles.textStyle}>A seguir apresentamos alguns exemplos:</Text>
-
-        <Text style={styles.titulo3}>Exemplo 2.1</Text>
-        <Text style={styles.textStyle}>a{parentesisFechados} <MathJaxSvg fontSize={2} style={styles.textStyle}>{'$2^3 = 2 \\cdot 2 \\cdot 2 = 8$'}</MathJaxSvg></Text>
-        <Text style={styles.textStyle}>b{parentesisFechados} <MathJaxSvg fontSize={2} style={styles.textStyle}>{'$(-2)^3 = (-2) \\cdot (-2) \\cdot (-2) = 8$'}</MathJaxSvg></Text>
-        <Text style={styles.textStyle}>c{parentesisFechados} <MathJaxSvg fontSize={2} style={styles.textStyle}>{'$(-3)^2 = (-3) \\cdot (-3) = 9$'}</MathJaxSvg></Text>
-        <Text style={styles.textStyle}>d{parentesisFechados} <MathJaxSvg fontSize={2} style={styles.textStyle}>{'$(\\frac{2}{3})^2 = \\frac{4}{9}$'}</MathJaxSvg></Text>
-
-        <Text style={styles.titulo3}>Observações:</Text>
-        <Text style={styles.textStyle}>1{parentesisFechados} {espaco} <MathJaxSvg fontSize={2} style={styles.textStyle}>{'$(-2)^2 \\ne -2^2$'}</MathJaxSvg>, pois: <MathJaxSvg fontSize={2} style={styles.textStyle}>{'$(-2)^2 = 4$'}</MathJaxSvg> e <MathJaxSvg fontSize={2} style={styles.textStyle}>{'$-2^2 = -4$'}</MathJaxSvg>;</Text>
-        <Text style={styles.textStyle}>2{parentesisFechados} {espaco} <MathJaxSvg fontSize={2} style={styles.textStyle}>{'$(-1)^n = 1$'}</MathJaxSvg>, se {espaco}
-          <MathJaxSvg fontSize={2} style={styles.textStyle}>{'$n$'}</MathJaxSvg> {espaco}
-          é par e <MathJaxSvg fontSize={2} style={styles.textStyle}>{'$(-1)^n = -1$'}</MathJaxSvg>, se {espaco}
-          <MathJaxSvg fontSize={2} style={styles.textStyle}>{'$n$'}</MathJaxSvg> {espaco}
-          é ímpar;</Text>
-        <Text style={styles.textStyle}>3{parentesisFechados} {espaco} <MathJaxSvg fontSize={2} style={styles.textStyle}>{'$1^n = 1$'}</MathJaxSvg>;</Text>
-        <Text style={styles.textStyle}>4{parentesisFechados} {espaco} <MathJaxSvg fontSize={2} style={styles.textStyle}>{'$0^n = 0$'}</MathJaxSvg>, se {espaco}
-          <MathJaxSvg fontSize={2} style={styles.textStyle}>{'$n \\ne 0$'}</MathJaxSvg> {espaco}
-          ;</Text>
-        <Text style={styles.textStyle}>5{parentesisFechados} {espaco} <MathJaxSvg fontSize={2} style={styles.textStyle}>{'$a^1 = a$'}</MathJaxSvg>;</Text>
-        <Text style={styles.textStyle}>6{parentesisFechados} {espaco} <MathJaxSvg fontSize={2} style={styles.textStyle}>{'$a^0 = 1$'}</MathJaxSvg>;</Text>
-        <Text style={styles.textStyle}>7{parentesisFechados} {espaco} <MathJaxSvg fontSize={2} style={styles.textStyle}>{'$a^{-n} = \\frac{1}{a^n} = (\\frac{1}{a})^n$'}</MathJaxSvg>, {espaco}
-          <MathJaxSvg fontSize={2} style={styles.textStyle}>{'$a \\ne 0$'}</MathJaxSvg>.</Text>
-
-        <Text style={styles.titulo3}>2.1.1 Propriedades das potências</Text>
-        <Text style={styles.textStyle}>Para todo <MathJaxSvg fontSize={2} style={styles.textStyle}>{'$a \\in \\mathbb{R}$'}</MathJaxSvg>, {espaco}
-          <MathJaxSvg fontSize={2} style={styles.textStyle}>{'$b \\in \\mathbb{R}$'}</MathJaxSvg>, {espaco}
-          <MathJaxSvg fontSize={2} style={styles.textStyle}>{'$m$'}</MathJaxSvg> e {espaco}
-          <MathJaxSvg fontSize={2} style={styles.textStyle}>{'$n$'}</MathJaxSvg> inteiros, temos:</Text>
-        <Text style={styles.textStyle}><Text style={{ fontWeight: 'bold' }}>P1. {espaco}</Text> <MathJaxSvg fontSize={2} style={styles.textStyle}>{'$a^m \\cdot a^n = a^{m+n}$'}</MathJaxSvg></Text>
-        <Text style={styles.textStyle}><Text style={{ fontWeight: 'bold' }}>P2. {espaco}</Text> <MathJaxSvg fontSize={2} style={styles.textStyle}>{'$\\frac{a^m}{a^n} = a^{m-n}$'}</MathJaxSvg>, {espaco}
-          <MathJaxSvg fontSize={2} style={styles.textStyle}>{'$a \\ne 0$'}</MathJaxSvg></Text>
-        <Text style={styles.textStyle}><Text style={{ fontWeight: 'bold' }}>P3. {espaco}</Text> <MathJaxSvg fontSize={2} style={styles.textStyle}>{'$(a^m)^n = a^{m \\cdot n}$'}</MathJaxSvg></Text>
-        <Text style={styles.textStyle}><Text style={{ fontWeight: 'bold' }}>P4. {espaco}</Text> <MathJaxSvg fontSize={2} style={styles.textStyle}>{'$(\\frac{a}{b})^n = \\frac{a^n}{b^n}$'}</MathJaxSvg>, {espaco}
-          <MathJaxSvg fontSize={2} style={styles.textStyle}>{'$b \\ne 0$'}</MathJaxSvg></Text>
-        <Text style={styles.textStyle}><Text style={{ fontWeight: 'bold' }}>P5. {espaco}</Text> <MathJaxSvg fontSize={2} style={styles.textStyle}>{'$(a \\cdot b)^n = a^n \\cdot b^n$'}</MathJaxSvg></Text>
-
-        <Text style={styles.titulo3}>Exemplo 2.2</Text>
-        <Text style={styles.textStyle}>a{parentesisFechados} <MathJaxSvg fontSize={2} style={styles.textStyle}>{'$2^7 \\cdot 2^3 = 2^{7+3} = 2^{10}$'}</MathJaxSvg></Text>
-        <Text style={styles.textStyle}>b{parentesisFechados} <MathJaxSvg fontSize={2} style={styles.textStyle}>{'$2^7 \\cdot 2^3 \\cdot 2^{-2} = 2^{7+3+(-2)} = 2^8$'}</MathJaxSvg></Text>
-        <Text style={styles.textStyle}>c{parentesisFechados} <MathJaxSvg fontSize={2} style={styles.textStyle}>{'$\\frac{2^7}{2^3} = 2^{7-3} = 2^4$'}</MathJaxSvg></Text>
-        <Text style={styles.textStyle}>d{parentesisFechados} <MathJaxSvg fontSize={2} style={styles.textStyle}>{'$(2^5)^3 = 2^{5 \\cdot 3} = 2^{15}$'}</MathJaxSvg></Text>
-
-        <Text style={styles.titulo3}>Exemplo 2.3</Text>
-        <Text style={styles.textStyle}>Calcular:</Text>
-        <Text style={styles.textStyle}>a{parentesisFechados} <MathJaxSvg fontSize={2} style={styles.textStyle}>{'$\\frac{(5^3 \\cdot 5^7)^2}{5^{18}} = \\frac{(5^{10})^2}{5^{18}} = \\frac{5^{20}}{5^{18}} = 5^2 = 25$'}</MathJaxSvg></Text>
-        <Text style={styles.textStyle}>b{parentesisFechados} <MathJaxSvg fontSize={2} style={styles.textStyle}>{'$\\frac{(10^{-1})^{3} \\cdot 10^{-7}}{10^{-10}} = \\frac{10^{-3} \\cdot 10^{-7}}{10^{-10}} = \\frac{10^{-10}}{10^{-10}} = 1$'}</MathJaxSvg></Text>
-        <Text style={styles.textStyle}>c{parentesisFechados} <MathJaxSvg fontSize={2} style={styles.textStyle}>{'$3^{2^3} = 3^{(2^3)} = 3^8 = 6561$'}</MathJaxSvg></Text>
-
-        <Text style={styles.titulo3}>2.1.2 Notação científica</Text>
-        <Text style={styles.textStyle}>Um número escrito na notação científica corresponde ao produto de um número decimal de 1 a 10, excluído o 10, por uma potência de base 10.</Text>
-        <Text style={styles.textStyle}>Por exemplo, os números <MathJaxSvg fontSize={2} style={styles.textStyle}>{'$2,6 \\cdot 10^6$'}</MathJaxSvg> e <MathJaxSvg fontSize={2} style={styles.textStyle}>{'$3 \\cdot 10^{-3}$'}</MathJaxSvg> estão em notação científica.</Text>
-        <Text style={styles.textStyle}>Para se escrever um número em notação científica, podemos utilizar a seguinte ideia:</Text>
-        <Text style={styles.textStyle}>
-          <Text style={{ fontWeight: 'bold' }}>P1.</Text> quando deslocamos a vírgula para a <Text style={{ fontWeight: 'bold' }}>direita</Text>, o expoente do 10 fica <Text style={{ fontWeight: 'bold' }}>negativo</Text>.
-        </Text>
-        <Text style={styles.textStyle}>
-          <Text style={{ fontWeight: 'bold' }}>P2.</Text> quando deslocamos a vírgula para a <Text style={{ fontWeight: 'bold' }}>esquerda</Text>, o expoente do 10 fica <Text style={{ fontWeight: 'bold' }}>positivo</Text>.
-        </Text>
-
-        <Text style={styles.titulo3}>Exemplo 2.4</Text>
-        <Text style={styles.textStyle}>Vamos escrever os seguintes números em notação científica:</Text>
-        <Text style={styles.textStyle}>a{parentesisFechados} <MathJaxSvg fontSize={2} style={styles.textStyle}>{'$1700000 = 1,7 \\cdot 10^7$'}</MathJaxSvg> (deslocamos 7 casas decimais à esquerda)</Text>
-        <Text style={styles.textStyle}>b{parentesisFechados} <MathJaxSvg fontSize={2} style={styles.textStyle}>{'$0,422 = 4,22 \\cdot 10^{-1}$'}</MathJaxSvg> (deslocamos 1 casa decimal à direita)</Text>
-        <Text style={styles.textStyle}>c{parentesisFechados} <MathJaxSvg fontSize={2} style={styles.textStyle}>{'$-60200 = -6,02 \\cdot 10^4$'}</MathJaxSvg> (deslocamos 4 casas decimais à esquerda)</Text>
-        <Text style={styles.textStyle}>d{parentesisFechados} <MathJaxSvg fontSize={2} style={styles.textStyle}>{'$23,49 = 2,349 \\cdot 10^1$'}</MathJaxSvg> (deslocamos 1 casa decimal à esquerda)</Text>
-
-        <Text style={styles.titulo2}>2.2 Radiciação</Text>
-        <Text style={styles.textStyle}>Para entendermos a ideia de radiciação, vamos observar as seguintes situações:</Text>
-        <Text style={styles.textStyle}>1{parentesisFechados} Um terreno quadrado tem <MathJaxSvg fontSize={2} style={styles.textStyle}>{'$900 m^2$'}</MathJaxSvg> de área. Qual é a medida do seu lado?</Text>
-
-        {/* Figura do quadrado não será incluída */}
-
-        <Text style={styles.textStyle}><MathJaxSvg fontSize={2} style={styles.textStyle}>{'$x^2 = 900$'}</MathJaxSvg></Text>
-        <Text style={styles.textStyle}><MathJaxSvg fontSize={2} style={styles.textStyle}>{'$x = \\sqrt{900}$'}</MathJaxSvg></Text>
-        <Text style={styles.textStyle}><MathJaxSvg fontSize={2} style={styles.textStyle}>{'$x = 30$'}</MathJaxSvg></Text>
-        <Text style={styles.textStyle}>Logo, a medida de seu lado é <Text style={styles.boldText}>30 m</Text>.</Text>
-        <Text style={styles.textStyle}>2{parentesisFechados} Um reservatório de água tem a forma cúbica e sua capacidade é de 8 litros <MathJaxSvg fontSize={2} style={styles.textStyle}>{'$(8 m^3)$'}</MathJaxSvg>. Quanto mede cada aresta desse reservatório?</Text>
-
-        {/* Figura do cubo não será incluída */}
-
-        <Text style={styles.textStyle}><MathJaxSvg fontSize={2} style={styles.textStyle}>{'$x^3 = 8$'}</MathJaxSvg></Text>
-        <Text style={styles.textStyle}><MathJaxSvg fontSize={2} style={styles.textStyle}>{'$x = \\sqrt[3]{8}$'}</MathJaxSvg></Text>
-        <Text style={styles.textStyle}><MathJaxSvg fontSize={2} style={styles.textStyle}>{'$x = 2$'}</MathJaxSvg></Text>
-        <Text style={styles.textStyle}>Logo, a medida de cada aresta desse reservatório é 8 m.</Text>
-
-        <Text style={styles.textStyle}>
-          <Text style={styles.boldText}>Definição 2.2</Text> Sendo <MathJaxSvg fontSize={2} style={styles.textStyle}>{' $a > 0$ '}</MathJaxSvg> e <MathJaxSvg fontSize={2} style={styles.textStyle}>{' $n \\in \\mathbb{N}^*$ '}</MathJaxSvg>, tem-se:
-        </Text>
-        <Text style={styles.textCenter}>
-          <MathJaxSvg fontSize={2} style={styles.textStyle}>
-            {'$$ \\sqrt[n]{a} = b \\Leftrightarrow b^n = a \\text{ e } b \\ge 0 $$'}
-          </MathJaxSvg>
-        </Text>
-        <Text style={styles.textStyle}>onde <MathJaxSvg fontSize={2} style={styles.textStyle}>{'$b$'}</MathJaxSvg> é um número real chamado raiz enésima de <MathJaxSvg fontSize={2} style={styles.textStyle}>{'$a$'}</MathJaxSvg>.</Text>
-
-        <Text style={styles.titulo3}>Exemplo 2.5</Text>
-        <Text style={styles.textStyle}>Usando a definição temos:</Text>
-        <Text style={styles.textStyle}>a{parentesisFechados} <MathJaxSvg fontSize={2} style={styles.textStyle}>{'$\\sqrt{9} = 3$'}</MathJaxSvg>, pois <MathJaxSvg fontSize={2} style={styles.textStyle}>{'$3^2 = 9$'}</MathJaxSvg> e <MathJaxSvg fontSize={2} style={styles.textStyle}>{'$3 \\ge 0$'}</MathJaxSvg>.</Text>
-        <Text style={styles.textStyle}>b{parentesisFechados} <MathJaxSvg fontSize={2} style={styles.textStyle}>{'$\\sqrt[3]{64} = 4$'}</MathJaxSvg>, pois <MathJaxSvg fontSize={2} style={styles.textStyle}>{'$4^3 = 64$'}</MathJaxSvg> e <MathJaxSvg fontSize={2} style={styles.textStyle}>{'$4 \\ge 0$'}</MathJaxSvg>.</Text>
-        <Text style={styles.textStyle}>c{parentesisFechados} <MathJaxSvg fontSize={2} style={styles.textStyle}>{'$\\sqrt[3]{\\frac{8}{27}} = \\frac{2}{3}$'}</MathJaxSvg>, pois <MathJaxSvg fontSize={2} style={styles.textStyle}>{'$(\\frac{2}{3})^3 = \\frac{8}{27}$'}</MathJaxSvg> e <MathJaxSvg fontSize={2} style={styles.textStyle}>{'$\\frac{2}{3} \\ge 0$'}</MathJaxSvg>.</Text>
-        <Text style={styles.textStyle}>
-          <Text style={styles.boldText}>Observação:</Text> Existem dois valores de <MathJaxSvg fontSize={2} style={styles.textStyle}>{'$x$'}</MathJaxSvg> que tornam verdadeira a sentença <MathJaxSvg fontSize={2} style={styles.textStyle}>{'$x^2 = 25$'}</MathJaxSvg>: 5 e -5, pois, <MathJaxSvg fontSize={2} style={styles.textStyle}>{'$5^2 = 25$'}</MathJaxSvg> e <MathJaxSvg fontSize={2} style={styles.textStyle}>{'$(-5)^2 = 25$'}</MathJaxSvg>. Também vale lembrar que, <MathJaxSvg fontSize={2} style={styles.textStyle}>{'$\\sqrt[n]{-a} = -\\sqrt[n]{a}$'}</MathJaxSvg> se <MathJaxSvg fontSize={2} style={styles.textStyle}>{'$n$'}</MathJaxSvg> for um número ímpar.
-        </Text>
-
-        <Text style={styles.titulo3}>2.2.1 Propriedades dos radicais</Text>
-        <Text style={styles.textStyle}><Text style={styles.boldText}>P1.</Text> <MathJaxSvg fontSize={2} style={styles.textStyle}>{'$\\sqrt[n]{a^n} = a$'}</MathJaxSvg></Text>
-        <Text style={styles.textStyle}>Exemplo: <MathJaxSvg fontSize={2} style={styles.textStyle}>{'$\\sqrt{3^2} = 3$'}</MathJaxSvg></Text>
-        <Text style={styles.textStyle}><Text style={styles.boldText}>P2.</Text> <MathJaxSvg fontSize={2} style={styles.textStyle}>{'$\\sqrt[n]{a^m} = \\sqrt[n\\div p]{a^{m\\div p}}$'}</MathJaxSvg> e <MathJaxSvg fontSize={2} style={styles.textStyle}>{'$\\sqrt[n]{a^m} = \\sqrt[n \\cdot r]{a^{m \\cdot r}}$'}</MathJaxSvg>, com $p \\ne 0$ e $p$ divisor comum de $m$ e $n$.</Text>
-        <Text style={styles.textStyle}>Exemplos: <MathJaxSvg fontSize={2} style={styles.textStyle}>{'$\\sqrt[6]{2^6} = \\sqrt[6\\div 2]{2^{6\\div 2}} = \\sqrt[3]{2^3}$'}</MathJaxSvg> e <MathJaxSvg fontSize={2} style={styles.textStyle}>{'$\\sqrt[3]{3^2} = \\sqrt[3 \\cdot 2]{3^{2 \\cdot 2}} = \\sqrt[6]{3^4}$'}</MathJaxSvg></Text>
-        <Text style={styles.textStyle}><Text style={styles.boldText}>P3.</Text> <MathJaxSvg fontSize={2} style={styles.textStyle}>{'$\\sqrt[n]{a \\cdot b} = \\sqrt[n]{a} \\cdot \\sqrt[n]{b}$'}</MathJaxSvg></Text>
-        <Text style={styles.textStyle}>Exemplo: <MathJaxSvg fontSize={2} style={styles.textStyle}>{'$\\sqrt{6 \\cdot 7} = \\sqrt{6} \\cdot \\sqrt{7}$'}</MathJaxSvg></Text>
-        <Text style={styles.textStyle}><Text style={styles.boldText}>P4.</Text> <MathJaxSvg fontSize={2} style={styles.textStyle}>{'$\\sqrt[n]{\\frac{a}{b}} = \\frac{\\sqrt[n]{a}}{\\sqrt[n]{b}}$'}</MathJaxSvg></Text>
-        <Text style={styles.textStyle}>Exemplo: <MathJaxSvg fontSize={2} style={styles.textStyle}>{'$\\sqrt[3]{\\frac{3}{4}} = \\frac{\\sqrt[3]{3}}{\\sqrt[3]{4}}$'}</MathJaxSvg></Text>
-        <Text style={styles.textStyle}><Text style={styles.boldText}>P5.</Text> <MathJaxSvg fontSize={2} style={styles.textStyle}>{'$\\sqrt[n]{\\sqrt[m]{a}} = \\sqrt[n \\cdot m]{a}$'}</MathJaxSvg></Text> {/* BUG AQ */}
-        <Text style={styles.textStyle}>Exemplo: <MathJaxSvg fontSize={2} style={styles.textStyle}>{'$\\sqrt[3]{\\sqrt[4]{7}} = \\sqrt[3 \\cdot 4]{7} = \\sqrt[12]{7}$'}</MathJaxSvg></Text>
-
-        <Text style={styles.textStyle}>Podemos utilizar as propriedades para simplificar os radicais.</Text>
-
-        <Text style={styles.titulo3}>Exemplo 2.6</Text>
-        <Text style={styles.textStyle}>Simplificar os radicais:</Text>
-        <Text style={styles.textStyle}>a{parentesisFechados} <MathJaxSvg fontSize={2} style={styles.textStyle}>{'$\\sqrt[3]{320}$'}</MathJaxSvg> b{parentesisFechados} <MathJaxSvg fontSize={2} style={styles.textStyle}>{'$\\sqrt{32}$'}</MathJaxSvg></Text>
-        <Text style={styles.textStyle}>Resolução:</Text>
-        <Text style={styles.textStyle}>a{parentesisFechados} Fatorando o 320, temos:</Text>
-        <Text style={[styles.textStyle, styles.preFormattedText]}>
-          {'320 | 2 '}
-          {'\n160 | 2 '}
-          {'\n 80 | 2 '}
-          {'\n 40 | 2 '}
-          {'\n 20 | 2 '}
-          {'\n 10 | 2 '}
-          {'\n  5 | 5 '}
-          {'\n  1 | '}
-        </Text>
-        <Text style={styles.textStyle}>Logo, <MathJaxSvg fontSize={2} style={styles.textStyle}>{'$\\sqrt[3]{320} = 2 \\cdot 2 \\cdot \\sqrt[3]{5} = 4\\sqrt[3]{5}$'}</MathJaxSvg>.</Text>
-        <Text style={styles.textStyle}>b{parentesisFechados} Fatorando o 32, temos:</Text>
-        <Text style={[styles.textStyle, styles.preFormattedText]}>
-          {'32 | 2 '}
-          {'\n16 | 2 '}
-          {'\n 8 | 2 '}
-          {'\n 4 | 2 '}
-          {'\n 2 | 2 '}
-          {'\n 1 | '}
-        </Text>
-        <Text style={styles.textStyle}>Logo, <MathJaxSvg fontSize={2} style={styles.textStyle}>{'$\\sqrt{32} = 2 \\cdot 2 \\cdot \\sqrt{2} = 4\\sqrt{2}$'}</MathJaxSvg>.</Text>
-
-        <Text style={styles.titulo3}>2.2.2 Racionalização de denominadores</Text>
-        <Text style={styles.textStyle}>Vejamos agora como podemos evitar a divisão por números irracionais, ou seja, por radicais.</Text>
-
-        <Text style={styles.titulo3}>Exemplo 2.7</Text>
-        <Text style={styles.textStyle}>Racionalizar o denominador de:</Text>
-        <Text style={styles.textStyle}>
-          a{parentesisFechados} <MathJaxSvg fontSize={2} style={styles.textStyle}>{'$\\frac{3}{\\sqrt{2}} = \\frac{3 \\cdot \\sqrt{2}}{\\sqrt{2} \\cdot \\sqrt{2}} = \\frac{3 \\sqrt{2}}{2}$'}</MathJaxSvg>
-        </Text>
-        <Text style={styles.textStyle}>
-          b{parentesisFechados} <MathJaxSvg fontSize={2} style={styles.textStyle}>{'$\\frac{5}{\\sqrt[3]{7}} = \\frac{5 \\cdot \\sqrt[3]{7^2}}{\\sqrt[3]{7} \\cdot \\sqrt[3]{7^2}} = \\frac{5 \\sqrt[3]{49}}{7}$'}</MathJaxSvg>
-        </Text>
-        <Text style={styles.textStyle}>
-          c{parentesisFechados} <MathJaxSvg fontSize={2} style={styles.textStyle}>{'$\\frac{3}{\\sqrt{7}+2} = \\frac{3(\\sqrt{7}-2)}{(\\sqrt{7}+2)(\\sqrt{7}-2)} = \\frac{3(\\sqrt{7}-2)}{7-4} = \\frac{3(\\sqrt{7}-2)}{3} = \\sqrt{7}-2$'}</MathJaxSvg>
-        </Text>
-
-        <Text style={styles.titulo3}>2.2.3 Potência com expoente racional</Text>
-        <Text style={styles.textStyle}>Na seção anterior estudamos expressões da forma <MathJaxSvg fontSize={2} style={styles.textStyle}>{'$10^2$'}</MathJaxSvg>, <MathJaxSvg fontSize={2} style={styles.textStyle}>{'$6^{-1}$'}</MathJaxSvg> e <MathJaxSvg fontSize={2} style={styles.textStyle}>{'$2^0$'}</MathJaxSvg>, que são potências com expoente inteiro cujo significado já conhecemos.</Text>
-        <Text style={styles.textStyle}>Qual será, então, o significado de uma potência com expoente fracionário, como, por exemplo, a expressão <MathJaxSvg fontSize={2} style={styles.textStyle}>{'$2^{\\frac{3}{4}}$'}</MathJaxSvg>?</Text>
-        <Text style={styles.textStyle}>Logo, pode-se demonstrar que</Text>
-        <Text style={styles.textCenter}>
-          <MathJaxSvg fontSize={2} style={styles.textStyle}>
-            {'$$ 2^{\\frac{3}{4}} = \\sqrt[4]{2^3} $$'}
-          </MathJaxSvg>
-        </Text>
-        <Text style={styles.textStyle}>Vejamos outros exemplos:</Text>
-
-        <Text style={styles.titulo3}>Exemplo 2.8</Text>
-        <Text style={styles.textStyle}>Escreva as potências como radicais:</Text>
-        <Text style={styles.textStyle}>a{parentesisFechados} <MathJaxSvg fontSize={2} style={styles.textStyle}>{'$5^{\\frac{6}{7}} = \\sqrt[7]{5^6}$'}</MathJaxSvg></Text>
-        <Text style={styles.textStyle}>b{parentesisFechados} <MathJaxSvg fontSize={2} style={styles.textStyle}>{'$9^{0,4} = 9^{\\frac{4}{10}} = 9^{\\frac{2}{5}} = \\sqrt[5]{9^2}$'}</MathJaxSvg></Text>
+        <View style={styles.navButtonsContainer}>
+          <TouchableOpacity
+            style={[styles.navButton, page === 0 && styles.navButtonDisabled]}
+            onPress={() => handleNavigation(page - 1)}
+            disabled={page === 0}
+          >
+            <Text style={styles.navButtonText}>Voltar</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={[styles.navButton, page === pages.length - 1 && styles.navButtonDisabled]}
+            onPress={() => handleNavigation(page + 1)}
+            disabled={page === pages.length - 1}
+          >
+            <Text style={styles.navButtonText}>Próximo</Text>
+          </TouchableOpacity>
+        </View>
 
       </Animated.ScrollView>
-
     </LinearGradient>
   );
 };
@@ -344,13 +468,11 @@ const styles = StyleSheet.create({
   textStyle: {
     fontSize: 20,
     fontWeight: 'normal',
-    marginBottom: 20,
     textAlign: 'justify',
   },
-  textBold: {
+  boldText: {
     fontSize: 20,
     fontWeight: 'bold',
-    marginBottom: 20,
     textAlign: 'justify',
   },
   imageSubtitle: {
@@ -404,19 +526,32 @@ const styles = StyleSheet.create({
     marginLeft: 5,
   },
   preFormattedText: {
-    fontFamily: 'monospace', // Usar uma fonte de largura fixa para alinhamento
-    // whiteSpace: 'pre',      // Preservar espaços e quebras de linha
-    lineHeight: 20,         // Ajuste a altura da linha conforme necessário
+    fontFamily: 'monospace',
+    lineHeight: 20,
   },
-  inlineMath: {
-    // Estilo para o MathJax para que ele se ajuste na mesma linha do texto
-    // `lineHeight` pode precisar ser ajustado para alinhar com o texto
-  },
+  inlineMath: {},
   textCenter: {
     textAlign: 'center',
   },
-  boldText: {
-    fontWeight: "bold",
+  navButtonsContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    padding: 20,
+    marginTop: '3%',
+  },
+  navButton: {
+    backgroundColor: Colors.light.tint,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 50,
+  },
+  navButtonText: {
+    color: 'white',
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+  navButtonDisabled: {
+    backgroundColor: '#6c6a6a8f',
   },
 });
 

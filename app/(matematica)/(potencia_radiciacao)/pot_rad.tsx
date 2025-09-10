@@ -5,7 +5,7 @@ import {
   TouchableOpacity,
   Image,
   Text,
-  ScrollView, 
+  ScrollView,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { useRouter } from "expo-router";
@@ -13,13 +13,13 @@ import { Colors } from "@/constants/Colors";
 import { IconSymbol } from "@/components/ui/IconSymbol";
 import { ThemedText } from "@/components/ThemedText";
 import { Personagem } from "@/components/ui/Personagem";
-import { Feather } from "@expo/vector-icons"; 
+import { Feather } from "@expo/vector-icons";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const opcoesDaUnidade = [
   {
     title: "Material Teórico",
-    route: "/(matematica)/(potencia_radiciacao)/teoriaPot_rad", 
+    route: "/(matematica)/(potencia_radiciacao)/teoriaPot_rad",
     locked: false,
   },
   {
@@ -59,7 +59,7 @@ export default function UnidadeConjuntos() {
 
   //customizacao do personagem
   const customizacoes = {
-    background: 'cor1', 
+    background: 'cor1',
     ears: 'orelha1',
     cheeks: 'bochecha1',
     face: 'rosto1',
@@ -72,16 +72,6 @@ export default function UnidadeConjuntos() {
 
   return (
     <View style={styles.container}>
-      <View style={styles.headerUser}>
-        {/* <Personagem size={32} customizations={customizacoes} /> */}
-        <View style={styles.streakContainer}>
-          <Image
-            source={require("@/assets/images/foguin--ativado-.png")}
-            style={styles.streakIcon}
-          />
-          <Text style={styles.streakNumber}>{streakUsuario}</Text>
-        </View>
-      </View>
       <View style={styles.headerUnidade}>
         <TouchableOpacity
           onPress={() => router.replace('/(matematica)/telaUnidades')}
@@ -89,13 +79,23 @@ export default function UnidadeConjuntos() {
         >
           <IconSymbol name="arrow.left" size={32} color={Colors.light.text} />
         </TouchableOpacity>
+        <View style={styles.headerUser}>
+          {/* <Personagem size={32} customizations={customizacoes} /> */}
+          <View style={styles.streakContainer}>
+            <Image
+              source={require("@/assets/images/foguin--ativado-.png")}
+              style={styles.streakIcon}
+            />
+            <Text style={styles.streakNumber}>{streakUsuario}</Text>
+          </View>
+        </View>
         <View>
           <ThemedText style={styles.headerTitle}>Potenciação e Radiciação</ThemedText>
           <ThemedText style={styles.headerSubtitle}>Matemática</ThemedText>
         </View>
       </View>
 
-      
+
       <ScrollView contentContainerStyle={styles.buttonsListContainer}>
         {opcoesDaUnidade.map((opcao, index) => {
           const isLocked = opcao.locked;
@@ -173,7 +173,7 @@ const styles = StyleSheet.create({
   },
   backButton: {
     position: "absolute",
-    left: 20, 
+    left: 20,
   },
   headerTitle: {
     fontSize: 30,
@@ -185,13 +185,13 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontFamily: "Kumbh Sans",
     color: "#060302",
-    textAlign: "center", 
+    textAlign: "center",
   },
 
   buttonsListContainer: {
     paddingHorizontal: 25,
     paddingTop: 20,
-    gap: 25, 
+    gap: 25,
   },
   cardShadow: {
     borderRadius: 12,
@@ -208,12 +208,12 @@ const styles = StyleSheet.create({
   cardBody: {
     backgroundColor: "white",
     //borderRadius: 10,
-    marginTop: 10, 
+    marginTop: 10,
     marginBottom: 10,
     paddingVertical: 15,
     alignItems: "center",
     justifyContent: "center",
-    flexDirection: "row", 
+    flexDirection: "row",
   },
   cardTitle: {
     fontSize: 18,
@@ -221,14 +221,19 @@ const styles = StyleSheet.create({
     fontWeight: "600",
     color: Colors.primary,
   },
-  
+
   lockedCardBody: {
-    backgroundColor: "#F0F0F0", 
+    backgroundColor: "#F0F0F0",
   },
   lockedCardTitle: {
-    color: "#9E9E9E", 
+    color: "#9E9E9E",
   },
   lockIcon: {
-    marginRight: 10, 
+    marginRight: 10,
+  },
+  textStyle: {
+    fontSize: 20,
+    fontWeight: 'normal',
+    textAlign: 'justify',
   },
 });

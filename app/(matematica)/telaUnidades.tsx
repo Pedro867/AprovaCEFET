@@ -10,9 +10,8 @@ import {
 import { LinearGradient } from "expo-linear-gradient";
 import { useRouter } from "expo-router";
 import { Colors } from "@/constants/Colors";
-import { IconSymbol } from "@/components/ui/IconSymbol";
 import { ThemedText } from "@/components/ThemedText";
-import { Personagem } from "@/components/ui/Personagem";
+import Ionicons from '@expo/vector-icons/Ionicons';
 import { unidadesMatematica } from "@/constants/dadosUnidades"
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
@@ -49,28 +48,28 @@ export default function TelaUnidadesMatematica() {
 
   return ( 
       <View style={styles.container}>
-      <View style={styles.headerUser}>
+        <View style={styles.header}> 
         <TouchableOpacity
           onPress={() => router.replace('/(tabs)/secao')}
           style={styles.backButton}
         >
-          <IconSymbol name="arrow.left" size={32} color={Colors.light.text} />
+        <Ionicons name="arrow-back" size={24} color="black" />
         </TouchableOpacity>
-        <View style={styles.streakContainer}>
+        
+      <View style={styles.textHeader}>
+        <View>
+          <ThemedText style={styles.headerTitle}>UNIDADES</ThemedText>
+          <ThemedText style={styles.headerSubtitle}>Matemática</ThemedText>
+        </View>
+      </View>
+      <View style={styles.streakContainer}>
           <Image
             source={require("@/assets/images/foguin--ativado-.png")}
             style={styles.streakIcon}
           />
           <Text style={styles.streakNumber}>{streakUsuario}</Text>
         </View>
-      </View>
-      <View style={styles.headerUnidade}>
-        <View>
-          <ThemedText style={styles.headerTitle}>UNIDADES</ThemedText>
-          <ThemedText style={styles.headerSubtitle}>Matemática</ThemedText>
-        </View>
-      </View>
-
+</View>
       <ScrollView
         contentContainerStyle={styles.scrollViewContent}
         showsVerticalScrollIndicator={false}
@@ -124,27 +123,29 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingBottom: 40,
   },
-  headerUser: {
+  header: {
     flexDirection: "row",
     justifyContent: "space-between",
-    paddingHorizontal: 24,
-    paddingTop: 50,
+    paddingHorizontal: 20,
+    paddingTop: 20,
     marginBottom: 20,
+    marginTop: 40,
+    borderBottomWidth: 2,
+    borderTopWidth: 2,
+    borderColor: "rgba(0, 0, 0, 0.1)",
   },
 
-  headerUnidade: {
+  textHeader: {
     flexDirection: "row",
     alignItems: 'center', 
     justifyContent: "center",
     paddingHorizontal: 20,
     marginBottom: 20,
-    borderBottomWidth: 1,
-    borderColor: "rgba(0, 0, 0, 0.1)",
-    paddingBottom: 15,
     position :"relative",
   },
   streakContainer: {
     alignItems: "center",
+    right: '5%',
   },
   streakIcon: {
     width: 40,
@@ -159,8 +160,7 @@ const styles = StyleSheet.create({
     textShadowRadius: 4,
   },
   backButton: {
-    position: "absolute",
-    left: '10%',
+    left: '2%',
     top: '5%',
   },
   headerTitle: {
@@ -169,7 +169,6 @@ const styles = StyleSheet.create({
     fontWeight: "600",
     color: "#121212",
     marginBottom: 10,
-    
   },
   headerSubtitle: {
     fontSize: 16,

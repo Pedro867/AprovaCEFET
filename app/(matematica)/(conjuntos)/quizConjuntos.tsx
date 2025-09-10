@@ -16,7 +16,7 @@ import { BotaoCustomizado } from "@/components/ui/ButtomCustom";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useRouter, useFocusEffect } from "expo-router";
 import { LinearGradient } from "expo-linear-gradient";
-import { IconSymbol } from "@/components/ui/IconSymbol";
+import Ionicons from "@expo/vector-icons/Ionicons";
 import { Colors, Fonts } from "@/constants/Colors";
 import initialQuestions from "./questoesConjuntos.json";
 import { updateCoinsBD, updateStreakBD } from "@/app/api/conexaoFetch";
@@ -361,7 +361,7 @@ const QuizScreen = () => {
             onPress={() => router.replace("/(matematica)/telaUnidades")}
             style={styles.backButton}
           >
-            <IconSymbol name="arrow.left" size={32} color={Colors.light.text} />
+            <Ionicons name="arrow-back" size={24} color="black" />
           </TouchableOpacity>
         </View>
         <View style={styles.personagemContainer}>
@@ -621,7 +621,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
   },
   welcomeText: {
-    fontSize: 26,
+    fontSize: 46,
     fontFamily: Fonts.family.bold,
     textAlign: "center",
     color: "#ffffffff", 

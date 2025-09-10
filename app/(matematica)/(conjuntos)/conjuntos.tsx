@@ -5,21 +5,19 @@ import {
   TouchableOpacity,
   Image,
   Text,
-  ScrollView, 
+  ScrollView,
 } from "react-native";
-import { LinearGradient } from "expo-linear-gradient";
 import { useRouter } from "expo-router";
 import { Colors } from "@/constants/Colors";
-import { IconSymbol } from "@/components/ui/IconSymbol";
 import { ThemedText } from "@/components/ThemedText";
-import { Personagem } from "@/components/ui/Personagem";
-import { Feather } from "@expo/vector-icons"; 
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import Ionicons from "@expo/vector-icons/Ionicons";
+import { Feather } from "@expo/vector-icons";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const opcoesDaUnidade = [
   {
     title: "Material Teórico",
-    route: "/(matematica)/(conjuntos)/teoriaConjuntos", 
+    route: "/(matematica)/(conjuntos)/teoriaConjuntos",
     locked: false,
   },
   {
@@ -52,15 +50,27 @@ export default function UnidadeConjuntos() {
       } catch (error) {
         console.error("Erro ao carregar o streak do usuário", error);
       }
-    }
+    };
 
     carregarDados();
   }, []);
 
   return (
     <View style={styles.container}>
-      <View style={styles.headerUser}>
-        {/* <Personagem size={32} customizations={customizacoes} /> */}
+      <View style={styles.header}>
+        <TouchableOpacity
+          onPress={() => router.replace("/(tabs)/secao")}
+          style={styles.backButton}
+        >
+          <Ionicons name="arrow-back" size={24} color="black" />
+        </TouchableOpacity>
+
+        <View style={styles.textHeader}>
+          <View>
+            <ThemedText style={styles.headerTitle}>UNIDADES</ThemedText>
+            <ThemedText style={styles.headerSubtitle}>Matemática</ThemedText>
+          </View>
+        </View>
         <View style={styles.streakContainer}>
           <Image
             source={require("@/assets/images/foguin--ativado-.png")}
@@ -69,20 +79,7 @@ export default function UnidadeConjuntos() {
           <Text style={styles.streakNumber}>{streakUsuario}</Text>
         </View>
       </View>
-      <View style={styles.headerUnidade}>
-        <TouchableOpacity
-          onPress={() => router.replace('/(matematica)/telaUnidades')}
-          style={styles.backButton}
-        >
-          <IconSymbol name="arrow.left" size={32} color={Colors.light.text} />
-        </TouchableOpacity>
-        <View>
-          <ThemedText style={styles.headerTitle}>CONJUNTOS</ThemedText>
-          <ThemedText style={styles.headerSubtitle}>Matemática</ThemedText>
-        </View>
-      </View>
 
-      
       <ScrollView contentContainerStyle={styles.buttonsListContainer}>
         {opcoesDaUnidade.map((opcao, index) => {
           const isLocked = opcao.locked;
@@ -95,7 +92,9 @@ export default function UnidadeConjuntos() {
               // navega para a rota definida no array
               onPress={() => router.push(opcao.route as any)}
             >
-              <View style={[styles.cardBody, isLocked && styles.lockedCardBody]}>
+              <View
+                style={[styles.cardBody, isLocked && styles.lockedCardBody]}
+              >
                 {isLocked && (
                   <Feather
                     name="lock"
@@ -118,35 +117,34 @@ export default function UnidadeConjuntos() {
   );
 }
 
-// 3. ESTILOS ATUALIZADOS
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "white",
   },
-  headerUser: {
+  header: {
     flexDirection: "row",
     justifyContent: "space-between",
-    paddingHorizontal: 24,
-    paddingTop: 50,
+    paddingHorizontal: 20,
+    paddingTop: 20,
     marginBottom: 20,
+    marginTop: 40,
+    borderBottomWidth: 2,
+    borderTopWidth: 2,
+    borderColor: "rgba(0, 0, 0, 0.1)",
   },
-  headerUnidade: {
+
+  textHeader: {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
     paddingHorizontal: 20,
     marginBottom: 20,
-    borderBottomWidth: 1,
-    borderColor: "rgba(0, 0, 0, 0.1)",
-    paddingBottom: 15,
     position: "relative",
-  },
-  avatar: {
-    marginRight: 10,
   },
   streakContainer: {
     alignItems: "center",
+    right: "5%",
   },
   streakIcon: {
     width: 40,
@@ -156,28 +154,32 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: "#060302",
     fontWeight: "bold",
+    textShadowColor: "rgba(0,0,0,0.25)",
+    textShadowOffset: { width: 0, height: 4 },
+    textShadowRadius: 4,
   },
   backButton: {
-    position: "absolute",
-    left: 20, 
+    left: "2%",
+    top: "5%",
   },
   headerTitle: {
     fontSize: 30,
     fontFamily: "Kumbh Sans",
     fontWeight: "600",
     color: "#121212",
+    marginBottom: 10,
   },
   headerSubtitle: {
     fontSize: 16,
     fontFamily: "Kumbh Sans",
     color: "#060302",
-    textAlign: "center", 
+    marginLeft: 28,
   },
 
   buttonsListContainer: {
     paddingHorizontal: 25,
     paddingTop: 20,
-    gap: 25, 
+    gap: 25,
   },
   cardShadow: {
     borderRadius: 12,
@@ -194,12 +196,12 @@ const styles = StyleSheet.create({
   cardBody: {
     backgroundColor: "white",
     //borderRadius: 10,
-    marginTop: 10, 
+    marginTop: 10,
     marginBottom: 10,
     paddingVertical: 15,
     alignItems: "center",
     justifyContent: "center",
-    flexDirection: "row", 
+    flexDirection: "row",
   },
   cardTitle: {
     fontSize: 18,
@@ -207,14 +209,14 @@ const styles = StyleSheet.create({
     fontWeight: "600",
     color: Colors.primary,
   },
-  
+
   lockedCardBody: {
-    backgroundColor: "#F0F0F0", 
+    backgroundColor: "#F0F0F0",
   },
   lockedCardTitle: {
-    color: "#9E9E9E", 
+    color: "#9E9E9E",
   },
   lockIcon: {
-    marginRight: 10, 
+    marginRight: 10,
   },
 });

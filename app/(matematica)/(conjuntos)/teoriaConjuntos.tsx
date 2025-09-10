@@ -7,6 +7,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import { IconSymbol } from "@/components/ui/IconSymbol";
 import { Colors } from "@/constants/Colors";
 import { MathJaxSvg } from 'react-native-mathjax-html-to-svg';
+import Ionicons from "@expo/vector-icons/Ionicons";
 
 const QuizScreen = () => {
   const [coins, setCoinsUsuario] = useState(0);
@@ -312,15 +313,8 @@ const QuizScreen = () => {
       colors={[Colors.gradientEnd, Colors.gradientStart]}
     >
       <TouchableOpacity onPress={() => router.replace('/(matematica)/(conjuntos)/conjuntos')} style={styles.backButton}>
-        <IconSymbol name="arrow.left" size={32} color={Colors.light.text} />
+        <Ionicons name="arrow-back" size={24} color="black" />
       </TouchableOpacity>
-      <View style={styles.coinContainer}>
-        <Image
-          source={require("@/assets/images/pontos.png")}
-          style={styles.coinIcon}
-        />
-        <Text style={styles.coinNumber}>{coins}</Text>
-      </View>
 
       <Animated.ScrollView contentContainerStyle={styles.scrollViewContent}>
         <Text style={styles.titulo1}>Conjuntos</Text>
@@ -417,40 +411,6 @@ const styles = StyleSheet.create({
   },
   imageView: {
     alignItems: 'center',
-  },
-  coinContainer: {
-    position: 'absolute',
-    top: 50,
-    right: 50,
-    flexDirection: 'row',
-    alignItems: 'center',
-    zIndex: 10,
-    backgroundColor: 'rgba(255, 255, 255, 0.7)',
-    paddingVertical: 5,
-    paddingHorizontal: 10,
-    borderRadius: 20,
-  },
-  coinContainerScore: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 20,
-    backgroundColor: 'rgba(255, 255, 255, 0.7)',
-    paddingVertical: 5,
-    paddingHorizontal: 10,
-    borderRadius: 20,
-  },
-  coinIcon: {
-    width: 30,
-    height: 30,
-  },
-  coinNumber: {
-    fontSize: 20,
-    color: "#060302",
-    fontWeight: "bold",
-    textShadowColor: "rgba(0,0,0,0.25)",
-    textShadowOffset: { width: 0, height: 4 },
-    textShadowRadius: 4,
-    marginLeft: 5,
   },
   preFormattedText: {
     fontFamily: 'monospace',

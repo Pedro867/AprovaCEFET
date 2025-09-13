@@ -40,7 +40,7 @@ export default function EditProfileScreen() {
         const nomeSalvo = await AsyncStorage.getItem("userNome");
         if (nomeSalvo !== null) {
           setNome(nomeSalvo);
-          setNomeOriginal(nomeSalvo); // nome original para o placeholder
+          setNomeOriginal(nomeSalvo);// nome original para o placeholder
         }
       } catch (error) {
         console.error("Erro ao carregar o nome do usuário", error);
@@ -68,6 +68,7 @@ export default function EditProfileScreen() {
     try {
       // salva o novo nome
       await updateNomeBD(nome);
+      await AsyncStorage.setItem("userPrimeiroNome", nome.split(" ")[0]);
       
       // salva a nova senha apenas se ela foi alterada
       if (novaSenha !== "") {
@@ -118,7 +119,7 @@ export default function EditProfileScreen() {
                     placeholder='Digite a nova senha'
                     isPassword
                   />
-                     <InputCustomizado
+                    <InputCustomizado
                     label="Confirmar Nova Senha"
                     value={confirmarSenha}
                     onChangeText={setConfirmarSenha}

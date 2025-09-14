@@ -28,35 +28,35 @@ export const unidadesMatematica = [
     description:
       "Simplificação de expressões algébricas e métodos de adição e substituição para resolver sistemas.",
     Icon: IconFatoracao,
-    route: "/(matematica)/(conjuntos)/testeQuiz",
+    route: "/(matematica)/(fatoracao_sistemas)/fat_sis",
   },
   {
     title: "Equação do 2º Grau",
     description:
       "Resolução por fatoração e Bhaskara, relação de soma e produto entre as raízes e equações biquadradas.",
     Icon: IconEquacao,
-    route: "/(matematica)/(conjuntos)/testeQuiz",
+    route: "/(matematica)/(equacoes)/equacoes",
   },
   {
     title: "Funções",
     description:
       "Características, propriedades e gráficos das funções de 1º e 2º grau. Análise de raízes e vértices.",
     Icon: IconFuncoes,
-    route: "/(matematica)/(conjuntos)/testeQuiz",
+    route: "/(matematica)/(funcoes)/funcoes",
   },
   {
     title: "Grandezas Proporcionais e Regra de três",
     description:
       "Esta unidade explora as relações entre grandezas direta e inversamente proporcionais. Em seguida, aplica esses conceitos para resolver problemas práticos através da regra de três simples e composta.",
     Icon: IconRegraDeTres,
-    route: "/(matematica)/(conjuntos)/testeQuiz",
+    route: "/(matematica)/(grandezas)/grandezas",
   },
   {
     title: "Geometria",
     description:
       "Geometria plana, Teorema de Tales, semelhança de triângulos, Teorema de Pitágoras e cálculo de áreas.",
     Icon: IconGeometria,
-    route: "/(matematica)/(conjuntos)/testeQuiz",
+    route: "/(matematica)/(geometria)/geometria",
   },
 ];
 

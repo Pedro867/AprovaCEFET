@@ -17,17 +17,17 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 const opcoesDaUnidade = [
   {
     title: "Material Teórico",
-    route: "/(matematica)/(conjuntos)/teoriaConjuntos",
+    route: "/(matematica)/(fatoracao_sistemas)/teoriaFat_sis",
     locked: false,
   },
   {
     title: "Videoaulas",
-    route: "/(matematica)/(conjuntos)/quizConjuntos",
+    route: "/(matematica)/(fatoracao_sistemas)/quizFat_sis",
     locked: false,
   },
   {
     title: "Exercícios",
-    route: "/(matematica)/(conjuntos)/quizConjuntos",
+    route: "/(matematica)/(fatoracao_sistemas)/quizFat_sis",
     locked: false,
   },
   {
@@ -39,7 +39,6 @@ const opcoesDaUnidade = [
 
 export default function UnidadeConjuntos() {
   const router = useRouter();
-
   const [streakUsuario, setStreakUsuario] = useState(0);
 
   useEffect(() => {
@@ -67,7 +66,7 @@ export default function UnidadeConjuntos() {
 
         <View style={styles.textHeader}>
           <View>
-            <ThemedText style={styles.headerTitle}>CONJUNTOS</ThemedText>
+            <ThemedText style={styles.headerTitle}>FATORAÇÃO E SISTEMAS LINEARES</ThemedText>
             <ThemedText style={styles.headerSubtitle}>Matemática</ThemedText>
           </View>
         </View>

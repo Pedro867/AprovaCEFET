@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   Image,
   ScrollView,
+  Platform
 } from "react-native";
 import { useRouter } from "expo-router";
 import { LinearGradient } from "expo-linear-gradient";
@@ -17,6 +18,18 @@ export default function TeoriaConjuntosScreen() {
   const [page, setPage] = useState(0);
   const scrollViewRef = useRef<ScrollView>(null);
   const router = useRouter();
+
+  let tamanhoMathJax = 0;
+  //TAMANHO DO MATHJAX
+  if (Platform.OS == 'web'){
+    tamanhoMathJax = 2.5;
+  }
+  if (Platform.OS == 'android'){
+    tamanhoMathJax = 17;
+  }
+  if (Platform.OS == 'ios'){
+    tamanhoMathJax = 17; //testar dps
+  }
 
   //estilos aq pq n ta reconhecendo deixar dps do codigo de renderizar
   const styles = StyleSheet.create({
@@ -167,7 +180,7 @@ export default function TeoriaConjuntosScreen() {
               <MathJaxSvg
                 key={index}
                 color={styles.textStyle.color}
-                fontSize={17}
+                fontSize={tamanhoMathJax}
               >
                 {part}
               </MathJaxSvg>
@@ -336,7 +349,7 @@ export default function TeoriaConjuntosScreen() {
           {"528 | 2\n264 | 2\n132 | 2\n 66 | 2\n 33 | 3\n 11 | 11\n  1 |"}
         </Text>
         <Text style={styles.fatoracaoSeta}>{"=>"}</Text>
-        <MathJaxSvg color="#333" fontSize={16}>
+        <MathJaxSvg color="#333" fontSize={tamanhoMathJax}>
           {"$2^4 \\cdot 3^1 \\cdot 11^1$"}
         </MathJaxSvg>
       </View>
@@ -365,7 +378,7 @@ export default function TeoriaConjuntosScreen() {
           {"20, 55 | 2\n10, 55 | 2\n 5, 55 | 5\n 1, 11 | 11\n 1, 1  |"}
         </Text>
         <Text style={styles.fatoracaoSeta}>{"=>"}</Text>
-        <MathJaxSvg color="#333" fontSize={16}>
+        <MathJaxSvg color="#333" fontSize={tamanhoMathJax}>
           {"$2 \\cdot 2 \\cdot 5 \\cdot 11 = 220$"}
         </MathJaxSvg>
       </View>
@@ -381,7 +394,7 @@ export default function TeoriaConjuntosScreen() {
           {"20, 60 | 2\n10, 30 | 2\n 5, 15 | 3\n 5,  5 | 5\n 1,  1 |"}
         </Text>
         <Text style={styles.fatoracaoSeta}>{"=>"}</Text>
-        <MathJaxSvg color="#333" fontSize={16}>
+        <MathJaxSvg color="#333" fontSize={tamanhoMathJax}>
           {"$2 \\cdot 2 \\cdot 5 = 20$"}
         </MathJaxSvg>
       </View>
@@ -403,7 +416,7 @@ export default function TeoriaConjuntosScreen() {
           {"4, 5, 10| 2\n2, 5, 5 | 2\n1, 5, 5 | 5\n1, 1, 1 |"}
         </Text>
         <Text style={styles.fatoracaoSeta}>{"=>"}</Text>
-        <MathJaxSvg color="#333" fontSize={16}>
+        <MathJaxSvg color="#333" fontSize={tamanhoMathJax}>
           {"$2 \\cdot 2 \\cdot 5 = 20$"}
         </MathJaxSvg>
       </View>

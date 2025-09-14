@@ -10,7 +10,7 @@ import {
 import { LinearGradient } from "expo-linear-gradient";
 import { useRouter } from "expo-router";
 import { Colors } from "@/constants/Colors";
-import { IconSymbol } from "@/components/ui/IconSymbol";
+import Ionicons from "@expo/vector-icons/Ionicons";
 import { ThemedText } from "@/components/ThemedText";
 import { Personagem } from "@/components/ui/Personagem";
 import { Feather } from "@expo/vector-icons";
@@ -72,26 +72,26 @@ export default function UnidadeConjuntos() {
 
   return (
     <View style={styles.container}>
-      <View style={styles.headerUnidade}>
+      <View style={styles.header}>
         <TouchableOpacity
-          onPress={() => router.replace('/(matematica)/telaUnidades')}
+          onPress={() => router.replace("/(matematica)/telaUnidades")}
           style={styles.backButton}
         >
-          <IconSymbol name="arrow.left" size={32} color={Colors.light.text} />
+          <Ionicons name="arrow-back" size={24} color="black" />
         </TouchableOpacity>
-        <View style={styles.headerUser}>
-          {/* <Personagem size={32} customizations={customizacoes} /> */}
-          <View style={styles.streakContainer}>
-            <Image
-              source={require("@/assets/images/foguin--ativado-.png")}
-              style={styles.streakIcon}
-            />
-            <Text style={styles.streakNumber}>{streakUsuario}</Text>
+
+        <View style={styles.textHeader}>
+          <View>
+            <ThemedText style={styles.headerTitle}>POTENCIAÇÃO E RADICIAÇÃO</ThemedText>
+            <ThemedText style={styles.headerSubtitle}>Matemática</ThemedText>
           </View>
         </View>
-        <View>
-          <ThemedText style={styles.headerTitle}>Potenciação e Radiciação</ThemedText>
-          <ThemedText style={styles.headerSubtitle}>Matemática</ThemedText>
+        <View style={styles.streakContainer}>
+          <Image
+            source={require("@/assets/images/foguin--ativado-.png")}
+            style={styles.streakIcon}
+          />
+          <Text style={styles.streakNumber}>{streakUsuario}</Text>
         </View>
       </View>
 
@@ -138,6 +138,25 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "white",
   },
+  header: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    paddingHorizontal: 20,
+    paddingTop: 20,
+    marginBottom: 20,
+    marginTop: 40,
+    borderBottomWidth: 2,
+    borderTopWidth: 2,
+    borderColor: "rgba(0, 0, 0, 0.1)",
+  },
+  textHeader: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    paddingHorizontal: 20,
+    marginBottom: 20,
+    position: "relative",
+  },
   headerUser: {
     flexDirection: "row",
     justifyContent: "space-between",
@@ -156,11 +175,9 @@ const styles = StyleSheet.create({
     paddingBottom: 15,
     position: "relative",
   },
-  avatar: {
-    marginRight: 10,
-  },
   streakContainer: {
     alignItems: "center",
+    right: "5%",
   },
   streakIcon: {
     width: 40,
@@ -170,10 +187,13 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: "#060302",
     fontWeight: "bold",
+    textShadowColor: "rgba(0,0,0,0.25)",
+    textShadowOffset: { width: 0, height: 4 },
+    textShadowRadius: 4,
   },
   backButton: {
-    position: "absolute",
-    left: 20,
+    left: "2%",
+    top: "5%",
   },
   headerTitle: {
     fontSize: 30,

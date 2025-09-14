@@ -12,6 +12,11 @@ export default function StackLayout() {
         <Stack.Screen name="telaUnidades" options={{ headerShown: false }} /> 
         <Stack.Screen name="(conjuntos)" options={{ headerShown: false }} />  
         <Stack.Screen name="(potencia_radiciacao)" options={{ headerShown: false }} />  
+        <Stack.Screen name="(fatoracao_sistemas)" options={{ headerShown: false }} />  
+        <Stack.Screen name="(equacoes)" options={{ headerShown: false }} />  
+        <Stack.Screen name="(funcoes)" options={{ headerShown: false }} />  
+        <Stack.Screen name="(grandezas)" options={{ headerShown: false }} />  
+        <Stack.Screen name="(geometria)" options={{ headerShown: false }} />  
     </Stack>
   );  
 }

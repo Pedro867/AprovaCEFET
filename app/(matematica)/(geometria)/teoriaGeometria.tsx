@@ -57,169 +57,407 @@ const QuizScreen = () => {
   };
 
   const paginasDeConteudo = [
-    <View key="Grandezas Proporcionais">
-      <Text style={styles.titulo2}>6.1 Grandezas proporcionais</Text>
-      <Text style={styles.titulo3}>6.1.1 Grandezas diretamente proporcionais</Text>
+    <View key="Teorema de Tales">
+      <Text style={styles.titulo2}>7.1 Teorema de Tales</Text>
       {parseAndRenderMath(
-        "Duas grandezas variáveis são diretamente proporcionais quando, aumentando ou diminuindo uma delas numa determinada razão, a outra aumenta ou diminui nessa mesma razão. As razões de cada elemento da primeira por cada elemento correspondente da segunda são iguais, ou seja, possuem o mesmo coeficiente de proporcionalidade."
+        "O teorema de Tales garante que um feixe de paralelas determina em duas transversais segmentos proporcionais."
       )}
-      <Text style={styles.titulo3}>Exemplo 6.1</Text>
+      <Image
+        source={require("@/app/(matematica)/(geometria)/7.1.png")}
+        style={styles.image}
+      />
       {parseAndRenderMath(
-        "Os números 3, 10 e 8 são diretamente proporcionais aos números 6, 20 e 16, nessa ordem, como podemos ver na seguinte proporção:"
-      )}
-      {parseAndRenderMath("$$ \\frac{3}{6} = \\frac{10}{20} = \\frac{8}{16} = \\frac{1}{2} $$")}
-      <Text style={styles.titulo3}>6.1.2 Grandezas inversamente proporcionais</Text>
-      {parseAndRenderMath(
-        "Duas grandezas são inversamente proporcionais quando, aumentando ou diminuindo uma delas numa determinada razão, a outra diminui ou aumenta na mesma razão. As razões de cada elemento da primeira pelo inverso de cada elemento correspondente da segunda são iguais."
-      )}
-      <Text style={styles.titulo3}>Exemplo 6.2</Text>
-      {parseAndRenderMath(
-        "Os números 9,6 e 2 são inversamente proporcionais aos números 4, 6 e 18, nessa ordem, como podemos ver na seguinte proporção:"
+        "$$ r // s // t \\implies \\frac{AB}{BC} = \\frac{MN}{NP} $$"
       )}
       {parseAndRenderMath(
-        "$$ \\frac{9}{\\frac{1}{4}} = \\frac{6}{\\frac{1}{6}} = \\frac{2}{\\frac{1}{18}} = 36 $$"
-      )}
-      {parseAndRenderMath("Que resulta em:")}
-      {parseAndRenderMath("$$ 9 \\cdot 4 = 6 \\cdot 6 = 2 \\cdot 18 = 36 $$")}
-      <Text style={styles.titulo3}>Exemplo 6.3</Text>
-      {parseAndRenderMath(
-        "Duas pessoas, **A** e **B**, trabalham numa determinada tarefa, sendo que **A** trabalhou durante 6 horas e **B** trabalhou durante 5 horas. Como elas irão dividir com justiça R$ 660,00 que serão pagos pela tarefa? Chamamos de $x$ o valor que **A** irá receber e $y$ o valor que **B** irá receber. Então, $x + y = 660$. A divisão dos R$ 660,00 será em partes **diretamente** proporcionais às horas trabalhadas, então temos:"
-      )}
-      {parseAndRenderMath("$$ \\frac{x}{6} = \\frac{y}{5} $$")}
-      {parseAndRenderMath(
-        "Aplicando as propriedades de proporção, vista nas séries anteriores, temos:"
-      )}
-      {parseAndRenderMath("$$ \\frac{x+y}{6+5} = \\frac{x}{6} = \\frac{y}{5} $$")}
-      {parseAndRenderMath("$$ \\frac{660}{11} = \\frac{x}{6} = \\frac{y}{5} $$")}
-      {parseAndRenderMath("Logo, temos duas equações a serem resolvidas,")}
-      {parseAndRenderMath("$$ \\frac{660}{11} = \\frac{x}{6} \\hspace{1cm} e \\hspace{1cm} \\frac{660}{11} = \\frac{y}{5} $$")}
-      {parseAndRenderMath("Resolvendo cada uma delas, encontramos os seguintes resultados:")}
-      {parseAndRenderMath("$$ x = 360 \\hspace{1cm} e \\hspace{1cm} y = 300 $$")}
-      {parseAndRenderMath(
-        "Assim, a pessoa **A** irá receber R$ 360,00 enquanto a pessoa **B** irá receber R$ 300,00. Uma outra maneira de resolvermos este problema é somarmos os números inversos, $\\frac{1}{3} + \\frac{1}{5} = \\frac{5+3}{15} = \\frac{8}{15}$ partes, Logo, dividindo 660 por 11 temos"
-      )}
-      {parseAndRenderMath("$$ \\frac{660}{11} = 60 $$")}
-      {parseAndRenderMath(
-        "Assim, cada parte terá 60 reais. Sabendo que cada trabalhador receberá conforme as horas trabalhadas, então o trabalhador **A** irá receber $60 \\cdot 6 = 360$ e o trabalhador **B**,$60 \\cdot 5 = 300$."
+        "Podemos considerar, ainda, outras proporções a partir do teorema de Tales:"
       )}
       {parseAndRenderMath(
-        "Vejamos agora como resolver problemas de divisão em partes inversamente proporcionais."
+        "$$ \\frac{AB}{AC} = \\frac{MN}{MP} \\quad \\frac{BC}{AC} = \\frac{NP}{MP} \\quad \\frac{AB}{MN} = \\frac{BC}{NP} $$"
       )}
-      <Text style={styles.titulo3}>Exemplo 6.4</Text>
+      <Text style={styles.titulo3}>Exemplo 7.1</Text>
       {parseAndRenderMath(
-        "Duas pessoas **A** e **B** trabalham durante um mesmo período para fabricar e vender por R$ 160,00 um certo artigo. Se **A** chegou atrasada ao trabalho 3 dias e **B**, 5 dias, quanto cada uma irá receber? Chamamos de $x$ o valor que **A** irá receber e $y$ o valor que **B** irá receber. Então, $x + y = 160$. A divisão dos R$ 160,00 será em partes **inversamente** proporcionais aos dias de atraso, então temos:"
+        "Na figura abaixo, determinar a medida de $x$ indicada."
       )}
-      {parseAndRenderMath("$$ \\frac{x}{\\frac{1}{3}} = \\frac{y}{\\frac{1}{5}} $$")}
-      {parseAndRenderMath("Aplicando as propriedades de proporção, temos:")}
-      {parseAndRenderMath("$$ \\frac{x+y}{\\frac{1}{3} + \\frac{1}{5}} = \\frac{x}{\\frac{1}{3}} = \\frac{y}{\\frac{1}{5}} $$")}
-      {parseAndRenderMath("Ou ainda,")}
-      {parseAndRenderMath("$$ \\frac{160}{\\frac{8}{15}} = \\frac{x}{\\frac{1}{3}} = \\frac{y}{\\frac{1}{5}} $$")}
+      <Image
+        source={require("@/app/(matematica)/(geometria)/7.1.1.png")}
+        style={styles.image}
+      />
       {parseAndRenderMath(
-        "Assim temos as seguintes equações a serem resolvidas,"
-      )}
-      {parseAndRenderMath(
-        "$$ \\frac{160}{\\frac{8}{15}} = \\frac{x}{\\frac{1}{3}} \\hspace{1cm} e \\hspace{1cm} \\frac{160}{\\frac{8}{15}} = \\frac{y}{\\frac{1}{5}} $$"
-      )}
-      {parseAndRenderMath("Resolvendo cada uma das equações acima, obtemos")}
-      {parseAndRenderMath("$$ x = 100 \\hspace{1cm} e \\hspace{1cm} y = 60 $$")}
-      {parseAndRenderMath("Portanto, **A** irá receber R$ 100,00 e **B** R$ 60,00.")}
-      {parseAndRenderMath(
-        "Uma outra maneira de resolvermos este problema é somarmos os números inversos, $\\frac{1}{3} + \\frac{1}{5} = \\frac{5+3}{15} = \\frac{8}{15}$ partes, Logo, dividindo 160 por $\\frac{8}{15}$ temos"
-      )}
-      {parseAndRenderMath("$$ \\frac{160}{\\frac{8}{15}} = 160 \\cdot \\frac{15}{8} = 20 \\cdot 15 = 300 $$")}
-      {parseAndRenderMath(
-        "Em seguida, multiplicamos 300 pelo número correspondente a cada número inverso, ou seja,"
+        "Pelo teorema de Tales, temos:"
       )}
       {parseAndRenderMath(
-        "$$ \\frac{1}{3} \\text{ corresponde a } \\frac{5}{15} \\text{, portanto, } 300 \\cdot \\frac{1}{3} = 100 $$"
+        "$$ \\frac{10}{2} = \\frac{8}{x} $$"
       )}
       {parseAndRenderMath(
-        "$$ \\frac{1}{5} \\text{ corresponde a } \\frac{3}{15} \\text{, portanto, } 300 \\cdot \\frac{1}{5} = 60 $$"
-      )}
-      {parseAndRenderMath("Assim, **A** irá receber 100 reais e **B**, 60 reais.")}
-      <Text style={styles.titulo3}>Exemplo 6.5</Text>
-      {parseAndRenderMath(
-        "Vamos dividir o número 130 em partes inversamente proporcionais a 2, 5 e 6, utilizando o método simplificado."
-      )}
-      {parseAndRenderMath("Primeiramente temos,")}
-      {parseAndRenderMath("$$ \\frac{1}{2} + \\frac{1}{5} + \\frac{1}{6} = \\frac{15 + 6 + 5}{30} = \\frac{26}{30} $$")}
-      {parseAndRenderMath("Em seguida, dividimos 130 em 26 partes, logo")}
-      {parseAndRenderMath("$$ \\frac{130}{26} = 5 $$")}
-      {parseAndRenderMath(
-        "Agora, basta multiplicarmos 5 pelas partes correspondentes aos números inversos."
+        "$$ 10x = 2 \\cdot 8 $$"
       )}
       {parseAndRenderMath(
-        "$\\frac{1}{2}$ corresponde a $\\frac{15}{30}$, portanto, $5 \\cdot 15 = 75$."
+        "$$ 10x = 16 $$"
       )}
       {parseAndRenderMath(
-        "$\\frac{1}{5}$ corresponde a $\\frac{6}{30}$, portanto, $5 \\cdot 6 = 30$."
+        "$$ x = \\frac{16}{10} $$"
       )}
       {parseAndRenderMath(
-        "$\\frac{1}{6}$ corresponde a $\\frac{5}{30}$, portanto, $5 \\cdot 5 = 25$."
+        "$$ x = 1,6 $$"
+      )}
+      <Text style={styles.titulo3}>Exemplo 7.2</Text>
+      {parseAndRenderMath(
+        "Na Figura abaixo, determinar as medidas $x$ e $y$."
+      )}
+      <Image
+        source={require("@/app/(matematica)/(geometria)/7.1.2.png")}
+        style={styles.image}
+      />
+      {parseAndRenderMath(
+        "Pelo teorema de Tales, temos:"
+      )}
+      {parseAndRenderMath(
+        "$$ \\frac{5}{9} = \\frac{x}{y} $$"
+      )}
+      {parseAndRenderMath(
+        "Aplicando a propriedade da soma nas proporções, sabendo que $x + y = 28$:"
+      )}
+      {parseAndRenderMath(
+        "$$ \\frac{5 + 9}{5} = \\frac{x + y}{x} $$"
+      )}
+      {parseAndRenderMath(
+        "$$ \\frac{14}{5} = \\frac{28}{x} $$"
+      )}
+      {parseAndRenderMath(
+        "$$ 14x = 5 \\cdot 28 $$"
+      )}
+      {parseAndRenderMath(
+        "$$ 14x = 140 $$"
+      )}
+      {parseAndRenderMath(
+        "$$ x = \\frac{140}{14} $$"
+      )}
+      {parseAndRenderMath(
+        "$$ x = 10 $$"
+      )}
+      {parseAndRenderMath(
+        "Como $x + y = 28$, então $y = 28 - 10 = 18$."
+      )}
+      <Text style={styles.titulo3}>Exemplo 7.3</Text>
+      {parseAndRenderMath(
+        "Na figura, $RS // BC$. Determinar a medida de $x$ no triângulo abaixo."
+      )}
+      <Image
+        source={require("@/app/(matematica)/(geometria)/7.1.3.png")}
+        style={styles.image}
+      />
+      {parseAndRenderMath(
+        "Pelo teorema de Tales aplicado nos triângulos temos a seguinte relação:"
+      )}
+      {parseAndRenderMath(
+        "$$ \\frac{2x}{x} = \\frac{x + 4}{x + 1} $$"
+      )}
+      {parseAndRenderMath(
+        "$$ 2x(x + 1) = x(x + 4) $$"
+      )}
+      {parseAndRenderMath(
+        "$$ 2x^2 + 2x = x^2 + 4x $$"
+      )}
+      {parseAndRenderMath(
+        "$$ x^2 - 2x = 0 $$"
+      )}
+      {parseAndRenderMath(
+        "$$ x(x - 2) = 0 $$"
+      )}
+      {parseAndRenderMath(
+        "ou $x = 0$ ou $x - 2 = 0 \\implies x = 2$."
+      )}
+      {parseAndRenderMath(
+        "Como $x = 0$ não serve, então $x = 2$."
       )}
     </View>,
 
-    <View key="Regra de tres">
-      <Text style={styles.titulo2}>6.2 Regra de três</Text>
+    <View key="Figuras Semelhantes">
+      <Text style={styles.titulo2}>7.2 Figuras semelhantes</Text>
       {parseAndRenderMath(
-        "Vamos ver agora algumas resoluções de problemas utilizando a regra de três simples e a regra de três composta."
-      )}
-      <Text style={styles.titulo3}>Exemplo 6.6</Text>
-      {parseAndRenderMath(
-        "Cinco metros de um tecido custam 80 reais. Quanto pagarei por 9 metros do mesmo tecido?"
-      )}
-      {parseAndRenderMath("Primeiramente, montamos uma tabela com as variáveis do problema.")}
-      {parseAndRenderMath("Comprimento (m) \\hspace{2cm} Preço (R$)")}
-      {parseAndRenderMath("5 \\hspace{3cm} 80")}
-      {parseAndRenderMath("9 \\hspace{3cm} x")}
-      {parseAndRenderMath(
-        "Podemos observar que, quanto mais se aumentar o comprimento, mais se aumenta o preço, portanto temos uma **regra de três direta**."
-      )}
-      {parseAndRenderMath("Logo,")}
-      {parseAndRenderMath("$$ \\frac{5}{9} = \\frac{80}{x} $$")}
-      {parseAndRenderMath("$$ 5x = 720 $$")}
-      {parseAndRenderMath("$$ x = \\frac{720}{5} $$")}
-      {parseAndRenderMath("$$ x = 144 $$")}
-      {parseAndRenderMath("Assim, irei pagar pelos 9 metros do tecido, 144 reais.")}
-      <Text style={styles.titulo3}>Exemplo 6.7</Text>
-      {parseAndRenderMath(
-        "Um carro percorre um trecho com velocidade de 60 km/h em 40 min. Se ele percorresse o mesmo trecho com uma velocidade de 80 km/h, quanto tempo gastaria?"
-      )}
-      {parseAndRenderMath("Montando a tabela temos,")}
-      {parseAndRenderMath("Velocidade \\hspace{1cm} Tempo")}
-      {parseAndRenderMath("60 \\hspace{1cm} 40")}
-      {parseAndRenderMath("80 \\hspace{1cm} x")}
-      {parseAndRenderMath(
-        "Podemos observar que, quando a velocidade aumenta, o tempo diminui. Portanto, temos uma **regra de três inversa**."
-      )}
-      {parseAndRenderMath("Logo,")}
-      {parseAndRenderMath("$$ \\frac{80}{60} = \\frac{40}{x} $$")}
-      {parseAndRenderMath("$$ 80x = 2400 $$")}
-      {parseAndRenderMath("$$ x = 30 $$")}
-      {parseAndRenderMath("Assim, o carro irá gastar 30 minutos.")}
-      <Text style={styles.titulo3}>Exemplo 6.8</Text>
-      {parseAndRenderMath(
-        "Três operários, trabalhando 6 dias, produzem 400 peças. Quantas peças, desse mesmo tipo, produzirão 7 operários, trabalhando 9 dias?"
-      )}
-      {parseAndRenderMath("Montando a tabela temos,")}
-      {parseAndRenderMath("Operários \\hspace{0.5cm} Dias \\hspace{0.5cm} Peças")}
-      {parseAndRenderMath("3 \\hspace{0.5cm} 6 \\hspace{0.5cm} 400")}
-      {parseAndRenderMath("7 \\hspace{0.5cm} 9 \\hspace{0.5cm} x")}
-      {parseAndRenderMath(
-        "Neste exemplo, temos um problema de regra de três composta. Para resolvê-lo, basta verificarmos as grandezas que contêm o $x$ com as demais, para sabermos se são grandezas diretamente ou inversamente proporcionais. Vejamos:"
+        "Em geometria, duas figuras são semelhantes quando todos os ângulos correspondentes têm medidas iguais e quando todas as distâncias correspondentes são proporcionais."
       )}
       {parseAndRenderMath(
-        "Quando se aumenta o número de operários, o número de peças aumenta, portanto são diretamente proporcionais."
+        "Dois polígonos com o mesmo número de lados são semelhantes quando possuem os ângulos respectivamente congruentes e os lados correspondentes proporcionais."
       )}
       {parseAndRenderMath(
-        "Quando se aumenta os dias trabalhados, o número de peças aumenta, portanto são diretamente proporcionais."
+        "Vamos observar os quadriláteros da Figura 7.2."
       )}
-      {parseAndRenderMath("Assim,")}
-      {parseAndRenderMath("$$ \\frac{3 \\cdot 6}{7 \\cdot 9} = \\frac{400}{x} $$")}
-      {parseAndRenderMath("$$ \\frac{18}{63} = \\frac{400}{x} $$")}
-      {parseAndRenderMath("$$ 18x = 25200 $$")}
-      {parseAndRenderMath("$$ x = 1400 $$")}
-      {parseAndRenderMath("Logo, serão produzidas 1400 peças.")}
+      <Image
+        source={require("@/app/(matematica)/(geometria)/7.2.png")}
+        style={styles.image}
+      />
+      {parseAndRenderMath(
+        "Os ângulos correspondentes possuem a mesma medida: $\\widehat{A} \\cong \\widehat{M}, \\widehat{B} \\cong \\widehat{N}, \\widehat{C} \\cong \\widehat{P}, \\widehat{D} \\cong \\widehat{Q}$."
+      )}
+      {parseAndRenderMath(
+        "Os lados correspondentes são proporcionais."
+      )}
+      {parseAndRenderMath(
+        "$$ \\frac{AB}{MN} = \\frac{6}{2,4} = 2,5 $$"
+      )}
+      {parseAndRenderMath(
+        "$$ \\frac{BC}{NP} = \\frac{3}{1,2} = 2,5 $$"
+      )}
+      {parseAndRenderMath(
+        "$$ \\frac{CD}{PQ} = \\frac{5}{2} = 2,5 $$"
+      )}
+      {parseAndRenderMath(
+        "$$ \\frac{AD}{MQ} = \\frac{4}{1,6} = 2,5 $$"
+      )}
+      {parseAndRenderMath(
+        "Podemos notar que a razão entre qualquer lado do quadrilátero $ABCD$ e o lado correspondente no quadrilátero $MNPQ$ é sempre a mesma, 2,5. Dizemos, então, que 2,5 é a **razão de semelhança** entre os polígonos."
+      )}
+      {parseAndRenderMath(
+        "Vamos resolver alguns problemas envolvendo semelhança de figuras planas."
+      )}
+      <Text style={styles.titulo3}>Exemplo 7.4</Text>
+      {parseAndRenderMath(
+        "Os quadriláteros $ABCD$ e $EFGH$ são semelhantes. O lado $AB$ do primeiro correspondente ao lado $EF$ do segundo. Sabendo que a razão de semelhança do primeiro para o segundo é de $\\frac{2}{3}$ qual é a medida do lado $EF$ do quadrilátero $EFGH$?"
+      )}
+      <Image
+        source={require("@/app/(matematica)/(geometria)/7.2.1.png")}
+        style={styles.image}
+      />
+      {parseAndRenderMath(
+        "Como os quadriláteros são semelhantes, temos:"
+      )}
+      {parseAndRenderMath(
+        "$$ \\frac{AB}{EF} = \\frac{2}{3} $$"
+      )}
+      {parseAndRenderMath(
+        "$$ \\frac{5}{x} = \\frac{2}{3} $$"
+      )}
+      {parseAndRenderMath(
+        "$$ 2x = 15 $$"
+      )}
+      {parseAndRenderMath(
+        "$$ x = \\frac{15}{2} $$"
+      )}
+      {parseAndRenderMath(
+        "$$ x = 7,5 $$"
+      )}
+      {parseAndRenderMath(
+        "Logo, $EF = 7,5cm$."
+      )}
+      <Text style={styles.titulo3}>7.2.1 Triângulos semelhantes</Text>
+      {parseAndRenderMath(
+        "Dois triângulos são semelhantes quando têm os ângulos respectivamente congruentes ou quando os lados correspondentes são proporcionais."
+      )}
+      {parseAndRenderMath(
+        "Se dois triângulos são semelhantes, então os lados de um são proporcionais aos lados homólogos do outro."
+      )}
+      {parseAndRenderMath(
+        "Vejamos alguns exemplos nos quais aplicamos semelhança de triângulos."
+      )}
+      <Text style={styles.titulo3}>Exemplo 7.5</Text>
+      {parseAndRenderMath(
+        "Dada a figura abaixo, determinar os valores de $x$ e $y$."
+      )}
+      <Image
+        source={require("@/app/(matematica)/(geometria)/7.3.png")}
+        style={styles.image}
+      />
+      {parseAndRenderMath(
+        "Como os triângulos têm dois ângulos congruentes, concluímos que eles são semelhantes. Logo,"
+      )}
+      {parseAndRenderMath(
+        "$$ \\frac{6}{3} = \\frac{x}{4} = \\frac{10}{y} $$"
+      )}
+      {parseAndRenderMath(
+        "Assim, resolvendo as duas equações"
+      )}
+      {parseAndRenderMath(
+        "$$ \\frac{6}{3} = \\frac{x}{4} $$"
+      )}
+      {parseAndRenderMath(
+        "e"
+      )}
+      {parseAndRenderMath(
+        "$$ \\frac{6}{3} = \\frac{10}{y} $$"
+      )}
+      {parseAndRenderMath(
+        "obtemos, $x = 8cm$ e $y = 5cm$."
+      )}
+      <Text style={styles.titulo3}>Exemplo 7.6</Text>
+      {parseAndRenderMath(
+        "Um homem de $1,80m$ de altura projeta uma sombra de $2,70m$ de comprimento no mesmo instante em que uma árvore projeta uma sombra de $9m$ de comprimento. Qual é a altura da árvore?"
+      )}
+      {parseAndRenderMath(
+        "Podemos representar este problema conforme a figura abaixo."
+      )}
+      <Image
+        source={require("@/app/(matematica)/(geometria)/7.4.png")}
+        style={styles.image}
+      />
+      {parseAndRenderMath(
+        "Como os triângulos são semelhantes, temos"
+      )}
+      {parseAndRenderMath(
+        "$$ \\frac{1,80}{x} = \\frac{2,70}{9} $$"
+      )}
+      {parseAndRenderMath(
+        "$$ 2,70x = 1,80 \\cdot 9 $$"
+      )}
+      {parseAndRenderMath(
+        "$$ 2,70x = 16,2 $$"
+      )}
+      {parseAndRenderMath(
+        "$$ x = \\frac{16,2}{2,70} $$"
+      )}
+      {parseAndRenderMath(
+        "$$ x = 6 $$"
+      )}
+      {parseAndRenderMath(
+        "Então, a altura da árvore é de $6m$."
+      )}
+    </View>,
+
+    <View key="Relacoes Metricas no Triangulo Retangulo">
+      <Text style={styles.titulo2}>7.3 Relações métricas no triângulo retângulo</Text>
+      <Text style={styles.titulo3}>7.3.1 Teorema de Pitágoras</Text>
+      {parseAndRenderMath(
+        "Em todo triângulo retângulo, o quadrado da medida da hipotenusa é igual à soma dos quadrados das medidas dos catetos."
+      )}
+      <Image
+        source={require("@/app/(matematica)/(geometria)/7.5.png")}
+        style={styles.image}
+      />
+      {parseAndRenderMath(
+        "Então, pelo teorema de Pitágoras, tem-se"
+      )}
+      {parseAndRenderMath(
+        "$$ c^2 = a^2 + b^2 $$"
+      )}
+      <Text style={styles.titulo3}>Exemplo 7.7</Text>
+      {parseAndRenderMath(
+        "No triângulo retângulo, determine a medida $x$."
+      )}
+      <Image
+        source={require("@/app/(matematica)/(geometria)/7.6.png")}
+        style={styles.image}
+      />
+      {parseAndRenderMath(
+        "Pelo teorema de Pitágoras, temos,"
+      )}
+      {parseAndRenderMath(
+        "$$ (\\sqrt{5})^2 = (x - 3)^2 + (2x - 1)^2 $$"
+      )}
+      {parseAndRenderMath(
+        "$$ 5 = x^2 - 6x + 9 + 4x^2 - 4x + 1 $$"
+      )}
+      {parseAndRenderMath(
+        "$$ 5x^2 - 10x + 5 = 0 $$"
+      )}
+      {parseAndRenderMath(
+        "Resolvendo a equação do $2^o$ grau, temos:"
+      )}
+      {parseAndRenderMath(
+        "$$ \\Delta = (-10)^2 - 4 \\cdot (5) \\cdot (5) = 100 - 100 = 0 $$"
+      )}
+      {parseAndRenderMath(
+        "Assim,"
+      )}
+      {parseAndRenderMath(
+        "$$ x = \\frac{-(-10) \\pm \\sqrt{0}}{2 \\cdot 5} = \\frac{10}{10} = 1 $$"
+      )}
+      <Text style={styles.titulo3}>7.3.2 Outras relações métricas no triângulo retângulo</Text>
+      {parseAndRenderMath(
+        "Dado o triângulo retângulo $ABC$. Sabendo que $AH$ é a altura relativa à base (hipotenusa), pode-se mostrar as seguintes relações métricas."
+      )}
+      <Image
+        source={require("@/app/(matematica)/(geometria)/7.7.png")}
+        style={styles.image}
+      />
+      {parseAndRenderMath(
+        "\\begin{array}{|c|c|} \\hline b^2 = m \\cdot a & c^2 = n \\cdot a \\\\ \\hline h^2 = m \\cdot n & b \\cdot c = a \\cdot h \\\\ \\hline a = m + n & a^2 = b^2 + c^2 \\\\ \\hline \\end{array}"
+      )}
+      <Text style={styles.titulo3}>Exemplo 7.8</Text>
+      {parseAndRenderMath(
+        "No triângulo retângulo, determinar as medidas $a$, $h$, $b$ e $c$ indicadas."
+      )}
+      <Image
+        source={require("@/app/(matematica)/(geometria)/7.8.png")}
+        style={styles.image}
+      />
+      {parseAndRenderMath(
+        "$$ a = m + n $$"
+      )}
+      {parseAndRenderMath(
+        "$$ a = 3,2 + 1,8 $$"
+      )}
+      {parseAndRenderMath(
+        "$$ a = 5cm $$"
+      )}
+      {parseAndRenderMath(
+        "$$ h^2 = mn $$"
+      )}
+      {parseAndRenderMath(
+        "$$ h^2 = 1,8 \\cdot 3,2 $$"
+      )}
+      {parseAndRenderMath(
+        "$$ h^2 = 5,76 $$"
+      )}
+      {parseAndRenderMath(
+        "$$ h = \\sqrt{5,76} $$"
+      )}
+      {parseAndRenderMath(
+        "$$ h = 2,4cm $$"
+      )}
+      {parseAndRenderMath(
+        "$$ b^2 = a \\cdot m $$"
+      )}
+      {parseAndRenderMath(
+        "$$ b^2 = 5 \\cdot 3,2 $$"
+      )}
+      {parseAndRenderMath(
+        "$$ b^2 = 16 $$"
+      )}
+      {parseAndRenderMath(
+        "$$ b = \\sqrt{16} $$"
+      )}
+      {parseAndRenderMath(
+        "$$ b = 4cm $$"
+      )}
+      {parseAndRenderMath(
+        "$$ c^2 = a \\cdot n $$"
+      )}
+      {parseAndRenderMath(
+        "$$ c^2 = 5 \\cdot 1,8 $$"
+      )}
+      {parseAndRenderMath(
+        "$$ c^2 = 9 $$"
+      )}
+      {parseAndRenderMath(
+        "$$ c = \\sqrt{9} $$"
+      )}
+      {parseAndRenderMath(
+        "$$ c = 3cm $$"
+      )}
+    </View>,
+
+    <View key="Calculando a Area de Algumas Figuras Geometricas">
+      <Text style={styles.titulo2}>7.4 Calculando a área de algumas figuras geométricas</Text>
+      {parseAndRenderMath(
+        "Vamos relembrar como se calcular as áreas de algumas figuras geométricas."
+      )}
+      <Image
+        source={require("@/app/(matematica)/(geometria)/area_retangulo_quadrado.png")}
+        style={styles.image}
+      />
+      <Image
+        source={require("@/app/(matematica)/(geometria)/area_triangulo.png")}
+        style={styles.image}
+      />
+      <Image
+        source={require("@/app/(matematica)/(geometria)/area_trapezio.png")}
+        style={styles.image}
+      />
+      <Image
+        source={require("@/app/(matematica)/(geometria)/area_circulo.png")}
+        style={styles.image}
+      />
     </View>
   ];
 

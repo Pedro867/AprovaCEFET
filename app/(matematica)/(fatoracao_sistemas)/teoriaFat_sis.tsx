@@ -183,7 +183,7 @@ const QuizScreen = () => {
         "Consideremos o seguinte sistema de equações. Aplicando o método da adição temos:"
       )}
       {parseAndRenderMath(
-        "$$ \\begin{cases} 2x + y = 10 \\\\ x - y = 8 \\end{cases} $$"
+        "$ \\begin{cases} 2x + y = 10 \\\\ x - y = 8 \\end{cases} $"
       )}
       {parseAndRenderMath("$3x = 18$")}
       {parseAndRenderMath("$x = 6$")}
@@ -196,7 +196,7 @@ const QuizScreen = () => {
         "Consideremos o mesmo sistema de equações visto no método da adição. Assim, pelo método da substituição, vamos proceder da seguinte forma:"
       )}
       {parseAndRenderMath(
-        "$$ \\begin{cases} 2x + y = 10 \\\\ x - y = 8 \\rightarrow x = 8 + y \\end{cases} $$"
+        "$ \\begin{cases} 2x + y = 10 \\\\ x - y = 8 \\rightarrow x = 8 + y \\end{cases} $"
       )}
       {parseAndRenderMath("Logo, substituindo na primeira equação temos,")}
       {parseAndRenderMath("$2x + y = 10$")}

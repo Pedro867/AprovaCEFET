@@ -294,7 +294,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: "5%",
     paddingTop: 20,
     marginBottom: 20,
-    marginTop: 20,
+    marginTop: "10%",
   },
   avatar: {
     marginRight: 12,

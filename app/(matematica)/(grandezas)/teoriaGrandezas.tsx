@@ -67,7 +67,7 @@ const QuizScreen = () => {
       {parseAndRenderMath(
         "Os números 3, 10 e 8 são diretamente proporcionais aos números 6, 20 e 16, nessa ordem, como podemos ver na seguinte proporção:"
       )}
-      {parseAndRenderMath("$$ \\frac{3}{6} = \\frac{10}{20} = \\frac{8}{16} = \\frac{1}{2} $$")}
+      {parseAndRenderMath("$ \\frac{3}{6} = \\frac{10}{20} = \\frac{8}{16} = \\frac{1}{2} $")}
       <Text style={styles.titulo3}>6.1.2 Grandezas inversamente proporcionais</Text>
       {parseAndRenderMath(
         "Duas grandezas são inversamente proporcionais quando, aumentando ou diminuindo uma delas numa determinada razão, a outra diminui ou aumenta na mesma razão. As razões de cada elemento da primeira pelo inverso de cada elemento correspondente da segunda são iguais."
@@ -77,28 +77,28 @@ const QuizScreen = () => {
         "Os números 9,6 e 2 são inversamente proporcionais aos números 4, 6 e 18, nessa ordem, como podemos ver na seguinte proporção:"
       )}
       {parseAndRenderMath(
-        "$$ \\frac{9}{\\frac{1}{4}} = \\frac{6}{\\frac{1}{6}} = \\frac{2}{\\frac{1}{18}} = 36 $$"
+        "$ \\frac{9}{\\frac{1}{4}} = \\frac{6}{\\frac{1}{6}} = \\frac{2}{\\frac{1}{18}} = 36 $"
       )}
       {parseAndRenderMath("Que resulta em:")}
-      {parseAndRenderMath("$$ 9 \\cdot 4 = 6 \\cdot 6 = 2 \\cdot 18 = 36 $$")}
+      {parseAndRenderMath("$ 9 \\cdot 4 = 6 \\cdot 6 = 2 \\cdot 18 = 36 $")}
       <Text style={styles.titulo3}>Exemplo 6.3</Text>
       {parseAndRenderMath(
         "Duas pessoas, **A** e **B**, trabalham numa determinada tarefa, sendo que **A** trabalhou durante 6 horas e **B** trabalhou durante 5 horas. Como elas irão dividir com justiça R$ 660,00 que serão pagos pela tarefa? Chamamos de $x$ o valor que **A** irá receber e $y$ o valor que **B** irá receber. Então, $x + y = 660$. A divisão dos R$ 660,00 será em partes **diretamente** proporcionais às horas trabalhadas, então temos:"
       )}
-      {parseAndRenderMath("$$ \\frac{x}{6} = \\frac{y}{5} $$")}
+      {parseAndRenderMath("$ \\frac{x}{6} = \\frac{y}{5} $")}
       {parseAndRenderMath(
         "Aplicando as propriedades de proporção, vista nas séries anteriores, temos:"
       )}
-      {parseAndRenderMath("$$ \\frac{x+y}{6+5} = \\frac{x}{6} = \\frac{y}{5} $$")}
-      {parseAndRenderMath("$$ \\frac{660}{11} = \\frac{x}{6} = \\frac{y}{5} $$")}
+      {parseAndRenderMath("$ \\frac{x+y}{6+5} = \\frac{x}{6} = \\frac{y}{5} $")}
+      {parseAndRenderMath("$ \\frac{660}{11} = \\frac{x}{6} = \\frac{y}{5} $")}
       {parseAndRenderMath("Logo, temos duas equações a serem resolvidas,")}
-      {parseAndRenderMath("$$ \\frac{660}{11} = \\frac{x}{6} \\hspace{1cm} e \\hspace{1cm} \\frac{660}{11} = \\frac{y}{5} $$")}
+      {parseAndRenderMath("$ \\frac{660}{11} = \\frac{x}{6} \\hspace{1cm} e \\hspace{1cm} \\frac{660}{11} = \\frac{y}{5} $")}
       {parseAndRenderMath("Resolvendo cada uma delas, encontramos os seguintes resultados:")}
-      {parseAndRenderMath("$$ x = 360 \\hspace{1cm} e \\hspace{1cm} y = 300 $$")}
+      {parseAndRenderMath("$ x = 360 \\hspace{1cm} e \\hspace{1cm} y = 300 $")}
       {parseAndRenderMath(
         "Assim, a pessoa **A** irá receber R$ 360,00 enquanto a pessoa **B** irá receber R$ 300,00. Uma outra maneira de resolvermos este problema é somarmos os números inversos, $\\frac{1}{3} + \\frac{1}{5} = \\frac{5+3}{15} = \\frac{8}{15}$ partes, Logo, dividindo 660 por 11 temos"
       )}
-      {parseAndRenderMath("$$ \\frac{660}{11} = 60 $$")}
+      {parseAndRenderMath("$ \\frac{660}{11} = 60 $")}
       {parseAndRenderMath(
         "Assim, cada parte terá 60 reais. Sabendo que cada trabalhador receberá conforme as horas trabalhadas, então o trabalhador **A** irá receber $60 \\cdot 6 = 360$ e o trabalhador **B**,$60 \\cdot 5 = 300$."
       )}
@@ -109,32 +109,32 @@ const QuizScreen = () => {
       {parseAndRenderMath(
         "Duas pessoas **A** e **B** trabalham durante um mesmo período para fabricar e vender por R$ 160,00 um certo artigo. Se **A** chegou atrasada ao trabalho 3 dias e **B**, 5 dias, quanto cada uma irá receber? Chamamos de $x$ o valor que **A** irá receber e $y$ o valor que **B** irá receber. Então, $x + y = 160$. A divisão dos R$ 160,00 será em partes **inversamente** proporcionais aos dias de atraso, então temos:"
       )}
-      {parseAndRenderMath("$$ \\frac{x}{\\frac{1}{3}} = \\frac{y}{\\frac{1}{5}} $$")}
+      {parseAndRenderMath("$ \\frac{x}{\\frac{1}{3}} = \\frac{y}{\\frac{1}{5}} $")}
       {parseAndRenderMath("Aplicando as propriedades de proporção, temos:")}
-      {parseAndRenderMath("$$ \\frac{x+y}{\\frac{1}{3} + \\frac{1}{5}} = \\frac{x}{\\frac{1}{3}} = \\frac{y}{\\frac{1}{5}} $$")}
+      {parseAndRenderMath("$ \\frac{x+y}{\\frac{1}{3} + \\frac{1}{5}} = \\frac{x}{\\frac{1}{3}} = \\frac{y}{\\frac{1}{5}} $")}
       {parseAndRenderMath("Ou ainda,")}
-      {parseAndRenderMath("$$ \\frac{160}{\\frac{8}{15}} = \\frac{x}{\\frac{1}{3}} = \\frac{y}{\\frac{1}{5}} $$")}
+      {parseAndRenderMath("$ \\frac{160}{\\frac{8}{15}} = \\frac{x}{\\frac{1}{3}} = \\frac{y}{\\frac{1}{5}} $")}
       {parseAndRenderMath(
         "Assim temos as seguintes equações a serem resolvidas,"
       )}
       {parseAndRenderMath(
-        "$$ \\frac{160}{\\frac{8}{15}} = \\frac{x}{\\frac{1}{3}} \\hspace{1cm} e \\hspace{1cm} \\frac{160}{\\frac{8}{15}} = \\frac{y}{\\frac{1}{5}} $$"
+        "$ \\frac{160}{\\frac{8}{15}} = \\frac{x}{\\frac{1}{3}} \\hspace{1cm} e \\hspace{1cm} \\frac{160}{\\frac{8}{15}} = \\frac{y}{\\frac{1}{5}} $"
       )}
       {parseAndRenderMath("Resolvendo cada uma das equações acima, obtemos")}
-      {parseAndRenderMath("$$ x = 100 \\hspace{1cm} e \\hspace{1cm} y = 60 $$")}
+      {parseAndRenderMath("$ x = 100 \\hspace{1cm} e \\hspace{1cm} y = 60 $")}
       {parseAndRenderMath("Portanto, **A** irá receber R$ 100,00 e **B** R$ 60,00.")}
       {parseAndRenderMath(
         "Uma outra maneira de resolvermos este problema é somarmos os números inversos, $\\frac{1}{3} + \\frac{1}{5} = \\frac{5+3}{15} = \\frac{8}{15}$ partes, Logo, dividindo 160 por $\\frac{8}{15}$ temos"
       )}
-      {parseAndRenderMath("$$ \\frac{160}{\\frac{8}{15}} = 160 \\cdot \\frac{15}{8} = 20 \\cdot 15 = 300 $$")}
+      {parseAndRenderMath("$ \\frac{160}{\\frac{8}{15}} = 160 \\cdot \\frac{15}{8} = 20 \\cdot 15 = 300 $")}
       {parseAndRenderMath(
         "Em seguida, multiplicamos 300 pelo número correspondente a cada número inverso, ou seja,"
       )}
       {parseAndRenderMath(
-        "$$ \\frac{1}{3} \\text{ corresponde a } \\frac{5}{15} \\text{, portanto, } 300 \\cdot \\frac{1}{3} = 100 $$"
+        "$ \\frac{1}{3} \\text{ corresponde a } \\frac{5}{15} \\text{, portanto, } 300 \\cdot \\frac{1}{3} = 100 $"
       )}
       {parseAndRenderMath(
-        "$$ \\frac{1}{5} \\text{ corresponde a } \\frac{3}{15} \\text{, portanto, } 300 \\cdot \\frac{1}{5} = 60 $$"
+        "$ \\frac{1}{5} \\text{ corresponde a } \\frac{3}{15} \\text{, portanto, } 300 \\cdot \\frac{1}{5} = 60 $"
       )}
       {parseAndRenderMath("Assim, **A** irá receber 100 reais e **B**, 60 reais.")}
       <Text style={styles.titulo3}>Exemplo 6.5</Text>
@@ -142,9 +142,9 @@ const QuizScreen = () => {
         "Vamos dividir o número 130 em partes inversamente proporcionais a 2, 5 e 6, utilizando o método simplificado."
       )}
       {parseAndRenderMath("Primeiramente temos,")}
-      {parseAndRenderMath("$$ \\frac{1}{2} + \\frac{1}{5} + \\frac{1}{6} = \\frac{15 + 6 + 5}{30} = \\frac{26}{30} $$")}
+      {parseAndRenderMath("$ \\frac{1}{2} + \\frac{1}{5} + \\frac{1}{6} = \\frac{15 + 6 + 5}{30} = \\frac{26}{30} $")}
       {parseAndRenderMath("Em seguida, dividimos 130 em 26 partes, logo")}
-      {parseAndRenderMath("$$ \\frac{130}{26} = 5 $$")}
+      {parseAndRenderMath("$ \\frac{130}{26} = 5 $")}
       {parseAndRenderMath(
         "Agora, basta multiplicarmos 5 pelas partes correspondentes aos números inversos."
       )}
@@ -176,10 +176,10 @@ const QuizScreen = () => {
         "Podemos observar que, quanto mais se aumentar o comprimento, mais se aumenta o preço, portanto temos uma **regra de três direta**."
       )}
       {parseAndRenderMath("Logo,")}
-      {parseAndRenderMath("$$ \\frac{5}{9} = \\frac{80}{x} $$")}
-      {parseAndRenderMath("$$ 5x = 720 $$")}
-      {parseAndRenderMath("$$ x = \\frac{720}{5} $$")}
-      {parseAndRenderMath("$$ x = 144 $$")}
+      {parseAndRenderMath("$ \\frac{5}{9} = \\frac{80}{x} $")}
+      {parseAndRenderMath("$ 5x = 720 $")}
+      {parseAndRenderMath("$ x = \\frac{720}{5} $")}
+      {parseAndRenderMath("$ x = 144 $")}
       {parseAndRenderMath("Assim, irei pagar pelos 9 metros do tecido, 144 reais.")}
       <Text style={styles.titulo3}>Exemplo 6.7</Text>
       {parseAndRenderMath(
@@ -193,9 +193,9 @@ const QuizScreen = () => {
         "Podemos observar que, quando a velocidade aumenta, o tempo diminui. Portanto, temos uma **regra de três inversa**."
       )}
       {parseAndRenderMath("Logo,")}
-      {parseAndRenderMath("$$ \\frac{80}{60} = \\frac{40}{x} $$")}
-      {parseAndRenderMath("$$ 80x = 2400 $$")}
-      {parseAndRenderMath("$$ x = 30 $$")}
+      {parseAndRenderMath("$ \\frac{80}{60} = \\frac{40}{x} $")}
+      {parseAndRenderMath("$ 80x = 2400 $")}
+      {parseAndRenderMath("$ x = 30 $")}
       {parseAndRenderMath("Assim, o carro irá gastar 30 minutos.")}
       <Text style={styles.titulo3}>Exemplo 6.8</Text>
       {parseAndRenderMath(
@@ -215,10 +215,10 @@ const QuizScreen = () => {
         "Quando se aumenta os dias trabalhados, o número de peças aumenta, portanto são diretamente proporcionais."
       )}
       {parseAndRenderMath("Assim,")}
-      {parseAndRenderMath("$$ \\frac{3 \\cdot 6}{7 \\cdot 9} = \\frac{400}{x} $$")}
-      {parseAndRenderMath("$$ \\frac{18}{63} = \\frac{400}{x} $$")}
-      {parseAndRenderMath("$$ 18x = 25200 $$")}
-      {parseAndRenderMath("$$ x = 1400 $$")}
+      {parseAndRenderMath("$ \\frac{3 \\cdot 6}{7 \\cdot 9} = \\frac{400}{x} $")}
+      {parseAndRenderMath("$ \\frac{18}{63} = \\frac{400}{x} $")}
+      {parseAndRenderMath("$ 18x = 25200 $")}
+      {parseAndRenderMath("$ x = 1400 $")}
       {parseAndRenderMath("Logo, serão produzidas 1400 peças.")}
     </View>
   ];

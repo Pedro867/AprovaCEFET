@@ -67,13 +67,13 @@ const QuizScreen = () => {
         style={styles.image}
       />
       {parseAndRenderMath(
-        "$$ r // s // t \\implies \\frac{AB}{BC} = \\frac{MN}{NP} $$"
+        "$ r // s // t \\implies \\frac{AB}{BC} = \\frac{MN}{NP} $"
       )}
       {parseAndRenderMath(
         "Podemos considerar, ainda, outras proporções a partir do teorema de Tales:"
       )}
       {parseAndRenderMath(
-        "$$ \\frac{AB}{AC} = \\frac{MN}{MP} \\quad \\frac{BC}{AC} = \\frac{NP}{MP} \\quad \\frac{AB}{MN} = \\frac{BC}{NP} $$"
+        "$ \\frac{AB}{AC} = \\frac{MN}{MP} \\quad \\frac{BC}{AC} = \\frac{NP}{MP} \\quad \\frac{AB}{MN} = \\frac{BC}{NP} $"
       )}
       <Text style={styles.titulo3}>Exemplo 7.1</Text>
       {parseAndRenderMath(
@@ -87,19 +87,19 @@ const QuizScreen = () => {
         "Pelo teorema de Tales, temos:"
       )}
       {parseAndRenderMath(
-        "$$ \\frac{10}{2} = \\frac{8}{x} $$"
+        "$ \\frac{10}{2} = \\frac{8}{x} $"
       )}
       {parseAndRenderMath(
-        "$$ 10x = 2 \\cdot 8 $$"
+        "$ 10x = 2 \\cdot 8 $"
       )}
       {parseAndRenderMath(
-        "$$ 10x = 16 $$"
+        "$ 10x = 16 $"
       )}
       {parseAndRenderMath(
-        "$$ x = \\frac{16}{10} $$"
+        "$ x = \\frac{16}{10} $"
       )}
       {parseAndRenderMath(
-        "$$ x = 1,6 $$"
+        "$ x = 1,6 $"
       )}
       <Text style={styles.titulo3}>Exemplo 7.2</Text>
       {parseAndRenderMath(
@@ -113,28 +113,28 @@ const QuizScreen = () => {
         "Pelo teorema de Tales, temos:"
       )}
       {parseAndRenderMath(
-        "$$ \\frac{5}{9} = \\frac{x}{y} $$"
+        "$ \\frac{5}{9} = \\frac{x}{y} $"
       )}
       {parseAndRenderMath(
         "Aplicando a propriedade da soma nas proporções, sabendo que $x + y = 28$:"
       )}
       {parseAndRenderMath(
-        "$$ \\frac{5 + 9}{5} = \\frac{x + y}{x} $$"
+        "$ \\frac{5 + 9}{5} = \\frac{x + y}{x} $"
       )}
       {parseAndRenderMath(
-        "$$ \\frac{14}{5} = \\frac{28}{x} $$"
+        "$ \\frac{14}{5} = \\frac{28}{x} $"
       )}
       {parseAndRenderMath(
-        "$$ 14x = 5 \\cdot 28 $$"
+        "$ 14x = 5 \\cdot 28 $"
       )}
       {parseAndRenderMath(
-        "$$ 14x = 140 $$"
+        "$ 14x = 140 $"
       )}
       {parseAndRenderMath(
-        "$$ x = \\frac{140}{14} $$"
+        "$ x = \\frac{140}{14} $"
       )}
       {parseAndRenderMath(
-        "$$ x = 10 $$"
+        "$ x = 10 $"
       )}
       {parseAndRenderMath(
         "Como $x + y = 28$, então $y = 28 - 10 = 18$."
@@ -151,19 +151,19 @@ const QuizScreen = () => {
         "Pelo teorema de Tales aplicado nos triângulos temos a seguinte relação:"
       )}
       {parseAndRenderMath(
-        "$$ \\frac{2x}{x} = \\frac{x + 4}{x + 1} $$"
+        "$ \\frac{2x}{x} = \\frac{x + 4}{x + 1} $"
       )}
       {parseAndRenderMath(
-        "$$ 2x(x + 1) = x(x + 4) $$"
+        "$ 2x(x + 1) = x(x + 4) $"
       )}
       {parseAndRenderMath(
-        "$$ 2x^2 + 2x = x^2 + 4x $$"
+        "$ 2x^2 + 2x = x^2 + 4x $"
       )}
       {parseAndRenderMath(
-        "$$ x^2 - 2x = 0 $$"
+        "$ x^2 - 2x = 0 $"
       )}
       {parseAndRenderMath(
-        "$$ x(x - 2) = 0 $$"
+        "$ x(x - 2) = 0 $"
       )}
       {parseAndRenderMath(
         "ou $x = 0$ ou $x - 2 = 0 \\implies x = 2$."
@@ -195,16 +195,16 @@ const QuizScreen = () => {
         "Os lados correspondentes são proporcionais."
       )}
       {parseAndRenderMath(
-        "$$ \\frac{AB}{MN} = \\frac{6}{2,4} = 2,5 $$"
+        "$ \\frac{AB}{MN} = \\frac{6}{2,4} = 2,5 $"
       )}
       {parseAndRenderMath(
-        "$$ \\frac{BC}{NP} = \\frac{3}{1,2} = 2,5 $$"
+        "$ \\frac{BC}{NP} = \\frac{3}{1,2} = 2,5 $"
       )}
       {parseAndRenderMath(
-        "$$ \\frac{CD}{PQ} = \\frac{5}{2} = 2,5 $$"
+        "$ \\frac{CD}{PQ} = \\frac{5}{2} = 2,5 $"
       )}
       {parseAndRenderMath(
-        "$$ \\frac{AD}{MQ} = \\frac{4}{1,6} = 2,5 $$"
+        "$ \\frac{AD}{MQ} = \\frac{4}{1,6} = 2,5 $"
       )}
       {parseAndRenderMath(
         "Podemos notar que a razão entre qualquer lado do quadrilátero $ABCD$ e o lado correspondente no quadrilátero $MNPQ$ é sempre a mesma, 2,5. Dizemos, então, que 2,5 é a **razão de semelhança** entre os polígonos."
@@ -224,19 +224,19 @@ const QuizScreen = () => {
         "Como os quadriláteros são semelhantes, temos:"
       )}
       {parseAndRenderMath(
-        "$$ \\frac{AB}{EF} = \\frac{2}{3} $$"
+        "$ \\frac{AB}{EF} = \\frac{2}{3} $"
       )}
       {parseAndRenderMath(
-        "$$ \\frac{5}{x} = \\frac{2}{3} $$"
+        "$ \\frac{5}{x} = \\frac{2}{3} $"
       )}
       {parseAndRenderMath(
-        "$$ 2x = 15 $$"
+        "$ 2x = 15 $"
       )}
       {parseAndRenderMath(
-        "$$ x = \\frac{15}{2} $$"
+        "$ x = \\frac{15}{2} $"
       )}
       {parseAndRenderMath(
-        "$$ x = 7,5 $$"
+        "$ x = 7,5 $"
       )}
       {parseAndRenderMath(
         "Logo, $EF = 7,5cm$."
@@ -263,19 +263,19 @@ const QuizScreen = () => {
         "Como os triângulos têm dois ângulos congruentes, concluímos que eles são semelhantes. Logo,"
       )}
       {parseAndRenderMath(
-        "$$ \\frac{6}{3} = \\frac{x}{4} = \\frac{10}{y} $$"
+        "$ \\frac{6}{3} = \\frac{x}{4} = \\frac{10}{y} $"
       )}
       {parseAndRenderMath(
         "Assim, resolvendo as duas equações"
       )}
       {parseAndRenderMath(
-        "$$ \\frac{6}{3} = \\frac{x}{4} $$"
+        "$ \\frac{6}{3} = \\frac{x}{4} $"
       )}
       {parseAndRenderMath(
         "e"
       )}
       {parseAndRenderMath(
-        "$$ \\frac{6}{3} = \\frac{10}{y} $$"
+        "$ \\frac{6}{3} = \\frac{10}{y} $"
       )}
       {parseAndRenderMath(
         "obtemos, $x = 8cm$ e $y = 5cm$."
@@ -295,19 +295,19 @@ const QuizScreen = () => {
         "Como os triângulos são semelhantes, temos"
       )}
       {parseAndRenderMath(
-        "$$ \\frac{1,80}{x} = \\frac{2,70}{9} $$"
+        "$ \\frac{1,80}{x} = \\frac{2,70}{9} $"
       )}
       {parseAndRenderMath(
-        "$$ 2,70x = 1,80 \\cdot 9 $$"
+        "$ 2,70x = 1,80 \\cdot 9 $"
       )}
       {parseAndRenderMath(
-        "$$ 2,70x = 16,2 $$"
+        "$ 2,70x = 16,2 $"
       )}
       {parseAndRenderMath(
-        "$$ x = \\frac{16,2}{2,70} $$"
+        "$ x = \\frac{16,2}{2,70} $"
       )}
       {parseAndRenderMath(
-        "$$ x = 6 $$"
+        "$ x = 6 $"
       )}
       {parseAndRenderMath(
         "Então, a altura da árvore é de $6m$."
@@ -328,7 +328,7 @@ const QuizScreen = () => {
         "Então, pelo teorema de Pitágoras, tem-se"
       )}
       {parseAndRenderMath(
-        "$$ c^2 = a^2 + b^2 $$"
+        "$ c^2 = a^2 + b^2 $"
       )}
       <Text style={styles.titulo3}>Exemplo 7.7</Text>
       {parseAndRenderMath(
@@ -342,25 +342,25 @@ const QuizScreen = () => {
         "Pelo teorema de Pitágoras, temos,"
       )}
       {parseAndRenderMath(
-        "$$ (\\sqrt{5})^2 = (x - 3)^2 + (2x - 1)^2 $$"
+        "$ (\\sqrt{5})^2 = (x - 3)^2 + (2x - 1)^2 $"
       )}
       {parseAndRenderMath(
-        "$$ 5 = x^2 - 6x + 9 + 4x^2 - 4x + 1 $$"
+        "$ 5 = x^2 - 6x + 9 + 4x^2 - 4x + 1 $"
       )}
       {parseAndRenderMath(
-        "$$ 5x^2 - 10x + 5 = 0 $$"
+        "$ 5x^2 - 10x + 5 = 0 $"
       )}
       {parseAndRenderMath(
         "Resolvendo a equação do $2^o$ grau, temos:"
       )}
       {parseAndRenderMath(
-        "$$ \\Delta = (-10)^2 - 4 \\cdot (5) \\cdot (5) = 100 - 100 = 0 $$"
+        "$ \\Delta = (-10)^2 - 4 \\cdot (5) \\cdot (5) = 100 - 100 = 0 $"
       )}
       {parseAndRenderMath(
         "Assim,"
       )}
       {parseAndRenderMath(
-        "$$ x = \\frac{-(-10) \\pm \\sqrt{0}}{2 \\cdot 5} = \\frac{10}{10} = 1 $$"
+        "$ x = \\frac{-(-10) \\pm \\sqrt{0}}{2 \\cdot 5} = \\frac{10}{10} = 1 $"
       )}
       <Text style={styles.titulo3}>7.3.2 Outras relações métricas no triângulo retângulo</Text>
       {parseAndRenderMath(
@@ -382,58 +382,58 @@ const QuizScreen = () => {
         style={styles.image}
       />
       {parseAndRenderMath(
-        "$$ a = m + n $$"
+        "$ a = m + n $"
       )}
       {parseAndRenderMath(
-        "$$ a = 3,2 + 1,8 $$"
+        "$ a = 3,2 + 1,8 $"
       )}
       {parseAndRenderMath(
-        "$$ a = 5cm $$"
+        "$ a = 5cm $"
       )}
       {parseAndRenderMath(
-        "$$ h^2 = mn $$"
+        "$ h^2 = mn $"
       )}
       {parseAndRenderMath(
-        "$$ h^2 = 1,8 \\cdot 3,2 $$"
+        "$ h^2 = 1,8 \\cdot 3,2 $"
       )}
       {parseAndRenderMath(
-        "$$ h^2 = 5,76 $$"
+        "$ h^2 = 5,76 $"
       )}
       {parseAndRenderMath(
-        "$$ h = \\sqrt{5,76} $$"
+        "$ h = \\sqrt{5,76} $"
       )}
       {parseAndRenderMath(
-        "$$ h = 2,4cm $$"
+        "$ h = 2,4cm $"
       )}
       {parseAndRenderMath(
-        "$$ b^2 = a \\cdot m $$"
+        "$ b^2 = a \\cdot m $"
       )}
       {parseAndRenderMath(
-        "$$ b^2 = 5 \\cdot 3,2 $$"
+        "$ b^2 = 5 \\cdot 3,2 $"
       )}
       {parseAndRenderMath(
-        "$$ b^2 = 16 $$"
+        "$ b^2 = 16 $"
       )}
       {parseAndRenderMath(
-        "$$ b = \\sqrt{16} $$"
+        "$ b = \\sqrt{16} $"
       )}
       {parseAndRenderMath(
-        "$$ b = 4cm $$"
+        "$ b = 4cm $"
       )}
       {parseAndRenderMath(
-        "$$ c^2 = a \\cdot n $$"
+        "$ c^2 = a \\cdot n $"
       )}
       {parseAndRenderMath(
-        "$$ c^2 = 5 \\cdot 1,8 $$"
+        "$ c^2 = 5 \\cdot 1,8 $"
       )}
       {parseAndRenderMath(
-        "$$ c^2 = 9 $$"
+        "$ c^2 = 9 $"
       )}
       {parseAndRenderMath(
-        "$$ c = \\sqrt{9} $$"
+        "$ c = \\sqrt{9} $"
       )}
       {parseAndRenderMath(
-        "$$ c = 3cm $$"
+        "$ c = 3cm $"
       )}
     </View>,
 

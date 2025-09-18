@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import {
   StyleSheet,
   View,
@@ -9,6 +9,8 @@ import {
   ScrollView,
   TextStyle,
   ViewStyle,
+  Platform,
+  Animated,
 } from "react-native";
 import { ProgressBar } from "@/components/ui/ProgressBar";
 import { Personagem } from "@/components/ui/Personagem";
@@ -47,6 +49,18 @@ const imageMap: { [key: string]: any } = {
   "./q4.png": require("./q4.png"),
 };
 
+let tamanhoMathJax = 0;
+//TAMANHO DO MATHJAX
+if (Platform.OS == 'web') {
+  tamanhoMathJax = 2.5;
+}
+if (Platform.OS == 'android') {
+  tamanhoMathJax = 17;
+}
+if (Platform.OS == 'ios') {
+  tamanhoMathJax = 17; //testar dps
+}
+
 const QuizScreen = () => {
   const [quizStarted, setQuizStarted] = useState(false); //estado para controlar o inicio do quiz
   const [questions, setQuestions] = useState<Question[]>(initialQuestions);
@@ -74,6 +88,10 @@ const QuizScreen = () => {
   const STREAK_KEY = "userStreak";
   const LAST_STREAK_DATE_KEY = "lastStreakDate";
 
+  // Estados para a animação
+  const animatedValue = useRef(new Animated.Value(0)).current;
+  const animatedOpacity = useRef(new Animated.Value(0)).current;
+
   const saveQuizState = async (state) => {
     /*try {
       const jsonValue = JSON.stringify(state);
@@ -82,18 +100,19 @@ const QuizScreen = () => {
       console.error('Erro ao salvar o estado do quiz:', e);
     }*/
   };
+
   useFocusEffect(
     useCallback(() => {
-      
+
       const carregaDadosUsuario = async () => {
         try {
-        const savedName = await AsyncStorage.getItem("userPrimeiroNome");
-        if (savedName) {
-          setUserName(savedName);
+          const savedName = await AsyncStorage.getItem("userPrimeiroNome");
+          if (savedName) {
+            setUserName(savedName);
+          }
+        } catch (error) {
+          console.error("Erro ao carregar nome do usuário", error);
         }
-      } catch (error) {
-        console.error("Erro ao carregar nome do usuário", error);
-      }
 
         try {
           const savedCustomizations = await AsyncStorage.getItem(
@@ -101,7 +120,7 @@ const QuizScreen = () => {
           );
           if (savedCustomizations) {
             setCustomizacoes(JSON.parse(savedCustomizations));
-            
+
           }
         } catch (error) {
           console.error("Erro ao carregar o personagem do usuário", error);
@@ -111,6 +130,7 @@ const QuizScreen = () => {
       carregaDadosUsuario();
     }, [])
   );
+
   const saveCoins = async (newCoin: number) => {
     try {
       await updateCoinsBD(newCoin);
@@ -217,6 +237,7 @@ const QuizScreen = () => {
       saveCoins(coins);
     }
   }, [coins, isLoading]);
+
   useEffect(() => {
     // lógica para carregar estado inicial do quiz e do usuário
     const loadInitialData = async () => {
@@ -268,9 +289,26 @@ const QuizScreen = () => {
       setCoinsUsuario(newCoins);
       setCoinsIncreaseAmount(pointsToAdd);
       setShowCoinsIncrease(true);
-      setTimeout(() => {
-        setShowCoinsIncrease(false);
-      }, 1000);
+
+      // Inicia a animação
+      animatedValue.setValue(0); // Reseta o valor para o início
+      animatedOpacity.setValue(1); // Torna o texto visível
+
+      Animated.parallel([
+        Animated.timing(animatedValue, {
+          toValue: -30, // Move para cima
+          duration: 800,
+          useNativeDriver: true,
+        }),
+        Animated.timing(animatedOpacity, {
+          toValue: 0, // Desaparece
+          duration: 800,
+          delay: 200, // Começa a desaparecer um pouco depois
+          useNativeDriver: true,
+        }),
+      ]).start(() => {
+        setShowCoinsIncrease(false); // Esconde o componente no final da animação
+      });
 
       // Lógica da streak diária
       const today = new Date();
@@ -422,6 +460,21 @@ const QuizScreen = () => {
                 style={styles.coinIcon}
               />
               <Text style={styles.coinNumber}>{coins}</Text>
+
+              {showCoinsIncrease && (
+              <Animated.View
+                style={[
+                  styles.coinsIncreaseContainer,
+                  {
+                    opacity: animatedOpacity,
+                    transform: [{ translateY: animatedValue }],
+                  },
+                ]}
+              >
+                <Text style={styles.coinsIncreaseText}>+{coinsIncreaseAmount}</Text>
+              </Animated.View>
+            )}
+
             </View>
           </View>
 
@@ -457,7 +510,7 @@ const QuizScreen = () => {
                     onPress={() => handleOptionSelect(option)}
                     disabled={answered}
                   >
-                    <Text style={styles.optionText}>{option}</Text>
+                    {parseAndRenderMathOptions2(option)}
                   </TouchableOpacity>
                 );
               })}
@@ -496,7 +549,6 @@ const QuizScreen = () => {
         <View style={styles.scoreContent}>
           <Image
             style={styles.trofeuIcon}
-            contentFit="cover"
             source={require("@/assets/images/trofeu.png")}
           />
           <Text style={styles.quizFinalizado}>QUIZ FINALIZADO!</Text>
@@ -542,57 +594,90 @@ const QuizScreen = () => {
   return renderQuizScreen();
 };
 
-const parseAndRenderMath = (text, fontSize) => {
-  // Regex para encontrar equações inline ($...$) e em display ($$...$$)
-  const parts = text.split(/(\$.*?\$|\$\$[\s\S]*?\$\$)/);
+const parseAndRenderMathOptions = (text: string) => {
+  // A regex agora busca por fórmulas ($...$) ou texto em negrito (**...**)
+  const parts = text.split(/(\$[^\$]+\$|\*\*[^\*]+\*\*)/);
 
-  return parts.map((part, index) => {
-    // Se a parte começar com $, é uma equação MathJax
-    if (part.startsWith("$")) {
-      return (
-        <MathJaxSvg key={index} fontSize={2}>
-          {part}
-        </MathJaxSvg>
-      );
-    }
-    // Caso contrário, é texto normal
-    else {
-      return (
-        <Text key={index} style={{ fontSize: fontSize }}>
-          {part}
-        </Text>
-      );
-    }
-  });
+  return (
+    <Text style={styles.optionText}>
+      {parts.map((part, index) => {
+        if (part.startsWith("$") && part.endsWith("$")) {
+          return (
+            <MathJaxSvg
+              key={index}
+              color={styles.optionText.color}
+              fontSize={tamanhoMathJax}
+            >
+              {part}
+            </MathJaxSvg>
+          );
+        }
+        if (part.startsWith("**") && part.endsWith("**")) {
+          // Remove os asteriscos e aplica o estilo de negrito
+          return (
+            <Text key={index} style={styles.boldText}>
+              {part.slice(2, -2)}
+            </Text>
+          );
+        }
+        return part;
+      })}
+    </Text>
+  );
+};
+
+const parseAndRenderMathOptions2 = (text: string) => {
+  // Regex para capturar fórmulas ($...$) e texto em negrito (**...**)
+  const regex = /(\$\$[\s\S]*?\$\$|\$[^\$]+\$|\*\*[^\*]+\*\*)/g;
+  const parts = text.split(regex).filter(Boolean); // Filtra strings vazias
+
+  return (
+    <Text style={styles.optionText}>
+      {parts.map((part, index) => {
+        if (part.startsWith('$$') && part.endsWith('$$')) {
+          // Fórmulas em display mode
+          return (
+            <View key={index}>
+              <MathJaxSvg
+                key={`math-display-${index}`}
+                fontSize={tamanhoMathJax}
+                color={styles.optionText.color}>
+                {part}
+              </MathJaxSvg>
+            </View>
+          );
+        }
+        if (part.startsWith('$') && part.endsWith('$')) {
+          // Fórmulas inline
+          return (
+            <MathJaxSvg
+              key={`math-inline-${index}`}
+              fontSize={tamanhoMathJax}
+              color={styles.optionText.color}>
+              {part}
+            </MathJaxSvg>
+          );
+        }
+        if (part.startsWith('**') && part.endsWith('**')) {
+          // Texto em negrito
+          return (
+            <Text key={`bold-${index}`} style={styles.boldText}>
+              {part.slice(2, -2)}
+            </Text>
+          );
+        }
+        // Texto normal
+        return (
+          <Text key={`text-${index}`} style={styles.optionText}>
+            {part}
+          </Text>
+        );
+      })}
+    </Text>
+  );
 };
 
 /* PRECISA MUDAR A FUNÇÃO PARA RETORNAR A STRING DAS OPÇÕES PQ É UM TOUCHABLEOPACITY */
-const parseAndRenderMathOptions = (text, fontSize) => {
-  // Regex para encontrar equações inline ($...$) e em display ($$...$$)
-  const parts = text.split(/(\$.*?\$|\$\$[\s\S]*?\$\$)/);
-
-  return parts.map((part, index) => {
-    // Se a parte começar com $, é uma equação MathJax
-    if (part.startsWith("$")) {
-      return (
-        <MathJaxSvg key={index} fontSize={2}>
-          {part}
-        </MathJaxSvg>
-      );
-    }
-    // Caso contrário, é texto normal
-    else {
-      return (
-        <Text key={index} style={{ fontSize: fontSize }}>
-          {part}
-        </Text>
-      );
-    }
-  });
-};
-// const exampleText =
-//   `Olá! A fórmula da área do círculo é $A = \\pi r^2$. A soma de uma progressão ` +
-//   `aritmética é $ S_n = \\frac{n(a_1 + a_n)}{2} $. Esta é a demonstração.`;
 
 const styles = StyleSheet.create({
   //estilos gerais e carregamento
@@ -624,10 +709,10 @@ const styles = StyleSheet.create({
     fontSize: 46,
     fontFamily: Fonts.family.bold,
     textAlign: "center",
-    color: "#ffffffff", 
+    color: "#ffffffff",
   },
   userName: {
-    color: "#0D1B52", 
+    color: "#0D1B52",
     fontFamily: Fonts.family.bold,
   },
 
@@ -650,7 +735,7 @@ const styles = StyleSheet.create({
   },
   footerButton: {
     alignItems: "center",
-    marginBottom: 20,
+    marginBottom: "10%",
   },
 
   // Estilos da Tela de Quiz
@@ -674,9 +759,24 @@ const styles = StyleSheet.create({
     fontFamily: Fonts.family.bold,
     color: "white",
   },
-  coinContainer: { flexDirection: "row", alignItems: "center" },
-  coinIcon: { width: 30, height: 30 },
-  coinNumber: { fontSize: 18, fontWeight: "bold", marginLeft: 5 },
+
+  coinContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    position: "relative", // Necessário para posicionar o Animated.View
+  },
+
+  coinIcon: { 
+    width: 30, 
+    height: 30 
+  },
+
+  coinNumber: { 
+    fontSize: 18, 
+    fontWeight: "bold", 
+    marginLeft: 5 
+  },
+
   questionContainer: { flex: 1, justifyContent: "center" },
   questionBox: {
     backgroundColor: "#FFFFFF",
@@ -710,6 +810,11 @@ const styles = StyleSheet.create({
   optionText: {
     fontSize: 18,
     fontFamily: Fonts.family.kumbhSans,
+    color: "#333",
+  },
+  boldText: {
+    fontFamily: Fonts.family.bold,
+    color: "#333",
   },
   selectedButton: { borderColor: "#007bff", borderWidth: 3 },
   correctButton: { backgroundColor: "#d4edda", borderColor: "#28a745" },
@@ -740,7 +845,27 @@ const styles = StyleSheet.create({
     fontFamily: Fonts.family.kumbhSans,
     textAlign: "center",
   },
-  scoreButtonContainer: { width: "90%", gap: 40, alignItems: "center" },
+  scoreButtonContainer: { 
+    width: "90%", 
+    gap: 40, 
+    alignItems: "center" 
+  },
+
+  //animação de pontuação
+  coinsIncreaseContainer: {
+    position: "absolute",
+    right: 0,
+    bottom: "100%", // Começa acima do coinContainer
+    alignItems: "center",
+  },
+  coinsIncreaseText: {
+    fontSize: 18,
+    fontFamily: Fonts.family.bold,
+    color: "#28a745", // Verde para pontos positivos
+    textShadowColor: "rgba(0, 0, 0, 0.25)",
+    textShadowOffset: { width: 1, height: 1 },
+    textShadowRadius: 2,
+  },
 });
 
 export default QuizScreen;

@@ -6,25 +6,27 @@ import { Colors, Fonts, Spacing } from '@/constants/Colors'; //importando consta
 
 interface Props extends TouchableOpacityProps {
   title: string;
+  buttonColor?: string;
+  textColor?: string;
 }
 
 
-export function BotaoCustomizado({ title, style, ...rest }: Props) {
+export function BotaoCustomizado({ title, style, buttonColor, textColor, ...rest }: Props) {
   return (
     
-    <TouchableOpacity style={[styles.buttonWrapper, style]} {...rest}>
+    <TouchableOpacity style={[styles.button, style]} {...rest}>
       {/* sombra do botão */}
       <View style={styles.buttonShadow} />
       {/* Corpo principal do botão */}
-      <View style={styles.buttonBody}>
-        <Text style={styles.buttonText}>{title}</Text>
+      <View style= {[styles.buttonBody, { backgroundColor: buttonColor || Colors.primary }]}>
+        <Text style={[styles.buttonText, { color: textColor || Colors.textLight }]}>{title}</Text>
       </View>
     </TouchableOpacity>
   );
 }
 
 const styles = StyleSheet.create({
-  buttonWrapper: { 
+  button: { 
     width: 232,
     height: 64,
   },

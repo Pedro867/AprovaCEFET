@@ -130,12 +130,12 @@ const styles = StyleSheet.create({
   },
   scrollViewContent: {
     padding: Spacing.large,
-    paddingTop: 60,
+    paddingTop: 65,
   },
   header: {
     flexDirection: "row",
     alignItems: "center",
-    marginBottom: Spacing.large,
+    marginBottom: 50,
   },
   backButton: {
     position: "absolute",
@@ -149,7 +149,7 @@ const styles = StyleSheet.create({
     color: "black",
     textAlign: "center",
     flex: 1,
-    marginBottom: 20,
+    //marginBottom: 20,
   },
   profileSection: {
     alignItems: "center",

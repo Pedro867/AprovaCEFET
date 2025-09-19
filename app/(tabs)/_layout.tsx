@@ -66,6 +66,20 @@ export default function TabLayout() {
           tabBarStyle: { display: "none" },
         }}
       />
+    <Tabs.Screen
+        name="changeName" 
+        options={{
+          href: null,
+          tabBarStyle: { display: "none" },
+        }}
+      />
+      <Tabs.Screen
+        name="changePassword" 
+        options={{
+          href: null,
+          tabBarStyle: { display: "none" },
+        }}
+      />
     </Tabs>
   );
 }

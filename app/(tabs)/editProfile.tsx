@@ -38,6 +38,7 @@ export default function EditProfileScreen() {
           text: "Deletar",
           onPress: async () => {
             await deleteAcc();
+            await AsyncStorage.clear();
             router.replace('/');
           },
           style: "destructive",

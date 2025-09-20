@@ -272,3 +272,45 @@ export async function deleteAcc() {
         Alert.alert("Erro", "Erro ao conectar no servidor.");
     }
 }
+
+export async function saveData() {
+    let idUser = await AsyncStorage.getItem("userID");
+    idUser = parseInt(idUser);
+
+    try {
+        const response = await fetch("https://backend-aprovacefet.onrender.com/saveData", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                idUser
+            }),
+        });
+
+        const text = await response.text();
+        console.log("Resposta crua:", text);
+
+        let data;
+        try {
+            data = JSON.parse(text);
+        } catch (err) {
+            console.error("Resposta não era JSON:", text);
+            Alert.alert("Erro", "O servidor retornou algo inesperado.", [{
+                text: "ok",
+                onPress: () => console.log("jhsvafhgk")
+            }]);
+            return;
+        }
+
+        if (data.success) {
+            //DEPOIS TIRAR OS TOKENS
+            return true;
+        } else {
+            Alert.alert("Erro", data.message || "Erro ao conectar ao BD.");
+        }
+    } catch (error) {
+        console.error(error);
+        Alert.alert("Erro", "Erro ao conectar no servidor.");
+    }
+}

@@ -7,6 +7,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import { Colors, Fonts, Spacing } from "@/constants/Colors";
 import { BotaoCustomizado } from "@/components/ui/ButtomCustom";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { deleteAcc } from "../api/conexaoFetch";
 // Importe a função da API que criamos no passo anterior (se você a criou)
 // import { deleteUserAccount } from "../api/conexaoFetch";
 
@@ -36,8 +37,8 @@ export default function EditProfileScreen() {
         {
           text: "Deletar",
           onPress: async () => {
-            
-             //TORRES --> colocar a logica do bd aq
+            await deleteAcc();
+            router.replace('/');
           },
           style: "destructive",
         },

@@ -13,6 +13,8 @@ import { BotaoCustomizado } from "@/components/ui/ButtomCustom";
 import { Spacing, Colors } from "@/constants/Colors";
 import { CalendarioCustomizado } from "@/components/ui/CalendarCustom";
 
+import { saveData } from "../api/conexaoFetch";
+
 
 export default function TelaRegistroData() {
   const [selectedDate, setSelectedDate] = useState(""); // guarda a data selecionada no formato 'YYYY-MM-DD'
@@ -30,9 +32,8 @@ export default function TelaRegistroData() {
       const today = new Date().toISOString().split('T')[0]; // Pega a data de hoje em formato YYYY-MM-DD
       await AsyncStorage.setItem('dataProva', selectedDate);
       await AsyncStorage.setItem('inicioEstudo', today);
-
+      await saveData(selectedDate);
       router.replace('/(tabs)/secao');
-      // Torres--> colocar a logica de salvar no bd a data no perfil do usuario (vai precisar pra colocar na home page)
     } catch (error) {
       console.error("Erro ao salvar a data:", error);
       Alert.alert("Erro", "Não foi possível salvar a data da prova.");
@@ -40,7 +41,7 @@ export default function TelaRegistroData() {
   };
 
   return (
-   <LinearGradient colors={[Colors.gradientStart, Colors.gradientEnd]} style={styles.container}>
+  <LinearGradient colors={[Colors.gradientStart, Colors.gradientEnd]} style={styles.container}>
       <SafeAreaView style={styles.safeArea}>
         <Text style={styles.title}>Selecione a data da sua prova:</Text>
 

@@ -91,6 +91,7 @@ export async function validaLogin(email, senha) {
             await AsyncStorage.setItem("userEmail", data.email);
             await AsyncStorage.setItem("userPontuacao", data.pontuacao.toString()); //tem q ser string pra salvar
             await AsyncStorage.setItem("userStreak", data.streak.toString());
+            await AsyncStorage.setItem("dataProva", data.dataProva);
             Alert.alert("Sucesso", data.message);
             return true;
         } else {
@@ -273,7 +274,7 @@ export async function deleteAcc() {
     }
 }
 
-export async function saveData() {
+export async function saveData(selectedDate) {
     let idUser = await AsyncStorage.getItem("userID");
     idUser = parseInt(idUser);
 
@@ -284,7 +285,8 @@ export async function saveData() {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
-                idUser
+                idUser,
+                selectedDate
             }),
         });
 
@@ -304,7 +306,6 @@ export async function saveData() {
         }
 
         if (data.success) {
-            //DEPOIS TIRAR OS TOKENS
             return true;
         } else {
             Alert.alert("Erro", data.message || "Erro ao conectar ao BD.");

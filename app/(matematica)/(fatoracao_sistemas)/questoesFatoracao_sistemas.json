@@ -1,0 +1,122 @@
+[
+  {
+    "id": "1",
+    "question": "Na prevenção da gripe suína está sendo muito usada uma solução com 70% de álcool e 30% de água, cuja concentração é de 70%. Um laboratório desenvolve duas soluções da seguinte maneira:\n\n• $S_1$ com 60% do princípio ativo P;\n\n• $S_2$ com 80% de $S_1$ e 20% de P.\n\nDessa forma, $S_2$ tem uma concentração percentual de, aproximadamente,",
+    "options": [
+      "68",
+      "78",
+      "88",
+      "98"
+    ]
+  },
+  {
+    "id": "2",
+    "question": "Segundo as estimativas do IBGE, em 2009 o Brasil tem, aproximadamente, 190 milhões de habitantes espalhados pelas suas 27 unidades da federação e 5565 municípios. A tabela seguinte mostra o número aproximado de habitantes em algumas capitais brasileiras.\n\nCom base nesses dados, é correto afirmar que, aproximadamente, ............ habitantes estão distribuídos em ..............\n\nA opção que completa, corretamente, as lacunas acima é",
+    "options": [
+      "1,68.$10^8$, 5561 municípios.",
+      "2,45.$10^7$, 5561 municípios.",
+      "7,52.$10^6$, Belo Horizonte e Brasília.",
+      "7,10.$10^6$, Belo Horizonte e São Paulo."
+    ]
+  },
+  {
+    "id": "3",
+    "question": "O gráfico, a seguir, representa o faturamento mensal correspondente ao total de ganho menos o total de gastos de uma indústria automobilística.\n\nAnalisando esse gráfico, é correto afirmar que o faturamento da empresa",
+    "options": [
+      "foi negativo no primeiro semestre.",
+      "foi negativo em março e nulo em novembro.",
+      "manteve-se constante entre junho e setembro.",
+      "diminuiu entre os meses de fevereiro e março."
+    ]
+  },
+  {
+    "id": "4",
+    "question": "Para realizar uma dinâmica em uma aula de Matemática, a classe foi dividida em grupos de 7 participantes, e um deles deveria ser o líder. Como o grupo de José teve dificuldade para fazer essa escolha, ele propôs as seguintes etapas:\n\n1. Identificar-se com a letra A e aos seus colegas com as letras B, C, D, E, F e G.\n\n2. Pedir ao professor que escolhesse um número inteiro n maior ou igual a 2131 e menor ou igual a 2136.\n\n3. Iniciar a contagem de 1 até n, associando 1 para o aluno identificado com B, 2 para C e, assim por diante, até chegar a ele mesmo, identificado com A. Depois continuar a contagem, recomeçando pelo B e, assim por diante, até se chegar ao número n.\n\n4. Tornar-se-á líder o aluno associado a n.\n\nConsiderando essa situação, é INCORRETO afirmar que",
+    "options": [
+      "o aluno A poderá ser o líder.",
+      "o aluno C jamais será líder.",
+      "o líder será o aluno D, se n = 2132.",
+      "o líder será o aluno F, se n = 2133."
+    ]
+  },
+  {
+    "id": "5",
+    "question": "Considere o número real a, tal que 0 < a < 1. Entre os números abaixo, o maior que a é",
+    "options": [
+      "$a^3$",
+      "0,8a",
+      "$a^2$",
+      "$\\sqrt{a}$"
+    ]
+  },
+  {
+    "id": "6",
+    "question": "(CEFET/MG-2009) Um artesão, ao criar um brinco, corta de uma chapa de metal cinco triângulos equiláteros, de tamanhos diferentes que são fixados um sobre o outro, do maior para o menor, ficando igualmente espaçados. Para melhorar o seu acabamento, colam-se pedras de \"strass\" nas laterais dos triângulos, conforme a figura.\n\nSabendo-se que a quantidade de \"strass\" em cada lado é proporcional ao seu tamanho e que o lado menor mede 1cm, é correto afirmar que a soma dos comprimentos de todos os lados é",
+    "options": [
+      "42",
+      "45",
+      "48",
+      "51"
+    ]
+  },
+  {
+    "id": "7",
+    "question": "Seja $x + y = -2$ e $3x - 2y = 19$, logo o valor de $\\frac{(y-x)^6}{(3x+y)^4}$ é:",
+    "options": [
+      "226",
+      "326",
+      "-326",
+      "-226"
+    ]
+  },
+  {
+    "id": "8",
+    "question": "No balcão de uma lanchonete, a diferença entre a quantidade de pães de queijo e o de coxinhas é 6, e o produto entre o número de pastéis e o de pães de queijo é 720. Se o total de unidades desses três salgados é 72, e o número de pães de queijo é maior que 20, pode-se afirmar que a quantidade de coxinhas é",
+    "options": [
+      "16",
+      "18",
+      "20",
+      "22"
+    ]
+  },
+  {
+    "id": "9",
+    "question": "Num reservatório com 280 litros de água, foram acrescentados 3/20 de sua capacidade. Se ainda faltam 57% para encher totalmente esse reservatório, então a quinta parte do restante, em litros, é igual a",
+    "options": [
+      "114",
+      "116",
+      "118",
+      "120"
+    ]
+  },
+  {
+    "id": "10",
+    "question": "Considere a fração $\\frac{n}{m}$. Se o numerador dessa fração for aumentado de uma unidade e o denominador diminuído de duas unidades, a nova fração obtida será igual a 1. E, se o denominador for aumentado de duas unidades e o numerador for subtraído de três, a fração será igual a 1/3. Nessas condições, o valor de $(m-n)^{n-m}$, será",
+    "options": [
+      "-27",
+      "1/27",
+      "1/4",
+      "4"
+    ]
+  },
+  {
+    "id": "11",
+    "question": "Os preços do arroz (A) e feijão (F), nos supermercados $S_1$ e $S_2$, estão discriminados nos seguintes gráficos:\n\nNos supermercados $S_1$ e $S_2$, as embalagens de arroz e feijão são sempre de um quilo. Um consumidor X foi a $S_1$ e gastou R$ 30,00, comprando arroz e feijão. Já o consumidor Y teve uma despesa de R$ 36,00, adquirindo a mesma quantidade de cada produto em $S_2$. Assim sendo, o total de alimentos, em kg, que cada um comprou é",
+    "options": [
+      "6",
+      "7",
+      "8",
+      "9"
+    ]
+  },
+  {
+    "id": "12",
+    "question": "Considere a sequência abaixo:\n\n1.9 + 2 = 11\n12.9 + 3 = 111\n123.9 + 4 = 1 111\n\n.....................\n\n.....................\n\nNessas condições, o número 1 111 111 111 pode ser escrito da forma",
+    "options": [
+      "123456.9 + 7",
+      "1234567.9 + 8",
+      "12345678.9 + 9",
+      "123456789.9 + 10"
+    ]
+  }
+]

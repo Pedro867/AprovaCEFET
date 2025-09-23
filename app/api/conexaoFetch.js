@@ -2,7 +2,8 @@ import {
     Alert
 } from "react-native";
 import {
-    saveToken, getToken
+    saveToken,
+    getToken
 } from "./manipulacaoTokens";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
@@ -38,7 +39,7 @@ export async function validaCadastro(nome, email, senha) {
 
         if (data.success) {
             await saveToken(data.token);
-            await AsyncStorage.setItem("userID", data.id.toString());//tem q ser string pra salvar
+            await AsyncStorage.setItem("userID", data.id.toString()); //tem q ser string pra salvar
             await AsyncStorage.setItem("userNome", data.nome);
             await AsyncStorage.setItem("userPrimeiroNome", data.primeiroNome);
             await AsyncStorage.setItem("userEmail", data.email);
@@ -85,7 +86,7 @@ export async function validaLogin(email, senha) {
 
         if (data.success) {
             await saveToken(data.token);
-            await AsyncStorage.setItem("userID", data.id.toString());//tem q ser string pra salvar
+            await AsyncStorage.setItem("userID", data.id.toString()); //tem q ser string pra salvar
             await AsyncStorage.setItem("userNome", data.nome);
             await AsyncStorage.setItem("userPrimeiroNome", data.primeiroNome);
             await AsyncStorage.setItem("userEmail", data.email);
@@ -232,6 +233,48 @@ export async function updateNomeBD(newNome) {
     }
 }
 
+export async function updateSenhaBD(newSenha) {
+
+    let idUser = await AsyncStorage.getItem("userID");
+    idUser = parseInt(idUser);
+
+    try {
+        const response = await fetch("https://backend-aprovacefet.onrender.com/updateSenha", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                newSenha,
+                idUser
+            }),
+        });
+
+        const text = await response.text();
+
+        let data;
+        try {
+            data = JSON.parse(text);
+        } catch (err) {
+            console.error("Resposta não era JSON:", text);
+            Alert.alert("Erro", "O servidor retornou algo inesperado.", [{
+                text: "ok",
+                onPress: () => console.log("jhsvafhgk")
+            }]);
+            return;
+        }
+
+        if (data.success) {
+            return true;
+        } else {
+            Alert.alert("Erro", data.message || "Erro ao conectar ao BD.");
+        }
+    } catch (error) {
+        console.error(error);
+        Alert.alert("Erro", "Erro ao conectar no servidor.");
+    }
+}
+
 export async function deleteAcc() {
     let idUser = await AsyncStorage.getItem("userID");
     idUser = parseInt(idUser);
@@ -309,6 +352,49 @@ export async function saveData(selectedDate) {
             return true;
         } else {
             Alert.alert("Erro", data.message || "Erro ao conectar ao BD.");
+        }
+    } catch (error) {
+        console.error(error);
+        Alert.alert("Erro", "Erro ao conectar no servidor.");
+    }
+}
+
+//ESSA FUNCAO SERVE P VERIFICAR SE A SENHA CONCEDIDA COINCIDE COM A DO BD
+export async function checkSenha(senha) {
+    let idUser = await AsyncStorage.getItem("userID");
+    idUser = parseInt(idUser);
+
+    try {
+        const response = await fetch("https://backend-aprovacefet.onrender.com/checkSenha", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                idUser,
+                senha
+            }),
+        });
+
+        const text = await response.text();
+
+        let data;
+        try {
+            data = JSON.parse(text);
+        } catch (err) {
+            console.error("Resposta não era JSON:", text);
+            Alert.alert("Erro", "O servidor retornou algo inesperado.", [{
+                text: "ok",
+                onPress: () => console.log("jhsvafhgk")
+            }]);
+            return;
+        }
+
+        if (data.success) {
+            return true;
+        } else {
+            Alert.alert("Erro", data.message || "Erro ao conectar ao BD.");
+            return false;
         }
     } catch (error) {
         console.error(error);

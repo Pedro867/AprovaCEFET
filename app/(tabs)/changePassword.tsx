@@ -9,6 +9,8 @@ import { BotaoCustomizado } from "@/components/ui/ButtomCustom";
 import { InputCustomizado } from "@/components/ui/InputCustom";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
+import { checkSenha, updateSenhaBD } from "../api/conexaoFetch";
+
 export default function ChangePasswordScreen() {
   const router = useRouter();
   const [senhaAtual, setSenhaAtual] = useState("");
@@ -16,7 +18,7 @@ export default function ChangePasswordScreen() {
   const [confirmarSenha, setConfirmarSenha] = useState("");
 
   const handleSalvarSenha = async () => {
-    //TORRES --> colocar a logica do bd aq
+
     if (!senhaAtual || !novaSenha || !confirmarSenha) {
       Alert.alert("Erro", "Por favor, preencha todos os campos.");
       return;
@@ -27,17 +29,14 @@ export default function ChangePasswordScreen() {
     }
 
     try {
-        const senhaSalva = await AsyncStorage.getItem("userSenha");
-        if (senhaAtual !== senhaSalva) {
+        const senhaValida = await checkSenha(senhaAtual);
+        if (!senhaValida) {
             Alert.alert("Erro", "A senha atual está incorreta.");
             return;
         }
-
-        
-        await AsyncStorage.setItem("userSenha", novaSenha);
+        await updateSenhaBD(novaSenha);
         Alert.alert("Sucesso!", "Sua senha foi atualizada.");
         router.back();
-
     } catch (error) {
         console.error("Erro ao salvar a senha:", error);
         Alert.alert("Erro", "Não foi possível salvar a nova senha.");

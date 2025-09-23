@@ -9,30 +9,31 @@ import { BotaoCustomizado } from "@/components/ui/ButtomCustom";
 import { InputCustomizado } from "@/components/ui/InputCustom";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
+import { checkSenha, updateNomeBD } from "../api/conexaoFetch";
+
 export default function ChangeNameScreen() {
   const router = useRouter();
   const [novoNome, setNovoNome] = useState("");
   const [senhaAtual, setSenhaAtual] = useState("");
 
   const handleSalvarNome = async () => {
-    //TORRES --> colocar a logica do bd aq
-
     if (!novoNome || !senhaAtual) {
       Alert.alert("Erro", "Por favor, preencha todos os campos.");
       return;
     }
 
     try {
-      const senhaSalva = await AsyncStorage.getItem("userSenha"); //pega senha atual
-
-      if (senhaAtual === senhaSalva) {
+      const senhaValida = await checkSenha(senhaAtual);
+      if (senhaValida) {
         // se a senha estiver correta, salva o novo nome (local)
         await AsyncStorage.setItem("userNome", novoNome);
         await AsyncStorage.setItem("userPrimeiroNome", novoNome.split(" ")[0]);
+        await updateNomeBD(novoNome); //salva no BD
         Alert.alert("Sucesso!", "Seu nome foi atualizado.");
         router.back(); 
       } else {
         Alert.alert("Erro", "A senha atual está incorreta.");
+        //router.back(); 
       }
     } catch (error) {
       console.error("Erro ao salvar o nome:", error);

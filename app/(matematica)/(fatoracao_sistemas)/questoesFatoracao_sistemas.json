@@ -7,7 +7,8 @@
       "78",
       "88",
       "98"
-    ]
+    ],
+    "correctAnswer": "12"
   },
   {
     "id": "2",
@@ -17,7 +18,9 @@
       "2,45.$10^7$, 5561 municípios.",
       "7,52.$10^6$, Belo Horizonte e Brasília.",
       "7,10.$10^6$, Belo Horizonte e São Paulo."
-    ]
+    ],
+    "image": "./q2.png",
+    "correctAnswer": "12"
   },
   {
     "id": "3",
@@ -27,7 +30,9 @@
       "foi negativo em março e nulo em novembro.",
       "manteve-se constante entre junho e setembro.",
       "diminuiu entre os meses de fevereiro e março."
-    ]
+    ],
+    "image": "./q3.png",
+    "correctAnswer": "12"
   },
   {
     "id": "4",
@@ -37,7 +42,8 @@
       "o aluno C jamais será líder.",
       "o líder será o aluno D, se n = 2132.",
       "o líder será o aluno F, se n = 2133."
-    ]
+    ],
+    "correctAnswer": "12"
   },
   {
     "id": "5",
@@ -47,7 +53,8 @@
       "0,8a",
       "$a^2$",
       "$\\sqrt{a}$"
-    ]
+    ],
+    "correctAnswer": "12"
   },
   {
     "id": "6",
@@ -57,7 +64,9 @@
       "45",
       "48",
       "51"
-    ]
+    ],
+    "image": "./q6.png",
+    "correctAnswer": "12"
   },
   {
     "id": "7",
@@ -67,7 +76,8 @@
       "326",
       "-326",
       "-226"
-    ]
+    ],
+    "correctAnswer": "12"
   },
   {
     "id": "8",
@@ -77,7 +87,8 @@
       "18",
       "20",
       "22"
-    ]
+    ],
+    "correctAnswer": "12"
   },
   {
     "id": "9",
@@ -87,7 +98,8 @@
       "116",
       "118",
       "120"
-    ]
+    ],
+    "correctAnswer": "12"
   },
   {
     "id": "10",
@@ -97,17 +109,20 @@
       "1/27",
       "1/4",
       "4"
-    ]
+    ],
+    "correctAnswer": "12"
   },
   {
     "id": "11",
-    "question": "Os preços do arroz (A) e feijão (F), nos supermercados $S_1$ e $S_2$, estão discriminados nos seguintes gráficos:\n\nNos supermercados $S_1$ e $S_2$, as embalagens de arroz e feijão são sempre de um quilo. Um consumidor X foi a $S_1$ e gastou R$ 30,00, comprando arroz e feijão. Já o consumidor Y teve uma despesa de R$ 36,00, adquirindo a mesma quantidade de cada produto em $S_2$. Assim sendo, o total de alimentos, em kg, que cada um comprou é",
+    "question": "Os preços do arroz (A) e feijão (F), nos supermercados $S_1$ e $S_2$, estão discriminados nos seguintes gráficos:\n\nNos supermercados $S_1$ e $S_2$, as embalagens de arroz e feijão são sempre de um quilo. Um consumidor X foi a $S_1$ e gastou 30,00 reais, comprando arroz e feijão. Já o consumidor Y teve uma despesa de 36,00 reais, adquirindo a mesma quantidade de cada produto em $S_2$. Assim sendo, o total de alimentos, em kg, que cada um comprou é",
     "options": [
       "6",
       "7",
       "8",
       "9"
-    ]
+    ],
+    "image": "./q11.png",
+    "correctAnswer": "12"
   },
   {
     "id": "12",
@@ -117,6 +132,7 @@
       "1234567.9 + 8",
       "12345678.9 + 9",
       "123456789.9 + 10"
-    ]
+    ],
+    "correctAnswer": "12"
   }
 ]

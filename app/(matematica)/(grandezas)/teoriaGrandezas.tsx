@@ -83,7 +83,7 @@ const QuizScreen = () => {
       {parseAndRenderMath("$ 9 \\cdot 4 = 6 \\cdot 6 = 2 \\cdot 18 = 36 $")}
       <Text style={styles.titulo3}>Exemplo 6.3</Text>
       {parseAndRenderMath(
-        "Duas pessoas, **A** e **B**, trabalham numa determinada tarefa, sendo que **A** trabalhou durante 6 horas e **B** trabalhou durante 5 horas. Como elas irão dividir com justiça R$ 660,00 que serão pagos pela tarefa? Chamamos de $x$ o valor que **A** irá receber e $y$ o valor que **B** irá receber. Então, $x + y = 660$. A divisão dos R$ 660,00 será em partes **diretamente** proporcionais às horas trabalhadas, então temos:"
+        "Duas pessoas, **A** e **B**, trabalham numa determinada tarefa, sendo que **A** trabalhou durante 6 horas e **B** trabalhou durante 5 horas. Como elas irão dividir com justiça 660,00 reais que serão pagos pela tarefa? Chamamos de $x$ o valor que **A** irá receber e $y$ o valor que **B** irá receber. Então, $x + y = 660$. A divisão dos 660,00 reais será em partes **diretamente** proporcionais às horas trabalhadas, então temos:"
       )}
       {parseAndRenderMath("$ \\frac{x}{6} = \\frac{y}{5} $")}
       {parseAndRenderMath(
@@ -96,7 +96,7 @@ const QuizScreen = () => {
       {parseAndRenderMath("Resolvendo cada uma delas, encontramos os seguintes resultados:")}
       {parseAndRenderMath("$ x = 360 \\hspace{1cm} e \\hspace{1cm} y = 300 $")}
       {parseAndRenderMath(
-        "Assim, a pessoa **A** irá receber R$ 360,00 enquanto a pessoa **B** irá receber R$ 300,00. Uma outra maneira de resolvermos este problema é somarmos os números inversos, $\\frac{1}{3} + \\frac{1}{5} = \\frac{5+3}{15} = \\frac{8}{15}$ partes, Logo, dividindo 660 por 11 temos"
+        "Assim, a pessoa **A** irá receber 360,00 reais enquanto a pessoa **B** irá receber 300,00 reais. Uma outra maneira de resolvermos este problema é somarmos os números inversos, $\\frac{1}{3} + \\frac{1}{5} = \\frac{5+3}{15} = \\frac{8}{15}$ partes, Logo, dividindo 660 por 11 temos"
       )}
       {parseAndRenderMath("$ \\frac{660}{11} = 60 $")}
       {parseAndRenderMath(
@@ -107,7 +107,7 @@ const QuizScreen = () => {
       )}
       <Text style={styles.titulo3}>Exemplo 6.4</Text>
       {parseAndRenderMath(
-        "Duas pessoas **A** e **B** trabalham durante um mesmo período para fabricar e vender por R$ 160,00 um certo artigo. Se **A** chegou atrasada ao trabalho 3 dias e **B**, 5 dias, quanto cada uma irá receber? Chamamos de $x$ o valor que **A** irá receber e $y$ o valor que **B** irá receber. Então, $x + y = 160$. A divisão dos R$ 160,00 será em partes **inversamente** proporcionais aos dias de atraso, então temos:"
+        "Duas pessoas **A** e **B** trabalham durante um mesmo período para fabricar e vender por 160,00 reais um certo artigo. Se **A** chegou atrasada ao trabalho 3 dias e **B**, 5 dias, quanto cada uma irá receber? Chamamos de $x$ o valor que **A** irá receber e $y$ o valor que **B** irá receber. Então, $x + y = 160$. A divisão dos 160,00 reais será em partes **inversamente** proporcionais aos dias de atraso, então temos:"
       )}
       {parseAndRenderMath("$ \\frac{x}{\\frac{1}{3}} = \\frac{y}{\\frac{1}{5}} $")}
       {parseAndRenderMath("Aplicando as propriedades de proporção, temos:")}
@@ -122,7 +122,7 @@ const QuizScreen = () => {
       )}
       {parseAndRenderMath("Resolvendo cada uma das equações acima, obtemos")}
       {parseAndRenderMath("$ x = 100 \\hspace{1cm} e \\hspace{1cm} y = 60 $")}
-      {parseAndRenderMath("Portanto, **A** irá receber R$ 100,00 e **B** R$ 60,00.")}
+      {parseAndRenderMath("Portanto, **A** irá receber 100,00 reais e **B** 60,00 reais.")}
       {parseAndRenderMath(
         "Uma outra maneira de resolvermos este problema é somarmos os números inversos, $\\frac{1}{3} + \\frac{1}{5} = \\frac{5+3}{15} = \\frac{8}{15}$ partes, Logo, dividindo 160 por $\\frac{8}{15}$ temos"
       )}
@@ -169,9 +169,9 @@ const QuizScreen = () => {
         "Cinco metros de um tecido custam 80 reais. Quanto pagarei por 9 metros do mesmo tecido?"
       )}
       {parseAndRenderMath("Primeiramente, montamos uma tabela com as variáveis do problema.")}
-      {parseAndRenderMath("Comprimento (m) \\hspace{2cm} Preço (R$)")}
-      {parseAndRenderMath("5 \\hspace{3cm} 80")}
-      {parseAndRenderMath("9 \\hspace{3cm} x")}
+      {parseAndRenderMath("Comprimento (m) $\\hspace{2cm}$ Preço (R$)")}
+      {parseAndRenderMath("$5 \\hspace{5cm} 80$")}
+      {parseAndRenderMath("$9 \\hspace{5cm} x$")}
       {parseAndRenderMath(
         "Podemos observar que, quanto mais se aumentar o comprimento, mais se aumenta o preço, portanto temos uma **regra de três direta**."
       )}
@@ -186,9 +186,9 @@ const QuizScreen = () => {
         "Um carro percorre um trecho com velocidade de 60 km/h em 40 min. Se ele percorresse o mesmo trecho com uma velocidade de 80 km/h, quanto tempo gastaria?"
       )}
       {parseAndRenderMath("Montando a tabela temos,")}
-      {parseAndRenderMath("Velocidade \\hspace{1cm} Tempo")}
-      {parseAndRenderMath("60 \\hspace{1cm} 40")}
-      {parseAndRenderMath("80 \\hspace{1cm} x")}
+      {parseAndRenderMath("Velocidade $\\hspace{1cm}$ Tempo")}
+      {parseAndRenderMath("60 $\\hspace{3cm}$ 40")}
+      {parseAndRenderMath("80 $\\hspace{3cm}$ x")}
       {parseAndRenderMath(
         "Podemos observar que, quando a velocidade aumenta, o tempo diminui. Portanto, temos uma **regra de três inversa**."
       )}

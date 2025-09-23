@@ -9,9 +9,8 @@ export default function StackLayout() {
   return (
 
     <Stack>
-        {/* <Stack.Screen name="quizFuncoes" options={{ headerShown: false }} /> */}
+        <Stack.Screen name="quizFuncoes" options={{ headerShown: false }} />
         <Stack.Screen name="funcoes" options={{ headerShown: false }} />
-        {/* <Stack.Screen name="questoesFuncoes" options={{ headerShown: false }} /> */}
         <Stack.Screen name="teoriaFuncoes" options={{ headerShown: false }} />
     </Stack>
   );

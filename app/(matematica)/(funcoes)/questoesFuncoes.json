@@ -1,0 +1,81 @@
+[
+  {
+    "id": "1",
+    "question": "Na geometria plana, quando são conhecidos os três lados a, b e c de um triângulo qualquer, é possível calcular a área S sem necessidade da determinação de sua altura, utilizando a fórmula de Herão: $S = \\sqrt{p(p-a)(p-b)(p-c)}$, em que $p = \\frac{a+b+c}{2}$ é o semiperímetro.\n\nConsidere a figura abaixo de um terreno triangular cujos lados medem $4x - 2$, $2x + 2$ e $2x$, com área e perímetro de mesmo valor numérico.\n\nA área desse terreno é igual a",
+    "options": [
+      "24",
+      "26",
+      "28",
+      "30"
+    ],
+    "image": "./q1.png",
+    "correctAnswer": "12"
+  },
+  {
+    "id": "2",
+    "question": "Um produto com embalagem de 500ml está em promoção, no supermercado A, por 9,60 reais. Esse mesmo produto é vendido em embalagem de 250ml, no supermercado B, por 7,68 reais.\n\nSe os 500ml forem adquiridos em B, paga-se a mais",
+    "options": [
+      "50%",
+      "55%",
+      "60%",
+      "65%"
+    ],
+    "correctAnswer": "12"
+  },
+  {
+    "id": "3",
+    "question": "Os números naturais $x$, $y$ e $z$ são os menores divisores, pelos quais se pode dividir 2700, 1080 e 4500, respectivamente, obtendo-se, desse modo, quocientes iguais. Assim sendo $(y.z) : x$ vale",
+    "options": [
+      "5",
+      "6",
+      "8",
+      "10"
+    ],
+    "correctAnswer": "12"
+  },
+  {
+    "id": "4",
+    "question": "Os gráficos das funções $f(x) = x(6 - 2x)$ e $g(x) = x - 3$ cruzam-se nos pontos P e Q do sistema cartesiano. Pode-se afirmar que P e Q pertencem, respectivamente, ao",
+    "options": [
+      "1° e 2° quadrantes.",
+      "3° e 4° quadrantes.",
+      "3° quadrante e eixo das abscissas.",
+      "eixo das ordenadas e 2° quadrante."
+    ],
+    "correctAnswer": "12"
+  },
+  {
+    "id": "5",
+    "question": "A empresa A prestadora de serviços de digitação estabeleceu uma taxa fixa de 20,00 reais e mais 10,00 reais por hora de trabalho; enquanto a empresa B fixou seu preço de 12,00 reais apenas para hora trabalhada pelo mesmo serviço. O gráfico que melhor representa essa situação é",
+    "options": [
+      "a)",
+      "b)",
+      "c)",
+      "d)"
+    ],
+    "image": "./q5.png",
+    "correctAnswer": "12"
+  },
+  {
+    "id": "6",
+    "question": "O gráfico da função $f(x) = \\frac{4x^2}{9} - \\frac{8x}{3} + 4$ intercepta o eixo das abscissas em P e o das ordenadas em Q, no sistema cartesiano de origem O, logo, a medida da hipotenusa PQ do triângulo POQ vale",
+    "options": [
+      "4",
+      "$\\frac{9}{2}$",
+      "5",
+      "$\\frac{11}{2}$"
+    ],
+    "correctAnswer": "12"
+  },
+  {
+    "id": "7",
+    "question": "O conjunto imagem da função $f(x) = -4 - 3x + x^2$, definida para todo $x \\in \\mathbb{R}$, está contido em",
+    "options": [
+      "A = {$y \\in \\mathbb{R}|y \\leq \\frac{25}{4}$}",
+      "B = {$y \\in \\mathbb{R}|y \\geq \\frac{25}{4}$}",
+      "C = {$y \\in \\mathbb{R}|y \\leq -\\frac{25}{4}$}",
+      "D = {$y \\in \\mathbb{R}|y \\geq -\\frac{25}{4}$}"
+    ],
+    "correctAnswer": "12"
+  }
+]

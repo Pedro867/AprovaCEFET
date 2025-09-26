@@ -54,7 +54,8 @@ export default function ProfileScreen() {
         } catch (error) {
           console.error("Erro ao carregar as coins do usuário", error);
         }
-        try {
+        //carrega personagem atual
+        try { 
           const savedCustomizations = await AsyncStorage.getItem("userCharacter");
           if (savedCustomizations) {
             setCustomizacoes(JSON.parse(savedCustomizations));

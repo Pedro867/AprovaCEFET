@@ -22,7 +22,7 @@ const opcoesDaUnidade = [
   },
   {
     title: "Videoaulas",
-    route: "/(matematica)/(conjuntos)/quizConjuntos",
+    route: "/(matematica)/(conjuntos)/videoAulasConjuntos",
     locked: false,
   },
   {

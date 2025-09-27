@@ -8,9 +8,11 @@ interface ItemGridProps {
   selectedItemId: string;
   unlockedItemIds: string[]; //lista de itens desbloqueados
   onSelectItem: (itemId: string,itemPrice: number) => void;
+  faceColor?:string;
+  selectedCategory:string,
 }
 
-export function GradeItems({ items, selectedItemId, unlockedItemIds, onSelectItem }: ItemGridProps) {
+export function GradeItems({ items, selectedItemId, unlockedItemIds, onSelectItem, faceColor, selectedCategory }: ItemGridProps) {
   return (
     <ScrollView contentContainerStyle={styles.grid}>
       {items.map((item) => {
@@ -24,7 +26,7 @@ export function GradeItems({ items, selectedItemId, unlockedItemIds, onSelectIte
             style={[styles.itemContainer, isSelected && styles.selectedItemContainer,!isUnlocked && styles.itemBloqueado,]}
             onPress={() => onSelectItem(item.id, item.preco)}
           >
-            <ThumbnailComponent width="80%" height="80%" />
+            <ThumbnailComponent width="80%" height="80%" fill={selectedCategory === 'face' || 'ears'? faceColor : undefined}/>
             {!isUnlocked && (
               // mostra o preço e o ícone de cadeado se estiver bloqueado
               <View style={styles.bloqueado}>

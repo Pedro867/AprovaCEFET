@@ -400,11 +400,12 @@ interface CharacterProps {
     bangs: keyof typeof partesPersonagem.franja;
     hair: keyof typeof partesPersonagem.cabelo;
     nose: keyof typeof partesPersonagem.nariz;
+    faceColor?: string;
   };
 }
 
 export function Personagem({ size, customizations }: CharacterProps) {
-  const { background, ears, cheeks, face, eyes, mouth, bangs, hair, nose } =
+  const { background, ears, cheeks, face, eyes, mouth, bangs, hair, nose, faceColor } =
     customizations;
 
   // componentes SVG
@@ -418,6 +419,8 @@ export function Personagem({ size, customizations }: CharacterProps) {
   const HairComponent = partesPersonagem.cabelo[hair];
   const NoseComponent = partesPersonagem.nariz[nose];
 
+  console.log('Renderizando o rosto com a cor:', faceColor);
+
   return (
     <View style={[styles.avatarContainer, { width: size, height: size }]}>
       {BackgroundComponent && (
@@ -427,12 +430,12 @@ export function Personagem({ size, customizations }: CharacterProps) {
       )}
       {EarsComponent && (
         <View style={[styles.earRightLayer, { zIndex: 5 }]}>
-          <EarsComponent width="50%" height="50%" />
+          <EarsComponent width="50%" height="50%" fill={faceColor}/>
         </View>
       )}
       {EarsComponent && (
         <View style={[styles.earLeftLayer, { zIndex: 5 }]}>
-          <EarsComponent width="50%" height="50%" />
+          <EarsComponent width="50%" height="50%" fill={faceColor}/>
         </View>
       )}
       {CheeksComponent && (
@@ -442,12 +445,12 @@ export function Personagem({ size, customizations }: CharacterProps) {
       )}
       {NoseComponent && (
         <View style={[styles.noseLayer, { zIndex: 4 }]}>
-          <NoseComponent width="100%" height="100%" />
+          <NoseComponent width="100%" height="100%" fill={faceColor}/>
         </View>
       )}
       {FaceComponent && (
         <View style={[styles.faceLayer, { zIndex: 3 }]}>
-          <FaceComponent width="100%" height="100%" />
+          <FaceComponent width="100%" height="100%" fill={faceColor}/>
         </View>
       )}
       {EyesComponent && (
@@ -481,24 +484,24 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   backgroundLayer: {
-    ...StyleSheet.absoluteFillObject, //atalho pra camada ocupar todo o espaço do conteiner
+    ...StyleSheet.absoluteFillObject,
     transform: [{ scale: 1.5 }],
   },
   hairLayer: {
     ...StyleSheet.absoluteFillObject,
-    transform: [{ translateY: "-20%" }, { scale: 1.2 }],
+    transform: [{ translateY: "-5%" }, { scale: 1.2 }], 
   },
   faceLayer: {
     ...StyleSheet.absoluteFillObject,
-    transform: [{ translateY: "12%" }, { scale: 0.9 }],
+    transform: [{ translateY: "22%" }, { scale: 0.9 }], 
   },
   mouthLayer: {
     ...StyleSheet.absoluteFillObject,
-    transform: [{ translateY: "30%" }, { scale: 0.16 }],
+    transform: [{ translateY: "40%" }, { scale: 0.16 }], 
   },
   earRightLayer: {
     ...StyleSheet.absoluteFillObject,
-    top: "18%",
+    top: "28%", 
     left: "45%",
     transform: [{ scale: 0.5 }],
     width: "100%",
@@ -506,7 +509,7 @@ const styles = StyleSheet.create({
   },
   earLeftLayer: {
     ...StyleSheet.absoluteFillObject,
-    top: "18%",
+    top: "28%", 
     left: "-45%",
     width: "100%",
     height: "100%",
@@ -514,18 +517,18 @@ const styles = StyleSheet.create({
   },
   eyesLayer: {
     ...StyleSheet.absoluteFillObject,
-    transform: [{ translateY: "2.5%" }, { scale: 0.6 }],
+    transform: [{ translateY: "12.5%" }, { scale: 0.6 }], 
   },
   cheekLayer: {
     ...StyleSheet.absoluteFillObject,
-    transform: [{ translateY: "17%" }, { scale: 0.6 }],
+    transform: [{ translateY: "27%" }, { scale: 0.6 }],
   },
   noseLayer: {
     ...StyleSheet.absoluteFillObject,
-    transform: [{ translateY: "13%" }, { scale: 0.15 }],
+    transform: [{ translateY: "23%" }, { scale: 0.15 }], 
   },
   frontHairLayer: {
     ...StyleSheet.absoluteFillObject,
-    transform: [{ translateY: "-20%" }, { scale: 0.7 }],
+    transform: [{ translateY: "-10%" }, { scale: 0.7 }], 
   },
 });

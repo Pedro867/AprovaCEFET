@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { useRouter, useFocusEffect } from "expo-router";
-import { StyleSheet, View, Text, SafeAreaView, ScrollView, Alert, Image } from "react-native";
+import { StyleSheet, View, Text, Alert, Image , TouchableOpacity, ScrollView,} from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Personagem } from "@/components/ui/Personagem";
 import { Colors, Fonts, Spacing } from "@/constants/Colors";
@@ -10,6 +10,8 @@ import { CategoriaTab } from "@/components/loja/categoriasTab";
 import { GradeItems } from "@/components/loja/gradeItems";
 import { LinearGradient } from "expo-linear-gradient";
 import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs"; 
+
+const CORES_ROSTO = ["#F8B788","#F2D0B4", "#D9A481", "#A67A5F", "#734E39"];
 
 type CustomizacoesType = React.ComponentProps<
   typeof Personagem
@@ -30,6 +32,7 @@ export default function LojaScreen() {
     bangs: "franja1",
     hair: "cabelo1",
     nose: "nariz1",
+    faceColor: CORES_ROSTO[0], 
   });
   const [unlockedItems, setUnlockedItems] = useState<string[]>([]); //itens bloqueados e desbloqueados
 
@@ -43,7 +46,16 @@ export default function LojaScreen() {
             "userCharacter"
           );
           if (savedCustomizations)
-            setCustomizacoes(JSON.parse(savedCustomizations));
+          {
+            const parsed = JSON.parse(savedCustomizations);
+            
+            
+            if(!parsed.faceColor){
+              parsed.faceColor = CORES_ROSTO[0];
+            }
+            setCustomizacoes(parsed);
+          }
+            
 
           const savedCoins = await AsyncStorage.getItem("userPontuacao");
           if (savedCoins) setCefetCoins(parseInt(savedCoins, 10));
@@ -61,6 +73,20 @@ export default function LojaScreen() {
       loadUserData();
     }, [])
   );
+
+  const handleColorSelect = async (color: string) => {
+    const newCustomizations = {
+      ...customizacoes, faceColor: color,
+    };
+
+    setCustomizacoes(newCustomizations);
+
+    await AsyncStorage.setItem(
+      "userCharacter",
+      JSON.stringify(newCustomizations)
+    );
+
+  };
 
   const ItemSelecionado = async (itemId: string, itemPrice: number) => {
     const isUnlocked = unlockedItems.includes(itemId) || itemPrice === 0; //verifica se o item ja foi comprado
@@ -119,12 +145,12 @@ export default function LojaScreen() {
   };
 
   return (
-    <SafeAreaView style={styles.safeArea}>
+    
       <LinearGradient
         colors={[Colors.gradientEnd, Colors.gradientStart, Colors.gradientStart]}
-        style={styles.safeArea}
+        style={styles.container}
       >
-        <View contentContainerStyle={[styles.container , {paddingBottom: tabBarHeight + Spacing.medium},]}>
+        <View style={{ flex: 1, paddingBottom: tabBarHeight }}>
           <View style={styles.headerContainer}>
             <View style={styles.coinContainer}>
               <Image
@@ -145,7 +171,21 @@ export default function LojaScreen() {
               categories={LOJA_CATEGORIAS}
               selectedCategory={selectedCategory}
               onSelectCategory={setSelectedCategory}
+              faceColor={customizacoes.faceColor}
             />
+            {/* PALETA DE CORES ROSTO*/}
+            {selectedCategory === "face" && (
+              <View style = {styles.paletaDeCoresContainer}>
+                {CORES_ROSTO.map((color) => (
+                  <TouchableOpacity
+                  key = {color}
+                  style = {[styles.corMostrada, {backgroundColor: color}, customizacoes.faceColor === color && styles.corSelecionada,]}
+                  onPress={() => handleColorSelect(color)}
+                  />
+                ))}
+              </View>
+            )}
+    
             <GradeItems
               items={LOJA_ITENS[selectedCategory as keyof typeof LOJA_ITENS]}
               selectedItemId={
@@ -153,20 +193,21 @@ export default function LojaScreen() {
               }
               unlockedItemIds={unlockedItems}
               onSelectItem={ItemSelecionado}
+              faceColor={customizacoes.faceColor}
+              selectedCategory={selectedCategory}
             />
           </View>
-        </View>
+       </View>
       </LinearGradient>
-    </SafeAreaView>
+    
   );
 }
 
 const styles = StyleSheet.create({
-  safeArea: {
-    flex: 1,
-  },
+  
   container: {
     paddingHorizontal: Spacing.medium,
+    flex: 1,
   },
   headerContainer: {
     paddingTop: Spacing.large,
@@ -216,6 +257,31 @@ const styles = StyleSheet.create({
   },
   customizationContainer: {
     marginTop: Spacing.giga,
-    height: 400, // altura fixa para o container da grade
+    flex: 1,
+    //height: 400, 
+  },
+
+  paletaDeCoresContainer: {
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    paddingVertical: Spacing.medium,
+    gap: Spacing.large,
+  },
+  corMostrada: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    borderWidth: 3,
+    borderColor: "transparent",
+    elevation: 3,
+    shadowColor: '#000',
+    shadowOpacity: 0.2,
+    shadowRadius: 2,
+    shadowOffset: {width: 0, height: 2}
+  },
+  corSelecionada: {
+    borderColor: Colors.white,
+    transform: [{ scale: 1.1 }],
   },
 });

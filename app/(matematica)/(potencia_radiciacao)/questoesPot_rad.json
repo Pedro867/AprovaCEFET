@@ -1,102 +1,156 @@
 [
   {
     "id": "1",
-    "question": "Num ponto de ônibus, passa um ônibus para a cidade de Rio das Quadras de 15 em 15 minutos e um ônibus para a cidade Tão Longe de 25 em 25 minutos. Se os dois ônibus passaram juntos às 7h30min, a que horas vão passar juntos novamente?",
+    "question": "Calcule: $-(\\frac{-2}{3})^2$",
     "options": [
-      "7h45min",
-      "9h10min",
-      "8h45min",
-      "9h30min"
+      "$\\frac{4}{6}$",
+      "$-\\frac{2}{6}$",
+      "$\\frac{4}{9}$",
+      "$-\\frac{4}{9}$"
     ],
-    "correctAnswer": "8h45min"
+    "correctAnswer": "$-\\frac{4}{9}$"
   },
   {
     "id": "2",
-    "question": "Num sítio temos uma rua de laranjeiras e, ao seu lado, uma rua de limoeiros. Os pés de laranja são plantados a cada 4 metros e os de limão, a cada 6 metros. No começo das ruas, foi plantado um pé de laranja em frente a um pé de limão. De quantos em quantos metros isso acontece?",
+    "question": "Calcule: $(\\frac{3}{4})^{-2}$",
     "options": [
-      "24",
-      "12",
-      "10",
-      "2"
+      "$\\frac{9}{16}$",
+      "$-\\frac{9}{16}$",
+      "$\\frac{16}{9}$",
+      "$-\\frac{16}{9}$"
     ],
-    "correctAnswer": "12"
+    "correctAnswer": "$\\frac{16}{9}$"
   },
   {
     "id": "3",
-    "question": "João tinha 36 abacaxis, 60 abacates e 84 maçãs. Ele quer separá-los em caixas com a mesma quantidade de frutas, sem misturar os três tipos. Qual é o Maior número possível de frutas colocadas em cada caixa?",
+    "question": "Calcule: $[(\\frac{2}{3})^{-2} - (\\frac{-1}{3})^{-1}]$",
     "options": [
-      "12",
-      "24",
-      "1260",
-      "180"
+      "a",
+      "b",
+      "c",
+      "d"
     ],
-    "correctAnswer": "12"
+    "correctAnswer": "a"
   },
   {
     "id": "4",
-    "question": "No trapézio ABCD da figura abaixo, as bases AB e CD estão divididas em partes iguais. Se a área do trapézio é S, então a área do triângulo PQR é",
+    "question": "Calcular o valor de $(x^{-1} + y^{-1})^{-1}$, sabendo que $x$ = 0,1 e $y$ = 0,9.",
     "options": [
-      "S x $ \\frac{3}{5} $",
-      "S x $\\frac{3}{8}$",
-      "S x $\\frac{1}{3}$",
-      "S x $\\frac{5}{8}$"
+      "a",
+      "b",
+      "c",
+      "d"
     ],
-    "image": "./q4.png",
-    "correctAnswer": "S x $\\frac{1}{3}$"
+    "correctAnswer": "a"
   },
   {
     "id": "5",
-    "question": "Num laboratório, foram realizadas as misturas com os líquidos I (L1) e II (L2), obtendo-se as soluções S1, S2, S3 e S4 da seguinte forma:\n\n• em S1, foi usado somente L1.\n\n• em S2, 90% de S1 e 10% de L2.\n\n• em S3, 90% de S2 e 10% de L2.\n\n• em S4, 90% de S3 e 10% de L2.\n\nDesse modo, S4 apresentará uma concentração de L2 igual a",
+    "question": "Calcule: $\\frac{(0,001)^2 . 100^2}{0,1}$",
     "options": [
-      "25,6%",
-      "27,1%",
-      "32,4%",
-      "35,8%"
+      "a",
+      "b",
+      "c",
+      "d"
     ],
-    "correctAnswer": "27,1%"
+    "correctAnswer": "a"
   },
   {
     "id": "6",
-    "question": "Nas operações com elementos do conjunto Z, afirma-se:\n\nI- O produto de dois números inteiros ímpares é ímpar.\n\nII- Sejam n e m dois números inteiros, com n > m e m ≠ 0. Se n : m = p, então p é inteiro.\n\nIII- Se k é um número inteiro, então k² + k é necessariamente múltiplo de 2.\n\nIV- Se m e n, com m ≠ n, são dois números primos entre si, então necessariamente m e n são primos.\n\nV- Qualquer número inteiro escrito na forma 4n + 1, com n ∈ Z, é ímpar.\n\nSão FALSAS apenas as afirmativas",
+    "question": "Transformar a seguinte expressão numa única potência de base 2.\n$\\frac{8^{-3}}{(\\frac{1}{2})^{-3}}$",
     "options": [
-      "II e IV.",
-      "III e V.",
-      "I, II e IV.",
-      "II, III e IV."
+      "a",
+      "b",
+      "c",
+      "d"
     ],
-    "correctAnswer": "II e IV."
+    "correctAnswer": "a"
   },
   {
     "id": "7",
-    "question": "Na divisão de dois números inteiros e positivos, o quociente obtido é 18 e o resto é igual ao divisor menos 2 unidades. Sendo a diferença entre o dividendo e o divisor igual a 106, o resto é um número",
+    "question": "Se $2,4^6 = a$ e $2,4^7 = b$, então $2,4^{17}$ é igual a:",
     "options": [
-      "primo",
-      "ímpar",
-      "múltiplo de 2",
-      "par e maior que 8"
+      "a",
+      "b",
+      "c",
+      "d"
     ],
-    "correctAnswer": "múltiplo de 2"
+    "correctAnswer": "a"
   },
   {
     "id": "8",
-    "question": "Um cliente de uma companhia telefônica foi oferecido o seguinte plano:\n\ngratuidade em 10 horas de ligação por mês\nR$ 38,00 pela assinatura mensal\nR$ 0,02 por minuto que exceder as 10 horas\n\nConsiderando que o cliente contratou esse plano, e que o consumo foi de 17 horas e 23 minutos em outubro, e de 8 horas e 45 minutos em novembro, logo, sua despesa nos dois meses foi de",
+    "question": "Calcule: $\\sqrt[3]{8}$",
     "options": [
-      "R$ 84,86",
-      "R$ 95,36",
-      "R$ 96,86",
-      "R$ 107,36"
+      "a",
+      "b",
+      "c",
+      "d"
     ],
-    "correctAnswer": "R$ 84,86"
+    "correctAnswer": "a"
   },
   {
     "id": "9",
-    "question": "Considere os conjuntos A = {6, 7, 8, 9, 10} e B = {1, 2, 3, 4, 5}.\n\nO número (a² + b²) / (a - b), em que a ∈ A e b ∈ B, NÃO pode ser",
+    "question": "Obter a medida, em cm, do lado de um quadrado de área $81cm^2$",
     "options": [
-      "inteiro.",
-      "negativo.",
-      "positivo menor que 10.",
-      "positivo maior que 10."
+      "a",
+      "b",
+      "c",
+      "d"
     ],
-    "correctAnswer": "negativo."
+    "correctAnswer": "a"
+  },
+  {
+    "id": "10",
+    "question": "Simplifique a expressão: $2.\\sqrt[5]{2} . 6.\\sqrt[5]{3}$",
+    "options": [
+      "a",
+      "b",
+      "c",
+      "d"
+    ],
+    "correctAnswer": "a"
+  },
+  {
+    "id": "11",
+    "question": "Simplifique  a expressão: $\\frac{18.\\sqrt[3]{10}}{3.\\sqrt[3]{5}}$",
+    "options": [
+      "a",
+      "b",
+      "c",
+      "d"
+    ],
+    "correctAnswer": "a"
+  },
+  {
+    "id": "12",
+    "question": "Calcule: $9.\\sqrt[3]{40} + \\sqrt[3]{5} - 2.\\sqrt[3]{625}$",
+    "options": [
+      "a",
+      "b",
+      "c",
+      "d"
+    ],
+    "correctAnswer": "a"
+  },
+  {
+    "id": "13",
+    "question": "Torne racional o denominador da seguinte expressão: $\\frac{1 - \\sqrt{3}}{\\sqrt{3}}$",
+    "options": [
+      "a",
+      "b",
+      "c",
+      "d"
+    ],
+    "correctAnswer": "a"
+  },
+  {
+    "id": "14",
+    "question": "Escreva na forma de radical a seguinte potência com expoente fracionário: $3^{\\frac{5}{7}}$",
+    "options": [
+      "a",
+      "b",
+      "c",
+      "d"
+    ],
+    "correctAnswer": "a"
   }
 ]

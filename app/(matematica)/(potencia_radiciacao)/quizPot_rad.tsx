@@ -24,6 +24,8 @@ import initialQuestions from "./questoesPot_rad.json";
 import { updateCoinsBD, updateStreakBD } from "@/app/api/conexaoFetch";
 import { MathJaxSvg } from "react-native-mathjax-html-to-svg";
 
+import { updateQuizBD } from "@/app/api/conexaoFetch";
+
 const personagemInicial = {
   background: "background1",
   ears: "orelha1",
@@ -133,6 +135,14 @@ const QuizScreen = () => {
       carregaDadosUsuario();
     }, [])
   );
+
+    const finalizarQuiz = async () => {
+    try {
+      await updateQuizBD(score, 402); //402 eh o id do quiz
+    } catch (err) {
+      console.error("Erro ao atualizar quiz:", err);
+    }
+  };
 
   const saveCoins = async (newCoin: number) => {
     try {
@@ -591,6 +601,7 @@ const QuizScreen = () => {
   }
 
   if (showScore) {
+    finalizarQuiz();
     return renderScoreScreen();
   }
 

@@ -24,6 +24,8 @@ import initialQuestions from "./questoesGrandezas.json";
 import { updateCoinsBD, updateStreakBD } from "@/app/api/conexaoFetch";
 import { MathJaxSvg } from "react-native-mathjax-html-to-svg";
 
+import { updateQuizBD } from "@/app/api/conexaoFetch";
+
 const personagemInicial = {
   background: "background1",
   ears: "orelha1",
@@ -133,6 +135,15 @@ const QuizScreen = () => {
       carregaDadosUsuario();
     }, [])
   );
+
+  const finalizarQuiz = async () => {
+    try {
+      await updateQuizBD(score, 406); //406 eh o id do quiz
+    } catch (err) {
+      console.error("Erro ao atualizar quiz:", err);
+    }
+  };
+
 
   const saveCoins = async (newCoin: number) => {
     try {
@@ -465,18 +476,18 @@ const QuizScreen = () => {
               <Text style={styles.coinNumber}>{coins}</Text>
 
               {showCoinsIncrease && (
-              <Animated.View
-                style={[
-                  styles.coinsIncreaseContainer,
-                  {
-                    opacity: animatedOpacity,
-                    transform: [{ translateY: animatedValue }],
-                  },
-                ]}
-              >
-                <Text style={styles.coinsIncreaseText}>+{coinsIncreaseAmount}</Text>
-              </Animated.View>
-            )}
+                <Animated.View
+                  style={[
+                    styles.coinsIncreaseContainer,
+                    {
+                      opacity: animatedOpacity,
+                      transform: [{ translateY: animatedValue }],
+                    },
+                  ]}
+                >
+                  <Text style={styles.coinsIncreaseText}>+{coinsIncreaseAmount}</Text>
+                </Animated.View>
+              )}
 
             </View>
           </View>
@@ -591,6 +602,7 @@ const QuizScreen = () => {
   }
 
   if (showScore) {
+    finalizarQuiz();
     return renderScoreScreen();
   }
 
@@ -769,15 +781,15 @@ const styles = StyleSheet.create({
     position: "relative", // Necessário para posicionar o Animated.View
   },
 
-  coinIcon: { 
-    width: 30, 
-    height: 30 
+  coinIcon: {
+    width: 30,
+    height: 30
   },
 
-  coinNumber: { 
-    fontSize: 18, 
-    fontWeight: "bold", 
-    marginLeft: 5 
+  coinNumber: {
+    fontSize: 18,
+    fontWeight: "bold",
+    marginLeft: 5
   },
 
   questionContainer: { flex: 1, justifyContent: "center" },
@@ -848,10 +860,10 @@ const styles = StyleSheet.create({
     fontFamily: Fonts.family.kumbhSans,
     textAlign: "center",
   },
-  scoreButtonContainer: { 
-    width: "90%", 
-    gap: 40, 
-    alignItems: "center" 
+  scoreButtonContainer: {
+    width: "90%",
+    gap: 40,
+    alignItems: "center"
   },
 
   //animação de pontuação

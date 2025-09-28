@@ -24,6 +24,8 @@ import initialQuestions from "./questoesConjuntos.json";
 import { updateCoinsBD, updateStreakBD } from "@/app/api/conexaoFetch";
 import { MathJaxSvg } from "react-native-mathjax-html-to-svg";
 
+import { updateQuizBD } from "@/app/api/conexaoFetch";
+
 const personagemInicial = {
   background: "background1",
   ears: "orelha1",
@@ -130,6 +132,14 @@ const QuizScreen = () => {
       carregaDadosUsuario();
     }, [])
   );
+
+  const finalizarQuiz = async () => {
+  try {
+    await updateQuizBD(score, 401); //401 eh o id do quiz
+  } catch (err) {
+    console.error("Erro ao atualizar quiz:", err);
+  }
+};
 
   const saveCoins = async (newCoin: number) => {
     try {
@@ -369,7 +379,7 @@ const QuizScreen = () => {
     setQuizMode("initial");
   };
 
-  const redoIncorrectQuestions = async () => {
+  const redoIncorrectQuestions = async() => {
     if (incorrectQuestions.length === 0) {
       Alert.alert("Parabéns!", "Você não errou nenhuma questão.");
       return;
@@ -588,6 +598,7 @@ const QuizScreen = () => {
   }
 
   if (showScore) {
+    finalizarQuiz();
     return renderScoreScreen();
   }
 

@@ -25,132 +25,132 @@
     "id": "3",
     "question": "Calcule: $[(\\frac{2}{3})^{-2} - (\\frac{-1}{3})^{-1}]$",
     "options": [
-      "a",
-      "b",
-      "c",
-      "d"
+      "$-\\frac{3}{4}$",
+      "$\\frac{21}{4}$",
+      "$-\\frac{7}{9}$",
+      "$\\frac{1}{9}$"
     ],
-    "correctAnswer": "a"
+    "correctAnswer": "$\\frac{21}{4}$"
   },
   {
     "id": "4",
     "question": "Calcular o valor de $(x^{-1} + y^{-1})^{-1}$, sabendo que $x$ = 0,1 e $y$ = 0,9.",
     "options": [
-      "a",
-      "b",
-      "c",
-      "d"
+      "1",
+      "0,01",
+      "0,09",
+      "9"
     ],
-    "correctAnswer": "a"
+    "correctAnswer": "0,09"
   },
   {
     "id": "5",
     "question": "Calcule: $\\frac{(0,001)^2 . 100^2}{0,1}$",
     "options": [
-      "a",
-      "b",
-      "c",
-      "d"
+      "$10^{10}$",
+      "$10^{-3}$",
+      "$10^7$",
+      "$10^{-1}$"
     ],
-    "correctAnswer": "a"
+    "correctAnswer": "$10^{-1}$"
   },
   {
     "id": "6",
     "question": "Transformar a seguinte expressão numa única potência de base 2.\n$\\frac{8^{-3}}{(\\frac{1}{2})^{-3}}$",
     "options": [
-      "a",
-      "b",
-      "c",
-      "d"
+      "$2^{-12}$",
+      "$2^{6}$",
+      "$2^{-3}$",
+      "$2^{8}$"
     ],
-    "correctAnswer": "a"
+    "correctAnswer": "$2^{-12}$"
   },
   {
     "id": "7",
     "question": "Se $2,4^6 = a$ e $2,4^7 = b$, então $2,4^{17}$ é igual a:",
     "options": [
-      "a",
-      "b",
-      "c",
-      "d"
+      "a+b",
+      "6a+7b",
+      "a-b",
+      "a.b"
     ],
-    "correctAnswer": "a"
+    "correctAnswer": "6a+7b"
   },
   {
     "id": "8",
     "question": "Calcule: $\\sqrt[3]{8}$",
     "options": [
-      "a",
-      "b",
-      "c",
-      "d"
+      "8",
+      "16",
+      "2",
+      "4"
     ],
-    "correctAnswer": "a"
+    "correctAnswer": "2"
   },
   {
     "id": "9",
     "question": "Obter a medida, em cm, do lado de um quadrado de área $81cm^2$",
     "options": [
-      "a",
-      "b",
-      "c",
-      "d"
+      "3",
+      "9",
+      "27",
+      "81"
     ],
-    "correctAnswer": "a"
+    "correctAnswer": "9"
   },
   {
     "id": "10",
     "question": "Simplifique a expressão: $2.\\sqrt[5]{2} . 6.\\sqrt[5]{3}$",
     "options": [
-      "a",
-      "b",
-      "c",
-      "d"
+      "$\\sqrt[5]{2^7.3^2}$",
+      "$8.\\sqrt[5]{6}$",
+      "$12.\\sqrt[5]{6}$",
+      "$12.\\sqrt[5]{2}.\\sqrt[5]{3}$"
     ],
-    "correctAnswer": "a"
+    "correctAnswer": "$12.\\sqrt[5]{6}$"
   },
   {
     "id": "11",
     "question": "Simplifique  a expressão: $\\frac{18.\\sqrt[3]{10}}{3.\\sqrt[3]{5}}$",
     "options": [
-      "a",
-      "b",
-      "c",
-      "d"
+      "$6.\\sqrt[3]{50}$",
+      "$6.\\sqrt[3]{2}$",
+      "$6.\\sqrt[3]{5}$",
+      "$6.\\frac{\\sqrt[3]{10}}{\\sqrt[3]{5}}$"
     ],
-    "correctAnswer": "a"
+    "correctAnswer": "$6.\\sqrt[3]{2}$"
   },
   {
     "id": "12",
     "question": "Calcule: $9.\\sqrt[3]{40} + \\sqrt[3]{5} - 2.\\sqrt[3]{625}$",
     "options": [
-      "a",
-      "b",
-      "c",
-      "d"
+      "$8.\\sqrt[3]{5}$",
+      "$18.\\sqrt[3]{5}$",
+      "$9.\\sqrt[3]{5}$",
+      "$14.\\sqrt[3]{5}$"
     ],
-    "correctAnswer": "a"
+    "correctAnswer": "$9.\\sqrt[3]{5}$"
   },
   {
     "id": "13",
     "question": "Torne racional o denominador da seguinte expressão: $\\frac{1 - \\sqrt{3}}{\\sqrt{3}}$",
     "options": [
-      "a",
-      "b",
-      "c",
-      "d"
+      "$\\frac{\\sqrt{3} - 3}{3}$",
+      "$\\sqrt{3} - 1$",
+      "$\\sqrt{3}$",
+      "1"
     ],
-    "correctAnswer": "a"
+    "correctAnswer": "$\\frac{\\sqrt{3} - 3}{3}$"
   },
   {
     "id": "14",
     "question": "Escreva na forma de radical a seguinte potência com expoente fracionário: $3^{\\frac{5}{7}}$",
     "options": [
-      "a",
-      "b",
-      "c",
-      "d"
+      "$3.\\sqrt[5]{3^2}$",
+      "$3.\\sqrt[7]{3^2}$",
+      "$\\sqrt[5]{3^7}$",
+      "$\\sqrt[7]{3^5}$"
     ],
-    "correctAnswer": "a"
+    "correctAnswer": "$\\sqrt[7]{3^5}$"
   }
 ]

@@ -80,7 +80,7 @@ const QuizScreen = () => {
         "Na figura abaixo, determinar a medida de $x$ indicada."
       )}
       <Image
-        source={require("@/app/(matematica)/(geometria)/7.1.1.png")}
+        source={require("@/app/(matematica)/(geometria)///7.1.1.png")}
         style={styles.image}
       />
       {parseAndRenderMath(
@@ -106,7 +106,7 @@ const QuizScreen = () => {
         "Na Figura abaixo, determinar as medidas $x$ e $y$."
       )}
       <Image
-        source={require("@/app/(matematica)/(geometria)/7.1.2.png")}
+        source={require("@/app/(matematica)/(geometria)///7.1.2.png")}
         style={styles.image}
       />
       {parseAndRenderMath(
@@ -144,7 +144,7 @@ const QuizScreen = () => {
         "Na figura, $RS // BC$. Determinar a medida de $x$ no triângulo abaixo."
       )}
       <Image
-        source={require("@/app/(matematica)/(geometria)/7.1.3.png")}
+        source={require("@/app/(matematica)/(geometria)///7.1.3.png")}
         style={styles.image}
       />
       {parseAndRenderMath(
@@ -185,7 +185,7 @@ const QuizScreen = () => {
         "Vamos observar os quadriláteros da Figura 7.2."
       )}
       <Image
-        source={require("@/app/(matematica)/(geometria)/7.2.png")}
+        source={require("@/app/(matematica)/(geometria)///7.2.png")}
         style={styles.image}
       />
       {parseAndRenderMath(
@@ -217,7 +217,7 @@ const QuizScreen = () => {
         "Os quadriláteros $ABCD$ e $EFGH$ são semelhantes. O lado $AB$ do primeiro correspondente ao lado $EF$ do segundo. Sabendo que a razão de semelhança do primeiro para o segundo é de $\\frac{2}{3}$ qual é a medida do lado $EF$ do quadrilátero $EFGH$?"
       )}
       <Image
-        source={require("@/app/(matematica)/(geometria)/7.2.1.png")}
+        source={require("@/app/(matematica)/(geometria)///7.2.1.png")}
         style={styles.image}
       />
       {parseAndRenderMath(
@@ -256,7 +256,7 @@ const QuizScreen = () => {
         "Dada a figura abaixo, determinar os valores de $x$ e $y$."
       )}
       <Image
-        source={require("@/app/(matematica)/(geometria)/7.3.png")}
+        source={require("@/app/(matematica)/(geometria)///7.3.png")}
         style={styles.image}
       />
       {parseAndRenderMath(
@@ -288,7 +288,7 @@ const QuizScreen = () => {
         "Podemos representar este problema conforme a figura abaixo."
       )}
       <Image
-        source={require("@/app/(matematica)/(geometria)/7.4.png")}
+        source={require("@/app/(matematica)/(geometria)///7.4.png")}
         style={styles.image}
       />
       {parseAndRenderMath(
@@ -321,7 +321,7 @@ const QuizScreen = () => {
         "Em todo triângulo retângulo, o quadrado da medida da hipotenusa é igual à soma dos quadrados das medidas dos catetos."
       )}
       <Image
-        source={require("@/app/(matematica)/(geometria)/7.5.png")}
+        source={require("@/app/(matematica)/(geometria)///7.5.png")}
         style={styles.image}
       />
       {parseAndRenderMath(
@@ -335,7 +335,7 @@ const QuizScreen = () => {
         "No triângulo retângulo, determine a medida $x$."
       )}
       <Image
-        source={require("@/app/(matematica)/(geometria)/7.6.png")}
+        source={require("@/app/(matematica)/(geometria)///7.6.png")}
         style={styles.image}
       />
       {parseAndRenderMath(
@@ -367,7 +367,7 @@ const QuizScreen = () => {
         "Dado o triângulo retângulo $ABC$. Sabendo que $AH$ é a altura relativa à base (hipotenusa), pode-se mostrar as seguintes relações métricas."
       )}
       <Image
-        source={require("@/app/(matematica)/(geometria)/7.7.png")}
+        source={require("@/app/(matematica)/(geometria)///7.7.png")}
         style={styles.image}
       />
       {parseAndRenderMath(
@@ -378,7 +378,7 @@ const QuizScreen = () => {
         "No triângulo retângulo, determinar as medidas $a$, $h$, $b$ e $c$ indicadas."
       )}
       <Image
-        source={require("@/app/(matematica)/(geometria)/7.8.png")}
+        source={require("@/app/(matematica)/(geometria)///7.8.png")}
         style={styles.image}
       />
       {parseAndRenderMath(
@@ -443,19 +443,19 @@ const QuizScreen = () => {
         "Vamos relembrar como se calcular as áreas de algumas figuras geométricas."
       )}
       <Image
-        source={require("@/app/(matematica)/(geometria)/area_retangulo_quadrado.png")}
+        source={require("@/app/(matematica)/(geometria)///area_retangulo_quadrado.png")}
         style={styles.image}
       />
       <Image
-        source={require("@/app/(matematica)/(geometria)/area_triangulo.png")}
+        source={require("@/app/(matematica)/(geometria)///area_triangulo.png")}
         style={styles.image}
       />
       <Image
-        source={require("@/app/(matematica)/(geometria)/area_trapezio.png")}
+        source={require("@/app/(matematica)/(geometria)///area_trapezio.png")}
         style={styles.image}
       />
       <Image
-        source={require("@/app/(matematica)/(geometria)/area_circulo.png")}
+        source={require("@/app/(matematica)/(geometria)///area_circulo.png")}
         style={styles.image}
       />
     </View>

@@ -1,0 +1,101 @@
+[
+  {
+    "id": "1",
+    "question": "Resolva a seguinte equação: $5x^2 - 3x = 0$",
+    "options": [
+      "a",
+      "b",
+      "c",
+      "d"
+    ],
+    "correctAnswer": "a"
+  },
+  {
+    "id": "2",
+    "question": "Resolva a seguinte equação: $x^2 - 14x + 50 = 0$",
+    "options": [
+      "a",
+      "b",
+      "c",
+      "d"
+    ],
+    "correctAnswer": "a"
+  },
+  {
+    "id": "3",
+    "question": "Resolva a seguinte equação: $9x^2 + 6x - 48 = 0$",
+    "options": [
+      "a",
+      "b",
+      "c",
+      "d"
+    ],
+    "correctAnswer": "a"
+  },
+  {
+    "id": "4",
+    "question": "Determine o valor de m para que a equação $x^2 - (m + 1)x - 28 = 0$ tenha duas raízes cuja soma seja igual a -3.",
+    "options": [
+      "a",
+      "b",
+      "c",
+      "d"
+    ],
+    "correctAnswer": "a"
+  },
+  {
+    "id": "5",
+    "question": "Utilizando a relação de soma e produto das raízes de uma equação do 2º grau, resolva: $x^2 + 4x + 4 = 0$",
+    "options": [
+      "a",
+      "b",
+      "c",
+      "d"
+    ],
+    "correctAnswer": "a"
+  },
+  {
+    "id": "6",
+    "question": "Utilizando a relação de soma e produto das raízes de uma equação do 2º grau, resolva: $x^2 - x - 6 = 0$",
+    "options": [
+      "a",
+      "b",
+      "c",
+      "d"
+    ],
+    "correctAnswer": "a"
+  },
+  {
+    "id": "7",
+    "question": "Resolva a equação biquadrada em $\\mathbb{R}$: $9x^4 - 13x^2 + 4 = 0$",
+    "options": [
+      "a",
+      "b",
+      "c",
+      "d"
+    ],
+    "correctAnswer": "a"
+  },
+  {
+    "id": "8",
+    "question": "Resolva a equação biquadrada em $\\mathbb{R}$: $x^4 + 6x^2 + 8 = 0$",
+    "options": [
+      "a",
+      "b",
+      "c",
+      "d"
+    ],
+    "correctAnswer": "a"
+  },
+  {
+    "id": "9",
+    "question": "(CEFET/MG-2008) Sabendo-se que as medidas dos lados de um triângulo ABC são 5cm, 8cm e uma das raízes da equação $3x^2 - 17x + 22 = 0$ (em cm), então seu perímetro vale",
+    "options": [
+      "2",
+      "$\\frac{11}{3}$",
+      "3",
+      "$\\frac{50}{3}$"
+    ],
+    "correctAnswer": "nao sei"
+  }
+]

@@ -1,0 +1,180 @@
+[
+  {
+    "id": "1",
+    "question": "(CEFET/MG-2008) Uma piscina foi projetada em forma de um retângulo cujo comprimento é o triplo da largura, conforme FIG. 1. Antes de ser construída, seu proprietário decidiu modificá-la, conforme FIG. 2, na qual AB, BC e CD são diâmetros dos semicírculos anexados. Se o preço da construção for proporcional ao seu perímetro, e o custo da primeira piscina com 16m de comprimento for de R$ 1 888, 00, então o segundo projeto custará (use: π = 3, 14)",
+    "options": [
+      "R$2465,20",
+      "R$2590,40",
+      "R$2535,80",
+      "R$2560,60"
+    ],
+    "image": "./q1.png",
+    "correctAnswer": "nao sei"
+  },
+  {
+    "id": "2",
+    "question": "(CEFET/MG-2008) Na figura abaixo, ABCD é um quadrado e BF o prolongamento de AB. Se EF = 8, EB = 1, DE diâmetro do semicírculo e D ponto médio de EG, então a área hachurada é igual a",
+    "options": [
+      "$\\frac{150 - 24\\pi}{12}$",
+      "$\\frac{5\\pi - 12}{8}$",
+      "$\\frac{2\\pi - 4}{5}$",
+      "$\\frac{25\\pi - 48}{8}$"
+    ],
+    "image": "./q2.png",
+    "correctAnswer": "a"
+  },
+  {
+    "id": "3",
+    "question": "Divida 720 em partes diretamente proporcionais a 4, 6 e 8.",
+    "options": [
+      "a",
+      "b",
+      "c",
+      "d"
+    ],
+    "correctAnswer": "a"
+  },
+  {
+    "id": "4",
+    "question": "Divida o número 260 em partes inversamente proporcionais aos números 2, 3 e 4.",
+    "options": [
+      "a",
+      "b",
+      "c",
+      "d"
+    ],
+    "correctAnswer": "a"
+  },
+  {
+    "id": "5",
+    "question": "Dois operários contratam um serviço por R$ 180, 00. Como devem repartir essa quantia, se um trabalhou 7 horas e o outro 8 horas, sendo a divisão diretamente proporcional ao tempo de trabalho?",
+    "options": [
+      "a",
+      "b",
+      "c",
+      "d"
+    ],
+    "correctAnswer": "a"
+  },
+  {
+    "id": "6",
+    "question": "Um pai deixou R$ 2 870, 00 para serem divididos entre seus três filhos na razão inversa de suas idades: 8, 12 e 28 anos. Quanto recebeu cada um?",
+    "options": [
+      "a",
+      "b",
+      "c",
+      "d"
+    ],
+    "correctAnswer": "a"
+  },
+  {
+    "id": "7",
+    "question": "Um número foi dividido em partes diretamente proporcionais a 4 e 3. Sabendo que a parte correspondente a 4 era 2 000, encontre esse número.",
+    "options": [
+      "a",
+      "b",
+      "c",
+      "d"
+    ],
+    "correctAnswer": "a"
+  },
+  {
+    "id": "8",
+    "question": "Se 6 operários fazem certa obra em 10 dias, em quantos dias 20 operários fariam a mesma obra?",
+    "options": [
+      "a",
+      "b",
+      "c",
+      "d"
+    ],
+    "correctAnswer": "a"
+  },
+  {
+    "id": "9",
+    "question": "Uma viagem foi feita em 12 dias, percorrendo-se 150 Km por dia. Quantos dias seriam necessários para fazer a mesma viagem, percorrendo-se 200 Km por dia?",
+    "options": [
+      "a",
+      "b",
+      "c",
+      "d"
+    ],
+    "correctAnswer": "a"
+  },
+  {
+    "id": "10",
+    "question": "Três torneiras completamente abertas, enchem um tanque em 1h30min. Quantas torneiras de mesma vazão seriam necessárias para encher o mesmo tanque em 54min?",
+    "options": [
+      "a",
+      "b",
+      "c",
+      "d"
+    ],
+    "correctAnswer": "a"
+  },
+  {
+    "id": "11",
+    "question": "Um ciclista percorre 120 Km em 2 dias, dirigindo 3 horas por dia. Em quantos dias percorrerá 500 Km, viajando 5 horas por dia?",
+    "options": [
+      "a",
+      "b",
+      "c",
+      "d"
+    ],
+    "correctAnswer": "a"
+  },
+  {
+    "id": "12",
+    "question": "Numa fazenda, 3 cavalos consomem 210 Kg de alfafa durante 7 dias. Para alimentar 8 cavalos, durante 10 diais, quantos quilos de alfafa serão necessários?",
+    "options": [
+      "a",
+      "b",
+      "c",
+      "d"
+    ],
+    "correctAnswer": "a"
+  },
+  {
+    "id": "13",
+    "question": "Seis digitadores preparam 720 páginas em 18 dias. Em quantos dias 8 digitadores, de mesma capacidade, prepararão 800 páginas?",
+    "options": [
+      "a",
+      "b",
+      "c",
+      "d"
+    ],
+    "correctAnswer": "a"
+  },
+  {
+    "id": "14",
+    "question": "Um automóvel, com velocidade média de 60 km/h, roda 8 horas por dia e leva 6 dias para fazer certo percurso. Se a velocidade fosse 80 km/h e se rodasse 9 horas por dia, em quanto tempo ele faria o mesmo percurso?",
+    "options": [
+      "a",
+      "b",
+      "c",
+      "d"
+    ],
+    "correctAnswer": "a"
+  },
+  {
+    "id": "14",
+    "question": "Uma torneira enche um tanque em 20 horas, com uma vazão de 1 litro por minuto. Quanto tempo será necessário para que duas torneiras, com vazão de 2 litros por minuto, encham o mesmo tanque?",
+    "options": [
+      "a",
+      "b",
+      "c",
+      "d"
+    ],
+    "correctAnswer": "a"
+  },
+  {
+    "id": "14",
+    "question": "Um livro de 120 páginas, com 25 linhas, é impresso em 4 horas. Quantas horas seriam necessárias para imprimir um livro de 100 páginas com 30 linhas por página?",
+    "options": [
+      "a",
+      "b",
+      "c",
+      "d"
+    ],
+    "correctAnswer": "a"
+  }
+]

@@ -20,7 +20,7 @@ import { useRouter, useFocusEffect } from "expo-router";
 import { LinearGradient } from "expo-linear-gradient";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { Colors, Fonts } from "@/constants/Colors";
-import initialQuestions from "./questoesFuncoes.json";
+import initialQuestions from "./questoesGeometria.json";
 import { updateCoinsBD, updateStreakBD } from "@/app/api/conexaoFetch";
 import { MathJaxSvg } from "react-native-mathjax-html-to-svg";
 
@@ -49,7 +49,9 @@ interface Question {
 
 const imageMap: { [key: string]: any } = {
   "./q1.png": require("./q1.png"),
-  "./q5.png": require("./q5.png"),
+  "./q2.png": require("./q2.png"),
+  // "./q6.png": require("./q6.png"),
+  // "./q11.png": require("./q11.png"),
 };
 
 let tamanhoMathJax = 0;
@@ -134,9 +136,9 @@ const QuizScreen = () => {
     }, [])
   );
 
-  const finalizarQuiz = async () => {
+    const finalizarQuiz = async () => {
     try {
-      await updateQuizBD(score, 405); //405 eh o id do quiz
+      await updateQuizBD(score, 407); //407 eh o id do quiz
     } catch (err) {
       console.error("Erro ao atualizar quiz:", err);
     }
@@ -424,7 +426,7 @@ const QuizScreen = () => {
 
           <Text style={styles.startTitle}>
             Preparado para o Quiz sobre{" "}
-            <Text style={styles.differentText}>Fatoração e Sistemas Lineares?</Text>
+            <Text style={styles.differentText}>Potenciação e Radiciação?</Text>
           </Text>
 
           <Text style={styles.startSubtitle}>
@@ -473,18 +475,18 @@ const QuizScreen = () => {
               <Text style={styles.coinNumber}>{coins}</Text>
 
               {showCoinsIncrease && (
-                <Animated.View
-                  style={[
-                    styles.coinsIncreaseContainer,
-                    {
-                      opacity: animatedOpacity,
-                      transform: [{ translateY: animatedValue }],
-                    },
-                  ]}
-                >
-                  <Text style={styles.coinsIncreaseText}>+{coinsIncreaseAmount}</Text>
-                </Animated.View>
-              )}
+              <Animated.View
+                style={[
+                  styles.coinsIncreaseContainer,
+                  {
+                    opacity: animatedOpacity,
+                    transform: [{ translateY: animatedValue }],
+                  },
+                ]}
+              >
+                <Text style={styles.coinsIncreaseText}>+{coinsIncreaseAmount}</Text>
+              </Animated.View>
+            )}
 
             </View>
           </View>
@@ -599,6 +601,7 @@ const QuizScreen = () => {
   }
 
   if (showScore) {
+    finalizarQuiz();
     return renderScoreScreen();
   }
 
@@ -777,15 +780,15 @@ const styles = StyleSheet.create({
     position: "relative", // Necessário para posicionar o Animated.View
   },
 
-  coinIcon: {
-    width: 30,
-    height: 30
+  coinIcon: { 
+    width: 30, 
+    height: 30 
   },
 
-  coinNumber: {
-    fontSize: 18,
-    fontWeight: "bold",
-    marginLeft: 5
+  coinNumber: { 
+    fontSize: 18, 
+    fontWeight: "bold", 
+    marginLeft: 5 
   },
 
   questionContainer: { flex: 1, justifyContent: "center" },
@@ -856,10 +859,10 @@ const styles = StyleSheet.create({
     fontFamily: Fonts.family.kumbhSans,
     textAlign: "center",
   },
-  scoreButtonContainer: {
-    width: "90%",
-    gap: 40,
-    alignItems: "center"
+  scoreButtonContainer: { 
+    width: "90%", 
+    gap: 40, 
+    alignItems: "center" 
   },
 
   //animação de pontuação

@@ -10,6 +10,7 @@ import { CategoriaTab } from "@/components/loja/categoriasTab";
 import { GradeItems } from "@/components/loja/gradeItems";
 import { LinearGradient } from "expo-linear-gradient";
 import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs"; 
+import { updatePersonalizacoesBD } from "../api/conexaoFetch";
 
 const CORES_ROSTO = [
   {id: 1, principal: "#F8B788", sombra: "#D1A37E"},
@@ -44,7 +45,7 @@ export default function LojaScreen() {
   });
   const [unlockedItems, setUnlockedItems] = useState<string[]>([]); //itens bloqueados e desbloqueados
 
-   const tabBarHeight = useBottomTabBarHeight();
+  const tabBarHeight = useBottomTabBarHeight();
 
   useFocusEffect(
     useCallback(() => {
@@ -144,6 +145,7 @@ export default function LojaScreen() {
                   [selectedCategory]: itemId,
                 };
                 setCustomizacoes(newCustomizations);
+                await updatePersonalizacoesBD(JSON.stringify(newCustomizations)) //SALVA NO BD
                 await AsyncStorage.setItem("userCharacter",JSON.stringify(newCustomizations)
                 );
               },

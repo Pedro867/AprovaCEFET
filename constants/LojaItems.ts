@@ -1,14 +1,14 @@
 //ROSTOS
-import rosto1 from "@/assets/images/Personagem/rosto/1.svg";
-import rosto2 from "@/assets/images/Personagem/rosto/2.svg";
-import rosto3 from "@/assets/images/Personagem/rosto/3.svg";
-import rosto4 from "@/assets/images/Personagem/rosto/4.svg";
-import rosto5 from "@/assets/images/Personagem/rosto/5.svg";
-import rosto6 from "@/assets/images/Personagem/rosto/6.svg";
-import rosto7 from "@/assets/images/Personagem/rosto/7.svg";
-import rosto8 from "@/assets/images/Personagem/rosto/8.svg";
-import rosto9 from "@/assets/images/Personagem/rosto/9.svg";
-import rosto10 from "@/assets/images/Personagem/rosto/10.svg";
+import rosto1 from "@/assets/images/Personagem/rosto/1.tsx";
+import rosto2 from "@/assets/images/Personagem/rosto/2.tsx";
+import rosto3 from "@/assets/images/Personagem/rosto/3.tsx";
+import rosto4 from "@/assets/images/Personagem/rosto/4.tsx";
+import rosto5 from "@/assets/images/Personagem/rosto/5.tsx";
+import rosto6 from "@/assets/images/Personagem/rosto/6.tsx";
+import rosto7 from "@/assets/images/Personagem/rosto/7.tsx";
+import rosto8 from "@/assets/images/Personagem/rosto/8.tsx";
+import rosto9 from "@/assets/images/Personagem/rosto/9.tsx";
+import rosto10 from "@/assets/images/Personagem/rosto/10.tsx";
 
 //CABELOS
 import cabelo1 from "@/assets/images/Personagem/cabelo/1.svg";

@@ -11,7 +11,14 @@ import { GradeItems } from "@/components/loja/gradeItems";
 import { LinearGradient } from "expo-linear-gradient";
 import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs"; 
 
-const CORES_ROSTO = ["#F8B788","#F2D0B4", "#D9A481", "#A67A5F", "#734E39"];
+const CORES_ROSTO = [
+  {id: 1, principal: "#F8B788", sombra: "#D1A37E"},
+  {id: 2, principal: "#D9A481", sombra: "#B98460"},
+  {id: 3, principal:  "#A67A5F", sombra: "#855F47"},
+  {id: 4, principal: "#734E39", sombra: "#5A3C2A"},
+  
+  
+];
 
 type CustomizacoesType = React.ComponentProps<
   typeof Personagem
@@ -32,7 +39,8 @@ export default function LojaScreen() {
     bangs: "franja1",
     hair: "cabelo1",
     nose: "nariz1",
-    faceColor: CORES_ROSTO[0], 
+    faceColor: CORES_ROSTO[0].principal, 
+    faceShadowColor: CORES_ROSTO[0].sombra,
   });
   const [unlockedItems, setUnlockedItems] = useState<string[]>([]); //itens bloqueados e desbloqueados
 
@@ -74,9 +82,13 @@ export default function LojaScreen() {
     }, [])
   );
 
-  const handleColorSelect = async (color: string) => {
+  const handleColorSelect = async (corPrincipal: string) => {
+    const corSelecionada = CORES_ROSTO.find(c => c.principal === corPrincipal);
+    
     const newCustomizations = {
-      ...customizacoes, faceColor: color,
+      ...customizacoes, 
+      faceColor: corSelecionada.principal,
+      faceShadowColor: corSelecionada.sombra,
     };
 
     setCustomizacoes(newCustomizations);
@@ -172,15 +184,16 @@ export default function LojaScreen() {
               selectedCategory={selectedCategory}
               onSelectCategory={setSelectedCategory}
               faceColor={customizacoes.faceColor}
+              faceShadowColor={customizacoes.faceShadowColor}
             />
             {/* PALETA DE CORES ROSTO*/}
             {selectedCategory === "face" && (
               <View style = {styles.paletaDeCoresContainer}>
-                {CORES_ROSTO.map((color) => (
+                {CORES_ROSTO.map((cor) => (
                   <TouchableOpacity
-                  key = {color}
-                  style = {[styles.corMostrada, {backgroundColor: color}, customizacoes.faceColor === color && styles.corSelecionada,]}
-                  onPress={() => handleColorSelect(color)}
+                  key = {cor.id}
+                  style = {[styles.corMostrada, {backgroundColor: cor.principal}, customizacoes.faceColor === cor.principal && styles.corSelecionada,]}
+                  onPress={() => handleColorSelect(cor.principal)}
                   />
                 ))}
               </View>
@@ -194,6 +207,7 @@ export default function LojaScreen() {
               unlockedItemIds={unlockedItems}
               onSelectItem={ItemSelecionado}
               faceColor={customizacoes.faceColor}
+              faceShadowColor={customizacoes.faceShadowColor}
               selectedCategory={selectedCategory}
             />
           </View>

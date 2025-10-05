@@ -7,15 +7,17 @@ interface CategoryTabsProps {
   selectedCategory: string;
   onSelectCategory: (categoryId: string) => void;
   faceColor?: string;
+  faceShadowColor?: string;
 }
 
-export function CategoriaTab({ categories, selectedCategory, onSelectCategory, faceColor }: CategoryTabsProps) {
+export function CategoriaTab({ categories, selectedCategory, onSelectCategory, faceColor, faceShadowColor }: CategoryTabsProps) {
   return (
     <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.scrollView}>
       {categories.map((category) => {
         
         const IconeComponente = category.icone;
         const iconColor = category.id === 'face' || 'ears'? faceColor : '';
+        const isFaceCategory = category.id === 'face';
 
         return (
           <TouchableOpacity
@@ -27,7 +29,7 @@ export function CategoriaTab({ categories, selectedCategory, onSelectCategory, f
             onPress={() => onSelectCategory(category.id)}
           >
             <View style={styles.tabContent}>
-              {IconeComponente && <IconeComponente width={24} height={24}  fill={iconColor}/>}
+              {IconeComponente && <IconeComponente width={24} height={24}  fill={iconColor} shadowFill={isFaceCategory ? faceShadowColor : iconColor}/>}
               <Text style={[
                 styles.tabText,
                 selectedCategory === category.id && styles.selectedTabText,

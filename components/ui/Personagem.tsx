@@ -163,16 +163,16 @@ import nariz10 from "@/assets/images/Personagem/nariz/10.svg";
 import nariz11 from "@/assets/images/Personagem/nariz/11.svg";
 import nariz12 from "@/assets/images/Personagem/nariz/12.svg";
 // --- ROSTOS ---
-import rosto1 from "@/assets/images/Personagem/rosto/1.svg";
-import rosto2 from "@/assets/images/Personagem/rosto/2.svg";
-import rosto3 from "@/assets/images/Personagem/rosto/3.svg";
-import rosto4 from "@/assets/images/Personagem/rosto/4.svg";
-import rosto5 from "@/assets/images/Personagem/rosto/5.svg";
-import rosto6 from "@/assets/images/Personagem/rosto/6.svg";
-import rosto7 from "@/assets/images/Personagem/rosto/7.svg";
-import rosto8 from "@/assets/images/Personagem/rosto/8.svg";
-import rosto9 from "@/assets/images/Personagem/rosto/9.svg";
-import rosto10 from "@/assets/images/Personagem/rosto/10.svg";
+import rosto1 from "@/assets/images/Personagem/rosto/1.tsx";
+import rosto2 from "@/assets/images/Personagem/rosto/2.tsx";
+import rosto3 from "@/assets/images/Personagem/rosto/3.tsx";
+import rosto4 from "@/assets/images/Personagem/rosto/4.tsx";
+import rosto5 from "@/assets/images/Personagem/rosto/5.tsx";
+import rosto6 from "@/assets/images/Personagem/rosto/6.tsx";
+import rosto7 from "@/assets/images/Personagem/rosto/7.tsx";
+import rosto8 from "@/assets/images/Personagem/rosto/8.tsx";
+import rosto9 from "@/assets/images/Personagem/rosto/9.tsx";
+import rosto10 from "@/assets/images/Personagem/rosto/10.tsx";
 
 //-- backgroundS --
 import background1 from "@/assets/images/Personagem/background/1.svg";
@@ -401,11 +401,12 @@ interface CharacterProps {
     hair: keyof typeof partesPersonagem.cabelo;
     nose: keyof typeof partesPersonagem.nariz;
     faceColor?: string;
+    faceShadowColor?: string;
   };
 }
 
 export function Personagem({ size, customizations }: CharacterProps) {
-  const { background, ears, cheeks, face, eyes, mouth, bangs, hair, nose, faceColor } =
+  const { background, ears, cheeks, face, eyes, mouth, bangs, hair, nose, faceColor,faceShadowColor } =
     customizations;
 
   // componentes SVG
@@ -419,7 +420,7 @@ export function Personagem({ size, customizations }: CharacterProps) {
   const HairComponent = partesPersonagem.cabelo[hair];
   const NoseComponent = partesPersonagem.nariz[nose];
 
-  console.log('Renderizando o rosto com a cor:', faceColor);
+  //console.log('Renderizando o rosto com a cor:', faceColor);
 
   return (
     <View style={[styles.avatarContainer, { width: size, height: size }]}>
@@ -450,7 +451,7 @@ export function Personagem({ size, customizations }: CharacterProps) {
       )}
       {FaceComponent && (
         <View style={[styles.faceLayer, { zIndex: 3 }]}>
-          <FaceComponent width="100%" height="100%" fill={faceColor}/>
+          <FaceComponent width="100%" height="100%" fill={faceColor} shadowFill={faceShadowColor}/>
         </View>
       )}
       {EyesComponent && (

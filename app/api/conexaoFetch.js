@@ -70,9 +70,8 @@ export async function validaLogin(email, senha) {
         });
 
         const text = await response.text();
-        console.log("Resposta crua:", text);
-
         let data;
+
         try {
             data = JSON.parse(text);
         } catch (err) {
@@ -183,7 +182,7 @@ export async function updateQuizBD(acertos, idQuiz) {
     }
 }
 
-export async function updatePersonalizacoesBD(novaPersonalizacao) {
+export async function updatePersonalizacoesBD(itemId) {
 
     let idUser = await AsyncStorage.getItem("userID");
     idUser = parseInt(idUser);
@@ -195,7 +194,7 @@ export async function updatePersonalizacoesBD(novaPersonalizacao) {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
-                novaPersonalizacao,
+                itemId,
                 idUser,
             }),
         });

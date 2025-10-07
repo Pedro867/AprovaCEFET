@@ -50,8 +50,9 @@ interface Question {
 const imageMap: { [key: string]: any } = {
   "./q1.png": require("./q1.png"),
   "./q2.png": require("./q2.png"),
-  // "./q6.png": require("./q6.png"),
-  // "./q11.png": require("./q11.png"),
+  "./q4.png": require("./q4.png"),
+  "./q5.png": require("./q5.png"),
+  "./q6.png": require("./q6.png"),
 };
 
 let tamanhoMathJax = 0;
@@ -575,12 +576,6 @@ const QuizScreen = () => {
             onPress={redoIncorrectQuestions}
             title="REFAZER QUESTÕES ERRADAS"
             disabled={incorrectQuestions.length === 0}
-          />
-          <BotaoCustomizado
-            onPress={() =>
-              router.replace("/(matematica)/(potencia_radiciacao)/pot_rad")
-            }
-            title="IR PARA O PRÓXIMO MÓDULO"
           />
         </View>
       </ScrollView>

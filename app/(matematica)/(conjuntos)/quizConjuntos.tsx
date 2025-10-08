@@ -134,12 +134,12 @@ const QuizScreen = () => {
   );
 
   const finalizarQuiz = async () => {
-  try {
-    await updateQuizBD(score, 401); //401 eh o id do quiz
-  } catch (err) {
-    console.error("Erro ao atualizar quiz:", err);
-  }
-};
+    try {
+      await updateQuizBD(score, 401); //401 eh o id do quiz
+    } catch (err) {
+      console.error("Erro ao atualizar quiz:", err);
+    }
+  };
 
   const saveCoins = async (newCoin: number) => {
     try {
@@ -306,7 +306,7 @@ const QuizScreen = () => {
 
       Animated.parallel([
         Animated.timing(animatedValue, {
-          toValue: -30, // Move para cima
+          toValue: 20, // Move para a direita
           duration: 800,
           useNativeDriver: true,
         }),
@@ -379,7 +379,7 @@ const QuizScreen = () => {
     setQuizMode("initial");
   };
 
-  const redoIncorrectQuestions = async() => {
+  const redoIncorrectQuestions = async () => {
     if (incorrectQuestions.length === 0) {
       Alert.alert("Parabéns!", "Você não errou nenhuma questão.");
       return;
@@ -406,7 +406,7 @@ const QuizScreen = () => {
       <View style={styles.startScreen}>
         <View style={styles.startHeader}>
           <TouchableOpacity
-            onPress={() => router.replace("/(matematica)/telaUnidades")}
+            onPress={() => router.replace("/(matematica)/(conjuntos)/conjuntos")}
             style={styles.backButton}
           >
             <Ionicons name="arrow-back" size={24} color="black" />
@@ -453,6 +453,39 @@ const QuizScreen = () => {
         colors={["rgba(107, 145, 226, 0.8)", "rgba(255, 255, 255, 0.8)"]}
       >
         <ScrollView contentContainerStyle={styles.quizScrollViewContent}>
+
+          <View style={styles.startHeader}>
+            <TouchableOpacity
+              onPress={() => router.replace("/(matematica)/(conjuntos)/conjuntos")}
+              style={styles.backButton2}
+            >
+              <Ionicons name="arrow-back" size={24} color="black" />
+            </TouchableOpacity>
+
+            <View style={styles.coinContainer}>
+              <Image
+                source={require("@/assets/images/pontos.png")}
+                style={styles.coinIcon}
+              />
+              <Text style={styles.coinNumber}>{coins}</Text>
+
+              {showCoinsIncrease && (
+                <Animated.View
+                  style={[
+                    styles.coinsIncreaseContainer,
+                    {
+                      opacity: animatedOpacity,
+                      transform: [{ translateX: animatedValue }],
+                    },
+                  ]}
+                >
+                  <Text style={styles.coinsIncreaseText}>+{coinsIncreaseAmount}</Text>
+                </Animated.View>
+              )}
+
+            </View>
+          </View>
+
           <View style={styles.header}>
             <ProgressBar
               progress={progress}
@@ -464,28 +497,6 @@ const QuizScreen = () => {
             <Text style={styles.progressText}>
               {currentQuestionIndex + 1} / {questions.length}
             </Text>
-            <View style={styles.coinContainer}>
-              <Image
-                source={require("@/assets/images/pontos.png")}
-                style={styles.coinIcon}
-              />
-              <Text style={styles.coinNumber}>{coins}</Text>
-
-              {showCoinsIncrease && (
-              <Animated.View
-                style={[
-                  styles.coinsIncreaseContainer,
-                  {
-                    opacity: animatedOpacity,
-                    transform: [{ translateY: animatedValue }],
-                  },
-                ]}
-              >
-                <Text style={styles.coinsIncreaseText}>+{coinsIncreaseAmount}</Text>
-              </Animated.View>
-            )}
-
-            </View>
           </View>
 
           <View style={styles.questionContainer}>
@@ -555,6 +566,39 @@ const QuizScreen = () => {
       locations={[0, 1]}
       colors={["rgba(107, 145, 226, 0.8)", "rgba(255, 255, 255, 0.8)"]}
     >
+
+      <View style={styles.startHeader}>
+        <TouchableOpacity
+          onPress={() => router.replace("/(matematica)/(conjuntos)/conjuntos")}
+          style={styles.backButton2}
+        >
+          <Ionicons name="arrow-back" size={24} color="black" />
+        </TouchableOpacity>
+
+        <View style={styles.coinContainer}>
+          <Image
+            source={require("@/assets/images/pontos.png")}
+            style={styles.coinIcon}
+          />
+          <Text style={styles.coinNumber}>{coins}</Text>
+
+          {showCoinsIncrease && (
+            <Animated.View
+              style={[
+                styles.coinsIncreaseContainer,
+                {
+                  opacity: animatedOpacity,
+                  transform: [{ translateX: animatedValue }],
+                },
+              ]}
+            >
+              <Text style={styles.coinsIncreaseText}>+{coinsIncreaseAmount}</Text>
+            </Animated.View>
+          )}
+
+        </View>
+      </View>
+
       <ScrollView contentContainerStyle={styles.scoreScrollViewContent}>
         <View style={styles.scoreContent}>
           <Image
@@ -702,11 +746,11 @@ const styles = StyleSheet.create({
     paddingVertical: 40,
     paddingHorizontal: 20,
   },
-  startHeader: {
-    alignSelf: "flex-start",
-  },
   backButton: {
     marginTop: 30,
+  },
+  backButton2: {
+    marginTop: 15,
   },
   personagemContainer: {
     alignItems: "center",
@@ -755,12 +799,19 @@ const styles = StyleSheet.create({
     padding: 20,
     justifyContent: "space-between",
   },
+  startHeader: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    marginBottom: 10,
+    marginTop: 40,
+  },
   header: {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
     marginBottom: 10,
-    marginTop: 30,
+    marginTop: 10,
   },
   progressBar: {
     flex: 1,
@@ -775,17 +826,18 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     position: "relative", // Necessário para posicionar o Animated.View
+    marginRight: 20,
   },
 
-  coinIcon: { 
-    width: 30, 
-    height: 30 
+  coinIcon: {
+    width: 30,
+    height: 30
   },
 
-  coinNumber: { 
-    fontSize: 18, 
-    fontWeight: "bold", 
-    marginLeft: 5 
+  coinNumber: {
+    fontSize: 18,
+    fontWeight: "bold",
+    marginLeft: 5
   },
 
   questionContainer: { flex: 1, justifyContent: "center" },
@@ -856,17 +908,16 @@ const styles = StyleSheet.create({
     fontFamily: Fonts.family.kumbhSans,
     textAlign: "center",
   },
-  scoreButtonContainer: { 
-    width: "90%", 
-    gap: 40, 
-    alignItems: "center" 
+  scoreButtonContainer: {
+    width: "90%",
+    gap: 40,
+    alignItems: "center"
   },
 
   //animação de pontuação
   coinsIncreaseContainer: {
     position: "absolute",
     right: 0,
-    bottom: "100%", // Começa acima do coinContainer
     alignItems: "center",
   },
   coinsIncreaseText: {

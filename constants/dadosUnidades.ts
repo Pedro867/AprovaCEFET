@@ -14,7 +14,7 @@ export const unidadesMatematica = [
     description:
       "Conceitos básicos, tipos de conjuntos numéricos (naturais, inteiros, racionais, etc.) e operações como MMC e MDC.",
     Icon: IconConjuntos,
-    route: "/(matematica)/(conjuntos)/conjuntos", //rota para testeQuiz por enquanto
+    route: "/(matematica)/(conjuntos)/conjuntos", 
   },
   {
     title: "Potenciação e Radiciação",
@@ -59,5 +59,3 @@ export const unidadesMatematica = [
     route: "/(matematica)/(geometria)/geometria",
   },
 ];
-
-//outras materias em breve...

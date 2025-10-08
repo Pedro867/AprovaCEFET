@@ -307,7 +307,7 @@ const QuizScreen = () => {
 
       Animated.parallel([
         Animated.timing(animatedValue, {
-          toValue: -30, // Move para cima
+          toValue: 20, // Move para direita
           duration: 800,
           useNativeDriver: true,
         }),
@@ -407,7 +407,7 @@ const QuizScreen = () => {
       <View style={styles.startScreen}>
         <View style={styles.startHeader}>
           <TouchableOpacity
-            onPress={() => router.replace("/(matematica)/telaUnidades")}
+            onPress={() => router.replace("/(matematica)/(funcoes)/funcoes")}
             style={styles.backButton}
           >
             <Ionicons name="arrow-back" size={24} color="black" />
@@ -454,17 +454,15 @@ const QuizScreen = () => {
         colors={["rgba(107, 145, 226, 0.8)", "rgba(255, 255, 255, 0.8)"]}
       >
         <ScrollView contentContainerStyle={styles.quizScrollViewContent}>
-          <View style={styles.header}>
-            <ProgressBar
-              progress={progress}
-              height={10}
-              backgroundColor="#E5E5E5"
-              progressColor="#0D1B52" // azul escuro
-              style={styles.progressBar}
-            />
-            <Text style={styles.progressText}>
-              {currentQuestionIndex + 1} / {questions.length}
-            </Text>
+
+          <View style={styles.startHeader}>
+            <TouchableOpacity
+              onPress={() => router.replace("/(matematica)/(funcoes)/funcoes")}
+              style={styles.backButton2}
+            >
+              <Ionicons name="arrow-back" size={24} color="black" />
+            </TouchableOpacity>
+
             <View style={styles.coinContainer}>
               <Image
                 source={require("@/assets/images/pontos.png")}
@@ -478,7 +476,7 @@ const QuizScreen = () => {
                     styles.coinsIncreaseContainer,
                     {
                       opacity: animatedOpacity,
-                      transform: [{ translateY: animatedValue }],
+                      transform: [{ translateX: animatedValue }],
                     },
                   ]}
                 >
@@ -487,6 +485,19 @@ const QuizScreen = () => {
               )}
 
             </View>
+          </View>
+
+          <View style={styles.header}>
+            <ProgressBar
+              progress={progress}
+              height={10}
+              backgroundColor="#E5E5E5"
+              progressColor="#0D1B52" // azul escuro
+              style={styles.progressBar}
+            />
+            <Text style={styles.progressText}>
+              {currentQuestionIndex + 1} / {questions.length}
+            </Text>
           </View>
 
           <View style={styles.questionContainer}>
@@ -556,6 +567,39 @@ const QuizScreen = () => {
       locations={[0, 1]}
       colors={["rgba(107, 145, 226, 0.8)", "rgba(255, 255, 255, 0.8)"]}
     >
+
+      <View style={styles.startHeader}>
+        <TouchableOpacity
+          onPress={() => router.replace("/(matematica)/(funcoes)/funcoes")}
+          style={styles.backButton2}
+        >
+          <Ionicons name="arrow-back" size={24} color="black" />
+        </TouchableOpacity>
+
+        <View style={styles.coinContainer}>
+          <Image
+            source={require("@/assets/images/pontos.png")}
+            style={styles.coinIcon}
+          />
+          <Text style={styles.coinNumber}>{coins}</Text>
+
+          {showCoinsIncrease && (
+            <Animated.View
+              style={[
+                styles.coinsIncreaseContainer,
+                {
+                  opacity: animatedOpacity,
+                  transform: [{ translateX: animatedValue }],
+                },
+              ]}
+            >
+              <Text style={styles.coinsIncreaseText}>+{coinsIncreaseAmount}</Text>
+            </Animated.View>
+          )}
+
+        </View>
+      </View>
+
       <ScrollView contentContainerStyle={styles.scoreScrollViewContent}>
         <View style={styles.scoreContent}>
           <Image
@@ -576,7 +620,7 @@ const QuizScreen = () => {
           />
           <BotaoCustomizado
             onPress={() =>
-              router.replace("/(matematica)/(potencia_radiciacao)/pot_rad")
+              router.replace("/(matematica)/(grandezas)/grandezas")
             }
             title="IR PARA O PRÓXIMO MÓDULO"
           />
@@ -702,11 +746,11 @@ const styles = StyleSheet.create({
     paddingVertical: 40,
     paddingHorizontal: 20,
   },
-  startHeader: {
-    alignSelf: "flex-start",
-  },
   backButton: {
     marginTop: 30,
+  },
+  backButton2: {
+    marginTop: 15,
   },
   personagemContainer: {
     alignItems: "center",
@@ -755,12 +799,19 @@ const styles = StyleSheet.create({
     padding: 20,
     justifyContent: "space-between",
   },
+  startHeader: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    marginBottom: 10,
+    marginTop: 40,
+  },
   header: {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
     marginBottom: 10,
-    marginTop: 30,
+    marginTop: 10,
   },
   progressBar: {
     flex: 1,
@@ -775,6 +826,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     position: "relative", // Necessário para posicionar o Animated.View
+    marginRight: 20,
   },
 
   coinIcon: {
@@ -866,7 +918,6 @@ const styles = StyleSheet.create({
   coinsIncreaseContainer: {
     position: "absolute",
     right: 0,
-    bottom: "100%", // Começa acima do coinContainer
     alignItems: "center",
   },
   coinsIncreaseText: {

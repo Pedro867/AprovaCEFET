@@ -19,7 +19,6 @@ import { CalendarioCustomizado } from "@/components/ui/CalendarCustom";
 import { BlurView } from "expo-blur";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-const { width: screenWidth } = Dimensions.get("window");
 
 const subjectAreas = [
   {

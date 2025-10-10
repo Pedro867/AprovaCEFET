@@ -21,8 +21,8 @@ const opcoesDaUnidade = [
     locked: false,
   },
   {
-    title: "Videoaulas",
-    route: "/(matematica)/(equacoes)/quizEquacoes",
+    title: "Sugestão de Vídeoaulas",
+    route: "/(matematica)/(equacoes)/videoAulasEquacoes",
     locked: false,
   },
   {
@@ -161,7 +161,7 @@ const styles = StyleSheet.create({
     top: "5%",
   },
   headerTitle: {
-    fontSize: 30,
+    fontSize: 22,
     fontFamily: "Kumbh Sans",
     fontWeight: "600",
     color: "#121212",

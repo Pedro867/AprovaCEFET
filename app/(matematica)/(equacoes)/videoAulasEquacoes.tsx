@@ -12,7 +12,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import Feather from "@expo/vector-icons/Feather";
 import { Colors, Fonts } from "@/constants/Colors";
-import { playlistConjuntos, Video } from "@/constants/dadosVideos";
+import { playlistEquacoes, Video } from "@/constants/dadosVideos";
 import * as ScreenOrientation from "expo-screen-orientation";
 
 export default function VideoAulasConjuntosScreen() {
@@ -20,7 +20,7 @@ export default function VideoAulasConjuntosScreen() {
   const playerRef = useRef(null);
 
   const [currentVideoId, setCurrentVideoId] = useState(
-    playlistConjuntos.videos[0].id
+    playlistEquacoes.videos[0].id
   );
   const [isPlaying, setIsPlaying] = useState(false);
   const [watchedVideos, setWatchedVideos] = useState<Set<string>>(new Set());
@@ -52,7 +52,7 @@ export default function VideoAulasConjuntosScreen() {
     [currentVideoId]
   );
 
-  const currentVideoDetails = playlistConjuntos.videos.find(
+  const currentVideoDetails = playlistEquacoes.videos.find(
     (v) => v.id === currentVideoId
   ); //infos do video atual
 
@@ -63,14 +63,14 @@ export default function VideoAulasConjuntosScreen() {
     >
       <View style={styles.header}>
         <TouchableOpacity
-          onPress={() => router.replace("/(matematica)/(conjuntos)/conjuntos")}
+          onPress={() => router.replace("/(matematica)/(equacoes)/equacoes")}
           style={styles.backButton}
         >
           <Ionicons name="arrow-back" size={28} color="white" />
         </TouchableOpacity>
         <View style={styles.headerTitles}>
           <Text style={styles.headerTitle}>VIDEOAULAS</Text>
-          <Text style={styles.headerSubtitle}>Conjuntos</Text>
+          <Text style={styles.headerSubtitle}>EQUAÇÕES DO 2º GRAU</Text>
         </View>
         <View style={{ width: 48 }} />
       </View>
@@ -88,27 +88,27 @@ export default function VideoAulasConjuntosScreen() {
 
       <View style={styles.videoInfoContainer}>
         <Text style={styles.playlistTitle}>
-          {currentVideoDetails?.title || playlistConjuntos.title}
+          {currentVideoDetails?.title || playlistEquacoes.title}
         </Text>
         <Text style={styles.playlistCreator}>
-          Criado por {playlistConjuntos.creator}
+          Criado por {playlistEquacoes.creator}
         </Text>
         <View style={styles.durationContainer}>
           <Feather name="clock" size={14} color="#555" />
           <Text style={styles.durationText}>
-            {playlistConjuntos.totalDuration}
+            {playlistEquacoes.totalDuration}
           </Text>
         </View>
       </View>
 
       <View style={styles.playlistButton}>
         <Text style={styles.playlistButtonText}>
-          Playlist ({playlistConjuntos.videos.length})
+          Playlist ({playlistEquacoes.videos.length})
         </Text>
       </View>
       <ScrollView contentContainerStyle={styles.scrollViewContent}>
         <View style={styles.videoListContainer}>
-          {playlistConjuntos.videos.map((video, index) => (
+          {playlistEquacoes.videos.map((video, index) => (
             <TouchableOpacity
               key={video.id}
               style={styles.videoItem}
@@ -148,7 +148,7 @@ const styles = StyleSheet.create({
     borderBottomColor: "white",
     borderTopColor: "white",
   },
-  backButton: { right: 70 },
+  backButton: { right: 50 },
   headerTitles: {
     alignItems: "center",
   },

@@ -13,6 +13,7 @@ export default function StackLayout() {
         <Stack.Screen name="pot_rad" options={{ headerShown: false }} />
         <Stack.Screen name="questoesPot_rad" options={{ headerShown: false }} />
         <Stack.Screen name="teoriaPot_rad" options={{ headerShown: false }} />
+        <Stack.Screen name="videoAulasPotRad" options={{ headerShown: false }} /> 
     </Stack>
   );
 }

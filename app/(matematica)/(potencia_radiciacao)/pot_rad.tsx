@@ -23,8 +23,8 @@ const opcoesDaUnidade = [
     locked: false,
   },
   {
-    title: "Videoaulas",
-    route: "/(matematica)/(potencia_radiciacao)/quizConjuntos",
+    title: "Sugestão de Vídeoaulas",
+    route: "/(matematica)/(potencia_radiciacao)/videoAulasPotRad",
     locked: false,
   },
   {
@@ -196,7 +196,7 @@ const styles = StyleSheet.create({
     top: "5%",
   },
   headerTitle: {
-    fontSize: 30,
+    fontSize: 20,
     fontFamily: "Kumbh Sans",
     fontWeight: "600",
     color: "#121212",

@@ -13,6 +13,7 @@ export default function StackLayout() {
         <Stack.Screen name="grandezas" options={{ headerShown: false }} />
         {/* <Stack.Screen name="questoesGrandezas" options={{ headerShown: false }} /> */}
         <Stack.Screen name="teoriaGrandezas" options={{ headerShown: false }} />
+        <Stack.Screen name="videoAulasGrandezas" options={{ headerShown: false }} />
     </Stack>
   );
 }

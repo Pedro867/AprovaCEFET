@@ -206,6 +206,7 @@ export const LOJA_CATEGORIAS = [
 export const LOJA_ITENS = {
   face: [
     { id: "rosto1", thumbnail: rosto1, preco: 0 },
+    { id: "rosto9", thumbnail: rosto9, preco: 0 },
     { id: "rosto2", thumbnail: rosto2, preco: 50 },
     { id: "rosto3", thumbnail: rosto3, preco: 50 },
     { id: "rosto4", thumbnail: rosto4, preco: 50 },
@@ -213,7 +214,6 @@ export const LOJA_ITENS = {
     { id: "rosto6", thumbnail: rosto6, preco: 50 },
     { id: "rosto7", thumbnail: rosto7, preco: 50 },
     { id: "rosto8", thumbnail: rosto8, preco: 50 },
-    { id: "rosto9", thumbnail: rosto9, preco: 50 },
     { id: "rosto10", thumbnail: rosto10, preco: 50 },
   ],
   ears: [

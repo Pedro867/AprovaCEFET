@@ -21,7 +21,7 @@ const opcoesDaUnidade = [
     locked: false,
   },
   {
-    title: "Videoaulas",
+    title: "Sugestão de Vídeoaulas",
     route: "/(matematica)/(conjuntos)/videoAulasConjuntos",
     locked: false,
   },

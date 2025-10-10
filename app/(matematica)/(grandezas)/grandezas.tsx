@@ -21,8 +21,8 @@ const opcoesDaUnidade = [
     locked: false,
   },
   {
-    title: "Videoaulas",
-    route: "/(matematica)/(grandezas)/quizGrandezas",
+    title: "Sugestão de Vídeoaulas",
+    route: "/(matematica)/(grandezas)/videoAulasGrandezas",
     locked: false,
   },
   {
@@ -66,7 +66,7 @@ export default function UnidadeConjuntos() {
 
         <View style={styles.textHeader}>
           <View>
-            <ThemedText style={styles.headerTitle}>GRANDEZAS PROPORCIONAIS E REGRA DE TRÊS</ThemedText>
+            <ThemedText style={styles.headerTitle}>GRANDEZAS E REGRA DE TRÊS</ThemedText>
             <ThemedText style={styles.headerSubtitle}>Matemática</ThemedText>
           </View>
         </View>
@@ -161,7 +161,7 @@ const styles = StyleSheet.create({
     top: "5%",
   },
   headerTitle: {
-    fontSize: 30,
+    fontSize: 18,
     fontFamily: "Kumbh Sans",
     fontWeight: "600",
     color: "#121212",

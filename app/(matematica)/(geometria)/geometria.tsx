@@ -21,8 +21,8 @@ const opcoesDaUnidade = [
     locked: false,
   },
   {
-    title: "Videoaulas",
-    route: "/(matematica)/(geometria)/quizGeometria",
+    title: "Sugestão de Vídeoaulas",
+    route: "/(matematica)/(geometria)/videoAulasGeometria",
     locked: false,
   },
   {

@@ -203,7 +203,7 @@ const styles = StyleSheet.create({
     marginBottom: 0,
   },
   cardTitle: {
-    fontSize: 18,
+    fontSize: 20,
     fontFamily: "Poppins",
     fontWeight: "700",
     color: Colors.primary,
@@ -213,6 +213,9 @@ const styles = StyleSheet.create({
     backgroundColor:'white',
     borderTopRightRadius: 20,
     borderBottomRightRadius: 20,
+    paddingHorizontal: 10,
+    paddingVertical: 2,
+    alignSelf: "flex-start",
   },
 
   cardIconContainer: {
@@ -222,7 +225,7 @@ const styles = StyleSheet.create({
     
   },
   cardDescription: {
-    fontSize: 13,
+    fontSize: 15,
     fontFamily: "Poppins",
     color: "white",
     lineHeight: 20,

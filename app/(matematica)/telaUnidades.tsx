@@ -35,7 +35,7 @@ export default function TelaUnidadesMatematica() {
 
   //customizacao do personagem
   const customizacoes = {
-    background: 'cor1', 
+    background: 'cor1',
     ears: 'orelha1',
     cheeks: 'bochecha1',
     face: 'rosto1',
@@ -46,30 +46,32 @@ export default function TelaUnidadesMatematica() {
     nose: 'nariz1',
   };
 
-  return ( 
-      <View style={styles.container}>
-        <View style={styles.header}> 
+  return (
+    <View style={styles.container}>
+
+      <View style={styles.matematica}>Matematica</View>
+
+      <View style={styles.header}>
         <TouchableOpacity
           onPress={() => router.replace('/(tabs)/secao')}
           style={styles.backButton}
         >
-        <Ionicons name="arrow-back" size={24} color="black" />
+          <Ionicons name="arrow-back" size={24} color="black" />
         </TouchableOpacity>
-        
-      <View style={styles.textHeader}>
-        <View>
-          <ThemedText style={styles.headerTitle}>UNIDADES</ThemedText>
-          <ThemedText style={styles.headerSubtitle}>Matemática</ThemedText>
+
+        <View style={styles.textHeader}>
+          <View>
+            <ThemedText style={styles.headerTitle}>UNIDADES</ThemedText>
+          </View>
         </View>
-      </View>
-      <View style={styles.streakContainer}>
+        <View style={styles.streakContainer}>
           <Image
             source={require("@/assets/images/foguin--ativado-.png")}
             style={styles.streakIcon}
           />
           <Text style={styles.streakNumber}>{streakUsuario}</Text>
         </View>
-</View>
+      </View>
       <ScrollView
         contentContainerStyle={styles.scrollViewContent}
         showsVerticalScrollIndicator={false}
@@ -123,29 +125,39 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingBottom: 40,
   },
+  matematica: {
+    flexDirection: "row",
+    justifyContent: "center",
+    fontSize: 16,
+    fontFamily: "Kumbh Sans",
+    color: "#060302",
+    paddingHorizontal: 20,
+    marginTop: 20,
+  },
   header: {
     flexDirection: "row",
     justifyContent: "space-between",
     paddingHorizontal: 20,
     paddingTop: 20,
     marginBottom: 20,
-    marginTop: 40,
+    marginTop: 20,
     borderBottomWidth: 2,
     borderTopWidth: 2,
     borderColor: "rgba(0, 0, 0, 0.1)",
   },
-
   textHeader: {
     flexDirection: "row",
-    alignItems: 'center', 
+    alignContent: 'center',
+    textAlign: "center",
     justifyContent: "center",
     paddingHorizontal: 20,
     marginBottom: 20,
-    position :"relative",
+    position: "relative",
   },
   streakContainer: {
     alignItems: "center",
     right: '5%',
+    bottom: '10%',
   },
   streakIcon: {
     width: 40,
@@ -174,7 +186,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontFamily: "Kumbh Sans",
     color: "#060302",
-    marginLeft: 28,
   },
   unitsListContainer: {
     gap: 25,
@@ -195,11 +206,11 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     paddingTop: 15,
     paddingLeft: 0,
-    
+
   },
   titleContainer: {
     width: '100%',
-    alignItems: 'flex-start', 
+    alignItems: 'flex-start',
     marginBottom: 0,
   },
   cardTitle: {
@@ -208,12 +219,12 @@ const styles = StyleSheet.create({
     fontWeight: "700",
     color: Colors.primary,
     textAlign: "left",
-    
+
     marginBottom: 15,
-    backgroundColor:'white',
+    backgroundColor: 'white',
     borderTopRightRadius: 20,
     borderBottomRightRadius: 20,
-    paddingHorizontal: 10,
+    paddingHorizontal: 20,
     paddingVertical: 2,
     alignSelf: "flex-start",
   },
@@ -222,7 +233,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     marginBottom: 15,
-    
+
   },
   cardDescription: {
     fontSize: 15,

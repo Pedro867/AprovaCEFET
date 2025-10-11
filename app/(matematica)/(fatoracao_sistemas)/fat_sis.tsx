@@ -56,9 +56,11 @@ export default function UnidadeConjuntos() {
 
   return (
     <View style={styles.container}>
+      <View style={styles.matematica}>Matematica</View>
+
       <View style={styles.header}>
         <TouchableOpacity
-          onPress={() => router.replace("/(matematica)/telaUnidades")}
+          onPress={() => router.replace('/(matematica)/telaUnidades')}
           style={styles.backButton}
         >
           <Ionicons name="arrow-back" size={24} color="black" />
@@ -66,8 +68,7 @@ export default function UnidadeConjuntos() {
 
         <View style={styles.textHeader}>
           <View>
-            <ThemedText style={styles.headerTitle}>FATORAÇÃO E SISTEMAS LINEARES</ThemedText>
-            <ThemedText style={styles.headerSubtitle}>Matemática</ThemedText>
+            <ThemedText style={styles.headerTitle}>Fatoração e Sistemas Lineares</ThemedText>
           </View>
         </View>
         <View style={styles.streakContainer}>
@@ -121,13 +122,22 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "white",
   },
+  matematica: {
+    flexDirection: "row",
+    justifyContent: "center",
+    fontSize: 16,
+    fontFamily: "Kumbh Sans",
+    color: "#060302",
+    paddingHorizontal: 20,
+    marginTop: 20,
+  },
   header: {
     flexDirection: "row",
     justifyContent: "space-between",
     paddingHorizontal: 20,
     paddingTop: 20,
     marginBottom: 20,
-    marginTop: 40,
+    marginTop: 20,
     borderBottomWidth: 2,
     borderTopWidth: 2,
     borderColor: "rgba(0, 0, 0, 0.1)",
@@ -143,6 +153,7 @@ const styles = StyleSheet.create({
   streakContainer: {
     alignItems: "center",
     right: "5%",
+    bottom: "10%",
   },
   streakIcon: {
     width: 40,
@@ -161,7 +172,7 @@ const styles = StyleSheet.create({
     top: "5%",
   },
   headerTitle: {
-    fontSize: 16,
+    fontSize: 30,
     fontFamily: "Kumbh Sans",
     fontWeight: "600",
     color: "#121212",

@@ -158,6 +158,7 @@ export default function TelaSecao() {
     calculaProgresso();
   }, [calculaProgresso]);
 
+  const progress = ((3) / 5) * 100;
   const handleUpdateDate = async () => {
     //funcao pra caso o usuario queira alterar a data da prova
     if (!novaDataSelecionada) {
@@ -223,7 +224,7 @@ export default function TelaSecao() {
 
             <ProgressBar
               progress={progresso}
-              style={styles.progressBar}
+              style={styles.progressDateBar}
               progressColor="#6B91E2"
             />
           </LinearGradient>
@@ -238,7 +239,7 @@ export default function TelaSecao() {
               key={area.id}
               style={styles.subjectTouchable}
               onPress={() => router.push(area.route as any)}
-            >
+            > {/* inicio do card da disciplina */}
               <Card style={styles.subjectCard}>
                 <LinearGradient
                   colors={["rgba(34,75,244,0.29)", "rgba(34,75,244,0.29)"]}
@@ -246,6 +247,7 @@ export default function TelaSecao() {
                   end={{ x: 1, y: 0 }}
                   style={styles.subjectImageBackground}
                 />
+
                 <View style={styles.subjectImageContainer}>
                   <Image source={area.image} style={styles.subjectImage} />
                 </View>
@@ -255,6 +257,16 @@ export default function TelaSecao() {
                   <Text style={styles.subjectDisciplines}>
                     {area.disciplines}
                   </Text>
+                </View>
+
+                <View style={styles.progressBarContainer}>
+                  <ProgressBar
+                    progress={progress}
+                    height={10}
+                    backgroundColor="#E5E5E5"
+                    progressColor="#0D1B52" // azul escuro
+                    style={styles.progressBar}
+                  />
                 </View>
               </Card>
             </TouchableOpacity>
@@ -368,8 +380,15 @@ const styles = StyleSheet.create({
     color: "#060302",
     fontFamily: "DM Sans",
   },
-  progressBar: {
+  progressDateBar: {
     width: "100%",
+  },
+  progressBar: {
+    width: "80%",
+  },
+  progressBarContainer: {
+    alignItems: "center",
+    marginBottom: "5%"
   },
   sectionTitle: {
     fontSize: 24,

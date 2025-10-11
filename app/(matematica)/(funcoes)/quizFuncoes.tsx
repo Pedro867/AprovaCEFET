@@ -453,7 +453,6 @@ const QuizScreen = () => {
         locations={[0, 1]}
         colors={["rgba(107, 145, 226, 0.8)", "rgba(255, 255, 255, 0.8)"]}
       >
-        <ScrollView contentContainerStyle={styles.quizScrollViewContent}>
 
           <View style={styles.startHeader}>
             <TouchableOpacity
@@ -499,6 +498,8 @@ const QuizScreen = () => {
               {currentQuestionIndex + 1} / {questions.length}
             </Text>
           </View>
+
+          <ScrollView contentContainerStyle={styles.quizScrollViewContent}>
 
           <View style={styles.questionContainer}>
             <View style={styles.questionBox}>
@@ -805,6 +806,8 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     marginBottom: 10,
     marginTop: 40,
+    marginLeft: 30,
+    marginRight: 30,
   },
   header: {
     flexDirection: "row",
@@ -812,6 +815,8 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     marginBottom: 10,
     marginTop: 10,
+    marginLeft: 30,
+    marginRight: 30,
   },
   progressBar: {
     flex: 1,

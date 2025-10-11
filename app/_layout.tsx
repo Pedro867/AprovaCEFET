@@ -26,12 +26,14 @@ export default function RootLayout() {
         {/*telas apos o login */}
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
 
-        {/*telas apos o login */}
         <Stack.Screen name="(matematica)" options={{ headerShown: false }} />
 
-        {/*telas apos o login */}
-        <Stack.Screen name="(matematica)/(conjuntos)" options={{ headerShown: false }} />
+        <Stack.Screen name="(linguagens)" options={{ headerShown: false }} />
         
+        <Stack.Screen name="(humanas)" options={{ headerShown: false }} />
+
+        <Stack.Screen name="(natureza)" options={{ headerShown: false }} />
+
         <Stack.Screen name="+not-found" />
       </Stack>
       <StatusBar style="auto" />

@@ -9,7 +9,7 @@ export default function StackLayout() {
   return (
 
     <Stack>
-        <Stack.Screen name="telaUnidades" options={{ headerShown: false }} /> 
+        <Stack.Screen name="telaUnidadesMat" options={{ headerShown: false }} /> 
         <Stack.Screen name="(conjuntos)" options={{ headerShown: false }} />  
         <Stack.Screen name="(potencia_radiciacao)" options={{ headerShown: false }} />  
         <Stack.Screen name="(fatoracao_sistemas)" options={{ headerShown: false }} />  

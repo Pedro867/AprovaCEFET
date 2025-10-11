@@ -43,7 +43,7 @@ const subjectAreas = [
     disciplines: "1 Disciplina",
     image: require("@/assets/images/linguagens.png"),
     color: "rgba(137,161,212,0.64)",
-    route: "/(linguagens)/linguagens",
+    route: "/(linguagens)/telaUnidadesLing",
   },
   {
     id: 4,
@@ -51,7 +51,7 @@ const subjectAreas = [
     disciplines: "1 Disciplina",
     image: require("@/assets/images/matematica.png"),
     color: "rgba(137,161,212,0.64)",
-    route: "/(matematica)/telaUnidades",
+    route: "/(matematica)/telaUnidadesMat",
   },
 ];
 

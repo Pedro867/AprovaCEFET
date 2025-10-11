@@ -21,7 +21,8 @@ export default function TabLayout() {
         tabBarPosition:'bottom',
         tabBarButton: HapticTab,
         tabBarBackground: TabBarBackground,
-      }}>
+        tabBarStyle: { display: 'none' }
+      }}> 
       <Tabs.Screen
         name="cienciasHumanas"
         options={{

@@ -60,7 +60,7 @@ export default function UnidadeConjuntos() {
 
       <View style={styles.header}>
         <TouchableOpacity
-          onPress={() => router.replace('/(matematica)/telaUnidades')}
+          onPress={() => router.replace('/(matematica)/telaUnidadesMat')}
           style={styles.backButton}
         >
           <Ionicons name="arrow-back" size={24} color="black" />

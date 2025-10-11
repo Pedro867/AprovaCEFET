@@ -12,10 +12,10 @@ import { useRouter } from "expo-router";
 import { Colors } from "@/constants/Colors";
 import { ThemedText } from "@/components/ThemedText";
 import Ionicons from '@expo/vector-icons/Ionicons';
-import { unidadesMatematica } from "@/constants/dadosUnidades"
+import { unidadesLinguagens } from "@/constants/dadosUnidades"
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-export default function TelaUnidadesMatematica() {
+export default function telaUnidadesLing() {
   const router = useRouter();
 
   const [streakUsuario, setStreakUsuario] = useState(0);
@@ -49,7 +49,7 @@ export default function TelaUnidadesMatematica() {
   return (
     <View style={styles.container}>
 
-      <View style={styles.matematica}>Matematica</View>
+      <View style={styles.matematica}>Linguagens</View>
 
       <View style={styles.header}>
         <TouchableOpacity
@@ -78,7 +78,7 @@ export default function TelaUnidadesMatematica() {
       >
         {/* Lista de Unidades */}
         <View style={styles.unitsListContainer}>
-          {unidadesMatematica.map((unidade, index) => {
+          {unidadesLinguagens.map((unidade, index) => {
             //percorre o array de unidades
             const Icon = unidade.Icon;
             return (
@@ -102,9 +102,9 @@ export default function TelaUnidadesMatematica() {
                   <View style={styles.cardIconContainer}>
                     <Icon width={60} height={60} fill="#FFFFFF" />
                   </View>
-                  <ThemedText style={styles.cardDescription}>
+                  {/* <ThemedText style={styles.cardDescription}>
                     {unidade.description}
-                  </ThemedText>
+                  </ThemedText> */}
                 </LinearGradient>
               </TouchableOpacity>
             );

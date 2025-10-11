@@ -59,3 +59,69 @@ export const unidadesMatematica = [
     route: "/(matematica)/(geometria)/geometria",
   },
 ];
+
+export const unidadesLinguagens = [
+  {
+    title: "Linguagem, Língua e Variedade Regional",
+    // description:
+    //   "Conceitos básicos, tipos de conjuntos numéricos (naturais, inteiros, racionais, etc.) e operações como MMC e MDC.",
+    Icon: IconConjuntos,
+    route: "/(linguagens)/(linguagem)/linguagem", 
+  },
+  {
+    title: "Tipos Textuais/Discursivos",
+    // description:
+    //   "Propriedades e regras das operações, notação científica e racionalização de denominadores.",
+    Icon: IconPotencia,
+    route: "/(linguagens)/(tipos)/tipos",
+  },
+  {
+    title: "Gêneros Textuais",
+    // description:
+    //   "Simplificação de expressões algébricas e métodos de adição e substituição para resolver sistemas.",
+    Icon: IconFatoracao,
+    route: "/(linguagens)/(genText)/genText",
+  },
+  {
+    title: "Pontuação",
+    // description:
+    //   "Resolução por fatoração e Bhaskara, relação de soma e produto entre as raízes e equações biquadradas.",
+    Icon: IconEquacao,
+    route: "/(linguagens)/(pontuacao)/pontuacao",
+  },
+  {
+    title: "Classes Gramaticais",
+    // description:
+    //   "Características, propriedades e gráficos das funções de 1º e 2º grau. Análise de raízes e vértices.",
+    Icon: IconFuncoes,
+    route: "/(linguagens)/(classes)/classes",
+  },
+  {
+    title: "A Linguagem Literária",
+    // description:
+    //   "Esta unidade explora as relações entre grandezas direta e inversamente proporcionais. Em seguida, aplica esses conceitos para resolver problemas práticos através da regra de três simples e composta.",
+    Icon: IconRegraDeTres,
+    route: "/(linguagens)/(literaria)/literaria",
+  },
+  {
+    title: "Gêneros Literários",
+    // description:
+    //   "Geometria plana, Teorema de Tales, semelhança de triângulos, Teorema de Pitágoras e cálculo de áreas.",
+    Icon: IconGeometria,
+    route: "/(linguagens)/(genLit)/genLit",
+  },
+  {
+    title: "Intertextualidade",
+    // description:
+    //   "Geometria plana, Teorema de Tales, semelhança de triângulos, Teorema de Pitágoras e cálculo de áreas.",
+    Icon: IconGeometria,
+    route: "/(linguagens)/(inter)/inter",
+  },
+  {
+    title: "Metalinguagem",
+    // description:
+    //   "Geometria plana, Teorema de Tales, semelhança de triângulos, Teorema de Pitágoras e cálculo de áreas.",
+    Icon: IconGeometria,
+    route: "/(linguagens)/(meta)/meta",
+  },
+];

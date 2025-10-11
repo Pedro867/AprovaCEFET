@@ -26,7 +26,7 @@ const subjectAreas = [
     disciplines: "X Unidades",
     image: require("@/assets/images/naturezas.png"),
     color: "rgba(137, 161, 212, 0.66)",
-    route: "/(biologia)/biologia",
+    route: "/(biologia)/telaUnidadesBio",
   },
   {
     id: 2,
@@ -34,7 +34,7 @@ const subjectAreas = [
     disciplines: "X Unidades",
     image: require("@/assets/images/naturezas.png"),
     color: "rgba(137,161,212,0.64)",
-    route: "/(fisica)/fisica",
+    route: "/(fisica)/telaUnidadesFis",
   },
   {
     id: 3,
@@ -42,7 +42,7 @@ const subjectAreas = [
     disciplines: "X Unidades",
     image: require("@/assets/images/quimica.png"),
     color: "rgba(137,161,212,0.64)",
-    route: "/(quimica)/quimica",
+    route: "/(quimica)/telaUnidadesQui",
   }
 ];
 

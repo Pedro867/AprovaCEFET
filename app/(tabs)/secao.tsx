@@ -18,42 +18,7 @@ import { BotaoCustomizado } from "@/components/ui/ButtomCustom";
 import { CalendarioCustomizado } from "@/components/ui/CalendarCustom";
 import { BlurView } from "expo-blur";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-
-
-const subjectAreas = [
-  {
-    id: 1,
-    title: "Ciências da Natureza",
-    disciplines: "3 Disciplinas",
-    image: require("@/assets/images/naturezas.png"),
-    color: "rgba(137, 161, 212, 0.66)",
-    route: "/(natureza)/cienciasNatureza",
-  },
-  {
-    id: 2,
-    title: "Ciências Humanas",
-    disciplines: "2 Disciplinas",
-    image: require("@/assets/images/humanas.png"),
-    color: "rgba(137,161,212,0.64)",
-    route: "/(humanas)/cienciasHumanas",
-  },
-  {
-    id: 3,
-    title: "Linguagens",
-    disciplines: "1 Disciplina",
-    image: require("@/assets/images/linguagens.png"),
-    color: "rgba(137,161,212,0.64)",
-    route: "/(linguagens)/telaUnidadesLing",
-  },
-  {
-    id: 4,
-    title: "Matemática",
-    disciplines: "1 Disciplina",
-    image: require("@/assets/images/matematica.png"),
-    color: "rgba(137,161,212,0.64)",
-    route: "/(matematica)/telaUnidadesMat",
-  },
-];
+import { checkCompletedQuizes } from "../api/conexaoFetch";
 
 // estado inicial do personagem
 const personagemInicial = {
@@ -69,6 +34,70 @@ const personagemInicial = {
 };
 
 export default function TelaSecao() {
+
+  const [progressos, setProgressos] = useState({
+    1: 0,
+    2: 0,
+    3: 0,
+    4: 0,
+  });
+
+  useEffect(() => {
+    async function carregarProgressoMaterias() {
+      let p1 = await checkCompletedQuizes(1);
+      let p2 = await checkCompletedQuizes(2);
+      let p3 = await checkCompletedQuizes(3);
+      let p4 = await checkCompletedQuizes(4);
+      const novosProgressos = {
+        1: p1,
+        2: p2,
+        3: p3,
+        4: p4,
+      };
+      setProgressos(novosProgressos);
+    }
+    carregarProgressoMaterias();
+  }, []);
+
+  const subjectAreas = [
+  {
+    id: 1,
+    title: "Ciências da Natureza",
+    disciplines: "3 Disciplinas",
+    image: require("@/assets/images/naturezas.png"),
+    color: "rgba(137, 161, 212, 0.66)",
+    route: "/(natureza)/cienciasNatureza",
+    progress: progressos[1], //1 eh o id
+  },
+  {
+    id: 2,
+    title: "Ciências Humanas",
+    disciplines: "2 Disciplinas",
+    image: require("@/assets/images/humanas.png"),
+    color: "rgba(137,161,212,0.64)",
+    route: "/(humanas)/cienciasHumanas",
+    progress: progressos[2], //2 eh o id
+  },
+  {
+    id: 3,
+    title: "Linguagens",
+    disciplines: "1 Disciplina",
+    image: require("@/assets/images/linguagens.png"),
+    color: "rgba(137,161,212,0.64)",
+    route: "/(linguagens)/telaUnidadesLing",
+    progress: progressos[3], //3 eh o id
+  },
+  {
+    id: 4,
+    title: "Matemática",
+    disciplines: "1 Disciplina",
+    image: require("@/assets/images/matematica.png"),
+    color: "rgba(137,161,212,0.64)",
+    route: "/(matematica)/telaUnidadesMat",
+    progress: progressos[4], //4 eh o id
+  },
+];
+
   const [nomeUsuario, setNomeUsuario] = useState(null);
   const [streakUsuario, setStreakUsuario] = useState(null);
   const [coinsUsuario, setCoinsUsuario] = useState(null);
@@ -158,7 +187,6 @@ export default function TelaSecao() {
     calculaProgresso();
   }, [calculaProgresso]);
 
-  const progress = ((3) / 5) * 100;
   const handleUpdateDate = async () => {
     //funcao pra caso o usuario queira alterar a data da prova
     if (!novaDataSelecionada) {
@@ -261,7 +289,7 @@ export default function TelaSecao() {
 
                 <View style={styles.progressBarContainer}>
                   <ProgressBar
-                    progress={progress}
+                    progress={area.progress * 100}
                     height={10}
                     backgroundColor="#E5E5E5"
                     progressColor="#0D1B52" // azul escuro

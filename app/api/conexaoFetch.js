@@ -518,3 +518,48 @@ export async function checkSenha(senha) {
         Alert.alert("Erro", "Erro ao conectar no servidor.");
     }
 }
+
+//ESSA FUNCAO SERVE P VER QUANTOS QUIZES DE DETERMINADA MATERIA O ALUNA JA FEZ
+export async function checkCompletedQuizes(disciplina) { //O(S) PRIMEIRO(S) NUMERO(S) DO ID DO QUIZ
+    let idUser = await AsyncStorage.getItem("userID");
+    idUser = parseInt(idUser);
+
+    try {
+        const response = await fetch("https://backend-aprovacefet.onrender.com/checkCompletedQuizes", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                idUser,
+                disciplina
+            }),
+        });
+
+        const text = await response.text();
+
+        let data;
+        try {
+            data = JSON.parse(text);
+            console.log("Resposta da API para disciplina", disciplina, ":", data);
+        } catch (err) {
+            console.error("Resposta não era JSON:", text);
+            Alert.alert("Erro", "O servidor retornou algo inesperado.", [{
+                text: "ok",
+                onPress: () => console.log("jhsvafhgk")
+            }]);
+            return 0;
+        }
+
+        if (data.success) {
+            return parseInt(data.completados);
+        } else {
+            Alert.alert("Erro", data.message || "Erro ao conectar ao BD.");
+            return 0;
+        }
+    } catch (error) {
+        console.error(error);
+        Alert.alert("Erro", "Erro ao conectar no servidor.");
+        return 0;
+    }
+}

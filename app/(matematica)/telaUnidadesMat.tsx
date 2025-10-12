@@ -11,8 +11,8 @@ import { LinearGradient } from "expo-linear-gradient";
 import { useRouter } from "expo-router";
 import { Colors } from "@/constants/Colors";
 import { ThemedText } from "@/components/ThemedText";
-import Ionicons from '@expo/vector-icons/Ionicons';
-import { unidadesMatematica } from "@/constants/dadosUnidades"
+import Ionicons from "@expo/vector-icons/Ionicons";
+import { unidadesMatematica } from "@/constants/dadosUnidades";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function telaUnidadesMatMatematica() {
@@ -28,32 +28,30 @@ export default function telaUnidadesMatMatematica() {
       } catch (error) {
         console.error("Erro ao carregar o streak do usuário", error);
       }
-    }
+    };
 
     carregarDados();
   }, []);
 
   //customizacao do personagem
   const customizacoes = {
-    background: 'cor1',
-    ears: 'orelha1',
-    cheeks: 'bochecha1',
-    face: 'rosto1',
-    eyes: 'olhos1',
-    mouth: 'boca1',
-    bangs: 'franja1',
-    hair: 'cabelo1',
-    nose: 'nariz1',
+    background: "cor1",
+    ears: "orelha1",
+    cheeks: "bochecha1",
+    face: "rosto1",
+    eyes: "olhos1",
+    mouth: "boca1",
+    bangs: "franja1",
+    hair: "cabelo1",
+    nose: "nariz1",
   };
 
   return (
     <View style={styles.container}>
 
-      <View style={styles.matematica}>Matematica</View>
-
       <View style={styles.header}>
         <TouchableOpacity
-          onPress={() => router.replace('/(tabs)/secao')}
+          onPress={() => router.replace("/(tabs)/secao")}
           style={styles.backButton}
         >
           <Ionicons name="arrow-back" size={24} color="black" />
@@ -61,7 +59,8 @@ export default function telaUnidadesMatMatematica() {
 
         <View style={styles.textHeader}>
           <View>
-            <ThemedText style={styles.headerTitle}>UNIDADES</ThemedText>
+            <ThemedText style={styles.textHeader}>UNIDADES</ThemedText>
+            <ThemedText style={styles.headerSubtitle}>Matemática</ThemedText> 
           </View>
         </View>
         <View style={styles.streakContainer}>
@@ -76,10 +75,8 @@ export default function telaUnidadesMatMatematica() {
         contentContainerStyle={styles.scrollViewContent}
         showsVerticalScrollIndicator={false}
       >
-        {/* Lista de Unidades */}
         <View style={styles.unitsListContainer}>
           {unidadesMatematica.map((unidade, index) => {
-            //percorre o array de unidades
             const Icon = unidade.Icon;
             return (
               <TouchableOpacity
@@ -125,39 +122,28 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingBottom: 40,
   },
-  matematica: {
-    flexDirection: "row",
-    justifyContent: "center",
-    fontSize: 16,
-    fontFamily: "Kumbh Sans",
-    color: "#060302",
-    paddingHorizontal: 20,
-    marginTop: 20,
-  },
   header: {
     flexDirection: "row",
     justifyContent: "space-between",
     paddingHorizontal: 20,
     paddingTop: 20,
     marginBottom: 20,
-    marginTop: 20,
+    marginTop: 40,
     borderBottomWidth: 2,
     borderTopWidth: 2,
     borderColor: "rgba(0, 0, 0, 0.1)",
   },
   textHeader: {
-    flexDirection: "row",
-    alignContent: 'center',
+    fontSize: 30,
+    fontFamily: "Kumbh Sans",
+    fontWeight: "600",
+    color: "#121212",
     textAlign: "center",
-    justifyContent: "center",
-    paddingHorizontal: 20,
-    marginBottom: 20,
-    position: "relative",
   },
   streakContainer: {
     alignItems: "center",
-    right: '5%',
-    bottom: '10%',
+    right: "5%",
+    bottom: "10%",
   },
   streakIcon: {
     width: 40,
@@ -172,8 +158,8 @@ const styles = StyleSheet.create({
     textShadowRadius: 4,
   },
   backButton: {
-    left: '2%',
-    top: '5%',
+    left: "2%",
+    top: "5%",
   },
   headerTitle: {
     fontSize: 30,
@@ -186,6 +172,8 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontFamily: "Kumbh Sans",
     color: "#060302",
+    textAlign: "center", 
+    marginTop: 4,
   },
   unitsListContainer: {
     gap: 25,
@@ -200,17 +188,15 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.2,
     shadowRadius: 8,
     elevation: 10,
-
   },
   cardGradient: {
     borderRadius: 12,
     paddingTop: 15,
     paddingLeft: 0,
-
   },
   titleContainer: {
-    width: '100%',
-    alignItems: 'flex-start',
+    width: "100%",
+    alignItems: "flex-start",
     marginBottom: 0,
   },
   cardTitle: {
@@ -221,7 +207,7 @@ const styles = StyleSheet.create({
     textAlign: "left",
 
     marginBottom: 15,
-    backgroundColor: 'white',
+    backgroundColor: "white",
     borderTopRightRadius: 20,
     borderBottomRightRadius: 20,
     paddingHorizontal: 20,
@@ -233,7 +219,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     marginBottom: 15,
-
   },
   cardDescription: {
     fontSize: 15,

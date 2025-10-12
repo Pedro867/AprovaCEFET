@@ -24,7 +24,8 @@ import initialQuestions from "./questoesConjuntos.json";
 import { updateCoinsBD, updateStreakBD } from "@/app/api/conexaoFetch";
 import { MathJaxSvg } from "react-native-mathjax-html-to-svg";
 
-import { updateQuizBD } from "@/app/api/conexaoFetch";
+import { updateQuizBD, checkQuizCompleted } from "@/app/api/conexaoFetch";
+import { SECOES_PARA_EMBLEMAS, EMBLEMAS } from "@/constants/dadosEmblemas";
 
 const personagemInicial = {
   background: "background1",
@@ -53,13 +54,13 @@ const imageMap: { [key: string]: any } = {
 
 let tamanhoMathJax = 0;
 //TAMANHO DO MATHJAX
-if (Platform.OS == 'web') {
+if (Platform.OS == "web") {
   tamanhoMathJax = 2.5;
 }
-if (Platform.OS == 'android') {
+if (Platform.OS == "android") {
   tamanhoMathJax = 17;
 }
-if (Platform.OS == 'ios') {
+if (Platform.OS == "ios") {
   tamanhoMathJax = 17; //testar dps
 }
 
@@ -81,6 +82,7 @@ const QuizScreen = () => {
   const [streak, setStreak] = useState(0);
   const [customizacoes, setCustomizacoes] = useState(personagemInicial);
   const [userName, setUserName] = useState("");
+  const ID_DO_QUIZ = 401; //id do quiz atual
 
   const router = useRouter();
 
@@ -105,7 +107,6 @@ const QuizScreen = () => {
 
   useFocusEffect(
     useCallback(() => {
-
       const carregaDadosUsuario = async () => {
         try {
           const savedName = await AsyncStorage.getItem("userPrimeiroNome");
@@ -122,7 +123,6 @@ const QuizScreen = () => {
           );
           if (savedCustomizations) {
             setCustomizacoes(JSON.parse(savedCustomizations));
-
           }
         } catch (error) {
           console.error("Erro ao carregar o personagem do usuário", error);
@@ -350,22 +350,44 @@ const QuizScreen = () => {
       setAnswered(false);
     } else {
       setShowScore(true);
-      saveQuizState({
-        currentQuestionIndex: nextQuestion,
-        score:
-          score +
-          (selectedAnswer === questions[currentQuestionIndex].correctAnswer
-            ? 1
-            : 0),
-        incorrectQuestions:
-          selectedAnswer === questions[currentQuestionIndex].correctAnswer
-            ? incorrectQuestions
-            : [...incorrectQuestions, questions[currentQuestionIndex]],
-        quizMode,
-        questions: questions,
-      });
+      finalizarQuiz();
+
+      //Logica de conlusão e emblema
+
+      const finalIncorrectQuestions =
+        selectedAnswer === questions[currentQuestionIndex].correctAnswer
+          ? incorrectQuestions
+          : [...incorrectQuestions, questions[currentQuestionIndex]];
+
+        if (finalIncorrectQuestions.length === 0) {
+        try {
+          console.log(`Quiz ${ID_DO_QUIZ} concluído com perfeição!`);
+          
+          // salva o estado do quiz como concluído localmente
+
+          await AsyncStorage.setItem(`quizCompleted_${ID_DO_QUIZ}`, 'true');
+
+          // Verifica se a seção inteira foi completada para dar o emblema
+          await checkAndAwardMathEmblem();
+
+        } catch (error) {
+          console.error("Erro ao salvar a conclusão do quiz:", error);
+        }
+      }
     }
   };
+  
+  const checkAndAwardMathEmblem = async () => {
+    const unidadesMatematicaIds = SECOES_PARA_EMBLEMAS.matematica;
+    let todasUnidadesCompletas = true;
+    for (const unidadeId of unidadesMatematicaIds) {
+        // Verifica o status local de "conclusão perfeita"
+        const completou = await AsyncStorage.getItem(`quizCompleted_${unidadeId}`);
+        if (completou !== 'true') {
+            todasUnidadesCompletas = false;
+            break;
+        }
+    }
 
   const resetQuiz = () => {
     setQuizStarted(false); // volta para a tela inicial
@@ -406,7 +428,9 @@ const QuizScreen = () => {
       <View style={styles.startScreen}>
         <View style={styles.startHeader}>
           <TouchableOpacity
-            onPress={() => router.replace("/(matematica)/(conjuntos)/conjuntos")}
+            onPress={() =>
+              router.replace("/(matematica)/(conjuntos)/conjuntos")
+            }
             style={styles.backButton}
           >
             <Ionicons name="arrow-back" size={24} color="black" />
@@ -452,55 +476,55 @@ const QuizScreen = () => {
         locations={[0, 1]}
         colors={["rgba(107, 145, 226, 0.8)", "rgba(255, 255, 255, 0.8)"]}
       >
-        
+        <View style={styles.startHeader}>
+          <TouchableOpacity
+            onPress={() =>
+              router.replace("/(matematica)/(conjuntos)/conjuntos")
+            }
+            style={styles.backButton2}
+          >
+            <Ionicons name="arrow-back" size={24} color="black" />
+          </TouchableOpacity>
 
-          <View style={styles.startHeader}>
-            <TouchableOpacity
-              onPress={() => router.replace("/(matematica)/(conjuntos)/conjuntos")}
-              style={styles.backButton2}
-            >
-              <Ionicons name="arrow-back" size={24} color="black" />
-            </TouchableOpacity>
-
-            <View style={styles.coinContainer}>
-              <Image
-                source={require("@/assets/images/pontos.png")}
-                style={styles.coinIcon}
-              />
-              <Text style={styles.coinNumber}>{coins}</Text>
-
-              {showCoinsIncrease && (
-                <Animated.View
-                  style={[
-                    styles.coinsIncreaseContainer,
-                    {
-                      opacity: animatedOpacity,
-                      transform: [{ translateX: animatedValue }],
-                    },
-                  ]}
-                >
-                  <Text style={styles.coinsIncreaseText}>+{coinsIncreaseAmount}</Text>
-                </Animated.View>
-              )}
-
-            </View>
-          </View>
-
-          <View style={styles.header}>
-            <ProgressBar
-              progress={progress}
-              height={10}
-              backgroundColor="#E5E5E5"
-              progressColor="#0D1B52" // azul escuro
-              style={styles.progressBar}
+          <View style={styles.coinContainer}>
+            <Image
+              source={require("@/assets/images/pontos.png")}
+              style={styles.coinIcon}
             />
-            <Text style={styles.progressText}>
-              {currentQuestionIndex + 1} / {questions.length}
-            </Text>
+            <Text style={styles.coinNumber}>{coins}</Text>
+
+            {showCoinsIncrease && (
+              <Animated.View
+                style={[
+                  styles.coinsIncreaseContainer,
+                  {
+                    opacity: animatedOpacity,
+                    transform: [{ translateX: animatedValue }],
+                  },
+                ]}
+              >
+                <Text style={styles.coinsIncreaseText}>
+                  +{coinsIncreaseAmount}
+                </Text>
+              </Animated.View>
+            )}
           </View>
+        </View>
 
-          <ScrollView contentContainerStyle={styles.quizScrollViewContent}>
+        <View style={styles.header}>
+          <ProgressBar
+            progress={progress}
+            height={10}
+            backgroundColor="#E5E5E5"
+            progressColor="#0D1B52" // azul escuro
+            style={styles.progressBar}
+          />
+          <Text style={styles.progressText}>
+            {currentQuestionIndex + 1} / {questions.length}
+          </Text>
+        </View>
 
+        <ScrollView contentContainerStyle={styles.quizScrollViewContent}>
           <View style={styles.questionContainer}>
             <View style={styles.questionBox}>
               {currentQuestion.image && (
@@ -568,7 +592,6 @@ const QuizScreen = () => {
       locations={[0, 1]}
       colors={["rgba(107, 145, 226, 0.8)", "rgba(255, 255, 255, 0.8)"]}
     >
-
       <View style={styles.startHeader}>
         <TouchableOpacity
           onPress={() => router.replace("/(matematica)/(conjuntos)/conjuntos")}
@@ -594,10 +617,11 @@ const QuizScreen = () => {
                 },
               ]}
             >
-              <Text style={styles.coinsIncreaseText}>+{coinsIncreaseAmount}</Text>
+              <Text style={styles.coinsIncreaseText}>
+                +{coinsIncreaseAmount}
+              </Text>
             </Animated.View>
           )}
-
         </View>
       </View>
 
@@ -691,31 +715,33 @@ const parseAndRenderMathOptions2 = (text: string) => {
   return (
     <Text style={styles.optionText}>
       {parts.map((part, index) => {
-        if (part.startsWith('$$') && part.endsWith('$$')) {
+        if (part.startsWith("$$") && part.endsWith("$$")) {
           // Fórmulas em display mode
           return (
             <View key={index}>
               <MathJaxSvg
                 key={`math-display-${index}`}
                 fontSize={tamanhoMathJax}
-                color={styles.optionText.color}>
+                color={styles.optionText.color}
+              >
                 {part}
               </MathJaxSvg>
             </View>
           );
         }
-        if (part.startsWith('$') && part.endsWith('$')) {
+        if (part.startsWith("$") && part.endsWith("$")) {
           // Fórmulas inline
           return (
             <MathJaxSvg
               key={`math-inline-${index}`}
               fontSize={tamanhoMathJax}
-              color={styles.optionText.color}>
+              color={styles.optionText.color}
+            >
               {part}
             </MathJaxSvg>
           );
         }
-        if (part.startsWith('**') && part.endsWith('**')) {
+        if (part.startsWith("**") && part.endsWith("**")) {
           // Texto em negrito
           return (
             <Text key={`bold-${index}`} style={styles.boldText}>
@@ -837,13 +863,13 @@ const styles = StyleSheet.create({
 
   coinIcon: {
     width: 30,
-    height: 30
+    height: 30,
   },
 
   coinNumber: {
     fontSize: 18,
     fontWeight: "bold",
-    marginLeft: 5
+    marginLeft: 5,
   },
 
   questionContainer: { flex: 1, justifyContent: "center" },
@@ -917,7 +943,7 @@ const styles = StyleSheet.create({
   scoreButtonContainer: {
     width: "90%",
     gap: 40,
-    alignItems: "center"
+    alignItems: "center",
   },
 
   //animação de pontuação

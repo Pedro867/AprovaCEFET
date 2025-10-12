@@ -6,7 +6,7 @@ import {
   ScrollView,
   TouchableOpacity,
   StyleSheet,
-  Dimensions,
+  Dimensions, Alert,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { Personagem } from "@/components/ui/Personagem";
@@ -19,6 +19,7 @@ import { CalendarioCustomizado } from "@/components/ui/CalendarCustom";
 import { BlurView } from "expo-blur";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { checkCompletedQuizes } from "../api/conexaoFetch";
+import { SECOES_PARA_EMBLEMAS, EMBLEMAS } from "@/constants/dadosEmblemas";
 
 // estado inicial do personagem
 const personagemInicial = {
@@ -42,20 +43,49 @@ export default function TelaSecao() {
     4: 0,
   });
 
+  const verificarEmblemasDesbloqueados = async (progressoAtual: { [key: number]: number) => {
+    // Checa o emblema de Matemática
+    const totalQuizzesMatematica = SECOES_PARA_EMBLEMAS.matematica.length;
+    const quizzesCompletosMatematica = progressoAtual[4]; // ID 4 para Matemática
+
+    if (quizzesCompletosMatematica >= totalQuizzesMatematica) {
+      const unlockedEmblemsStr = await AsyncStorage.getItem('unlockedEmblems');
+      const unlockedEmblems = unlockedEmblemsStr ? JSON.parse(unlockedEmblemsStr) : [];
+      
+      if (!unlockedEmblems.includes('matematica')) {
+        unlockedEmblems.push('matematica');
+        await AsyncStorage.setItem('unlockedEmblems', JSON.stringify(unlockedEmblems));
+        Alert.alert(
+          "Emblema Desbloqueado!", 
+          "Você completou a seção de Matemática e ganhou o emblema 'Mestre da Matemática'!"
+        );
+      }
+    }
+    //adicionar checagem de outros emblemas aqui dps
+  };
+
   useEffect(() => {
+    
     async function carregarProgressoMaterias() {
+      try {
       let p1 = await checkCompletedQuizes(1);
       let p2 = await checkCompletedQuizes(2);
       let p3 = await checkCompletedQuizes(3);
       let p4 = await checkCompletedQuizes(4);
+      
       const novosProgressos = {
-        1: p1,
-        2: p2,
-        3: p3,
-        4: p4,
-      };
+          1: p1?.completados || 0,
+          2: p2?.completados || 0,
+          3: p3?.completados || 0,
+          4: p4?.completados || 0,
+        };
+
       setProgressos(novosProgressos);
+      await verificarEmblemasDesbloqueados(novosProgressos);
+    } catch (error) {
+      console.error("Erro ao carregar progresso das matérias:", error);
     }
+  }
     carregarProgressoMaterias();
   }, []);
 
@@ -98,10 +128,12 @@ export default function TelaSecao() {
   },
 ];
 
-  const [nomeUsuario, setNomeUsuario] = useState(null);
-  const [streakUsuario, setStreakUsuario] = useState(null);
-  const [coinsUsuario, setCoinsUsuario] = useState(null);
+  const [selectedEmblem, setSelectedEmblem] = useState<string | null>(null);
+  const [nomeUsuario, setNomeUsuario] = useState<string | null>(null);
+  const [streakUsuario, setStreakUsuario] = useState<number>(0);
+  const [coinsUsuario, setCoinsUsuario] = useState<number>(0);
   const [customizacoes, setCustomizacoes] = useState(personagemInicial);
+
 
   useFocusEffect(
     useCallback(() => {
@@ -134,6 +166,14 @@ export default function TelaSecao() {
           }
         } catch (error) {
           console.error("Erro ao carregar o personagem do usuário", error);
+        }
+
+        try {
+          // carrega o emblema selecionado
+          const emblem = await AsyncStorage.getItem("selectedEmblem");
+          setSelectedEmblem(emblem);
+        } catch (error) {
+          console.error("Erro ao carregar emblema na tela de seção", error);
         }
       };
 
@@ -209,7 +249,7 @@ export default function TelaSecao() {
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.header}>
           <TouchableOpacity onPress={() => router.push("/(tabs)/profile")}>
-            <Personagem size={32} customizations={customizacoes} />
+            <Personagem size={32} customizations={customizacoes} emblemId={selectedEmblem}/>
           </TouchableOpacity>
           <View style={styles.headerText}>
             <Text style={styles.greeting}>Olá, {nomeUsuario}</Text>

@@ -24,7 +24,7 @@ import initialQuestions from "./questoesConjuntos.json";
 import { updateCoinsBD, updateStreakBD } from "@/app/api/conexaoFetch";
 import { MathJaxSvg } from "react-native-mathjax-html-to-svg";
 
-import { updateQuizBD, checkQuizCompleted } from "@/app/api/conexaoFetch";
+import { updateQuizBD, checkCompletedQuizes } from "@/app/api/conexaoFetch";
 import { SECOES_PARA_EMBLEMAS, EMBLEMAS } from "@/constants/dadosEmblemas";
 
 const personagemInicial = {
@@ -136,6 +136,18 @@ const QuizScreen = () => {
   const finalizarQuiz = async () => {
     try {
       await updateQuizBD(score, 401); //401 eh o id do quiz
+      const p4 = await checkCompletedQuizes(4); // 4 = Matemática
+    const totalQuizzesMatematica = SECOES_PARA_EMBLEMAS.matematica.length;
+
+    if (p4?.completados >= totalQuizzesMatematica) {
+      const unlockedEmblemsStr = await AsyncStorage.getItem('unlockedEmblems');
+      const unlockedEmblems = unlockedEmblemsStr ? JSON.parse(unlockedEmblemsStr) : [];
+
+      if (!unlockedEmblems.includes('matematica')) {
+        unlockedEmblems.push('matematica');
+        await AsyncStorage.setItem('unlockedEmblems', JSON.stringify(unlockedEmblems));
+      }
+    }
     } catch (err) {
       console.error("Erro ao atualizar quiz:", err);
     }
@@ -342,7 +354,7 @@ const QuizScreen = () => {
     }
   };
 
-  const handleNextQuestion = () => {
+  const handleNextQuestion = async () => {
     const nextQuestion = currentQuestionIndex + 1;
     if (nextQuestion < questions.length) {
       setCurrentQuestionIndex(nextQuestion);
@@ -350,44 +362,9 @@ const QuizScreen = () => {
       setAnswered(false);
     } else {
       setShowScore(true);
-      finalizarQuiz();
-
-      //Logica de conlusão e emblema
-
-      const finalIncorrectQuestions =
-        selectedAnswer === questions[currentQuestionIndex].correctAnswer
-          ? incorrectQuestions
-          : [...incorrectQuestions, questions[currentQuestionIndex]];
-
-        if (finalIncorrectQuestions.length === 0) {
-        try {
-          console.log(`Quiz ${ID_DO_QUIZ} concluído com perfeição!`);
-          
-          // salva o estado do quiz como concluído localmente
-
-          await AsyncStorage.setItem(`quizCompleted_${ID_DO_QUIZ}`, 'true');
-
-          // Verifica se a seção inteira foi completada para dar o emblema
-          await checkAndAwardMathEmblem();
-
-        } catch (error) {
-          console.error("Erro ao salvar a conclusão do quiz:", error);
-        }
-      }
+      finalizarQuiz(); //salva  a pontuação no BD
     }
   };
-  
-  const checkAndAwardMathEmblem = async () => {
-    const unidadesMatematicaIds = SECOES_PARA_EMBLEMAS.matematica;
-    let todasUnidadesCompletas = true;
-    for (const unidadeId of unidadesMatematicaIds) {
-        // Verifica o status local de "conclusão perfeita"
-        const completou = await AsyncStorage.getItem(`quizCompleted_${unidadeId}`);
-        if (completou !== 'true') {
-            todasUnidadesCompletas = false;
-            break;
-        }
-    }
 
   const resetQuiz = () => {
     setQuizStarted(false); // volta para a tela inicial

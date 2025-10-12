@@ -16,29 +16,33 @@ import { Personagem } from "@/components/ui/Personagem";
 import { Colors, Fonts, Spacing } from "@/constants/Colors";
 import { useRouter, useFocusEffect } from "expo-router";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { EMBLEMAS } from "@/constants/dadosEmblemas";
 
- // estado inicial do personagem
-  const personagemInicial = {
-    background: "background1",
-    ears: "orelha1",
-    cheeks: "bochecha1",
-    face: "rosto1",
-    eyes: "olhos1",
-    mouth: "boca1",
-    bangs: "franja1",
-    hair: "cabelo1",
-    nose: "nariz1",
-  };
+// estado inicial do personagem
+const personagemInicial = {
+  background: "background1",
+  ears: "orelha1",
+  cheeks: "bochecha1",
+  face: "rosto1",
+  eyes: "olhos1",
+  mouth: "boca1",
+  bangs: "franja1",
+  hair: "cabelo1",
+  nose: "nariz1",
+};
 
 export default function ProfileScreen() {
   const router = useRouter();
 
-    const [nomeUsuario, setNomeUsuario] = useState(null);
-    const [streakUsuario, setStreakUsuario] = useState(0);
-    const [coinsUsuario, setCoinsUsuario] = useState(0);
-    const [customizacoes, setCustomizacoes] = useState(personagemInicial);
+  const [nomeUsuario, setNomeUsuario] = useState(null);
+  const [streakUsuario, setStreakUsuario] = useState(0);
+  const [coinsUsuario, setCoinsUsuario] = useState(0);
+  const [customizacoes, setCustomizacoes] = useState(personagemInicial);
+  const [unlockedEmblems, setUnlockedEmblems] = useState<string[]>([]);
+  const [selectedEmblem, setSelectedEmblem] = useState<string | null>(null);
 
-    useFocusEffect( //recarrega os dads sempre que a tela for forcada (caso o usuario altere o nome ou personagem)
+  useFocusEffect(
+    //recarrega os dads sempre que a tela for forcada (caso o usuario altere o nome ou personagem)
     useCallback(() => {
       const carregarDadosUsuario = async () => {
         //EU SEI QUE TUDO PODE SER FEITO EM 1 TRY CATCH MAS SE 1 DER ERRADO O CONSOLE.ERROR DIZ QUAL EH
@@ -55,30 +59,55 @@ export default function ProfileScreen() {
           console.error("Erro ao carregar as coins do usuário", error);
         }
         //carrega personagem atual
-        try { 
-          const savedCustomizations = await AsyncStorage.getItem("userCharacter");
+        try {
+          const savedCustomizations = await AsyncStorage.getItem(
+            "userCharacter"
+          );
           if (savedCustomizations) {
             setCustomizacoes(JSON.parse(savedCustomizations));
           }
-        }catch (error) {
+        } catch (error) {
           console.error("Erro ao carregar o personagem do usuário", error);
         }
+
+        try {
+
+          // carrega os emblemas que o usuario já desbloqueou
+          const unlocked = await AsyncStorage.getItem("unlockedEmblems");
+          setUnlockedEmblems(unlocked ? JSON.parse(unlocked) : []);
+
+          // carrega o emblema que o usuário selecionou por ultimo
+          const selected = await AsyncStorage.getItem("selectedEmblem");
+          setSelectedEmblem(selected);
+        } catch (error) {
+          console.error("Erro ao carregar dados dos emblemas", error);
+        }
       };
-  
+
       carregarDadosUsuario();
     }, [])
-   ); 
+  );
+
+  const handleSelectEmblem = async (emblemId: string) => {
+    const newSelectedEmblem = selectedEmblem === emblemId ? null : emblemId;
+    setSelectedEmblem(newSelectedEmblem);
+    if (newSelectedEmblem) {
+      await AsyncStorage.setItem('selectedEmblem', newSelectedEmblem);
+    } else {
+      await AsyncStorage.removeItem('selectedEmblem');
+    }
+  };
 
   return (
     <LinearGradient
       style={styles.container}
-      colors={[Colors.gradientEnd,Colors.gradientStart]}
+      colors={[Colors.gradientEnd, Colors.gradientStart]}
     >
       <ScrollView contentContainerStyle={styles.scrollViewContent}>
         {/* CABEÇALHO */}
         <View style={styles.header}>
           <TouchableOpacity
-            onPress={() => router.replace('/(tabs)/secao')}
+            onPress={() => router.replace("/(tabs)/secao")}
             style={styles.backButton}
           >
             <Feather name="arrow-left" size={24} color={Colors.text} />
@@ -88,10 +117,13 @@ export default function ProfileScreen() {
 
         {/* INFORMAÇÕES DO USUÁRIO, PERSONAGEM E BOTÃO */}
         <View style={styles.profileSection}>
-          <Personagem size={150} customizations={customizacoes} />
+          <Personagem size={150} customizations={customizacoes} emblemId={selectedEmblem}/>
           <ThemedText style={styles.profileName}>{nomeUsuario}</ThemedText>
 
-          <TouchableOpacity style={styles.editButton} onPress={() => router.push('/(tabs)/editProfile')}>
+          <TouchableOpacity
+            style={styles.editButton}
+            onPress={() => router.push("/(tabs)/editProfile")}
+          >
             <Feather name="edit-2" size={20} color={Colors.white} />
             <Text style={styles.editButtonText}>Editar perfil</Text>
           </TouchableOpacity>
@@ -105,9 +137,7 @@ export default function ProfileScreen() {
               source={require("@/assets/images/foguin--ativado-.png")}
               style={styles.statsIcon}
             />
-            <ThemedText style={styles.statValue}>
-              {streakUsuario}
-            </ThemedText>
+            <ThemedText style={styles.statValue}>{streakUsuario}</ThemedText>
             <ThemedText style={styles.statLabel}>Melhor streak</ThemedText>
           </View>
           <View style={styles.verticalDivider} />
@@ -120,6 +150,31 @@ export default function ProfileScreen() {
             <ThemedText style={styles.statLabel}>CefetCoins</ThemedText>
           </View>
         </Card>
+        <ThemedText style={styles.cardTitle}>Meus Emblemas</ThemedText>
+        <Card style={styles.emblemsContainer}>
+          {Object.values(EMBLEMAS).map((emblema) => {
+            const isUnlocked = unlockedEmblems.includes(emblema.id);
+            const isSelected = selectedEmblem === emblema.id;
+            const Icon = emblema.Icon;
+
+            return (
+              <TouchableOpacity
+                key={emblema.id}
+                style={[
+                  styles.emblemItem,
+                  !isUnlocked && styles.emblemLocked,
+                  isSelected && styles.emblemSelected,
+                ]}
+                onPress={() => isUnlocked && handleSelectEmblem(emblema.id)}
+                disabled={!isUnlocked}
+              >
+                <Icon width={60} height={60} />
+                <Text style={styles.emblemLabel}>{isUnlocked ? emblema.nome : "Bloqueado"}</Text>
+              </TouchableOpacity>
+            );
+          })}
+        </Card>
+
       </ScrollView>
     </LinearGradient>
   );
@@ -143,7 +198,7 @@ const styles = StyleSheet.create({
     left: 10,
     zIndex: 1,
   },
-  headerTitle: { 
+  headerTitle: {
     fontFamily: Fonts.family.kumbhSans,
     fontSize: 24,
     fontWeight: "bold",
@@ -159,7 +214,7 @@ const styles = StyleSheet.create({
   profileName: {
     fontFamily: Fonts.family.kumbhSans,
     fontSize: Fonts.size.title,
-    fontWeight: '800',
+    fontWeight: "800",
     color: Colors.text,
     marginTop: 60,
   },
@@ -206,8 +261,8 @@ const styles = StyleSheet.create({
     width: 40,
     height: 40,
   },
-  statValue: { 
-    fontFamily: 'DM Sans',
+  statValue: {
+    fontFamily: "DM Sans",
     fontSize: Fonts.size.small,
     fontWeight: "bold",
     color: Colors.text,
@@ -222,5 +277,36 @@ const styles = StyleSheet.create({
     width: 1,
     height: "100%",
     backgroundColor: Colors.black,
+  },
+
+  emblemsContainer: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "space-around",
+    marginTop: 10,
+    paddingVertical: 20,
+  },
+  emblemItem: {
+    alignItems: "center",
+    marginBottom: 15,
+    padding: 10,
+    borderRadius: 12,
+    width: '45%',
+  },
+  emblemLocked: {
+    opacity: 0.3,
+  },
+  emblemSelected: {
+    backgroundColor: 'rgba(137, 161, 212, 0.2)',
+    borderColor: Colors.primary,
+    borderWidth: 1.5,
+  },
+  emblemLabel: {
+    fontFamily: Fonts.family.kumbhSans,
+    fontSize: 14,
+    color: Colors.text,
+    textAlign: "center",
+    marginTop: 5,
+    fontWeight: '600',
   },
 });

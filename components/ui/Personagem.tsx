@@ -190,6 +190,8 @@ import background12 from "@/assets/images/Personagem/background/12.svg";
 import background13 from "@/assets/images/Personagem/background/13.svg";
 import background14 from "@/assets/images/Personagem/background/14.svg";
 
+import { EMBLEMAS } from '@/constants/dadosEmblemas';
+
 const partesPersonagem = {
   background: {
     background1: background1,
@@ -403,9 +405,10 @@ interface CharacterProps {
     faceColor?: string;
     faceShadowColor?: string;
   };
+  emblemId?: string | null;
 }
 
-export function Personagem({ size, customizations }: CharacterProps) {
+export function Personagem({ size, customizations, emblemId }: CharacterProps) {
   const { background, ears, cheeks, face, eyes, mouth, bangs, hair, nose, faceColor,faceShadowColor } =
     customizations;
 
@@ -419,11 +422,17 @@ export function Personagem({ size, customizations }: CharacterProps) {
   const BangsComponent = partesPersonagem.franja[bangs];
   const HairComponent = partesPersonagem.cabelo[hair];
   const NoseComponent = partesPersonagem.nariz[nose];
+  const EmblemaComponent = emblemId ? EMBLEMAS[emblemId as keyof typeof EMBLEMAS]?.EmblemaPersonagem : null;
 
   //console.log('Renderizando o rosto com a cor:', faceColor);
 
   return (
     <View style={[styles.avatarContainer, { width: size, height: size }]}>
+      {EmblemaComponent && (
+        <View style={[styles.emblemLayer, { zIndex: 1.5 }]}>
+          <EmblemaComponent width="160%" height="160%" />
+        </View>
+      )}
       {BackgroundComponent && (
         <View style={[styles.backgroundLayer, { zIndex: 1 }]}>
           <BackgroundComponent width="100%" height="100%" />
@@ -531,5 +540,10 @@ const styles = StyleSheet.create({
   frontHairLayer: {
     ...StyleSheet.absoluteFillObject,
     transform: [{ translateY: "-10%" }, { scale: 0.7 }], 
+  },
+  emblemLayer: {
+    ...StyleSheet.absoluteFillObject,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });

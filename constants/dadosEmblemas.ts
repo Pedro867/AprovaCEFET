@@ -5,9 +5,9 @@ import EmblemaLinguagens from '@/assets/images/emblemas/Pro.svg';
 import EmblemaNatureza from '@/assets/images/emblemas/Premium.svg'; 
 
 import iconEmblemaMatematica from '@/assets/images/emblemas/Emblema-basico.svg';
-import iconEmblemaHumanas from '@/assets/images/emblemas/Avançado.svg'; //mudar dps
-import iconEmblemaLinguagens from '@/assets/images/emblemas/Pro.svg'; 
-import iconEmblemaNatureza from '@/assets/images/emblemas/Premium.svg'; 
+import iconEmblemaHumanas from '@/assets/images/emblemas/Emblema-avançado.svg'; //mudar dps
+import iconEmblemaLinguagens from '@/assets/images/emblemas/Emblema-pro.svg'; 
+import iconEmblemaNatureza from '@/assets/images/emblemas/Emblema-pro.svg'; 
 
 export const EMBLEMAS = {
   matematica: {

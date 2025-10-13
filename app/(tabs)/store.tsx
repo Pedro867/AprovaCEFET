@@ -11,6 +11,7 @@ import { GradeItems } from "@/components/loja/gradeItems";
 import { LinearGradient } from "expo-linear-gradient";
 import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs"; 
 import { updatePersonalizacoesBD } from "../api/conexaoFetch";
+import { updateCoinsBD } from "../api/conexaoFetch";
 
 const CORES_ROSTO = [
   {id: 1, principal: "#F8B788", sombra: "#D1A37E"},
@@ -117,12 +118,12 @@ export default function LojaScreen() {
     } else {
       if (cefetCoins >= itemPrice) { //verifica se o usuario tem moedas suficientes
 
-        Alert.alert( "Confirmar Compra", `Você deseja comprar este item por ${itemPrice} CefetCoins?`,
+        /*Alert.alert( "Confirmar Compra", `Você deseja comprar este item por ${itemPrice} CefetCoins?`,
           [
             { text: "Cancelar", style: "cancel" },
             {
               text: "Comprar",
-              onPress: async () => {
+              onPress: async () => {*/
                 
                 const newBalance = cefetCoins - itemPrice;
                 const newUnlockedItems = [...unlockedItems, itemId];
@@ -130,6 +131,7 @@ export default function LojaScreen() {
                 // atualiza os estados
                 setCefetCoins(newBalance);
                 setUnlockedItems(newUnlockedItems);
+                updateCoinsBD(cefetCoins - itemPrice);
 
                 // salva no AsyncStorage
                 await AsyncStorage.setItem(
@@ -145,13 +147,13 @@ export default function LojaScreen() {
                   [selectedCategory]: itemId,
                 };
                 setCustomizacoes(newCustomizations);
-                await updatePersonalizacoesBD(JSON.stringify(newCustomizations)) //SALVA NO BD
+                await updatePersonalizacoesBD(itemId) //SALVA NO BD
                 await AsyncStorage.setItem("userCharacter",JSON.stringify(newCustomizations)
                 );
-              },
+              /*},
             },
           ]
-        );
+        );*/
       } else {
         Alert.alert("Saldo Insuficiente", "Você não tem CefetCoins para comprar este item.");
       }

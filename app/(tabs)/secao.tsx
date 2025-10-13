@@ -6,7 +6,8 @@ import {
   ScrollView,
   TouchableOpacity,
   StyleSheet,
-  Dimensions, Alert,
+  Dimensions,
+  Alert,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { Personagem } from "@/components/ui/Personagem";
@@ -35,7 +36,6 @@ const personagemInicial = {
 };
 
 export default function TelaSecao() {
-
   const [progressos, setProgressos] = useState({
     1: 0,
     2: 0,
@@ -43,20 +43,27 @@ export default function TelaSecao() {
     4: 0,
   });
 
-  const verificarEmblemasDesbloqueados = async (progressoAtual: { [key: number]: number) => {
+  const verificarEmblemasDesbloqueados = async (progressoAtual: {
+    [key: number]: number;
+  }) => {
     // Checa o emblema de Matemática
     const totalQuizzesMatematica = SECOES_PARA_EMBLEMAS.matematica.length;
     const quizzesCompletosMatematica = progressoAtual[4]; // ID 4 para Matemática
 
     if (quizzesCompletosMatematica >= totalQuizzesMatematica) {
-      const unlockedEmblemsStr = await AsyncStorage.getItem('unlockedEmblems');
-      const unlockedEmblems = unlockedEmblemsStr ? JSON.parse(unlockedEmblemsStr) : [];
-      
-      if (!unlockedEmblems.includes('matematica')) {
-        unlockedEmblems.push('matematica');
-        await AsyncStorage.setItem('unlockedEmblems', JSON.stringify(unlockedEmblems));
+      const unlockedEmblemsStr = await AsyncStorage.getItem("unlockedEmblems");
+      const unlockedEmblems = unlockedEmblemsStr
+        ? JSON.parse(unlockedEmblemsStr)
+        : [];
+
+      if (!unlockedEmblems.includes("matematica")) {
+        unlockedEmblems.push("matematica");
+        await AsyncStorage.setItem(
+          "unlockedEmblems",
+          JSON.stringify(unlockedEmblems)
+        );
         Alert.alert(
-          "Emblema Desbloqueado!", 
+          "Emblema Desbloqueado!",
           "Você completou a seção de Matemática e ganhou o emblema 'Mestre da Matemática'!"
         );
       }
@@ -65,75 +72,80 @@ export default function TelaSecao() {
   };
 
   useEffect(() => {
-    
     async function carregarProgressoMaterias() {
       try {
-      let p1 = await checkCompletedQuizes(1);
-      let p2 = await checkCompletedQuizes(2);
-      let p3 = await checkCompletedQuizes(3);
-      let p4 = await checkCompletedQuizes(4);
-      
-      const novosProgressos = {
-          1: p1?.completados || 0,
-          2: p2?.completados || 0,
-          3: p3?.completados || 0,
-          4: p4?.completados || 0,
+        const getCompletedCount = (r: any) =>
+          typeof r === "number"
+            ? r
+            : r && typeof r.completados === "number"
+            ? r.completados
+            : 0;
+          
+        let p1 = await checkCompletedQuizes(1);
+        let p2 = await checkCompletedQuizes(2);
+        let p3 = await checkCompletedQuizes(3);
+        let p4 = await checkCompletedQuizes(4);
+
+        const novosProgressos = {
+          1: getCompletedCount(p1),
+          2: getCompletedCount(p2),
+          3: getCompletedCount(p3),
+          4: getCompletedCount(p4),
         };
 
-      setProgressos(novosProgressos);
-      await verificarEmblemasDesbloqueados(novosProgressos);
-    } catch (error) {
-      console.error("Erro ao carregar progresso das matérias:", error);
+        setProgressos(novosProgressos);
+        await verificarEmblemasDesbloqueados(novosProgressos);
+      } catch (error) {
+        console.error("Erro ao carregar progresso das matérias:", error);
+      }
     }
-  }
     carregarProgressoMaterias();
   }, []);
 
   const subjectAreas = [
-  {
-    id: 1,
-    title: "Ciências da Natureza",
-    disciplines: "3 Disciplinas",
-    image: require("@/assets/images/naturezas.png"),
-    color: "rgba(137, 161, 212, 0.66)",
-    route: "/(natureza)/cienciasNatureza",
-    progress: progressos[1], //1 eh o id
-  },
-  {
-    id: 2,
-    title: "Ciências Humanas",
-    disciplines: "2 Disciplinas",
-    image: require("@/assets/images/humanas.png"),
-    color: "rgba(137,161,212,0.64)",
-    route: "/(humanas)/cienciasHumanas",
-    progress: progressos[2], //2 eh o id
-  },
-  {
-    id: 3,
-    title: "Linguagens",
-    disciplines: "1 Disciplina",
-    image: require("@/assets/images/linguagens.png"),
-    color: "rgba(137,161,212,0.64)",
-    route: "/(linguagens)/telaUnidadesLing",
-    progress: progressos[3], //3 eh o id
-  },
-  {
-    id: 4,
-    title: "Matemática",
-    disciplines: "1 Disciplina",
-    image: require("@/assets/images/matematica.png"),
-    color: "rgba(137,161,212,0.64)",
-    route: "/(matematica)/telaUnidadesMat",
-    progress: progressos[4], //4 eh o id
-  },
-];
+    {
+      id: 1,
+      title: "Ciências da Natureza",
+      disciplines: "3 Disciplinas",
+      image: require("@/assets/images/naturezas.png"),
+      color: "rgba(137, 161, 212, 0.66)",
+      route: "/(natureza)/cienciasNatureza",
+      progress: progressos[1], //1 eh o id
+    },
+    {
+      id: 2,
+      title: "Ciências Humanas",
+      disciplines: "2 Disciplinas",
+      image: require("@/assets/images/humanas.png"),
+      color: "rgba(137,161,212,0.64)",
+      route: "/(humanas)/cienciasHumanas",
+      progress: progressos[2], //2 eh o id
+    },
+    {
+      id: 3,
+      title: "Linguagens",
+      disciplines: "1 Disciplina",
+      image: require("@/assets/images/linguagens.png"),
+      color: "rgba(137,161,212,0.64)",
+      route: "/(linguagens)/telaUnidadesLing",
+      progress: progressos[3], //3 eh o id
+    },
+    {
+      id: 4,
+      title: "Matemática",
+      disciplines: "1 Disciplina",
+      image: require("@/assets/images/matematica.png"),
+      color: "rgba(137,161,212,0.64)",
+      route: "/(matematica)/telaUnidadesMat",
+      progress: progressos[4], //4 eh o id
+    },
+  ];
 
   const [selectedEmblem, setSelectedEmblem] = useState<string | null>(null);
   const [nomeUsuario, setNomeUsuario] = useState<string | null>(null);
   const [streakUsuario, setStreakUsuario] = useState<number>(0);
   const [coinsUsuario, setCoinsUsuario] = useState<number>(0);
   const [customizacoes, setCustomizacoes] = useState(personagemInicial);
-
 
   useFocusEffect(
     useCallback(() => {
@@ -162,7 +174,9 @@ export default function TelaSecao() {
             "userCharacter"
           );
           if (savedCustomizations) {
-            setCustomizacoes(JSON.parse(savedCustomizations));
+            setCustomizacoes(
+              JSON.parse(savedCustomizations) as typeof personagemInicial
+            );
           }
         } catch (error) {
           console.error("Erro ao carregar o personagem do usuário", error);
@@ -249,7 +263,11 @@ export default function TelaSecao() {
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.header}>
           <TouchableOpacity onPress={() => router.push("/(tabs)/profile")}>
-            <Personagem size={32} customizations={customizacoes} emblemId={selectedEmblem}/>
+            <Personagem
+              size={32}
+              customizations={customizacoes}
+              emblemId={selectedEmblem}
+            />
           </TouchableOpacity>
           <View style={styles.headerText}>
             <Text style={styles.greeting}>Olá, {nomeUsuario}</Text>
@@ -307,7 +325,9 @@ export default function TelaSecao() {
               key={area.id}
               style={styles.subjectTouchable}
               onPress={() => router.push(area.route as any)}
-            > {/* inicio do card da disciplina */}
+            >
+              {" "}
+              {/* inicio do card da disciplina */}
               <Card style={styles.subjectCard}>
                 <LinearGradient
                   colors={["rgba(34,75,244,0.29)", "rgba(34,75,244,0.29)"]}
@@ -456,7 +476,7 @@ const styles = StyleSheet.create({
   },
   progressBarContainer: {
     alignItems: "center",
-    marginBottom: "5%"
+    marginBottom: "5%",
   },
   sectionTitle: {
     fontSize: 24,

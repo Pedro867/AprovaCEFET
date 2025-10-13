@@ -82,7 +82,7 @@ const QuizScreen = () => {
   const [streak, setStreak] = useState(0);
   const [customizacoes, setCustomizacoes] = useState(personagemInicial);
   const [userName, setUserName] = useState("");
-  const ID_DO_QUIZ = 401; //id do quiz atual
+  const [selectedEmblem, setSelectedEmblem] = useState<string | null>(null);
 
   const router = useRouter();
 
@@ -127,6 +127,14 @@ const QuizScreen = () => {
         } catch (error) {
           console.error("Erro ao carregar o personagem do usuário", error);
         }
+
+      try {
+          // carrega o emblema selecionado
+          const emblem = await AsyncStorage.getItem("selectedEmblem");
+          setSelectedEmblem(emblem);
+        } catch (error) {
+          console.error("Erro ao carregar emblema na tela de seção", error);
+        }
       };
 
       carregaDadosUsuario();
@@ -137,15 +145,22 @@ const QuizScreen = () => {
     try {
       await updateQuizBD(score, 401); //401 eh o id do quiz
       const p4 = await checkCompletedQuizes(4); // 4 = Matemática
-    const totalQuizzesMatematica = SECOES_PARA_EMBLEMAS.matematica.length;
 
-    if (p4?.completados >= totalQuizzesMatematica) {
+      const getCompletedCount = (r: any) => // normaliza: aceita tanto number quanto { completados: number }
+      typeof r === "number" ? r : (r && typeof r.completados === "number" ? r.completados : 0);
+
+      const completados = getCompletedCount(p4);
+
+      const totalQuizzesMatematica = SECOES_PARA_EMBLEMAS.matematica.length;
+
+    if (completados >= totalQuizzesMatematica) {
       const unlockedEmblemsStr = await AsyncStorage.getItem('unlockedEmblems');
       const unlockedEmblems = unlockedEmblemsStr ? JSON.parse(unlockedEmblemsStr) : [];
 
       if (!unlockedEmblems.includes('matematica')) {
         unlockedEmblems.push('matematica');
         await AsyncStorage.setItem('unlockedEmblems', JSON.stringify(unlockedEmblems));
+        Alert.alert("Emblema Desbloqueado!", "Você completou Matemática e ganhou o emblema 'Mestre da Matemática'!");
       }
     }
     } catch (err) {
@@ -414,7 +429,7 @@ const QuizScreen = () => {
           </TouchableOpacity>
         </View>
         <View style={styles.personagemContainer}>
-          <Personagem size={150} customizations={customizacoes} />
+          <Personagem size={150} customizations={customizacoes} emblemId={selectedEmblem}/>
         </View>
 
         <View style={styles.startTextContainer}>

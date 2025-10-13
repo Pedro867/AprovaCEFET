@@ -117,7 +117,7 @@ export default function ProfileScreen() {
 
         {/* INFORMAÇÕES DO USUÁRIO, PERSONAGEM E BOTÃO */}
         <View style={styles.profileSection}>
-          <Personagem size={150} customizations={customizacoes} emblemId={selectedEmblem}/>
+          <Personagem size={140} customizations={customizacoes} emblemId={selectedEmblem}/>
           <ThemedText style={styles.profileName}>{nomeUsuario}</ThemedText>
 
           <TouchableOpacity
@@ -168,7 +168,7 @@ export default function ProfileScreen() {
                 onPress={() => isUnlocked && handleSelectEmblem(emblema.id)}
                 disabled={!isUnlocked}
               >
-                <Icon width={60} height={60} />
+                <Icon width={120} height={120} />
                 <Text style={styles.emblemLabel}>{isUnlocked ? emblema.nome : "Bloqueado"}</Text>
               </TouchableOpacity>
             );
@@ -205,7 +205,7 @@ const styles = StyleSheet.create({
     color: "black",
     textAlign: "center",
     flex: 1,
-    //marginBottom: 20,
+    marginBottom: 20,
   },
   profileSection: {
     alignItems: "center",
@@ -217,6 +217,7 @@ const styles = StyleSheet.create({
     fontWeight: "800",
     color: Colors.text,
     marginTop: 60,
+    
   },
   editButton: {
     flexDirection: "row",

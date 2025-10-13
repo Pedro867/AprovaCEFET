@@ -428,9 +428,10 @@ export function Personagem({ size, customizations, emblemId }: CharacterProps) {
 
   return (
     <View style={[styles.avatarContainer, { width: size, height: size }]}>
+
       {EmblemaComponent && (
-        <View style={[styles.emblemLayer, { zIndex: 1.5 }]}>
-          <EmblemaComponent width="160%" height="160%" />
+        <View style={[styles.emblemLayer, { zIndex: 2 }]}>
+          <EmblemaComponent width="230%" height="230%" />
         </View>
       )}
       {BackgroundComponent && (
@@ -545,5 +546,6 @@ const styles = StyleSheet.create({
     ...StyleSheet.absoluteFillObject,
     justifyContent: 'center',
     alignItems: 'center',
+    transform: [{ translateY: '16%' }], 
   },
 });

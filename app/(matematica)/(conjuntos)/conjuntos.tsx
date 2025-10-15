@@ -57,9 +57,6 @@ export default function UnidadeConjuntos() {
 
   return (
     <View style={styles.container}>
-      <View style={styles.matematica}>
-        <Text>Matematica</Text>
-      </View>
 
       <View style={styles.header}>
         <TouchableOpacity

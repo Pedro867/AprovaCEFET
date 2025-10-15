@@ -78,11 +78,12 @@ const QuizScreen = () => {
   const [coins, setCoinsUsuario] = useState(0);
   const [showCoinsIncrease, setShowCoinsIncrease] = useState(false);
   const [coinsIncreaseAmount, setCoinsIncreaseAmount] = useState(0);
-  const [lastStreakDate, setLastStreakDate] = useState<Date | null>(null);
-  const [streak, setStreak] = useState(0);
   const [customizacoes, setCustomizacoes] = useState(personagemInicial);
   const [userName, setUserName] = useState("");
   const [selectedEmblem, setSelectedEmblem] = useState<string | null>(null);
+
+  const [lastStreakDate, setLastStreakDate] = useState<string | null>(null);
+  const [streak, setStreak] = useState(0);
 
   const router = useRouter();
 
@@ -105,6 +106,7 @@ const QuizScreen = () => {
     }*/
   };
 
+  //CARREGA DADOS DO USUÁRIO (NOME, PERSONAGEM, STREAK, EMBLEMA)
   useFocusEffect(
     useCallback(() => {
       const carregaDadosUsuario = async () => {
@@ -128,12 +130,22 @@ const QuizScreen = () => {
           console.error("Erro ao carregar o personagem do usuário", error);
         }
 
-      try {
+        try {
           // carrega o emblema selecionado
           const emblem = await AsyncStorage.getItem("selectedEmblem");
           setSelectedEmblem(emblem);
         } catch (error) {
           console.error("Erro ao carregar emblema na tela de seção", error);
+        }
+
+        try {
+          const streakArmazenada = await AsyncStorage.getItem("userStreak");
+          setStreak(streakArmazenada ? parseInt(streakArmazenada, 10) : 0);
+
+          const lastDate = await AsyncStorage.getItem("lastStreakDate");
+          setLastStreakDate(lastDate);
+        } catch (error) {
+          console.error("Erro ao carregar dados do streak", error);
         }
       };
 
@@ -146,23 +158,39 @@ const QuizScreen = () => {
       await updateQuizBD(score, 401); //401 eh o id do quiz
       const p4 = await checkCompletedQuizes(4); // 4 = Matemática
 
-      const getCompletedCount = (r: any) => // normaliza: aceita tanto number quanto { completados: number }
-      typeof r === "number" ? r : (r && typeof r.completados === "number" ? r.completados : 0);
+      const getCompletedCount = (
+        r: any // normaliza: aceita tanto number quanto { completados: number }
+      ) =>
+        typeof r === "number"
+          ? r
+          : r && typeof r.completados === "number"
+          ? r.completados
+          : 0;
 
       const completados = getCompletedCount(p4);
 
       const totalQuizzesMatematica = SECOES_PARA_EMBLEMAS.matematica.length;
 
-    if (completados >= totalQuizzesMatematica) {
-      const unlockedEmblemsStr = await AsyncStorage.getItem('unlockedEmblems');
-      const unlockedEmblems = unlockedEmblemsStr ? JSON.parse(unlockedEmblemsStr) : [];
+      if (completados >= totalQuizzesMatematica) {
+        const unlockedEmblemsStr = await AsyncStorage.getItem(
+          "unlockedEmblems"
+        );
+        const unlockedEmblems = unlockedEmblemsStr
+          ? JSON.parse(unlockedEmblemsStr)
+          : [];
 
-      if (!unlockedEmblems.includes('matematica')) {
-        unlockedEmblems.push('matematica');
-        await AsyncStorage.setItem('unlockedEmblems', JSON.stringify(unlockedEmblems));
-        Alert.alert("Emblema Desbloqueado!", "Você completou Matemática e ganhou o emblema 'Mestre da Matemática'!");
+        if (!unlockedEmblems.includes("matematica")) {
+          unlockedEmblems.push("matematica");
+          await AsyncStorage.setItem(
+            "unlockedEmblems",
+            JSON.stringify(unlockedEmblems)
+          );
+          Alert.alert(
+            "Emblema Desbloqueado!",
+            "Você completou Matemática e ganhou o emblema 'Mestre da Matemática'!"
+          );
+        }
       }
-    }
     } catch (err) {
       console.error("Erro ao atualizar quiz:", err);
     }
@@ -303,7 +331,7 @@ const QuizScreen = () => {
     }
   };
 
-  const handleConfirmAnswer = () => {
+  const handleConfirmAnswer = async () => {
     if (!selectedAnswer) {
       Alert.alert(
         "Atenção",
@@ -315,6 +343,37 @@ const QuizScreen = () => {
     setAnswered(true);
 
     if (selectedAnswer === questions[currentQuestionIndex].correctAnswer) {
+      // Lógica da streak diária
+      const today = new Date();
+      const todayString = today.toDateString();
+
+      // A streak so aumenta se for a primeira resposta correta do dia
+      if (lastStreakDate !== todayString) {
+        const yestarday = new Date(today);
+        yestarday.setDate(today.getDate() - 1);
+
+        let newStreak = 1; // inicia ou reinicia a streak
+
+        if (lastStreakDate === yestarday.toDateString()) {
+          newStreak = streak + 1; // continua a streak
+        }
+
+        try {
+          setStreak(newStreak);
+          setLastStreakDate(todayString);
+
+          await AsyncStorage.setItem("userStreak", newStreak.toString());
+          await AsyncStorage.setItem("lastStreakDate", todayString);
+          await updateStreakBD(newStreak);
+
+          if(newStreak == 1){
+            Alert.alert("Sequencia iniciada!", `Você iniciou uma streak de ${newStreak} dia! Mantenha o ritmo!`);
+          } else{
+            Alert.alert("Sequencia atualizada!", `Sua streak diária é de ${newStreak} dias! Continue assim!`);
+          }
+        } catch (error) {}
+      }
+
       setScore(score + 1);
       let pointsToAdd = 0;
       if (quizMode === "initial") {
@@ -346,21 +405,6 @@ const QuizScreen = () => {
       ]).start(() => {
         setShowCoinsIncrease(false); // Esconde o componente no final da animação
       });
-
-      // Lógica da streak diária
-      const today = new Date();
-      const isNewDay =
-        !lastStreakDate ||
-        today.toDateString() !== lastStreakDate.toDateString();
-
-      // LÓGICA DE AUMENTAR SÓ UMA VEZ POR DIA
-      if (isNewDay) {
-        setStreak((prevStreak) => prevStreak + 1);
-        setLastStreakDate(today);
-        saveStreak(streak + 1);
-        saveLastStreakDate(today);
-      }
-      // saveStreak(streak + 1);
     } else {
       setIncorrectQuestions([
         ...incorrectQuestions,
@@ -429,7 +473,11 @@ const QuizScreen = () => {
           </TouchableOpacity>
         </View>
         <View style={styles.personagemContainer}>
-          <Personagem size={150} customizations={customizacoes} emblemId={selectedEmblem}/>
+          <Personagem
+            size={150}
+            customizations={customizacoes}
+            emblemId={selectedEmblem}
+          />
         </View>
 
         <View style={styles.startTextContainer}>

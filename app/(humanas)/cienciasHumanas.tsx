@@ -63,7 +63,6 @@ export default function TelaSecao() {
   
   return (
     <View style={styles.container}>
-      <View style={styles.matematica}><Text>Ciências Humanas</Text></View>
 
       <View style={styles.header}>
         <TouchableOpacity

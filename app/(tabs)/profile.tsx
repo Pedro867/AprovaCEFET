@@ -17,6 +17,7 @@ import { Colors, Fonts, Spacing } from "@/constants/Colors";
 import { useRouter, useFocusEffect } from "expo-router";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { EMBLEMAS } from "@/constants/dadosEmblemas";
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 // estado inicial do personagem
 const personagemInicial = {
@@ -103,6 +104,7 @@ export default function ProfileScreen() {
       style={styles.container}
       colors={[Colors.gradientEnd, Colors.gradientStart]}
     >
+      <SafeAreaView style={styles.container}>
       <ScrollView contentContainerStyle={styles.scrollViewContent}>
         {/* CABEÇALHO */}
         <View style={styles.header}>
@@ -176,6 +178,7 @@ export default function ProfileScreen() {
         </Card>
 
       </ScrollView>
+      </SafeAreaView>
     </LinearGradient>
   );
 }

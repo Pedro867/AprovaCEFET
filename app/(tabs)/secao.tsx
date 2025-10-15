@@ -19,8 +19,9 @@ import { BotaoCustomizado } from "@/components/ui/ButtomCustom";
 import { CalendarioCustomizado } from "@/components/ui/CalendarCustom";
 import { BlurView } from "expo-blur";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { checkCompletedQuizes } from "../api/conexaoFetch";
+import { checkCompletedQuizes, updateStreakBD } from "../api/conexaoFetch";
 import { SECOES_PARA_EMBLEMAS, EMBLEMAS } from "@/constants/dadosEmblemas";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 // estado inicial do personagem
 const personagemInicial = {
@@ -80,7 +81,7 @@ export default function TelaSecao() {
             : r && typeof r.completados === "number"
             ? r.completados
             : 0;
-          
+
         let p1 = await checkCompletedQuizes(1);
         let p2 = await checkCompletedQuizes(2);
         let p3 = await checkCompletedQuizes(3);
@@ -137,19 +138,49 @@ export default function TelaSecao() {
       image: require("@/assets/images/matematica.png"),
       color: "rgba(137,161,212,0.64)",
       route: "/(matematica)/telaUnidadesMat",
-      progress: progressos[4], //4 eh o id
+      progress: progressos[4] / 7, //4 eh o id
     },
   ];
 
   const [selectedEmblem, setSelectedEmblem] = useState<string | null>(null);
   const [nomeUsuario, setNomeUsuario] = useState<string | null>(null);
   const [streakUsuario, setStreakUsuario] = useState<number>(0);
+  const [isStreakActive, setIsStreakActive] = useState(false); //controlar a img de ativo ou inativo
   const [coinsUsuario, setCoinsUsuario] = useState<number>(0);
   const [customizacoes, setCustomizacoes] = useState(personagemInicial);
 
   useFocusEffect(
     useCallback(() => {
       const carregarDados = async () => {
+        try {
+          //logica de verificar se o streak ta ativo ou n
+          const today = new Date();
+          const todayStr = today.toISOString(); // Formato 'YYYY-MM-DD'
+
+          const yesterday = new Date();
+          yesterday.setDate(yesterday.getDate() - 1);
+          const yesterdayStr = yesterday.toISOString();
+
+          const lastDateStr = await AsyncStorage.getItem("lastStreakDate");
+          const currentStreakStr = await AsyncStorage.getItem("userStreak");
+          let currentStreak = currentStreakStr
+            ? parseInt(currentStreakStr, 10)
+            : 0;
+
+          if (
+            lastDateStr &&
+            lastDateStr !== todayStr &&
+            lastDateStr !== yesterdayStr
+          ) {
+            //se a ultima data for diferente de hoje e ontem, zerar streak
+            currentStreak = 0;
+            await AsyncStorage.setItem("userStreak", "0");
+            await updateStreakBD(0);
+          }
+          setStreakUsuario(currentStreak);
+          setIsStreakActive(lastDateStr === todayStr);
+        } catch (error) {}
+
         //EU SEI QUE TUDO PODE SER FEITO EM 1 TRY CATCH MAS SE 1 DER ERRADO O CONSOLE.ERROR DIZ QUAL EH
         try {
           const primeiroNome = await AsyncStorage.getItem("userPrimeiroNome");
@@ -159,13 +190,13 @@ export default function TelaSecao() {
         }
         try {
           const streak = await AsyncStorage.getItem("userStreak");
-          setStreakUsuario(streak);
+          setStreakUsuario(streak ? parseInt(streak, 10) : 0);
         } catch (error) {
           console.error("Erro ao carregar o streak do usuário", error);
         }
         try {
           const coins = await AsyncStorage.getItem("userPontuacao");
-          setCoinsUsuario(coins);
+          setCoinsUsuario(coins ? parseInt(coins, 10) : 0);
         } catch (error) {
           console.error("Erro ao carregar as coins do usuário", error);
         }
@@ -259,66 +290,72 @@ export default function TelaSecao() {
     }
   };
   return (
-    <View style={styles.container}>
-      <ScrollView showsVerticalScrollIndicator={false}>
-        <View style={styles.header}>
-          <TouchableOpacity onPress={() => router.push("/(tabs)/profile")}>
-            <Personagem
-              size={32}
-              customizations={customizacoes}
-              emblemId={selectedEmblem}
-            />
-          </TouchableOpacity>
-          <View style={styles.headerText}>
-            <Text style={styles.greeting}>Olá, {nomeUsuario}</Text>
+    <SafeAreaView style={styles.container}>
+      <View style={styles.header}>
+        <TouchableOpacity onPress={() => router.push("/(tabs)/profile")}>
+          <Personagem
+            size={32}
+            customizations={customizacoes}
+            emblemId={selectedEmblem}
+          />
+        </TouchableOpacity>
+        <View style={styles.headerText}>
+          <Text style={styles.greeting}>Olá, {nomeUsuario}</Text>
 
-            <Text style={styles.subtitle}>Vamos começar a aprender!</Text>
-          </View>
-          <View style={styles.streakContainer}>
-            <Image
-              source={require("@/assets/images/foguin--ativado-.png")}
-              style={styles.streakIcon}
-            />
-            <Text style={styles.streakNumber}>{streakUsuario}</Text>
-          </View>
-          <View style={styles.streakContainer}>
-            <Image
-              source={require("@/assets/images/pontos.png")}
-              style={styles.streakIcon}
-            />
-            <Text style={styles.streakNumber}>{coinsUsuario}</Text>
-          </View>
+          <Text style={styles.subtitle}>Vamos começar a aprender!</Text>
         </View>
+        <View style={styles.streakContainer}>
+          <Image
+            source={
+              isStreakActive
+                ? require("@/assets/images/foguin--ativado-.png")
+                : require("@/assets/images/foguin--desativado-.png")
+            }
+            style={styles.streakIcon}
+          />
+          <Text style={styles.streakNumber}>{streakUsuario}</Text>
+        </View>
+        <View style={styles.streakContainer}>
+          <Image
+            source={require("@/assets/images/pontos.png")}
+            style={styles.streakIcon}
+          />
+          <Text style={styles.streakNumber}>{coinsUsuario}</Text>
+        </View>
+      </View>
 
-        {/* CARD PROGRESSO DIAS ATÉ A PROVA */}
-        <Card style={styles.progressCard}>
-          <LinearGradient
-            colors={["rgba(34,75,244,0.29)", "rgba(34,75,244,0.29)"]}
-            style={styles.progressCardContent}
-          >
-            <View style={styles.progressHeader}>
-              <Text style={styles.progressLabel}>Faltam</Text>
-              <TouchableOpacity onPress={() => setCalendarioVisivel(true)}>
-                <Text style={styles.changeDate}>Alterar data</Text>
-              </TouchableOpacity>
-            </View>
+      {/* CARD PROGRESSO DIAS ATÉ A PROVA */}
+      <Card style={styles.progressCard}>
+        <LinearGradient
+          colors={["rgba(34,75,244,0.29)", "rgba(34,75,244,0.29)"]}
+          style={styles.progressCardContent}
+        >
+          <View style={styles.progressHeader}>
+            <Text style={styles.progressLabel}>Faltam</Text>
+            <TouchableOpacity onPress={() => setCalendarioVisivel(true)}>
+              <Text style={styles.changeDate}>Alterar data</Text>
+            </TouchableOpacity>
+          </View>
 
-            <View style={styles.daysContainer}>
-              <Text style={styles.daysNumber}>{diasFaltando} dias</Text>
-              <Text style={styles.daysLabel}>para a sua prova!</Text>
-            </View>
+          <View style={styles.daysContainer}>
+            <Text style={styles.daysNumber}>{diasFaltando} dias</Text>
+            <Text style={styles.daysLabel}>para a sua prova!</Text>
+          </View>
 
-            <ProgressBar
-              progress={progresso}
-              style={styles.progressDateBar}
-              progressColor="#6B91E2"
-            />
-          </LinearGradient>
-        </Card>
+          <ProgressBar
+            progress={progresso}
+            style={styles.progressDateBar}
+            progressColor="#6B91E2"
+          />
+        </LinearGradient>
+      </Card>
 
-        {/* ÁREA DE SEÇÕES */}
-        <Text style={styles.sectionTitle}>Áreas de conhecimento</Text>
-
+      {/* ÁREA DE SEÇÕES */}
+      <Text style={styles.sectionTitle}>Áreas de conhecimento</Text>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={styles.scrollContainer}
+      >
         <View style={styles.subjectsGrid}>
           {subjectAreas.map((area) => (
             <TouchableOpacity
@@ -378,7 +415,7 @@ export default function TelaSecao() {
           </TouchableOpacity>
         </BlurView>
       )}
-    </View>
+    </SafeAreaView>
   );
 }
 
@@ -387,19 +424,22 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "white",
   },
+  scrollContainer: {
+    paddingBottom: 50,
+    paddingHorizontal: "5%",
+  },
   header: {
     flexDirection: "row",
     alignItems: "center",
     paddingHorizontal: "5%",
     paddingTop: 20,
     marginBottom: 20,
-    marginTop: "10%",
   },
   avatar: {
-    marginRight: 12,
+    marginRight: 10,
   },
   headerText: {
-    marginLeft: 10,
+    marginLeft: 15,
     flex: 1,
   },
   greeting: {
@@ -490,7 +530,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     flexWrap: "wrap",
     justifyContent: "space-around",
-    paddingHorizontal: "5%",
     paddingBottom: 3,
   },
   subjectTouchable: {

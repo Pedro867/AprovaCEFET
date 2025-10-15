@@ -426,3 +426,142 @@ export const unidadesEletricidade = [
     route: "/(eletricidade)/(consumo)/consumo",
   },
 ];
+
+export const unidadesGeografia = [
+  {
+    title: "Limites e Fronteiras / Cartografia",
+    // description:
+    //   "Conceitos básicos, tipos de conjuntos numéricos (naturais, inteiros, racionais, etc.) e operações como MMC e MDC.",
+    Icon: IconConjuntos,
+    route: "/(geografia)/(cartografia)/cartografia", 
+  },
+  {
+    title: "Os Mapas",
+    // description:
+    //   "Propriedades e regras das operações, notação científica e racionalização de denominadores.",
+    Icon: IconPotencia,
+    route: "/(geografia)/(mapas)/mapas",
+  },
+  {
+    title: "Globalização e Ordem Mundial",
+    // description:
+    //   "Simplificação de expressões algébricas e métodos de adição e substituição para resolver sistemas.",
+    Icon: IconFatoracao,
+    route: "/(geografia)/(globalizacao)/globalizacao",
+  },
+  {
+    title: "O Relevo Terrestre",
+    // description:
+    //   "Simplificação de expressões algébricas e métodos de adição e substituição para resolver sistemas.",
+    Icon: IconFatoracao,
+    route: "/(geografia)/(relevo)/relevo",
+  },
+  {
+    title: "Climas do Brasil e do Mundo",
+    // description:
+    //   "Simplificação de expressões algébricas e métodos de adição e substituição para resolver sistemas.",
+    Icon: IconFatoracao,
+    route: "/(geografia)/(climas)/climas",
+  },
+  {
+    title: "Biomas do Brasil e do Mundo / Hidrografia",
+    // description:
+    //   "Simplificação de expressões algébricas e métodos de adição e substituição para resolver sistemas.",
+    Icon: IconFatoracao,
+    route: "/(geografia)/(biomas)/biomas",
+  },
+  {
+    title: "A Dinâmica Demográfica no Brasil e no Mundo",
+    // description:
+    //   "Simplificação de expressões algébricas e métodos de adição e substituição para resolver sistemas.",
+    Icon: IconFatoracao,
+    route: "/(geografia)/(demografia)/demografia",
+  },
+  {
+    title: "A Urbanização no Brasil e no Mundo",
+    // description:
+    //   "Simplificação de expressões algébricas e métodos de adição e substituição para resolver sistemas.",
+    Icon: IconFatoracao,
+    route: "/(geografia)/(urbanizacao)/urbanizacao",
+  },
+  {
+    title: "As Atividades Agropecuárias no Brasil e no Mundo",
+    // description:
+    //   "Simplificação de expressões algébricas e métodos de adição e substituição para resolver sistemas.",
+    Icon: IconFatoracao,
+    route: "/(geografia)/(agro)/agro",
+  },
+  {
+    title: "O Uso da Energia no Brasil e no Mundo",
+    // description:
+    //   "Simplificação de expressões algébricas e métodos de adição e substituição para resolver sistemas.",
+    Icon: IconFatoracao,
+    route: "/(geografia)/(energia)/energia",
+  },
+  {
+    title: "A Regionalização do Brasil",
+    // description:
+    //   "Simplificação de expressões algébricas e métodos de adição e substituição para resolver sistemas.",
+    Icon: IconFatoracao,
+    route: "/(geografia)/(regionalizacao)/regionalizacao",
+  },
+];
+
+export const unidadesHistoria = [
+  {
+    title: "Carga Elétrica",
+    // description:
+    //   "Conceitos básicos, tipos de conjuntos numéricos (naturais, inteiros, racionais, etc.) e operações como MMC e MDC.",
+    Icon: IconConjuntos,
+    route: "/(eletricidade)/(carga)/carga", 
+  },
+  {
+    title: "Processos de Eletrização",
+    // description:
+    //   "Propriedades e regras das operações, notação científica e racionalização de denominadores.",
+    Icon: IconPotencia,
+    route: "/(eletricidade)/(eletrizacao)/eletrizacao",
+  },
+  {
+    title: "Corrente Elétrica",
+    // description:
+    //   "Simplificação de expressões algébricas e métodos de adição e substituição para resolver sistemas.",
+    Icon: IconFatoracao,
+    route: "/(eletricidade)/(corrente)/corrente",
+  },
+  {
+    title: "Resistência Elétrica",
+    // description:
+    //   "Simplificação de expressões algébricas e métodos de adição e substituição para resolver sistemas.",
+    Icon: IconFatoracao,
+    route: "/(eletricidade)/(resistencia)/resistencia",
+  },
+  {
+    title: "Geradores de Corrente Elétrica",
+    // description:
+    //   "Simplificação de expressões algébricas e métodos de adição e substituição para resolver sistemas.",
+    Icon: IconFatoracao,
+    route: "/(eletricidade)/(geradores)/geradores",
+  },
+  {
+    title: "Resistores",
+    // description:
+    //   "Simplificação de expressões algébricas e métodos de adição e substituição para resolver sistemas.",
+    Icon: IconFatoracao,
+    route: "/(eletricidade)/(resistores)/resistores",
+  },
+  {
+    title: "Potência Elétrica e Efeito Joule",
+    // description:
+    //   "Simplificação de expressões algébricas e métodos de adição e substituição para resolver sistemas.",
+    Icon: IconFatoracao,
+    route: "/(eletricidade)/(potencia)/potencia",
+  },
+  {
+    title: "Consumo de Energia Elétrica",
+    // description:
+    //   "Simplificação de expressões algébricas e métodos de adição e substituição para resolver sistemas.",
+    Icon: IconFatoracao,
+    route: "/(eletricidade)/(consumo)/consumo",
+  },
+];

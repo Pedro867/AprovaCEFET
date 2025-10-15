@@ -26,7 +26,7 @@ const subjectAreas = [
     disciplines: "X Unidades",
     image: require("@/assets/images/linguagens.png"),
     color: "rgba(137, 161, 212, 0.66)",
-    route: "/(historia)/historia",
+    route: "/(historia)/telaUnidadesHist",
   },
   {
     id: 2,
@@ -34,7 +34,7 @@ const subjectAreas = [
     disciplines: "X Unidades",
     image: require("@/assets/images/geografia.png"),
     color: "rgba(137,161,212,0.64)",
-    route: "/(geografia)/geografia",
+    route: "/(geografia)/telaUnidadesGeo",
   }
 ];
 
@@ -63,7 +63,7 @@ export default function TelaSecao() {
   
   return (
     <View style={styles.container}>
-      <View style={styles.matematica}>Ciências Humanas</View>
+      <View style={styles.matematica}><Text>Ciências Humanas</Text></View>
 
       <View style={styles.header}>
         <TouchableOpacity
@@ -155,7 +155,7 @@ const styles = StyleSheet.create({
     fontFamily: "Kumbh Sans",
     color: "#060302",
     paddingHorizontal: 20,
-    marginTop: 20,
+    marginTop: "15%",
   },
   header: {
     flexDirection: "row",
@@ -163,7 +163,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingTop: 20,
     marginBottom: 20,
-    marginTop: 20,
+    marginTop: "15%",
     borderBottomWidth: 2,
     borderTopWidth: 2,
     borderColor: "rgba(0, 0, 0, 0.1)",

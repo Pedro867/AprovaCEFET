@@ -138,15 +138,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "white",
   },
-  matematica: {
-    flexDirection: "row",
-    justifyContent: "center",
-    fontSize: 16,
-    fontFamily: "Kumbh Sans",
-    color: "#060302",
-    paddingHorizontal: 20,
-    marginTop: "15%",
-  },
   header: {
     flexDirection: "row",
     justifyContent: "space-between",

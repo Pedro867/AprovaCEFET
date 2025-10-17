@@ -57,9 +57,6 @@ export default function UnidadeConjuntos() {
 
   return (
     <View style={styles.container}>
-      <View style={styles.matematica}>
-        <Text>Linguagens</Text>
-      </View>
 
       <View style={styles.header}>
         <TouchableOpacity
@@ -124,15 +121,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "white",
-  },
-  matematica: {
-    flexDirection: "row",
-    justifyContent: "center",
-    fontSize: 16,
-    fontFamily: "Kumbh Sans",
-    color: "#060302",
-    paddingHorizontal: 20,
-    marginTop: "15%",
   },
   header: {
     flexDirection: "row",

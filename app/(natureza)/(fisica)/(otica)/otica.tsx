@@ -49,8 +49,6 @@ export default function telaUnidadesBio() {
   return (
     <View style={styles.container}>
 
-      <View style={styles.matematica}><Text>Física - Ótica</Text></View>
-
       <View style={styles.header}>
         <TouchableOpacity
           onPress={() => router.replace('/(natureza)/(fisica)/telaUnidadesFis')}
@@ -124,15 +122,6 @@ const styles = StyleSheet.create({
     paddingTop: 10,
     paddingHorizontal: 20,
     paddingBottom: 40,
-  },
-  matematica: {
-    flexDirection: "row",
-    justifyContent: "center",
-    fontSize: 16,
-    fontFamily: "Kumbh Sans",
-    color: "#060302",
-    paddingHorizontal: 20,
-    marginTop: "15%",
   },
   header: {
     flexDirection: "row",

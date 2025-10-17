@@ -21,13 +21,13 @@ export default function TeoriaConjuntosScreen() {
 
   let tamanhoMathJax = 0;
   //TAMANHO DO MATHJAX
-  if (Platform.OS == 'web'){
+  if (Platform.OS == 'web') {
     tamanhoMathJax = 2.5;
   }
-  if (Platform.OS == 'android'){
+  if (Platform.OS == 'android') {
     tamanhoMathJax = 17;
   }
-  if (Platform.OS == 'ios'){
+  if (Platform.OS == 'ios') {
     tamanhoMathJax = 17; //testar dps
   }
 
@@ -48,7 +48,7 @@ export default function TeoriaConjuntosScreen() {
       borderBottomColor: "white",
       borderTopColor: "white",
     },
-    backButton: { right : 40,},
+    backButton: { right: 40, },
     headerTitles: {
       alignItems: "center",
     },
@@ -203,135 +203,298 @@ export default function TeoriaConjuntosScreen() {
   // -- CONTEUDO DAS PAGINAS --
   const paginasDeConteudo = [
     //PAGINA 1
-    <View key="Conceitos primitivos">
-      <Text style={styles.titulo2}>1.1 Conceitos Primitivos</Text>
+    <View key="Conceituacao de Texto">
+      <Text style={styles.titulo2}>1 Linguagem, Língua e Variedade Regional</Text>
+      <Text style={styles.titulo3}>1.1 Conceituação de Texto</Text>
       {parseAndRenderMath(
-        "Um conjunto é uma coleção não-ordenada de objetos, a ordem na qual os elementos são escritos não importa; portanto {violeta, mostarda, vermelho}, denota o mesmo conjunto que {mostarda, vermelho, violeta}. Além disso, cada elemento de um conjunto é listado apenas uma vez; seria redundante listá-los mais do que uma única vez."
+        "O texto é uma manifestação linguística produzida por alguém, em alguma situação concreta (contexto), com alguma intenção. Independentemente de sua extensão, o texto deve dar a sensação de completude, do contrário não será um texto."
       )}
       {parseAndRenderMath(
-        "Usamos letras maiúsculas para denotarem conjuntos e o símbolo $\\in$ para denotar que um elemento pertence ao conjunto. Portanto, $a \\in A$ significa que $a$ é um elemento, ou membro, do conjunto  $A$ e     $b  \\notin A$ significa que o objeto    $b$ não é um elemento do conjunto   $A$. Usamos chaves para indicar conjuntos."
+        "O texto é uma manifestação linguística produzida por alguém, em alguma situação concreta (contexto), com alguma intenção. Independentemente de sua extensão, o texto deve dar a sensação de completude, do contrário não será um texto."
+      )}
+      {parseAndRenderMath(
+        "**Fatores pragmáticos1** - intencionalidade, aceitabilidade, situacionalidade, informatividade e intertextualidade - dizem respeito aos fatores contextuais que determinam os usos linguísticos nas situações de comunicação e contribuem para a construção do sentido do texto:"
+      )}
+      {parseAndRenderMath(
+        "-> intencionalidade: é a manifestação da intenção, do objetivo do emissor numa determinada situação sociocomunicativa;"
+      )}
+      {parseAndRenderMath(
+        "-> aceitabilidade: é a expectativa que o leitor manifesta de que o texto com que se defronta seja coerente, coeso, útil, relevante;"
+      )}
+      {parseAndRenderMath(
+        "-> situacionalidade: pertinência e relevância do texto quanto ao contexto em que ocorre. Ela orienta tanto a produção quanto a recepção de textos;"
+      )}
+      {parseAndRenderMath(
+        "-> informatividade: diz respeito à taxa de informação do texto. Ela depende da situação, do público, das intenções;"
+      )}
+      {parseAndRenderMath(
+        "-> intertextualidade: refere-se ao diálogo entre textos. A produção e compreensão de textos dependem do conhecimento de outros textos."
+      )}
+      {/* COLOCAR POEMA */}
+      {parseAndRenderMath(
+        "Esse texto pode parecer um amontoado de palavras sem sentido se o leitor não perceber as intenções do autor, se não aceitá-lo como um texto coerente. Mas, para isso, ele deve ter em seu repertório a informação de que este texto refere-se a outro (dialoga com outro) do Romantismo brasileiro - Canção do exílio, de Gonçalves Dias - e dirige-se a leitores de um tempo moderno, caracterizado pela pressa, daí seu título."
+      )}
+      {parseAndRenderMath(
+        "**Fator semântico conceitual** - dele depende a coerência do texto;"
+      )}
+      {parseAndRenderMath(
+        "**Fator formal** - diz respeito à coesão textual (corresponde à superfície linguística do texto). Como você viu, um texto vai além de sua superfície linguística e pressupõe um comunicador atento a todas as suas dimensões. Em seguida, vamos tratar com maior profundidade os dois últimos fatores: o semântico conceitual e o formal."
       )}
 
-      <Text style={styles.titulo3}>Exemplo 1.1</Text>
-      {parseAndRenderMath("$A = \\{1, 2, 3\\}$")}
+      <Text style={styles.titulo2}>1.2 Coerência (ou fator semântico conceitual)</Text>
       {parseAndRenderMath(
-        'Dois conjuntos são **iguais** se contêm os mesmos elementos. (Em uma definição, "se" significa, na verdade, "se, e somente se", portanto dois conjuntos são iguais se, e somente se, eles contêm os mesmos elementos.)'
+        "A coerência é o resultado de processos cognitivos, relações de sentido, conhecimentos partilhados, condições operantes entre os usuários - emissor e destinatário - e não apenas um traço constitutivo dos textos. **Para ser coerente, um texto deve:** manter o mesmo tema; não ser contraditório; ter um valor de verdade que possa ser percebido e aceito por sua organização; trazer sempre uma informação nova."
+      )}
+      {parseAndRenderMath(
+        "A realização da coerência condiciona-se à adequação entre os elementos cognitivos ativados pelas palavras e o universo de referência do texto."
+      )}
+      {parseAndRenderMath(
+        "Veja este exemplo: Os leões subiram as montanhas geladas e puseram-se a perseguir a foca. Os esquimós os chamavam por seus nomes. As feras corriam sobre o gelo, protegendo-se com suas garras para não cair. Quando estavam prestes a alcançá-la, a foca alçou voo. (In: GUIMARÃES, Elisa. A articulação do texto. São Paulo: Ática, 1990. p. 39)"
+      )}
+      {parseAndRenderMath(
+        "Se considerarmos o “mundo normal”, a incoerência do texto decorre da incompatibilidade entre aquilo que ele descreve e os fatos da realidade: os leões não habitam territórios gelados, os esquimós não se utilizam desses animais para caçadas, nem as focas voam. No entanto, inserido num contexto ficcional fantástico, o mesmo texto teria a coerência própria (o valor de verdade) desse tipo de contexto. Como se trata do “mundo normal”, teria de haver a consonância entre os referentes textual e externo (situacional) em que repousa a coerência."
+      )}
+      {parseAndRenderMath(
+        "A coerência também é representada pela organização linear das sequências e pela ordenação temporal relativa aos fatos descritos. Nas seguintes frases, só a primeira é coerente:"
+      )}
+      {parseAndRenderMath(
+        "A menina despediu-se da mãe, disse o dia da sua volta, tomou o táxi e partiu"
+      )}
+      {parseAndRenderMath(
+        "A menina partiu, despediu-se da mãe, tomou o táxi e disse o dia da sua volta."
       )}
 
-      <Text style={styles.titulo3}>Exemplo 1.2</Text>
+      <Text style={styles.titulo2}>1.3 Coesão (ou fator formal)</Text>
       {parseAndRenderMath(
-        "$A = \\{1, 2\\}$ e    $B = \\{2, 1\\}$, então $A = B$."
+        "A coesão, efeito da coerência, manifesta-se no plano linguístico e constrói-se por meio de mecanismos gramaticais e lexicais."
       )}
       {parseAndRenderMath(
-        "Podemos representar um conjunto por meio de uma **propriedade**."
+        "-> **Mecanismos gramaticais:** o conhecimento da gramática nos auxilia a produzir textos coesos."
+      )}
+      {parseAndRenderMath(
+        "Entre alguns dos recursos gramaticais que auxiliam a coesão estão os pronomes, conjunções, pontuação, crase, advérbios, a elipse, a concordância, a correlação entre os tempos verbais, a colocação das palavras na frase, a pontuação etc."
+      )}
+      {parseAndRenderMath(
+        "-> **Mecanismos lexicais:** a coesão lexical se dá, entre outros processos, pela reiteração, pela substituição e pela expansão lexical."
+      )}
+      {parseAndRenderMath(
+        "-> reiteração: repetição do mesmo item lexical;"
+      )}
+      {parseAndRenderMath(
+        "-> substituição: inclui a sinonímia, a antonímia, a hiponímia e a hiperonímia e os nomes genéricos (coisa, negócio, gente, pessoa, lugar);"
+      )}
+      {parseAndRenderMath(
+        "-> expansões lexicais: trazem para o texto novas informações sobre o termo substituído, marcando também o posicionamento ideológico do enunciador, pois as palavras não são neutras, manifestam intenções. Ex.: João Paulo II esteve em Varsóvia. Na capital da Polônia, o sumo Pontífice disse que a Igreja continua a favor do celibato clerical. // João Paulo II esteve em Varsóvia. Na cidade do odioso gueto, o mais recente aliado do capitalismo disse que a Igreja continua a favor dessa excrescência que é o celibato clerical."
+      )}
+      {parseAndRenderMath(
+        "O texto abaixo, publicado na primeira página de um jornal de bairro da Zona Sul de São Paulo logo após os resultados do primeiro turno para eleição do prefeito da cidade, em 2000, exemplifica aspectos da coerência e coesão: “Os dois mais votados agora procuram adeptos para somarem votos. Na verdade àqueles que votaram no Alckmin e no Tuma, com certeza, vão votar no Maluf, pois pertencem a uma classe que não querem o comunismo ou, pelo menos, que o prefeito seja conduzido pelos princípios que regem as diretrizes do PT. Até na Rússia por terem sofrido barbaridades, impostas pelo sistema do comunismo, massacrante, autoritário, sem qualquer liberdade, o muro da vergonha foi derrubado, demonstrando a insatisfação de um povo sofredor, mas que mesmo assim até hoje sentem os reflexos do sistema.”"
+      )}
+      {parseAndRenderMath(
+        "Esse texto não apresenta coerência porque não trata de um único assunto nem a informação da introdução foi desenvolvida (portanto não houve progressão semântica), houve, também, uma informação que contraria nosso conhecimento do mundo: o Muro da Vergonha ficava em Berlim (Alemanha) e não na Rússia. No plano linguístico, faltou-lhe coesão, pois a crase no àqueles não remete a nada e não há correlação entre os termos pertencem/ querem/ classe; terem sofrido/ sentem/ povo. No segundo período, terem sofrido não tem sujeito explícito, portanto o muro da vergonha é o sujeito dessa oração reduzida e o mas e o mesmo assim marcam uma relação que não existe. Conclusão: texto(?) mal-estruturado, que jamais deveria ter sido publicado."
       )}
 
-      <Text style={styles.titulo3}>Exemplo 1.3</Text>
+      <Text style={styles.titulo2}>1.4 Relação Coerência, Coesão e Conjunções - Recapitulando Coerência e Coesão Texuais</Text>
+      <Text style={styles.titulo3}>Coerência</Text>
       {parseAndRenderMath(
-        "Sendo $\\mathbb{N} = \\{0, 1, 2, ..., 10, 11, ...\\}$ o conjunto dos números naturais, quais são os elementos do conjunto $A = \\{x \\in \\mathbb{N} | 2x + 5 \\le 17\\}$ ?"
+        "Um texto pode ser incoerente em ou para determinada situação se seu autor não consegue inferir um sentido ou uma ideia através da articulação de suas frases e parágrafos e por meio de recursos linguísticos (pontuação, vocabulário, etc.)."
       )}
       {parseAndRenderMath(
-        "$2x + 5 \\le 17 \\Rightarrow 2x \\le 17 - 5 \\Rightarrow 2x \\le 12 \\Rightarrow x \\le 6$"
+        "A coerência textual é a relação lógica entre as ideias, pois essas devem se complementar, é o resultado da não contradição entre as partes do texto."
       )}
       {parseAndRenderMath(
-        "Tem-se então que  $x \\le 6$ e, portanto, $A = \\{0, 1, 2, 3, 4, 5, 6\\}$."
+        "A coerência de um texto inclui fatores como o conhecimento que o produtor e o receptor têm do assunto abordado no texto, conhecimento de mundo, o conhecimento que esses têm da língua que usam e intertextualidade."
       )}
       {parseAndRenderMath(
-        "Podemos notar que, primeiramente o conjunto A foi representado por uma propriedade, que nos levou a descrever todos os elementos do referido conjunto. Também destacamos que o conjunto  $\\mathbb{N}$ , neste exemplo, é chamado de **conjunto universo**. Um conjunto universo é o conjunto ao qual pertencem todos os elementos que podemos utilizar no problema."
-      )}
-
-      <Text style={styles.titulo3}>Exemplo 1.4</Text>
-      {parseAndRenderMath(
-        "Quais são os elementos do conjunto $B = \\{x \\in \\mathbb{N} | x + 2 \\le 1\\}$ ?"
+        "Pode-se concluir que texto coerente é aquele do qual é possível estabelecer sentido; é entendido como um princípio de interpretabilidade."
       )}
       {parseAndRenderMath(
-        "$x + 2 \\le 1 \\Rightarrow x \\le 1 - 2 \\Rightarrow x \\le -1$"
+        "Veja o exemplo: “As crianças estão morrendo de fome por causa da riqueza do país.” “ Adoro sanduíche porque engorda.” As frases acima são contraditórias, não apresentam informações claras, portanto, são incoerentes."
+      )}
+      <Text style={styles.titulo3}>Coerência</Text>
+      {parseAndRenderMath(
+        "Coesão é a conexão, ligação, harmonia entre os elementos de um texto. Percebemos tal definição quando lemos um texto e verificamos que as palavras, as frases e os parágrafos estão entrelaçados, um dando continuidade ao outro. Os elementos de coesão determinam a transição de ideias entre as frases e os parágrafos. Observe a coesão presente no texto a seguir:"
       )}
       {parseAndRenderMath(
-        "Podemos reparar que não há   $x \\in \\mathbb{N}$ que satisfaz a propriedade, logo o conjunto B não possui nenhum elemento. Denominamos tal conjunto de conjunto vazio e denotamos $\\{\\}$ por $\\emptyset$."
+        "“Os sem-terra fizeram um protesto em Brasília contra a política agrária do país, **porque** consideram injusta a atual distribuição de terras. **Porém** o ministro da Agricultura considerou a manifestação um ato de rebeldia, **uma vez que** o projeto de Reforma Agrária pretende assentar milhares de sem-terra.” JORDÃO, R., BELLEZI C. Linguagens. São Paulo: Escala Educacional, 2007, p. 566"
+      )}
+      {parseAndRenderMath(
+        "As palavras destacadas têm o papel de ligar as partes do texto, podemos dizer que elas são responsáveis pela coesão do texto."
+      )}
+      {parseAndRenderMath(
+        "Há vários recursos que respondem pela coesão do texto, os principais são:"
+      )}
+      {parseAndRenderMath(
+        "**Palavras de transição:** são palavras responsáveis pela coesão do texto, estabelecem a inter-relação entre os enunciados (orações, frases, parágrafos), são preposições, conjunções, alguns advérbios e locuções adverbiais. Ex.: A prática de atividade física é essencial ao nosso cotidiano. **Assim sendo**, quem a pratica possui uma melhor qualidade de vida."
+      )}
+      {parseAndRenderMath(
+        "**Coesão por referência:** existem palavras que têm a função de fazer referência, são elas: Ex.: Marcela obteve uma ótima colocação no concurso. Tal resultado demonstra que **ela** se esforçou bastante para alcançar o objetivo que tanto almejava."
+      )}
+      {parseAndRenderMath(
+        "**Coesão por substituição:** substituição de um nome (pessoa, objeto, lugar etc.), verbos, períodos ou trechos do texto por uma palavra ou expressão que tenha sentido próximo, evitando a repetição no corpo do texto. Ex.: Porto Alegre pode ser substituída por “a capital gaúcha”; Castro Alves pode ser substituído por 'O Poeta dos Escravos'; João Paulo II: Sua Santidade; Vênus: A Deusa da Beleza. Ex.: Castro Alves é autor de uma vastíssima obra literária. Não é por acaso que o **'Poeta dos Escravos'** é considerado o mais importante da geração a qual representou."
+      )}
+      {parseAndRenderMath(
+        "Assim, a coesão confere textualidade aos enunciados agrupados em conjuntos."
+      )}
+      <Text style={styles.titulo3}>Conjunções</Text>
+      {parseAndRenderMath(
+        "A palavra “conjunção” provém de “conjunto”. Vejamos a definição do último termo no dicionário Aurélio: Conjunto: adj. 1. Junto simultaneamente. sm. 2 Reunião das partes dum todo. Já o sufixo -ção tem significado de “resultado de uma ação”. Logo, se associarmos as duas definições temos que: conjunção é a ação de juntar simultaneamente as partes de um todo. Com essa primeira definição, vejamos essa frase composta por três verbos, ou seja, por três orações: Ex: Os dias passam, as prestações chegam, a vida continua."
+      )}
+      {parseAndRenderMath(
+        "Vamos acrescentar na frase acima as palavras **e** e **mas**: Ex:Os dias passam e as prestações chegam, mas a vida continua. Notamos o seguinte: retiramos a vírgula e substituímos por palavras, e ao fazê-lo ligamos uma oração à outra, criamos um vínculo, uma união. A palavra e está ligando as orações 1 e 2 e a palavra mas está ligando as orações 2 e 3. Portanto, as palavras e e mas que unem as frases são exemplos de conjunção."
+      )}
+      {parseAndRenderMath(
+        "Agora, vejamos esse outro exemplo: Amor e carinho são sentimentos que estão em falta no nosso dia-a-dia. Observamos que as palavras amor, carinho têm a mesma função na frase, a de juntas exercerem papel de sujeito da oração. O e está ligando essas duas palavras equivalentes, ou seja, de mesma função na oração. A ação de unir simultaneamente as partes (amor, carinho) de um todo (sujeito) foi feita a partir da palavra e, a qual é, portanto, uma conjunção."
+      )}
+      {parseAndRenderMath(
+        "Podemos agora definir conjunção de uma segunda maneira, a usada pela maioria dos gramáticos, por ser definição do dicionário: **Conjunção é a palavra invariável que relaciona duas orações ou dois termos que exercem a mesma função sintática.**"
+      )}
+      <Text style={styles.titulo3}>Conjunção coordenada e subordinada</Text>
+      {parseAndRenderMath(
+        "As conjunções podem ser classificadas em coordenativas e subordinativas, o que dependerá da relação que estabelecem entre as orações. Vejamos essas duas frases: Maria caiu e torceu o tornozelo. Gostaria que você fosse sincera."
+      )}
+      {parseAndRenderMath(
+        "No primeiro caso temos duas orações independentes, já que separadamente elas têm sentido completo: Maria caiu e Maria torceu o tornozelo. O período é composto por coordenação, pois as ações são sintaticamente completas em significado."
+      )}
+      {parseAndRenderMath(
+        "No segundo caso, uma oração depende sintaticamente da outra. O verbo “gostaria” fica sem sentido se não há complemento, o que causa o questionamento seguinte: “gostaria de quê?”. Assim, a oração “que você fosse sincera” é complemento e, portanto, subordinada à primeira oração “Gostaria”. A palavra que, então, é a conjunção subordinativa que une as duas orações."
+      )}
+      <Text style={styles.titulo3}>Locução conjuntiva</Text>
+      {parseAndRenderMath(
+        "Há ainda a locução conjuntiva, que acontece quando duas ou mais palavras exercem a função de conjunção. Alguns exemplos são: desde que, assim que, uma vez que, antes que, logo que, ainda que."
+      )}
+      {parseAndRenderMath(
+        "Vejamos um exemplo: **Ele irá te ajudar, desde que você faça a sua parte.**"
+      )}
+      {parseAndRenderMath(
+        "Temos duas orações: “Ele irá te ajudar” e “você faça a sua parte”, ligadas pela locução conjuntiva desde que."
+      )}
+      {parseAndRenderMath(
+        ""
+      )}
+      {parseAndRenderMath(
+        ""
+      )}
+      {parseAndRenderMath(
+        ""
+      )}
+      {parseAndRenderMath(
+        ""
+      )}
+      {parseAndRenderMath(
+        ""
+      )}
+      {parseAndRenderMath(
+        ""
+      )}
+      {parseAndRenderMath(
+        ""
+      )}
+      {parseAndRenderMath(
+        ""
       )}
     </View>,
 
     //PAGINA 2
-    <View key="Conjuntos numericos">
-      <Text style={styles.titulo2}>1.2 Conjuntos numéricos</Text>
-      <Text style={styles.titulo3}>1.2.1 Conjunto dos números naturais</Text>
+    <View key="Tipos Textuais/Discursivos">
+      <Text style={styles.titulo2}>2 Tipos Textuais/Discursivos</Text>
+      <Text style={styles.titulo3}>2.1 Tipo Narrativo</Text>
       {parseAndRenderMath(
-        "Chama-se conjunto dos números naturais o conjunto formado pelos números 0, 1, 2, 3, ... e denotamos por $\\mathbb{N}$."
-      )}
-      {parseAndRenderMath("$\\mathbb{N} = \\{0, 1, 2, 3, ...\\}$")}
-
-      <Text style={styles.titulo3}>1.2.2 Conjunto dos números inteiros</Text>
-      {parseAndRenderMath(
-        "Chama-se conjunto dos números inteiros o conjunto formado pelos números ..., -2, -1, 0, 1, 2, 3, ... e denotamos por $\\mathbb{Z}$."
-      )}
-      {parseAndRenderMath("$\\mathbb{Z} = \\{..., -2, -1, 0, 1, 2, 3, ...\\}$")}
-
-      <Text style={styles.titulo3}>1.2.3 Conjunto dos números racionais</Text>
-      {parseAndRenderMath(
-        "Chama-se conjunto dos números racionais o conjunto formado pelos números que podem ser expressos por $\\frac{a}{b}$ onde  $a,b \\in \\mathbb{Z}$ e   $b \\neq 0$. Iremos denotar o conjunto por $\\mathbb{Q}$."
-      )}
-
-      <Text style={styles.titulo3}>Exemplo 1.5</Text>
-      {parseAndRenderMath(
-        "Os números  $-\\frac{5}{1} = -5$ ,    $\\frac{2}{5} = 0,4$ e $-\\frac{1}{3} = -0,3333...$ são exemplos de números racionais."
+        "Tipos de narrador:"
       )}
       {parseAndRenderMath(
-        "Destacamos que o número   $\\frac{2}{5} = 0,4$ é chamado de **decimal exato**. Já o número $-\\frac{1}{3} = -0,3333...$ chamamos de **dízima periódica**."
-      )}
-
-      <Text style={styles.titulo3}>Exemplo 1.6</Text>
-      {parseAndRenderMath(
-        "Vamos obter uma representação decimal para os números: a) $\\frac{3}{16}$ b) $\\frac{4}{9}$"
+        "**1)** Narrador em 1ª pessoa: é aquele que participa da ação, ou seja, que se inclui na narrativa. Tra-ta-se do narrador-personagem."
       )}
       {parseAndRenderMath(
-        "Dividindo 3 por 16 obtemos 0,1875 que é a representação decimal do número $\\frac{3}{16}$. Já a divisão de 4 por 9 obtemos 0,4444... que é a representação decimal do número $\\frac{4}{9}$."
+        "**2)**Narrador em 3ª pessoa: é aquele que não participa da ação, ou seja, não se inclui na narrativa. Temos então o narrador-observador"
       )}
       {parseAndRenderMath(
-        "Uma vez entendido o exemplo acima, é fácil concluir que todo número racional pode ser expresso por um decimal exato ou por uma dízima periódica."
-      )}
-
-      <Text style={styles.titulo3}>Exemplo 1.7</Text>
+        "Todo o texto narrativo conta um FATO que se passa em determinado TEMPO e LUGAR. A narração só existe na medida em que há ação; esta ação é praticada pelos PERSONAGENS.")}
       {parseAndRenderMath(
-        "Queremos representar os seguintes números por frações, essas frações são chamadas de frações geratrizes:"
-      )}
-      {parseAndRenderMath("a) $ -1,234 = -\\frac{1234}{1000} $")}
-      {parseAndRenderMath(
-        "b) $ 5,64444... = \\frac{564 - 56}{90} = \\frac{508}{90} $"
+        "Um fato, em geral, acontece por uma determinada CAUSA e desenrola-se envolvendo certas circunstâncias que o caracterizam. É necessário, portanto, mencionar, o MODO como tudo aconteceu detalhadamente, isto é, de que maneira o fato ocorreu. Um acontecimento pode provocar CONSEQUÊNCIAS, as quais devem ser observadas."
       )}
       {parseAndRenderMath(
-        "c) $ 5,6454545... = \\frac{5645 - 56}{990} = \\frac{5589}{990} $"
+        "Assim, os elementos básicos do texto narrativo são:"
       )}
       {parseAndRenderMath(
-        "Com estes exemplos, podemos perceber que toda dízima periódica é um número racional. Existem dízimas não-periódicas. Essas dízimas são os números irracionais."
+        "1) FATO (o que se vai narrar)"
       )}
-
-      <Text style={styles.titulo3}>1.2.4 Conjunto dos números irracionais</Text>
       {parseAndRenderMath(
-        "O conjunto será denotado por      $\\mathbb{I}$. O conjunto dos números irracionais é constituído pelas dízimas não-periódicas. Como exemplos de números irracionais, podemos citar:"
+        "2) TEMPO (quando o fato ocorreu)"
       )}
-      {parseAndRenderMath("$\\pi = 3,1415926535...$")}
-      {parseAndRenderMath("$\\sqrt{2} = 1,4142135623...$")}
-      {parseAndRenderMath("$\\sqrt{3} = 1,7320508075...$")}
-
-      <Text style={styles.titulo3}>1.2.5 Conjunto dos números reais</Text>
       {parseAndRenderMath(
-        "A reunião do conjunto dos números irracionais com o dos racionais é o conjunto dos números reais que denotamos por $\\mathbb{R}$."
+        "3) LUGAR (onde o fato se deu)"
       )}
-      {parseAndRenderMath("$\\mathbb{R} = \\mathbb{Q} \\cup \\mathbb{I}$")}
       {parseAndRenderMath(
-        "Os conjuntos numéricos podem ser representados esquematicamente pela Figura 1.1"
+        "4) PERSONAGENS (quem participou do ocorrido ou o observou)"
+      )}
+      {parseAndRenderMath(
+        "5) CAUSA (motivo que determinou a ocorrência)"
+      )}
+      {parseAndRenderMath(
+        "6) MODO (como se deu o fato)"
+      )}
+      {parseAndRenderMath(
+        "7) CONSEQUÊNCIAS"
       )}
 
       <View style={styles.imageView}>
         <Image
-          source={require("@/app/(matematica)/(conjuntos)/fig1.1.png")}
+          source={require("@/app/(linguagens)/imagens/fig1.1.png")}
           style={styles.image}
         ></Image>
       </View>
-      <Text style={styles.imageSubtitle}>
-        Figura 1.1: Representação dos conjuntos numéricos.
-      </Text>
+
+      <Text style={styles.titulo3}>A narração objetiva</Text>
+      {parseAndRenderMath(
+        "Observe agora um exemplo de narração sobre um incêndio, criado com o auxílio do esquema estudado. Lembre-se de que, antes de começar a escrever, é preciso escolher o tipo de narrador. Optamos pelo narrador em 3ª pessoa."
+      )}
+      <Text style={styles.titulo3}>O incêndio</Text>
+      {parseAndRenderMath(
+        "Ocorreu um pequeno incêndio na noite de ontem, em um apartamento de propriedade do sr. Marcos da Fonseca. No local habitavam o proprietário, sua esposa e seus dois filhos. Todos eles, na hora em que o fogo começou, tinham saído de casa e estavam jantando em um restaurante situado em frente ao edifício. A causa do incêndio foi um curto - circuito ocorrido no precário sistema elétrico do velho apartamento. O fogo desapontou em um dos quartos que, por sorte, ficava na frente do prédio. O porteiro do restaurante, conhecido da família, avistou-o e imediatamente foi chamar o sr. Marcos. Ele, mais que depressa, ligou para o Corpo de Bombeiros. Embora não tivessem demorado a chegar, os bombeiros não conseguiram impedir que o quarto e a sala ao lado fossem inteiramente destruídos pelas chamas. Não obstante o prejuízo, a família consolou-se com o fato de aquele incidente não ter tomado proporções, atingindo os apartamentos vizinhos."
+      )}
+
+      <Text style={styles.titulo3}>A narração subjetiva</Text>
+      {parseAndRenderMath(
+        "Nela os fatos são apresentados levando-se em conta as emoções, os sentimentos envolvidos na história. Nota-se claramente a posição sensível e emocional do narrador ao relatar os acontecimentos. O fato não é narrado de modo frio e impessoal; ao contrário, são ressaltados os efeitos psicológicos que os acontecimentos desencadeiam nos personagens. Observe o exemplo de uma narração subjetiva em 1ª pessoa."
+      )}
+      <Text style={styles.titulo3}>Com a fúria de um vendaval</Text>
+      {parseAndRenderMath(
+        "Em uma certa manhã acordei entediada. Estava em minhas férias escolares do mês de julho. Não pudera viajar. Fui ao portão e avistei, três quarteirões ao longe, a movimentação de uma feira livre. Não tinha nada a fazer, e isso estava me matando de aborrecimento. Embora soubesse que uma feira livre não constitui exatamente o melhor divertimento do qual um ser humano pode dispor, fui andando, a passos lentos, em direção àquelas barracas. Não esperava ver nada de original, ou mesmo interessante. Como é triste o tédio! Logo que me aproximei, vi uma senhora alta, extremamente gorda, discutindo com um feirante. O homem, dono da barraca de tomates, tentava em vão acalmar a nervosa senhora. Não sei por que brigavam, mas sei o que vi: a mulher, imensamente gorda, mais do que gorda (monstruosa), erguia seus enormes braços e, com os punhos cerrados, gritava contra o feirante. Comecei a me assustar, com medo de que ela destruísse a barraca ( e talvez o próprio homem) devido à sua fúria incontrolável. Ela ia gritando e se empolgando com sua raiva crescente e ficando cada vez mais vermelha, assim como os tomates, ou até mais. De repente, no auge de sua ira, avançou contra o homem já atemorizado e, tropeçando em alguns tomates podres que estavam no chão, caiu, tombou, mergulhou, esborrachou-se no asfalto, para o divertimento do pequeno público que, assim como eu, assistiu àquela cena incomum."
+      )}
+
+      <Text style={styles.titulo3}>2.2 Tipo Descritivo</Text>
+      <Text style={styles.titulo3}>Esquema de descrição de pessoas</Text>
+      <View style={styles.imageView}>
+        <Image
+          source={require("@/app/(linguagens)/imagens/fig1.2.png")}
+          style={styles.image}
+        ></Image>
+      </View>
+      {parseAndRenderMath(
+        "Exemplo:"
+      )}
+      <Text style={styles.titulo3}>Tancredo: o político da esperança</Text>
+      {parseAndRenderMath(
+        "Qualquer pessoa que o visse, quer pessoalmente ou através dos meios de comunicação, era logo levada a sentir que dele emanava uma serenidade e autoconfiança próprias daqueles que vivem com sabedoria e dignidade. De baixa estatura, magro, calvo, tinha a idade de um pai que cada pessoa gostaria de ter e de quem a nação tanto precisava naquele momento de desamparo. Seus olhos oblíquos e castanhos transmitiam confiança. O nariz levemente arrebitado e os lábios finos, em meio ao rosto arredondado, traçavam o perfil de alguém que sentíamos ter conhecido durante a vida inteira. Sua voz era doce e ao mesmo tempo dura. Falava e vestia-se como o estadista. Era um estadista. Sua característica mais marcante foi, sem dúvida, a ponderação na análise dos problemas políticos e socioeconômicos. Respeitado em todo mundo pela condição de líder preocupado com o destino das futuras gerações, de conhecedor profundo das questões deste país, colocava sempre o espírito comunitário acima dos interesses individuais. Seu grande sonho foi provavelmente o de pôr toda a sua capacidade a serviço da nação brasileira, tão ameaçada pelas adversidades econômicas e tão abandonada, como sempre, fora, por aqueles que se diziam seus representantes. Verdadeiro exemplo de homem público, ficará para sempre na memória dos seus contemporâneos e no registro histórico dos grandes vultos nacionais."
+      )}
+      {parseAndRenderMath(
+        "Obs: Note que, embora o esquema utilizado nesta descrição separe os aspectos físicos e psicológicos em parágrafos diferentes, nada impede que você faça algumas poucas referências psicológicas no segundo parágrafo, que trata das características físicas."
+      )}
+      <Text style={styles.titulo3}>Descrição de objetos</Text>
+      <View style={styles.imageView}>
+        <Image
+          source={require("@/app/(linguagens)/imagens/fig1.3.png")}
+          style={styles.image}
+        ></Image>
+      </View>
+      {parseAndRenderMath(
+        "Exemplo:"
+      )}
+      <Text style={styles.titulo3}>Um clipe, dois clipes</Text>
+      {parseAndRenderMath(
+        "Este pequeno objeto que agora descrevemos encontra-se sobre uma mesa de escritório e sua  função  é  a de prender folhas de papel. Tem o formato semelhante ao de uma torre de igreja. É constituído por um único fio metálico que, dando duas voltas sobre si mesmo, assume a configuração de dois desenhos (um dentro do outro), cada um deles apresentando uma forma específica. Essa forma é composta por duas figuras geométricas: um retângulo cujo lado maior apresenta aproximadamente três centímetros e um lado menor de cerca de um centímetro e meio; um de seus lados menores é, ao mesmo tempo, a base de um triângulo equilátero, o que acaba por torná-lo um objeto ligeiramente pontiagudo. O material de que é feito confere-lhe um peso insignificante. Por ser niquelado, apresenta um brilho suave. Prendemos as folhas de papel fazendo com que elas se encaixem no meio dele. Está presente em todos os escritórios ou locais onde seja necessário separar folhas em blocos diferenciados. Embora aparentemente insignificante, dadas as suas reduzidas dimensões, é muito útil na organização de papéis."
+      )}
+
     </View>,
 
     //PAGINA 3
@@ -458,7 +621,7 @@ export default function TeoriaConjuntosScreen() {
   };
 
   return (
-    <LinearGradient style={styles.container} colors={[Colors.gradientStart , Colors.gradientStart, Colors.gradientEnd]}>
+    <LinearGradient style={styles.container} colors={[Colors.gradientStart, Colors.gradientStart, Colors.gradientEnd]}>
       <View style={styles.header}>
         <TouchableOpacity
           onPress={() => router.replace("/(linguagens)/telaUnidadesLing")}

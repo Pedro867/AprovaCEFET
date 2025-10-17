@@ -7,7 +7,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import { Colors, Fonts, Spacing } from "@/constants/Colors";
 import { BotaoCustomizado } from "@/components/ui/ButtomCustom";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { deleteAcc } from "../api/conexaoFetch";
+import { deleteAcc } from "../../utils/api/conexaoFetch";
 
 export default function EditProfileScreen() {
   const router = useRouter();

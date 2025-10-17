@@ -13,7 +13,7 @@ import { BotaoCustomizado } from "@/components/ui/ButtomCustom";
 import { Spacing, Colors } from "@/constants/Colors";
 import { CalendarioCustomizado } from "@/components/ui/CalendarCustom";
 
-import { saveData } from "../api/conexaoFetch";
+import { saveData } from "../../utils/api/conexaoFetch";
 
 
 export default function TelaRegistroData() {

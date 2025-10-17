@@ -21,10 +21,10 @@ import { LinearGradient } from "expo-linear-gradient";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { Colors, Fonts } from "@/constants/Colors";
 import initialQuestions from "./questoesEquacoes.json";
-import { updateCoinsBD, updateStreakBD } from "@/app/api/conexaoFetch";
+import { updateCoinsBD, updateStreakBD } from "@/utils/api/conexaoFetch";
 import { MathJaxSvg } from "react-native-mathjax-html-to-svg";
 
-import { updateQuizBD } from "@/app/api/conexaoFetch";
+import { updateQuizBD } from "@/utils/api/conexaoFetch";
 
 const personagemInicial = {
   background: "background1",

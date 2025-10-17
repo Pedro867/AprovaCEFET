@@ -9,7 +9,7 @@ import { BotaoCustomizado } from "@/components/ui/ButtomCustom";
 import { InputCustomizado } from "@/components/ui/InputCustom";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-import { checkSenha, updateSenhaBD } from "../api/conexaoFetch";
+import { checkSenha, updateSenhaBD } from "../../utils/api/conexaoFetch";
 
 export default function ChangePasswordScreen() {
   const router = useRouter();

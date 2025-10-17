@@ -13,7 +13,7 @@ import {
 import { Link, useNavigation } from "expo-router";
 import { LinearGradient } from "expo-linear-gradient";
 import { Feather } from "@expo/vector-icons";
-import { validaCadastro } from "../api/conexaoFetch";
+import { validaCadastro } from "../../utils/api/conexaoFetch";
 import { Spacing, Fonts, Colors } from "@/constants/Colors";
 import { BotaoCustomizado } from "@/components/ui/ButtomCustom";
 import { InputCustomizado } from "@/components/ui/InputCustom";

@@ -12,7 +12,7 @@ import {
 } from 'react-native';
 import { Link, useNavigation } from 'expo-router';
 import { LinearGradient } from 'expo-linear-gradient';
-import { validaLogin } from '../api/conexaoFetch';
+import { validaLogin } from '../../utils/api/conexaoFetch';
 //import { getNomeUsuario } from '../api/conexaoFetch';
 import Feather from '@expo/vector-icons/Feather';
 import { useRouter } from 'expo-router'; //router pega o path todo, o navigate olha so o nome do arquivo

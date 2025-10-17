@@ -9,7 +9,7 @@ import { BotaoCustomizado } from "@/components/ui/ButtomCustom";
 import { InputCustomizado } from "@/components/ui/InputCustom";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-import { checkSenha, updateNomeBD } from "../api/conexaoFetch";
+import { checkSenha, updateNomeBD } from "../../utils/api/conexaoFetch";
 
 export default function ChangeNameScreen() {
   const router = useRouter();

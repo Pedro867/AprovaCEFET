@@ -10,8 +10,8 @@ import { CategoriaTab } from "@/components/loja/categoriasTab";
 import { GradeItems } from "@/components/loja/gradeItems";
 import { LinearGradient } from "expo-linear-gradient";
 import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs"; 
-import { updatePersonalizacoesBD } from "../api/conexaoFetch";
-import { updateCoinsBD } from "../api/conexaoFetch";
+import { updatePersonalizacoesBD } from "../../utils/api/conexaoFetch";
+import { updateCoinsBD } from "../../utils/api/conexaoFetch";
 
 const CORES_ROSTO = [
   {id: 1, principal: "#F8B788", sombra: "#D1A37E"},

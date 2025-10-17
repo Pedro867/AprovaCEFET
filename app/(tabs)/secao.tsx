@@ -19,10 +19,13 @@ import { BotaoCustomizado } from "@/components/ui/ButtomCustom";
 import { CalendarioCustomizado } from "@/components/ui/CalendarCustom";
 import { BlurView } from "expo-blur";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { checkCompletedQuizes, updateStreakBD } from "../api/conexaoFetch";
+import {
+  checkCompletedQuizes,
+  updateStreakBD,
+} from "../../utils/api/conexaoFetch";
 import { SECOES_PARA_EMBLEMAS, EMBLEMAS } from "@/constants/dadosEmblemas";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { streakEventEmitter } from "@/app/events/streakEvents";
+import { streakEventEmitter } from "@/utils/events/streakEvents";
 
 // estado inicial do personagem
 const personagemInicial = {
@@ -35,7 +38,7 @@ const personagemInicial = {
   bangs: "franja1",
   hair: "cabelo1",
   nose: "nariz1",
-};
+} as const;
 
 export default function TelaSecao() {
   const [progressos, setProgressos] = useState({
@@ -119,104 +122,98 @@ export default function TelaSecao() {
   const [coinsUsuario, setCoinsUsuario] = useState<number>(0);
   const [customizacoes, setCustomizacoes] = useState(personagemInicial);
 
- 
-const carregarTodosOsDados =  useCallback (async () => {
-        try {
-          //logica de verificar se o streak ta ativo ou n
-          const today = new Date();
-          const todayStr = today.toDateString();
+  const carregarTodosOsDados = useCallback(async () => {
+    try {
+      //logica de verificar se o streak ta ativo ou n
+      const today = new Date();
+      const todayStr = today.toDateString();
 
-          const yesterday = new Date();
-          yesterday.setDate(yesterday.getDate() - 1);
-          const yesterdayStr = yesterday.toDateString();
+      const yesterday = new Date();
+      yesterday.setDate(yesterday.getDate() - 1);
+      const yesterdayStr = yesterday.toDateString();
 
-          const lastDateStr = await AsyncStorage.getItem("lastStreakDate");
-          const currentStreakStr = await AsyncStorage.getItem("userStreak");
-          let currentStreak = currentStreakStr
-            ? parseInt(currentStreakStr, 10)
-            : 0;
+      const lastDateStr = await AsyncStorage.getItem("lastStreakDate");
+      const currentStreakStr = await AsyncStorage.getItem("userStreak");
+      let currentStreak = currentStreakStr ? parseInt(currentStreakStr, 10) : 0;
 
-          if (
-            lastDateStr &&
-            lastDateStr !== todayStr &&
-            lastDateStr !== yesterdayStr
-          ) {
-            //se a ultima data for diferente de hoje e ontem, zerar streak
-            currentStreak = 0;
-            await AsyncStorage.setItem("userStreak", "0");
-            //await updateStreakBD(0);
-          }
-          setStreakUsuario(currentStreak);
-          setIsStreakActive(lastDateStr === todayStr);
+      if (
+        lastDateStr &&
+        lastDateStr !== todayStr &&
+        lastDateStr !== yesterdayStr
+      ) {
+        //se a ultima data for diferente de hoje e ontem, zerar streak
+        currentStreak = 0;
+        await AsyncStorage.setItem("userStreak", "0");
+        //await updateStreakBD(0);
+      }
+      setStreakUsuario(currentStreak);
+      setIsStreakActive(lastDateStr === todayStr);
 
-          //carrega nome do usuario
-          const primeiroNome = await AsyncStorage.getItem("userPrimeiroNome");
-          setNomeUsuario(primeiroNome);
+      //carrega nome do usuario
+      const primeiroNome = await AsyncStorage.getItem("userPrimeiroNome");
+      setNomeUsuario(primeiroNome);
 
-          //carrega coins do usuario
-          const coins = await AsyncStorage.getItem("userPontuacao");
-          setCoinsUsuario(coins ? parseInt(coins, 10) : 0);
+      //carrega coins do usuario
+      const coins = await AsyncStorage.getItem("userPontuacao");
+      setCoinsUsuario(coins ? parseInt(coins, 10) : 0);
 
-          // carrega customizações do personagem
-          const savedCustomizations = await AsyncStorage.getItem(
-            "userCharacter"
-          );
-          if (savedCustomizations) {
-            setCustomizacoes(
-              JSON.parse(savedCustomizations) as typeof personagemInicial
-            );
-          }
+      // carrega customizações do personagem
+      const savedCustomizations = await AsyncStorage.getItem("userCharacter");
+      if (savedCustomizations) {
+        setCustomizacoes(
+          JSON.parse(savedCustomizations) as typeof personagemInicial
+        );
+      }
 
-          // carrega o emblema selecionado
-          const emblem = await AsyncStorage.getItem("selectedEmblem");
-          setSelectedEmblem(emblem);
+      // carrega o emblema selecionado
+      const emblem = await AsyncStorage.getItem("selectedEmblem");
+      setSelectedEmblem(emblem);
 
-          const streak = await AsyncStorage.getItem("userStreak");
-          setStreakUsuario(streak ? parseInt(streak, 10) : 0);
+      const streak = await AsyncStorage.getItem("userStreak");
+      setStreakUsuario(streak ? parseInt(streak, 10) : 0);
 
+      //CARREGA PROGRESSO DAS SEÇÕES
+      const getCompletedCount = (r: any) =>
+        typeof r === "number"
+          ? r
+          : r && typeof r.completados === "number"
+          ? r.completados
+          : 0;
 
-          //CARREGA PROGRESSO DAS SEÇÕES  
-          const getCompletedCount = (r: any) =>
-            typeof r === "number"
-              ? r
-              : r && typeof r.completados === "number"
-              ? r.completados
-              : 0;
+      let p1 = await checkCompletedQuizes(1);
+      let p2 = await checkCompletedQuizes(2);
+      let p3 = await checkCompletedQuizes(3);
+      let p4 = await checkCompletedQuizes(4);
 
-          let p1 = await checkCompletedQuizes(1);
-          let p2 = await checkCompletedQuizes(2);
-          let p3 = await checkCompletedQuizes(3);
-          let p4 = await checkCompletedQuizes(4);
+      const novosProgressos = {
+        1: getCompletedCount(p1),
+        2: getCompletedCount(p2),
+        3: getCompletedCount(p3),
+        4: getCompletedCount(p4),
+      };
 
-          const novosProgressos = {
-            1: getCompletedCount(p1),
-            2: getCompletedCount(p2),
-            3: getCompletedCount(p3),
-            4: getCompletedCount(p4),
-          };
+      setProgressos(novosProgressos);
+      await verificarEmblemasDesbloqueados(novosProgressos);
+    } catch (error) {
+      console.error("Erro ao carregar emblema na tela de seção", error);
+    }
+  }, []);
 
-          setProgressos(novosProgressos);
-          await verificarEmblemasDesbloqueados(novosProgressos);
-        } catch (error) {
-          console.error("Erro ao carregar emblema na tela de seção", error);
-        }
-    }, []);
+  useFocusEffect(
+    useCallback(() => {
+      carregarTodosOsDados();
+    }, [carregarTodosOsDados])
+  );
 
-useFocusEffect(
-  useCallback(() => {
-    carregarTodosOsDados();
-  }, [carregarTodosOsDados])
-);
+  useEffect(() => {
+    const listener = streakEventEmitter.addListener("streakAtualizada", () => {
+      carregarTodosOsDados();
+    });
 
-useEffect(() => {
-  const listener = streakEventEmitter.addListener("streakAtualizada", () => {
-    carregarTodosOsDados();
-  });
-
-  return () => {
-    listener.remove();
-  };
-}, [carregarTodosOsDados]);
+    return () => {
+      listener.remove();
+    };
+  }, [carregarTodosOsDados]);
 
   const router = useRouter();
   const [diasFaltando, setDiasFaltando] = useState(0);
@@ -250,6 +247,7 @@ useEffect(() => {
 
         if (totalDuration > 0) {
           const progressPercentage = (elapsedDuration / totalDuration) * 100;
+
           setProgresso(Math.min(Math.max(progressPercentage, 0), 100)); // progresso entre 0 e 100
         } else {
           setProgresso(100); //se a data ja tiver passado
@@ -272,7 +270,7 @@ useEffect(() => {
     }
     try {
       const today = new Date().toISOString().split("T")[0];
-      await AsyncStorage.setItem("dataProva", novaDataSelecionada); 
+      await AsyncStorage.setItem("dataProva", novaDataSelecionada);
       await AsyncStorage.setItem("inicioEstudo", today); // Reinicia a data de início
 
       await calculaProgresso(); // recalcula o progresso com a nova data
@@ -319,8 +317,8 @@ useEffect(() => {
       {/* CARD PROGRESSO DIAS ATÉ A PROVA */}
       <Card style={styles.progressCard}>
         <LinearGradient
-          colors={["rgba(34,75,244,0.29)", "rgba(34,75,244,0.29)"]}
-          style={styles.progressCardContent}
+          colors={["rgba(34,75,244,0.29)", "rgba(103, 114, 160, 0.78)"]}
+          style={{ width: '100%', padding: 16, borderRadius: 12.38 }}
         >
           <View style={styles.progressHeader}>
             <Text style={styles.progressLabel}>Faltam</Text>
@@ -334,11 +332,15 @@ useEffect(() => {
             <Text style={styles.daysLabel}>para a sua prova!</Text>
           </View>
 
-          <ProgressBar
-            progress={progresso}
-            style={styles.progressDateBar}
-            progressColor="#6B91E2"
-          />
+          <View style={styles.dateProgressBarContainer}>
+            <ProgressBar
+              progress={progresso}
+              height={10}
+              style={styles.progressDateBar}
+              progressColor="#0D1B52"
+            
+            />
+          </View>
         </LinearGradient>
       </Card>
 
@@ -355,7 +357,6 @@ useEffect(() => {
               style={styles.subjectTouchable}
               onPress={() => router.push(area.route as any)}
             >
-             
               {/* inicio do card da disciplina */}
               <Card style={styles.subjectCard}>
                 <LinearGradient
@@ -469,6 +470,7 @@ const styles = StyleSheet.create({
   progressCardContent: {
     padding: 16,
     borderRadius: 12.38,
+    justifyContent: 'space-between',
   },
   progressHeader: {
     flexDirection: "row",
@@ -505,6 +507,9 @@ const styles = StyleSheet.create({
   },
   progressBar: {
     width: "80%",
+  },
+  dateProgressBarContainer: {
+    width: '100%', 
   },
   progressBarContainer: {
     alignItems: "center",

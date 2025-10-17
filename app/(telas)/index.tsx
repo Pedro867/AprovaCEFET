@@ -5,7 +5,7 @@ import { Image } from 'expo-image';
 import { StyleSheet, View, Text } from 'react-native';
 import { Spacing } from '@/constants/Colors';
 import { useRouter } from 'expo-router';
-import { getToken } from "../api/manipulacaoTokens";
+import { getToken } from "../../utils/api/manipulacaoTokens";
 
 
 import { BotaoCustomizado } from '@/components/ui/ButtomCustom';

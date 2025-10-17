@@ -23,6 +23,7 @@ import { Colors, Fonts } from "@/constants/Colors";
 import initialQuestions from "./questoesConjuntos.json";
 import { updateCoinsBD, updateStreakBD } from "@/app/api/conexaoFetch";
 import { MathJaxSvg } from "react-native-mathjax-html-to-svg";
+import { streakEventEmitter } from "@/app/events/streakEvents";
 
 import { updateQuizBD, checkCompletedQuizes } from "@/app/api/conexaoFetch";
 import { SECOES_PARA_EMBLEMAS, EMBLEMAS } from "@/constants/dadosEmblemas";
@@ -204,23 +205,6 @@ const QuizScreen = () => {
     }
   };
 
-  const saveStreak = async (newStreak: number) => {
-    try {
-      await updateStreakBD(newStreak);
-      console.log(newStreak);
-    } catch (e) {
-      console.error("Erro ao salvar o streak:", e);
-    }
-  };
-
-  const saveLastStreakDate = async (date: Date) => {
-    try {
-      await AsyncStorage.setItem(LAST_STREAK_DATE_KEY, date.toISOString());
-    } catch (e) {
-      console.error("Erro ao salvar a data do streak:", e);
-    }
-  };
-
   const loadQuizState = async () => {
     try {
       const jsonValue = await AsyncStorage.getItem(QUIZ_STATE_KEY);
@@ -364,12 +348,23 @@ const QuizScreen = () => {
 
           await AsyncStorage.setItem("userStreak", newStreak.toString());
           await AsyncStorage.setItem("lastStreakDate", todayString);
-          await updateStreakBD(newStreak);
+          const respostaBD = await updateStreakBD(newStreak);
+          console.log(
+            "Resposta do servidor ao atualizar streak:",
+            respostaBD
+          );
+          streakEventEmitter.emit("streakAtualizada");
 
-          if(newStreak == 1){
-            Alert.alert("Sequencia iniciada!", `Você iniciou uma streak de ${newStreak} dia! Mantenha o ritmo!`);
-          } else{
-            Alert.alert("Sequencia atualizada!", `Sua streak diária é de ${newStreak} dias! Continue assim!`);
+          if (newStreak == 1) {
+            Alert.alert(
+              "Sequencia iniciada!",
+              `Você iniciou uma streak de ${newStreak} dia! Mantenha o ritmo!`
+            );
+          } else {
+            Alert.alert(
+              "Sequencia atualizada!",
+              `Sua streak diária é de ${newStreak} dias! Continue assim!`
+            );
           }
         } catch (error) {}
       }

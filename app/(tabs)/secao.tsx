@@ -22,6 +22,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { checkCompletedQuizes, updateStreakBD } from "../api/conexaoFetch";
 import { SECOES_PARA_EMBLEMAS, EMBLEMAS } from "@/constants/dadosEmblemas";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { streakEventEmitter } from "@/app/events/streakEvents";
 
 // estado inicial do personagem
 const personagemInicial = {
@@ -72,37 +73,6 @@ export default function TelaSecao() {
     //adicionar checagem de outros emblemas aqui dps
   };
 
-  useEffect(() => {
-    async function carregarProgressoMaterias() {
-      try {
-        const getCompletedCount = (r: any) =>
-          typeof r === "number"
-            ? r
-            : r && typeof r.completados === "number"
-            ? r.completados
-            : 0;
-
-        let p1 = await checkCompletedQuizes(1);
-        let p2 = await checkCompletedQuizes(2);
-        let p3 = await checkCompletedQuizes(3);
-        let p4 = await checkCompletedQuizes(4);
-
-        const novosProgressos = {
-          1: getCompletedCount(p1),
-          2: getCompletedCount(p2),
-          3: getCompletedCount(p3),
-          4: getCompletedCount(p4),
-        };
-
-        setProgressos(novosProgressos);
-        await verificarEmblemasDesbloqueados(novosProgressos);
-      } catch (error) {
-        console.error("Erro ao carregar progresso das matérias:", error);
-      }
-    }
-    carregarProgressoMaterias();
-  }, []);
-
   const subjectAreas = [
     {
       id: 1,
@@ -149,17 +119,16 @@ export default function TelaSecao() {
   const [coinsUsuario, setCoinsUsuario] = useState<number>(0);
   const [customizacoes, setCustomizacoes] = useState(personagemInicial);
 
-  useFocusEffect(
-    useCallback(() => {
-      const carregarDados = async () => {
+ 
+const carregarTodosOsDados =  useCallback (async () => {
         try {
           //logica de verificar se o streak ta ativo ou n
           const today = new Date();
-          const todayStr = today.toISOString(); // Formato 'YYYY-MM-DD'
+          const todayStr = today.toDateString();
 
           const yesterday = new Date();
           yesterday.setDate(yesterday.getDate() - 1);
-          const yesterdayStr = yesterday.toISOString();
+          const yesterdayStr = yesterday.toDateString();
 
           const lastDateStr = await AsyncStorage.getItem("lastStreakDate");
           const currentStreakStr = await AsyncStorage.getItem("userStreak");
@@ -179,28 +148,16 @@ export default function TelaSecao() {
           }
           setStreakUsuario(currentStreak);
           setIsStreakActive(lastDateStr === todayStr);
-        } catch (error) {}
 
-        //EU SEI QUE TUDO PODE SER FEITO EM 1 TRY CATCH MAS SE 1 DER ERRADO O CONSOLE.ERROR DIZ QUAL EH
-        try {
+          //carrega nome do usuario
           const primeiroNome = await AsyncStorage.getItem("userPrimeiroNome");
           setNomeUsuario(primeiroNome);
-        } catch (error) {
-          console.error("Erro ao carregar o nome do usuário", error);
-        }
-        try {
-          const streak = await AsyncStorage.getItem("userStreak");
-          setStreakUsuario(streak ? parseInt(streak, 10) : 0);
-        } catch (error) {
-          console.error("Erro ao carregar o streak do usuário", error);
-        }
-        try {
+
+          //carrega coins do usuario
           const coins = await AsyncStorage.getItem("userPontuacao");
           setCoinsUsuario(coins ? parseInt(coins, 10) : 0);
-        } catch (error) {
-          console.error("Erro ao carregar as coins do usuário", error);
-        }
-        try {
+
+          // carrega customizações do personagem
           const savedCustomizations = await AsyncStorage.getItem(
             "userCharacter"
           );
@@ -209,22 +166,57 @@ export default function TelaSecao() {
               JSON.parse(savedCustomizations) as typeof personagemInicial
             );
           }
-        } catch (error) {
-          console.error("Erro ao carregar o personagem do usuário", error);
-        }
 
-        try {
           // carrega o emblema selecionado
           const emblem = await AsyncStorage.getItem("selectedEmblem");
           setSelectedEmblem(emblem);
+
+          const streak = await AsyncStorage.getItem("userStreak");
+          setStreakUsuario(streak ? parseInt(streak, 10) : 0);
+
+
+          //CARREGA PROGRESSO DAS SEÇÕES  
+          const getCompletedCount = (r: any) =>
+            typeof r === "number"
+              ? r
+              : r && typeof r.completados === "number"
+              ? r.completados
+              : 0;
+
+          let p1 = await checkCompletedQuizes(1);
+          let p2 = await checkCompletedQuizes(2);
+          let p3 = await checkCompletedQuizes(3);
+          let p4 = await checkCompletedQuizes(4);
+
+          const novosProgressos = {
+            1: getCompletedCount(p1),
+            2: getCompletedCount(p2),
+            3: getCompletedCount(p3),
+            4: getCompletedCount(p4),
+          };
+
+          setProgressos(novosProgressos);
+          await verificarEmblemasDesbloqueados(novosProgressos);
         } catch (error) {
           console.error("Erro ao carregar emblema na tela de seção", error);
         }
-      };
+    }, []);
 
-      carregarDados();
-    }, [])
-  );
+useFocusEffect(
+  useCallback(() => {
+    carregarTodosOsDados();
+  }, [carregarTodosOsDados])
+);
+
+useEffect(() => {
+  const listener = streakEventEmitter.addListener("streakAtualizada", () => {
+    carregarTodosOsDados();
+  });
+
+  return () => {
+    listener.remove();
+  };
+}, [carregarTodosOsDados]);
 
   const router = useRouter();
   const [diasFaltando, setDiasFaltando] = useState(0);
@@ -363,7 +355,7 @@ export default function TelaSecao() {
               style={styles.subjectTouchable}
               onPress={() => router.push(area.route as any)}
             >
-              {" "}
+             
               {/* inicio do card da disciplina */}
               <Card style={styles.subjectCard}>
                 <LinearGradient
@@ -472,7 +464,7 @@ const styles = StyleSheet.create({
   },
   progressCard: {
     marginHorizontal: "5%",
-    marginBottom: 26,
+    marginBottom: 30,
   },
   progressCardContent: {
     padding: 16,

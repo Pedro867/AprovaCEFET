@@ -144,7 +144,7 @@ const carregarTodosOsDados =  useCallback (async () => {
             //se a ultima data for diferente de hoje e ontem, zerar streak
             currentStreak = 0;
             await AsyncStorage.setItem("userStreak", "0");
-            await updateStreakBD(0);
+            //await updateStreakBD(0);
           }
           setStreakUsuario(currentStreak);
           setIsStreakActive(lastDateStr === todayStr);
@@ -272,7 +272,7 @@ useEffect(() => {
     }
     try {
       const today = new Date().toISOString().split("T")[0];
-      await AsyncStorage.setItem("dataProva", novaDataSelecionada);
+      await AsyncStorage.setItem("dataProva", novaDataSelecionada); 
       await AsyncStorage.setItem("inicioEstudo", today); // Reinicia a data de início
 
       await calculaProgresso(); // recalcula o progresso com a nova data

@@ -49,9 +49,9 @@ export default function SignScreen() {
 
     setIsLoading(true);
 
-    // chama a API de cadastro
-    //comentado para testes com bd desligado
-    const sucesso = await validaCadastro(nome, email, senha);
+    const today = new Date();
+    const dateString = today.toISOString().slice(0, 10)
+    const sucesso = await validaCadastro(nome, email, senha, dateString);
     //const sucesso = true;
     if (sucesso) {
       router.replace('/(telas)/registerDate')

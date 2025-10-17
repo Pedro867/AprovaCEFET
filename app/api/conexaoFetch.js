@@ -7,7 +7,7 @@ import {
 } from "./manipulacaoTokens";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-export async function validaCadastro(nome, email, senha) {
+export async function validaCadastro(nome, email, senha, todayString) {
     try {
         //ESSE FETCH TA NO RENDER
         const response = await fetch("https://backend-aprovacefet.onrender.com/register", {
@@ -18,7 +18,8 @@ export async function validaCadastro(nome, email, senha) {
             body: JSON.stringify({
                 nome,
                 email,
-                senha
+                senha,
+                todayString
             }),
         });
 
@@ -45,6 +46,7 @@ export async function validaCadastro(nome, email, senha) {
             await AsyncStorage.setItem("userEmail", data.email);
             await AsyncStorage.setItem("userPontuacao", data.pontuacao.toString()); //tem q ser string pra salvar
             await AsyncStorage.setItem("userStreak", data.streak.toString());
+            await AsyncStorage.setItem("inicioEstudo", data.todayString);
             Alert.alert("Sucesso", data.message);
             return true;
         } else {
@@ -92,6 +94,7 @@ export async function validaLogin(email, senha) {
             await AsyncStorage.setItem("userPontuacao", data.pontuacao.toString()); //tem q ser string pra salvar
             await AsyncStorage.setItem("userStreak", data.streak.toString());
             await AsyncStorage.setItem("dataProva", data.dataProva);
+            await AsyncStorage.setItem("inicioEstudo", data.dataInicio);
             Alert.alert("Sucesso", data.message);
             return true;
         } else {

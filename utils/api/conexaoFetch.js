@@ -3,7 +3,6 @@ import {
 } from "react-native";
 import {
     saveToken,
-    getToken
 } from "./manipulacaoTokens";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
@@ -95,6 +94,7 @@ export async function validaLogin(email, senha) {
             await AsyncStorage.setItem("userStreak", data.streak.toString());
             await AsyncStorage.setItem("dataProva", data.dataProva);
             await AsyncStorage.setItem("inicioEstudo", data.dataInicio);
+            await AsyncStorage.setItem("lastStreakDate", data.lastStreakDate);
             Alert.alert("Sucesso", data.message);
             return true;
         } else {
@@ -306,6 +306,48 @@ export async function updateStreakBD(newStreak) {
     } catch (error) {
         console.error(error);
         Alert.alert("Erro", "Erro ao conectar no servidor.");
+    }
+}
+
+export async function updatelastStreakDateBD(newDate) {
+    let idUser = await AsyncStorage.getItem("userID");
+    idUser = parseInt(idUser);
+
+    try {
+        const response = await fetch("https://backend-aprovacefet.onrender.com/updateLastStreakDate", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                idUser,
+                newDate,
+            }),
+        });
+
+        const text = await response.text();
+
+        let data;
+        try {
+            data = JSON.parse(text);
+        } catch (err) {
+            console.error("Resposta não era JSON:", text);
+            Alert.alert("Erro", "O servidor retornou algo inesperado.", [{
+                text: "ok",
+                onPress: () => console.log("jhsvafhgk")
+            }]);
+        }
+
+        if (data.success) {
+            await AsyncStorage.setItem("lastStreakDate", newDate);
+            return true;
+        } else {
+            Alert.alert("Erro", data.message || "Erro ao conectar ao BD.");
+        }
+    } catch (error) {
+        console.error(error);
+        Alert.alert("Erro", "Erro ao conectar no servidor.");
+        return;
     }
 }
 
@@ -522,7 +564,7 @@ export async function checkSenha(senha) {
     }
 }
 
-//ESSA FUNCAO SERVE P VER QUANTOS QUIZES DE DETERMINADA MATERIA O ALUNA JA FEZ
+//ESSA FUNCAO SERVE P VER QUANTOS QUIZES DE DETERMINADA MATERIA O ALUNO JA FEZ
 export async function checkCompletedQuizes(disciplina) { //O(S) PRIMEIRO(S) NUMERO(S) DO ID DO QUIZ
     let idUser = await AsyncStorage.getItem("userID");
     idUser = parseInt(idUser);
@@ -544,7 +586,6 @@ export async function checkCompletedQuizes(disciplina) { //O(S) PRIMEIRO(S) NUME
         let data;
         try {
             data = JSON.parse(text);
-            console.log("Resposta da API para disciplina", disciplina, ":", data);
         } catch (err) {
             console.error("Resposta não era JSON:", text);
             Alert.alert("Erro", "O servidor retornou algo inesperado.", [{
@@ -556,6 +597,48 @@ export async function checkCompletedQuizes(disciplina) { //O(S) PRIMEIRO(S) NUME
 
         if (data.success) {
             return parseInt(data.completados);
+        } else {
+            Alert.alert("Erro", data.message || "Erro ao conectar ao BD.");
+            return 0;
+        }
+    } catch (error) {
+        console.error(error);
+        Alert.alert("Erro", "Erro ao conectar no servidor.");
+        return 0;
+    }
+}
+
+export async function getLastStreakDateBD() {
+    let idAluno = await AsyncStorage.getItem("userID");
+    idAluno = parseInt(idAluno);
+
+    try {
+        const response = await fetch("https://backend-aprovacefet.onrender.com/getLastStreakDate", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                idAluno,
+            }),
+        });
+
+        const text = await response.text();
+
+        let data;
+        try {
+            data = JSON.parse(text);
+        } catch (err) {
+            console.error("Resposta não era JSON:", text);
+            Alert.alert("Erro", "O servidor retornou algo inesperado.", [{
+                text: "ok",
+                onPress: () => console.log("jhsvafhgk")
+            }]);
+            return 0;
+        }
+
+        if (data.success) {
+            return data.lastStreakDate;
         } else {
             Alert.alert("Erro", data.message || "Erro ao conectar ao BD.");
             return 0;

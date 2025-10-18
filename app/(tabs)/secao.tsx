@@ -337,15 +337,14 @@ export default function TelaSecao() {
             <Text style={styles.daysLabel}>para a sua prova!</Text>
           </View>
 
-          <View style={styles.dateProgressBarContainer}>
             <ProgressBar
               progress={progresso}
               height={10}
-              style={styles.progressDateBar}
+              style={[styles.dateProgressBarContainer, styles.progressDateBar]}
               progressColor="#0D1B52"
             
             />
-          </View>
+          
         </LinearGradient>
       </Card>
 
@@ -506,9 +505,6 @@ const styles = StyleSheet.create({
     fontSize: 13.3,
     color: "#060302",
     fontFamily: "DM Sans",
-  },
-  progressDateBar: {
-    width: "100%",
   },
   progressBar: {
     width: "80%",

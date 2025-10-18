@@ -439,7 +439,7 @@ export default function TeoriaConjuntosScreen() {
 
       <View style={styles.imageView}>
         <Image
-          source={require("@/app/(linguagens)/imagens/fig1.1.png")}
+          source={require("@/app/(linguagens)/imagens/fig2.1.png")}
           style={styles.image}
         ></Image>
       </View>
@@ -481,7 +481,7 @@ export default function TeoriaConjuntosScreen() {
       <Text style={styles.titulo3}>Esquema de descrição de pessoas</Text>
       <View style={styles.imageView}>
         <Image
-          source={require("@/app/(linguagens)/imagens/fig1.2.png")}
+          source={require("@/app/(linguagens)/imagens/fig2.2.png")}
           style={styles.image}
         ></Image>
       </View>
@@ -508,7 +508,7 @@ export default function TeoriaConjuntosScreen() {
       <Text style={styles.titulo3}>Descrição de objetos</Text>
       <View style={styles.imageView}>
         <Image
-          source={require("@/app/(linguagens)/imagens/fig1.3.png")}
+          source={require("@/app/(linguagens)/imagens/fig2.3.png")}
           style={styles.image}
         ></Image>
       </View>
@@ -538,7 +538,7 @@ export default function TeoriaConjuntosScreen() {
       )}
       <View style={styles.imageView}>
         <Image
-          source={require("@/app/(linguagens)/imagens/fig1.4.png")}
+          source={require("@/app/(linguagens)/imagens/fig2.4.png")}
           style={styles.image}
         ></Image>
       </View>
@@ -563,7 +563,7 @@ export default function TeoriaConjuntosScreen() {
       <Text style={styles.titulo3}>Esquema de descrição de ambientes</Text>
       <View style={styles.imageView}>
         <Image
-          source={require("@/app/(linguagens)/imagens/fig1.5.png")}
+          source={require("@/app/(linguagens)/imagens/fig2.5.png")}
           style={styles.image}
         ></Image>
       </View>
@@ -639,7 +639,7 @@ export default function TeoriaConjuntosScreen() {
       )}
       <View style={styles.imageView}>
         <Image
-          source={require("@/app/(linguagens)/imagens/fig1.6.png")}
+          source={require("@/app/(linguagens)/imagens/fig2.6.png")}
           style={styles.image}
         ></Image>
       </View>
@@ -751,8 +751,800 @@ export default function TeoriaConjuntosScreen() {
       <Text style={styles.titulo2}>3 Gêneros Textuais</Text>
       <Text style={styles.titulo3}>3.1 Notícia</Text>
       {parseAndRenderMath(
+        "Como se sabe, cada gênero possui um objetivo ao estabelecer a comunicação entre os interlocutores (pessoas envolvidas na fala ou na escrita), e o referente a esta modalidade é a informação sobre acontecimentos ligados à sociedade em geral. Um detalhe de extrema importância que devemos estar atentos é sobre o tipo de linguagem estabelecida, ou seja, identificarmos se ela é formal ou informal, se há a participação do emissor (a pessoa que escreve ou fala) no sentido de emitir algum tipo de opinião, entre outros aspectos. A notícia, de forma específica, possui uma linguagem clara, precisa e objetiva, uma vez que se trata de uma informação e, por isso, tudo que é relatado precisa estar claro, de modo a fazer com que a mensagem seja transmitida de forma adequada. Que tal conhecermos agora um pouco mais sobre as partes que constituem este gênero? Sendo assim, vejamos:"
+      )}
+      {parseAndRenderMath(
+        "**A manchete ou título principal** -> Costuma ser composto de frases pequenas e atrativas, e revela o assunto principal que será retratado em seguida;"
+      )}
+      {parseAndRenderMath(
+        "**O título auxiliar** -> Sua função é complementar o título principal, acrescentando-lhe apenas algumas informações a mais."
+      )}
+      {parseAndRenderMath(
+        "**O lide (este termo deriva de uma palavra inglesa - lead)** -> Nesta parte precisamos encontrar todas as informações necessárias para responder às seguintes perguntas: Onde aconteceu o fato? Com quem? O que aconteceu? Quando? Como? Por quê? Qual foi o assunto?"
+      )}
+      {parseAndRenderMath(
+        "**Corpo da notícia** -> Nela, há um detalhamento maior dos fatos, de modo a destacar os detalhes mais importantes, fundamentais à compreensão do interlocutor."
+      )}
+
+      <Text style={styles.titulo3}>3.2 Editorial</Text>
+      {parseAndRenderMath(
+        "O **texto editorial** é um tipo de **texto jornalístico** e comumente aparecem no início das colunas. Diferente dos outros textos que compõem um jornal, ou seja, textos de caráter informativo, os editoriais são textos opinativos."
+      )}
+      {parseAndRenderMath(
+        "Assim, embora sejam textos de caráter subjetivo, eles podem apresentar certa objetividade uma vez que apresentará os artigos que o leitor irá se deparar. Os jornais apresentam diversos editoriais, ou seja dentro de cada seção (seja Política, Economia, Cultura, Esporte, Turismo, País, Cidade, Classificados, etc) jornalística são apresentados os assuntos que serão abordados."
+      )}
+      {parseAndRenderMath(
+        "Note que nos jornais e também nas revistas, podemos encontrar os editoriais intitulados “Carta ao Leitor” ou “Carta do Editor”."
+      )}
+      {parseAndRenderMath(
+        "No geral, tratam-se de textos dissertativo-argumentativos os quais apresenta os diversos temas que serão  abordados na imprensa. De tal maneira, são textos organizados pelos editorialistas que expressam as opiniões da equipe e, por isso, não recebem a assinatura do autor. Ou seja, no geral eles apresentam a opinião do meio de comunicação (revista, jornal, rádio, etc.)."
+      )}
+      {parseAndRenderMath(
+        "**Características** -> As principais características dos editoriais jornalísticos são:"
+      )}
+      {parseAndRenderMath(
+        "-> Caráter objetivo e subjetivo; Linguagem simples e clara; Textos dissertativos-argumentativos; Temas da atualidade; Textos relativamente curtos."
+      )}
+      {parseAndRenderMath(
+        "Exemplo"
+      )}
+      {parseAndRenderMath(
+        "**Texto editorial da Revista Feminina** - Neste mês de natal, celebramos o nascimento do menino Jesus. Nada melhor que reunir a família e curtir esse momento tão especial de encontro, amor, compreensão e tolerância. Por conta disso, a Revista Feminina nesse mês apresenta um artigo sobre a “Origem e História do Natal”, além de oferecer dicas de presentes natalinos para toda a família."
+      )}
+      {parseAndRenderMath(
+        "Ademais, você não deve perder as novidades sobre a moda nesse verão e ainda, ficar alerta no artigo sobre os “Melhores Concelhos para Economizar”. Para além disso, apresentamos diversas dicas de viagem para esse final de ano em todas as regiões do Brasil e muitas receitas natalinas práticas, rápidas e fáceis de preparar."
+      )}
+      {parseAndRenderMath(
+        "Aproveite o final do ano para se divertir com toda a família e amigos e não se esqueça que o espírito de natal deverá ser aproveitado para nos tornar pessoas cada vez melhores. Encha seu coração de tudo que há de melhor: amor, alegria, compreensão, harmonia e tolerância. Desejamos-lhes boa leitura e um feliz natal! - Equipe Revista Feminina"
+      )}
+
+      <Text style={styles.titulo3}>3.3 Artigo de Opinião</Text>
+      {parseAndRenderMath(
+        "É um tipo de texto dissertativo-argumentativo. Nele, o autor tem a finalidade de apresentar determinado tema e seu ponto de vista, e por isso, recebe esse nome. Possui as características de um texto jornalístico e tem como principal objetivo informar e persuadir o leitor sobre um assunto. Note que esse tipo de texto é muito pedido nos vestibulares e concursos públicos."
+      )}
+      {parseAndRenderMath(
+        "A Argumentação é o principal recurso retórico utilizado nos artigos de opinião, que surgem sobretudo, nos textos disseminados pelos meios de comunicação, sejam na televisão, rádio, jornais ou revistas. Por esse motivo, esse tipo de texto geralmente aborda temas da atualidade."
+      )}
+      {parseAndRenderMath(
+        "**Principais Características** -> As principais características dos artigos de opinião são:"
+      )}
+      {parseAndRenderMath(
+        "Uso da argumentação e persuasão; Textos em primeira e terceira pessoa; Textos assinados pelo autor; Textos veiculados nos meios de comunicação; Linguagem simples, objetiva e subjetiva; Temas da atualidade; Títulos polêmicos e provocativos; Verbos no presente e no imperativo."
+      )}
+      {parseAndRenderMath(
+        "**Exemplos de Artigos de Opinião** -> Para entender melhor esse tipo de texto argumentativo, seguem alguns exemplos de artigos de opinião:"
+      )}
+      {parseAndRenderMath(
+        "**Trecho de um artigo de opinião sobre 'Educação' :**"
+      )}
+      {parseAndRenderMath(
+        "A educação no Brasil tem sido discutida cada vez mais, uma vez que ela é o principal aspecto de desenvolvimento de uma nação."
+      )}
+      {parseAndRenderMath(
+        "Enquanto nosso governo investe na expansão econômica e financeira do país, a educação regride, apresentando muitos problemas estruturais. Principalmente nas pequenas cidades, o investimento para a educação é mal aplicado e, muitas vezes, as verbas são desviadas."
+      )}
+      {parseAndRenderMath(
+        "Por esse motivo, o nosso país está longe de ser um país desenvolvido até que descaso com a educação persista."
+      )}
+      {parseAndRenderMath(
+        "Acima de tudo, os governantes do nosso país precisam ter a consciência de que enquanto a educação estiver à margem, problemas como violência e pobreza persistirão. O lema da nossa bandeira será sempre uma ironia."
+      )}
+      {parseAndRenderMath(
+        "“Ordem e progresso” ou “Desordem e Regresso”? Nosso grande educador Paulo Freire já dizia: “Se a educação sozinha não transforma a sociedade, sem ela tampouco a sociedade muda”."
+      )}
+
+      <Text style={styles.titulo3}>3.4 Gêneros Mistos</Text>
+      <View style={styles.imageView}>
+        <Image
+          source={require("@/app/(linguagens)/imagens/fig3.1.png")}
+          style={styles.image}
+        ></Image>
+      </View>
+      {parseAndRenderMath(
+        "Há alguns gêneros textuais que são considerados mistos, por mesclarem em seu conteúdo imagens e palavras. O texto em quadrinhos tem algumas características específicas do gênero. Os “balões” que indicam a fala ou pensamento, a forma de se escrever, a riqueza de interjeições, onomatopeias, utilização de letras maiúsculas para indicar aumento no tom de voz, repetição de vogais indicando prolongamento do som emitido pelo personagem, etc. Além de tudo isto, a imagem dos personagens aparecem com expressões faciais e corporais, que completam a sua fala expressa pela escrita. É, talvez, o gênero de escrita que mais emprega representações dos componentes da linguagem oral, isto é, representa imagens dos movimentos do corpo de quem fala durante a emissão da mensagem. "
+      )}
+
+      <Text style={styles.titulo3}>3.4.1 Histórias em Quadrinhos</Text>
+      {parseAndRenderMath(
+        "As histórias em quadrinhos são histórias escritas que se assemelham ao cinema porque os diálogos são oralizados a partir de um roteiro. Essas histórias que podem ser definidas como histórias em linguagem escrita com características da linguagem oral, possuem também características específicas como é o caso da representação escrita do pensamento do personagem: no cinema isto é possível através do som da voz do personagem, relatando as suas impressões enquanto ele se apresenta absorto, ou com a alternância de imagens atuais com imagens que representam fatos passados ou da imaginação de uma situação futura."
+      )}
+      {parseAndRenderMath(
+        "Esse gênero de literatura deveria sair dos domínios comerciais para ocupar lugar de destaque como instrumento de leitura, utilizado para fins didáticos nas séries iniciais ou até mesmo nas intermediárias. Poder-se-ia utilizar conteúdos diferentes dos caricatos que comumente se vê, priorizando assuntos mais enriquecedores, como a reprodução de fábulas, contos, crônicas e outros textos que possam levar os jovens a se habituarem à leitura e a repensarem o mundo que os cerca. Obviamente, o investimento nessa área iria de encontro aos interesses de quem atualmente explora o mercado das revistas em quadrinhos com os personagens já consagrados pelo público, mas, sem dúvida, poderia ser uma alternativa valiosa para se criar o hábito de leitura nos jovens. "
+      )}
+      <Text style={styles.titulo3}>3.4.2 Charge ou Cartum</Text>
+      {parseAndRenderMath(
+        "Charge e Cartum podem ser conjuntamente consideradas como “piadas gráficas”, muitas vezes são mal empregados na imprensa que tende a confundir os termos como sinônimos. Eles não são sinônimos, estes termos servem justamente para definir os tipos de cada piada gráfica. O Cartum é uma piada gráfica para temas universais, que não precisa se prender a uma época ou lugar, sendo mais facilmente compreendido por pessoas de diferentes épocas e lugares. A charge é normalmente um produto jornalístico, referindo-se a um acontecimento real, atrelada a uma notícia e publicada na mesa época desta. Para que se possa entender uma charge antiga é necessário saber o que estava se passando naquele momento histórico, quais os personagens importantes da época e etc. A Charge pode ser entendida como todo Cartum que se torna incompreensível sem o conhecimento prévio do contexto de sua publicação original."
+      )}
+      <View style={styles.imageView}>
+        <Image
+          source={require("@/app/(linguagens)/imagens/fig3.2.png")}
+          style={styles.image}
+        ></Image>
+      </View>
+      <View style={styles.imageView}>
+        <Image
+          source={require("@/app/(linguagens)/imagens/fig3.3.png")}
+          style={styles.image}
+        ></Image>
+      </View>
+      <View style={styles.imageView}>
+        <Image
+          source={require("@/app/(linguagens)/imagens/fig3.4.png")}
+          style={styles.image}
+        ></Image>
+      </View>
+
+    </View>,
+
+    //PAGINA 4
+    <View key="Um Pouco sobre Pontução">
+      <Text style={styles.titulo2}>4 Um Pouco sobre Pontuação</Text>
+      {parseAndRenderMath(
+        "Para que servem os **sinais de pontuação**? No geral, para representar pausas na fala, nos casos do ponto, vírgula e ponto e vírgula; ou entonações, nos casos do ponto de exclamação e de interrogação, por exemplo. Além de pausa na fala e entonação da voz, os sinais de pontuação reproduzem, na escrita, nossas emoções, intenções e anseios. Vejamos aqui alguns empregos:"
+      )}
+      <Text style={styles.titulo3}>4.1 Vírgula (,)</Text>
+      {parseAndRenderMath(
+        "É usada para:"
+      )}
+      {parseAndRenderMath(
+        "a) separar termos que possuem mesma função sintática na oração: O menino berrou, chorou, esperneou e, enfim, dormiu. Nessa oração, a vírgula separa os verbos."
+      )}
+      {parseAndRenderMath(
+        "b) isolar o vocativo: Então, minha cara, não há mais o que se dizer!"
+      )}
+      {parseAndRenderMath(
+        "c) isolar o aposto: O João, ex-integrante da comissão, veio assistir à reunião."
+      )}
+      {parseAndRenderMath(
+        "d) isolar termos antecipados, como complemento ou adjunto:"
+      )}
+      {parseAndRenderMath(
+        "1. Uma vontade indescritível de beber água, eu senti quando olhei para aquele copo suado! (antecipação de complemento verbal)"
+      )}
+      {parseAndRenderMath(
+        "2. Nada se fez, naquele momento, para que pudéssemos sair! (antecipação de adjunto adverbial)"
+      )}
+      {parseAndRenderMath(
+        "e) separar expressões explicativas, conjunções e conectivos: isto é, ou seja, por exemplo, além disso, pois, porém, mas, no entanto, assim, etc."
+      )}
+      {parseAndRenderMath(
+        "f) separar os nomes dos locais de datas: Brasília, 30 de janeiro de 2009."
+      )}
+      {parseAndRenderMath(
+        "g) isolar orações adjetivas explicativas: O filme, que você indicou para mim, é muito mais do que esperava."
+      )}
+
+      <Text style={styles.titulo3}>4.2 Pontos</Text>
+      <Text style={styles.titulo3}>4.2.1 Ponto-final (.)</Text>
+      {parseAndRenderMath(
+        "É usado ao final de frases para indicar uma pausa total:"
+      )}
+      {parseAndRenderMath(
+        "a) Não quero dizer nada."
+      )}
+      {parseAndRenderMath(
+        "b) Eu amo minha família."
+      )}
+      {parseAndRenderMath(
+        "E em abreviaturas: Sr., a. C., Ltda., vv., num., adj., obs."
+      )}
+      <Text style={styles.titulo3}>4.2.2 Ponto de interrogação (?)</Text>
+      {parseAndRenderMath(
+        "O ponto de interrogação é usado para:"
+      )}
+      {parseAndRenderMath(
+        "a) Formular perguntas diretas:"
+      )}
+      {parseAndRenderMath(
+        "Você quer ir conosco ao cinema? Desejam participar da festa de confraternização?"
+      )}
+      {parseAndRenderMath(
+        "b) Para indicar surpresa, expressar indignação ou atitude de expectativa diante de uma determinada situação:"
+      )}
+      {parseAndRenderMath(
+        "O quê? não acredito que você tenha feito isso! (atitude de indignação)"
+      )}
+      {parseAndRenderMath(
+        "Não esperava que fosse receber tantos elogios! Será que mereço tudo isso? (surpresa)"
+      )}
+      {parseAndRenderMath(
+        "Qual será a minha colocação no resultado do concurso? Será a mesma que imagino? (expectativa)"
+      )}
+      <Text style={styles.titulo3}>4.2.3 Ponto de Exclamação (!)</Text>
+      {parseAndRenderMath(
+        "Esse sinal de pontuação é utilizado nas seguintes circunstâncias:"
+      )}
+      {parseAndRenderMath(
+        "a) Depois de frases que expressem sentimentos distintos, tais como: entusiasmo, surpresa, súplica, ordem, horror, espanto:"
+      )}
+      {parseAndRenderMath(
+        "Iremos viajar! (entusiasmo); Foi ele o vencedor! (surpresa); Por favor, não me deixe aqui! (súplica); Que horror! Não esperava tal atitude. (espanto); Seja rápido! (ordem)."
+      )}
+      {parseAndRenderMath(
+        "b) Depois de vocativos e algumas interjeições:"
+      )}
+      {parseAndRenderMath(
+        "Ui! que susto você me deu. (interjeição); Foi você mesmo, garoto! (vocativo)."
+      )}
+      {parseAndRenderMath(
+        "c) Nas frases que exprimem desejo: Oh, Deus, ajude-me!"
+      )}
+      {parseAndRenderMath(
+        "Observações dignas de nota:"
+      )}
+      {parseAndRenderMath(
+        "-> Quando a intenção comunicativa expressar, ao mesmo tempo, questionamento e admiração, o uso dos pontos de interrogação e exclamação é permitido."
+      )}
+      {parseAndRenderMath(
+        "**Observe:** Que que eu posso fazer agora?!"
+      )}
+      {parseAndRenderMath(
+        "-> Quando se deseja intensificar ainda mais a admiração ou qualquer outro sentimento, não há problema algum em repetir o ponto de exclamação ou interrogação. "
+      )}
+      {parseAndRenderMath(
+        "**Note:** Não!!! - gritou a mãe desesperada ao ver o filho em perigo."
+      )}
+
+      <Text style={styles.titulo3}>4.2.4 Ponto e vírgula (;)</Text>
+      {parseAndRenderMath(
+        "É usado para:"
+      )}
+      {parseAndRenderMath(
+        "a) separar itens enumerados:"
+      )}
+      {parseAndRenderMath(
+        "A Matemática se divide em: geometria; trigonometria; álgebra; financeira."
+      )}
+      {parseAndRenderMath(
+        "b) separar um período que já se encontra dividido por vírgulas: Ele não disse nada, apenas olhou ao longe, sentou por cima da grama; queria ficar sozinho com seu cão."
+      )}
+      <Text style={styles.titulo3}>4.3 Dois-pontos (:)</Text>
+      {parseAndRenderMath(
+        "É usado quando:"
+      )}
+      {parseAndRenderMath(
+        "a) se vai fazer uma citação ou introduzir uma fala: Ele respondeu: não, muito obrigado!"
+      )}
+      {parseAndRenderMath(
+        "b) se quer indicar uma enumeração: Quero lhe dizer algumas coisas: não converse com pessoas estranhas, não brigue com seus colegas e não responda à professora."
+      )}
+      <Text style={styles.titulo3}>4.4 Aspas ("")</Text>
+      {parseAndRenderMath(
+        "São usadas para indicar:"
+      )}
+      {parseAndRenderMath(
+        "a) citação de alguém: “A ordem para fechar a prisão de Guantánamo mostra um início firme. Ainda na edição, os 25 anos do MST e o bloqueio de 2 bilhões de dólares do Oportunity no exterior” (Carta Capital on-line, 30/01/09)"
+      )}
+      {parseAndRenderMath(
+        "b) expressões estrangeiras, neologismos, gírias: Nada pode com a propaganda de “outdoor”."
+      )}
+      <Text style={styles.titulo3}>4.5 Reticências (...)</Text>
+      {parseAndRenderMath(
+        "São usadas para indicar supressão de um trecho, interrupção ou dar ideia de continuidade ao que se estava falando:"
+      )}
+      {parseAndRenderMath(
+        "a) (...) Onde está ela, Amor, a nossa casa,"
+      )}
+      {parseAndRenderMath(
+        "O bem que neste mundo mais invejo?"
+      )}
+      {parseAndRenderMath(
+        "O brando ninho aonde o nosso beijo"
+      )}
+      {parseAndRenderMath(
+        "Será mais puro e doce que uma asa? (...)"
+      )}
+      {parseAndRenderMath(
+        "b) E então, veio um sentimento de alegria, paz, felicidade..."
+      )}
+      {parseAndRenderMath(
+        "c) Eu gostei da nova casa, mas do quintal..."
+      )}
+      <Text style={styles.titulo3}>4.6 Parêntesis ()</Text>
+      {parseAndRenderMath(
+        "São usados quando se quer explicar melhor algo que foi dito ou para fazer simples indicações."
+      )}
+      {parseAndRenderMath(
+        "Ele comeu, e almoçou, e dormiu, e depois saiu. (o e aparece repetido e, por isso, há o predomínio de vírgulas)."
+      )}
+      <Text style={styles.titulo3}>4.7 Travessão (-)</Text>
+      {parseAndRenderMath(
+        "O travessão é indicado para:"
+      )}
+      {parseAndRenderMath(
+        "a) Indicar a mudança de interlocutor em um diálogo:"
+      )}
+      {parseAndRenderMath(
+        "- Quais ideias você tem para revelar?"
+      )}
+      {parseAndRenderMath(
+        "- Não sei se serão bem-vindas."
+      )}
+      {parseAndRenderMath(
+        "- Não importa, o fato é que assim você estará contribuindo para a elaboração deste projeto."
+      )}
+      {parseAndRenderMath(
+        "b) Separar orações intercaladas, desempenhando as funções da vírgula e dos parênteses: "
+      )}
+      {parseAndRenderMath(
+        "Precisamos acreditar sempre - disse o aluno confiante - que tudo irá dar certo"
+      )}
+      {parseAndRenderMath(
+        "Não aja dessa forma - falou a mãe irritada - pois pode ser arriscado."
+      )}
+      {parseAndRenderMath(
+        "c) Colocar em evidência uma frase, expressão ou palavra:"
+      )}
+      {parseAndRenderMath(
+        "O prêmio foi destinado ao melhor aluno da classe - uma pessoa bastante esforçada."
+      )}
+      {parseAndRenderMath(
+        "Gostaria de parabenizar a pessoa que está discursando - meu melhor amigo."
+      )}
+
+    </View>,
+
+    //PAGINA 5
+    <View key="Classes Gramaticais">
+      <Text style={styles.titulo2}>5 Classes Gramaticais</Text>
+      {parseAndRenderMath(
+        "Na língua portuguesa há dez classes de palavras ou **classes gramaticais**. De maneira geral, a morfologia estuda a origem, as derivações e as flexões das palavras, expressas, na língua portuguesa, por **dez classes morfológicas** ou gramaticais de acordo com a função de cada, das quais seis delas são classificadas como **palavras variáveis** (substantivo, adjetivo, pronome, numeral, artigo e verbo), uma vez que podem variar em gênero (masculino e feminino), número (singular e plural) e grau (aumentativo e diminutivo) e as **palavras invariáveis** (preposição, conjunção, interjeição e advérbio):"
+      )}
+      <View style={styles.imageView}>
+        <Image
+          source={require("@/app/(linguagens)/imagens/fig5.1.png")}
+          style={styles.image}
+        ></Image>
+      </View>
+
+      <Text style={styles.titulo3}>5.1 Substantivo</Text>
+      {parseAndRenderMath(
+        "É toda a palavra que denomina um ser; é usada para nomear pessoas, coisas, animais, lugares e sentimentos. Normalmente vem precedida de artigo. Exemplo: O cachorro tomou banho. (Cachorro é um substantivo) Os substantivos classificam-se em:"
+      )}
+      {parseAndRenderMath(
+        "Comum/ Próprio, Concreto/Abstrato, Primitivo/Derivado, Simples/Composto, Coletivo"
+      )}
+      <Text style={styles.titulo3}>5.2 Artigo</Text>
+      {parseAndRenderMath(
+        "É a palavra que se coloca antes do substantivo para determiná-lo ou indeterminálo. Os artigos classificam-se em:"
+      )}
+      {parseAndRenderMath(
+        "Definidos: o / a / os / as"
+      )}
+      {parseAndRenderMath(
+        "Indefinidos: um / uns / uma / umas"
+      )}
+      <Text style={styles.titulo3}>5.3 Adjetivo</Text>
+      {parseAndRenderMath(
+        "É a palavra que caracteriza o substantivo."
+      )}
+      {parseAndRenderMath(
+        "Exemplo: Aquela moça é muito bonita. (Bonita é um adjetivo)"
+      )}
+      <Text style={styles.titulo3}>5.4 Numeral</Text>
+      {parseAndRenderMath(
+        "É uma palavra que exprime número, ordem numérica, múltiplo ou fração."
+      )}
+      <Text style={styles.titulo3}>5.5 Pronome</Text>
+      {parseAndRenderMath(
+        "É a palavra que substitui ou acompanha o substantivo"
+      )}
+      <Text style={styles.titulo3}>5.6 Verbo</Text>
+      {parseAndRenderMath(
+        "É a palavra que exprime ação, estado ou fenômeno da natureza."
+      )}
+      <Text style={styles.titulo3}>5.7 Advérbio</Text>
+      {parseAndRenderMath(
+        "É a palavra invariável que modifica o sentido de um verbo, de um adjetivo ou de outro advérbio. Os principais advérbios indicam circunstâncias de:"
+      )}
+      {parseAndRenderMath(
+        "Tempo: ontem, hoje, amanhã, já, cedo, tarde, antigamente..."
+      )}
+      {parseAndRenderMath(
+        "Lugar: aqui, ali, acolá, aí, lá, perto, longe, acima, abaixo, dentro, fora..."
+      )}
+      {parseAndRenderMath(
+        "Modo: depressa, devagar, bem, mal, calmamente, alegremente..."
+      )}
+      {parseAndRenderMath(
+        "Intensidade: muito, menos, pouco, mais, bastante..."
+      )}
+      {parseAndRenderMath(
+        "Negação: não, absolutamente..."
+      )}
+      {parseAndRenderMath(
+        "Dúvida: talvez, provavelmente, possivelmente..."
+      )}
+      {parseAndRenderMath(
+        "Afirmação: sim, certamente, realmente..."
+      )}
+      <Text style={styles.titulo3}>5.8 Preposição</Text>
+      {parseAndRenderMath(
+        "É uma palavra invariável que liga um termo dependente a um termo principal, estabelecendo uma relação entre eles. As preposições essenciais são:"
+      )}
+      <View style={styles.imageView}>
+        <Image
+          source={require("@/app/(linguagens)/imagens/fig5.2.png")}
+          style={styles.image}
+        ></Image>
+      </View>
+
+      <Text style={styles.titulo3}>5.9 Conjunção</Text>
+      {parseAndRenderMath(
+        "É a palavra invariável que liga: duas palavras com o mesmo valor, numa oração ou duas orações entre si."
+      )}
+      <Text style={styles.titulo3}>5.10 Interjeição</Text>
+      {parseAndRenderMath(
+        "São palavras invariáveis que expressam uma emoção, um sentimento. As interjeições mais comuns são:"
+      )}
+      {parseAndRenderMath(
+        "De alegria: ah! oh! oba!"
+      )}
+      {parseAndRenderMath(
+        "De aplauso: viva! bis! bravo!"
+      )}
+      {parseAndRenderMath(
+        "De chamamento: oi!olá! alô!"
+      )}
+      {parseAndRenderMath(
+        "De dor: ui! ai!"
+      )}
+      {parseAndRenderMath(
+        "De silêncio: silêncio! psiu!"
+      )}
+      {parseAndRenderMath(
+        "De surpresa: oh! ah!"
+      )}
+      {parseAndRenderMath(
+        "De advertência: cuidado! atenção!"
+      )}
+      {parseAndRenderMath(
+        "De alívio: ufa! arre!"
+      )}
+      {parseAndRenderMath(
+        "De admiração: ah!oh! puxa! nossa!"
+      )}
+      {parseAndRenderMath(
+        "De desejo: oxalá, tomara!"
+      )}
+      {parseAndRenderMath(
+        "De saudação: salve! viva! olá!"
+      )}
+      {parseAndRenderMath(
+        "De terror: ui! credo! Cruzes!"
+      )}
+
+    </View>,
+
+    //PAGINA 6
+    <View key="A Linguagem Literária">
+      <Text style={styles.titulo2}>Estudos Literários</Text>
+      <Text style={styles.titulo2}>1 A Linguagem Literária</Text>
+      <Text style={styles.titulo3}>O que é Literatura?</Text>
+      {parseAndRenderMath(
+        "**Um caso de poesia...**"
+      )}
+      {parseAndRenderMath(
+        "Paulo tinha fama de mentiroso."
+      )}
+      {parseAndRenderMath(
+        "Um dia chegou em casa dizendo que vira no campo dois dragões da independência cuspindo fogo e lendo fotonovelas."
+      )}
+      {parseAndRenderMath(
+        "A mãe botou-o de castigo, mas na semana seguinte ele veio contando que ca íra no pátio da escola um pedaço de lua, todo cheio de buraquinhos, feito queijo, e ele provou e tinha gosto a queijo. Desta vez Paulo não só ficou sem sobremesa como foi proibido de jogar futebol durante quinze dias."
+      )}
+      {parseAndRenderMath(
+        "Quando o menino voltou falando que todas as borboletas da Terra passaram pela chácara de Siá Elpídia e queriam formar um tapete voador para transportá-lo ao sétimo céu, a mãe decidiu levá-lo ao médico."
+      )}
+      {parseAndRenderMath(
+        "Após o exame, o Dr. Epaminondas abanou a cabeça:"
+      )}
+      {parseAndRenderMath(
+        "- Nada a fazer, Dona Coló. Este menino é mesmo um caso de poesia. - Carlos Drummond de Andrade"
+      )}
+
+      {parseAndRenderMath(
+        "Embora a palavra “Literatura” nos seja bastante familiar, quando precisamos dar uma definição a ela, nem sempre conseguimos fazê-lo com clareza ou não conseguimos definir e reconhecer o que torna um texto literário. Algumas vezes, chegamos até a generalizar as produções escritas como literatura. No entanto, é importante saber que os textos literários possuem suas particularidades e a forma como eles são elaborados marcam sua diferença em relação a outros gêneros textuais."
+      )}
+      {parseAndRenderMath(
+        "Em primeiro lugar, é importante saber que a **Literatura é uma arte** e, como toda arte, ela possui sua matéria-prima, ou seja, o elemento com o qual ela trabalha para compor uma obra. Assim, esse elemento primordial da literatura é a palavra, no entanto a Literatura não deixa de fazer uso de outros tipos de recursos."
+      )}
+      {parseAndRenderMath(
+        "Isso significa dizer que o texto literário trabalhará de forma diferenciada com a linguagem, estabelecendo novos sentidos para as palavras e, por meio delas, criando mundos ficcionais. É o que nos mostra o texto acima, de Drummond, através da personagem Paulo. O menino, de forma inventiva, transforma os elementos da realidade: assim, os “dragões da independência”, que originalmente é um regimento de cavalaria do exército, desloca-se para o ser fabuloso cuspidor de fogo, os quais, inusitadamente, estão lendo fotonovelas. Tão inusitado quanto um pedaço de lua cair no pátio da escola. Assim, é a partir dessa transformação da realidade, da transgressão ao comum, que a Literatura se situa."
+      )}
+      {parseAndRenderMath(
+        "Para compreendermos melhor o mundo literário, iremos estudar alguns conceitos que são fundamentais para entendermos o texto literário: a **denotação**, a **conotação** e a **polissemia**."
+      )}
+
+      <Text style={styles.titulo3}>1.1 Denotação e Conotação</Text>
+      {parseAndRenderMath(
+        "Leia os textos abaixo:"
+      )}
+      {parseAndRenderMath(
+        "**Texto I**"
+      )}
+      {parseAndRenderMath(
+        "A orientação realizada através da observação das estrelas tem seu uso difundido entre pessoas do campo, pescadores e navegadores, essas geralmente conhecem as características gerais do céu durante a **noite**."
+      )}
+      {parseAndRenderMath(
+        "**Texto II**"
+      )}
+      {parseAndRenderMath(
+        "Quando você foi embora fez-se **noite** em meu viver"
+      )}
+      {parseAndRenderMath(
+        "Forte eu sou, mas não tem jeito"
+      )}
+      {parseAndRenderMath(
+        "Hoje eu tenho que chorar - Milton Nascimento"
+      )}
+
+      {parseAndRenderMath(
+        "Observe que, em ambos os textos, há a palavra **noite**. No entanto, elas não são usadas no mesmo sentido, ganhando uma significação diferente em cada um deles. Podemos dizer que, no Texto I, **noite** está no sentido DENOTATIVO e, no II, no sentido CONOTATIVO."
+      )}
+      {parseAndRenderMath(
+        "Então, inferimos que a **denotação** ocorre quando usamos a palavra no seu sentido primitivo, original. Se pesquisarmos no dicionário, encontraremos:"
+      )}
+      <View style={styles.imageView}>
+        <Image
+          source={require("@/app/(linguagens)/imagens/fig6.1.png")}
+          style={styles.image}
+        ></Image>
+      </View>
+      {parseAndRenderMath(
+        "Essa definição é compatível com o uso da palavra no Texto I, já que ele fala exatamente de um período de tempo. Já no Texto II, esse sentido não se confirma, pois a voz da canção diz que “fez-se noite em meu viver”, ou seja, a palavra está no sentido figurado e podemos pensar que noite, aqui, remete à ideia de melancolia, solidão, abandono. Quando há essa mudança de significado nas palavras, estamos no campo da **CONOTAÇÃO**."
+      )}
+      {parseAndRenderMath(
+        "Outro exemplo: "
+      )}
+      <View style={styles.imageView}>
+        <Image
+          source={require("@/app/(linguagens)/imagens/fig6.2.png")}
+          style={styles.image}
+        ></Image>
+      </View>
+      {parseAndRenderMath(
+        "Embora a conotação não seja exclusiva da Literatura, os textos literários - poemas,contos, crônicas, romances, etc. - apresentarão, predominantemente, as palavras nosentido conotativo, figurado."
+      )}
+
+      <Text style={styles.titulo3}>1.2 Polissemia</Text>
+      {parseAndRenderMath(
+        "Outro tipo de recurso que encontramos nos textos literários é a POLISSEMIA, que consiste em a mesma palavra ou locução apresentar mais de um significado no texto."
+      )}
+      {parseAndRenderMath(
+        "O quadrinho de Luis Fernando Verissimo ilustra esse fenômeno:"
+      )}
+      <View style={styles.imageView}>
+        <Image
+          source={require("@/app/(linguagens)/imagens/fig6.3.png")}
+          style={styles.image}
+        ></Image>
+      </View>
+      {parseAndRenderMath(
+        "Perceba que a palavra “chato(a)” aparece em dois sentidos: no segundo quadrinho, chato se relaciona a uma superfície plana, sem relevo; no terceiro, em que a palavra é retomada por elipse “E [chata] nos domingos sem futebol”, seu significado refere-se a entediante, maçante, sem graça. Assim, como uma mesma palavra adquire mais de um sentido, estamos diante da POLISSEMIA. É o que vemos, também, no poema de Mário Quintana:"
+      )}
+
+      {parseAndRenderMath(
+        "**POEMINHA DO CONTRA**"
+      )}
+      {parseAndRenderMath(
+        "Todos esses que aí estão"
+      )}
+      {parseAndRenderMath(
+        "Atravancando meu caminho,"
+      )}
+      {parseAndRenderMath(
+        "Eles passarão..."
+      )}
+      {parseAndRenderMath(
+        "Eu passarinho!"
+      )}
+
+      {parseAndRenderMath(
+        "O poeta faz uma brincadeira entre passarão - que pode ser entendido como a 3ª pessoa do plural do verbo “passar”, no futuro do presente -, ou o aumentativo de “pássaro”, marcando contraposição a “passarinho”, com o qual o eu lírico se identifica."
+      )}
+
+      <Text style={styles.titulo3}>1.3 Figuras de Linguagem</Text>
+      {parseAndRenderMath(
+        "As figuras de linguagem ou de estilo são empregadas para valorizar o texto, tornando a linguagem mais expressiva. É um recurso linguístico para expressar de formas diferentes experiências comuns, conferindo originalidade, emotividade ou poeticidade ao discurso. São várias as figuras de linguagem, conheceremos algumas delas, bastante utilizadas no discurso literário."
+      )}
+      <Text style={styles.titulo3}>1.3.1 Comparação e Metáfora</Text>
+      {parseAndRenderMath(
+        "Algumas vezes, estabelecemos similaridades entre dois elementos de natureza distinta, pois percebemos ou queremos criar uma identificação entre esses elementos. É nesse sentido que operam a comparação e a metáfora. Observe:"
+      )}
+
+      {parseAndRenderMath(
+        "**Exemplo 1:**"
+      )}
+      {parseAndRenderMath(
+        "Quero ficar no teu corpo"
+      )}
+      {parseAndRenderMath(
+        "**Feito tatuagem**"
+      )}
+      {parseAndRenderMath(
+        "Que é pra te dar coragem"
+      )}
+      {parseAndRenderMath(
+        "Pra seguir viagem"
+      )}
+      {parseAndRenderMath(
+        "Quando a noite vem (Chico Buarque)"
+      )}
+
+      {parseAndRenderMath(
+        "**Exemplo 2:**"
+      )}
+      {parseAndRenderMath(
+        "Meu coração tombou na vida"
+      )}
+      {parseAndRenderMath(
+        "**tal qual uma estrela ferida**"
+      )}
+      {parseAndRenderMath(
+        "pela flecha de um caçador. (Cecília Meireles)"
+      )}
+
+      {parseAndRenderMath(
+        "Os textos acima usam da COMPARAÇÃO para causar um efeito poético no que expressam. No primeiro, por exemplo, para demonstrar a força e intensidade do desejo de ficar junto, escolheu-se a tatuagem como representação, por seu caráter de permanência e durabilidade. "
+      )}
+      {parseAndRenderMath(
+        "Assim, definimos a **COMPARAÇÃO como a aproximação entre dois elementos que se identificam, ligados por conectivos comparativos explícitos - feito, assim como, tal, como, tal qual, tal como, qual, que nem - e alguns verbos - parecer, assemelhar-se e outros**."
+      )}
+      {parseAndRenderMath(
+        "Já na METÁFORA, substitui-se um termo por outro, tendo em vista uma relação de semelhança entre eles. A metáfora é uma comparação abreviada, em que o conectivo comparativo não está expresso."
+      )}
+
+      {parseAndRenderMath(
+        "**Exemplo**"
+      )}
+      {parseAndRenderMath(
+        "Encostei-me a ti, sabendo que eras somente **onda**."
+      )}
+      {parseAndRenderMath(
+        "Sabendo bem que **eras nuvem**, depus a minha vida em ti,"
+      )}
+      {parseAndRenderMath(
+        "Como sabia bem tudo isso, e dei-me ao teu destino, frágil, "
+      )}
+      {parseAndRenderMath(
+        "Fiquei sem poder chorar quando caí. (Cecília Meireles)"
+      )}
+      {parseAndRenderMath(
+        "Nesse poema, para falar da inconstância e instabilidade de uma relação, o eu lírico usa as imagens da onda e da nuvem, que são elementos sem forma estável, que rapidamente se desfazem, dando a ideia de algo passageiro, breve, transitório."
+      )}
+
+      <Text style={styles.titulo3}>1.3.2 Metonímia</Text>
+      {parseAndRenderMath(
+        "Metonímia é a substituição de uma palavra por outra, devido a uma ligação objetiva de sentido entre elas. Diferente da metáfora, não é por semelhança que usamos a metonímia, mas por ela proporcionar um reconhecimento imediato daquilo a que se refere. As relações metonímicas podem ser:"
+      )}
+      {parseAndRenderMath(
+        "-> da marca pelo produto: “Hoje, no café da manhã, tomei dois copos de **Nescau**.” (=achocolatado em pó)"
+      )}
+      {parseAndRenderMath(
+        "-> da causa pelo efeito e vice-versa: “Sou alérgico **à cigarro**.” (= à fumaça)"
+      )}
+      {parseAndRenderMath(
+        "-> do continente pelo conteúdo e vice-versa: “Antes de sair, tomamos **um cálice de licor**.”"
+      )}
+      {parseAndRenderMath(
+        "-> do autor pela obra: “Comprei um **Portinari**.” (=quadro)"
+      )}
+      {parseAndRenderMath(
+        "-> da parte pelo todo e vice-versa: “**A cidade inteira** viu assombrada, de queixo caído, o pistoleiro sumir de ladrão, fugindo nos **cascos** de seu cavalo.”"
+      )}
+
+      <Text style={styles.titulo3}>1.3.3 Metonímia</Text>
+      {parseAndRenderMath(
+        "A hipérbole consiste no exagero de uma ideia, a fim de proporcionar uma imagem emocionante e de impacto."
+      )}
+      {parseAndRenderMath(
+        "Eu **nunca mais vou respirar**"
+      )}
+      {parseAndRenderMath(
+        "Se você não me notar"
+      )}
+      {parseAndRenderMath(
+        "**Eu posso até morrer de fome**"
+      )}
+      {parseAndRenderMath(
+        "Se você não me amar (Cazuza)"
+      )}
+
+      <Text style={styles.titulo3}>1.3.4 Eufemismo</Text>
+      {parseAndRenderMath(
+        "Consiste no emprego de expressões polidas e suaves que abrandam palavras desagradáveis ou grosseiras. Veja como Manuel Bandeira designa a morte na estrofe abaixo:"
+      )}
+      {parseAndRenderMath(
+        "**Quando a Indesejada das gentes chegar**"
+      )}
+      {parseAndRenderMath(
+        "(Não sei se dura ou caroável)"
+      )}
+      {parseAndRenderMath(
+        "Talvez eu tenha medo"
+      )}
+      {parseAndRenderMath(
+        "Talvez sorria, ou diga:"
+      )}
+      {parseAndRenderMath(
+        "- Alô, iniludível!"
+      )}
+
+      <Text style={styles.titulo3}>1.4 Figuras de Som</Text>
+      {parseAndRenderMath(
+        "Dentre as figuras de linguagem, há as chamadas **figuras de som ou harmonia**, que recebem este nome por trabalhem a sonoridade no texto. Veremos três delas."
+      )}
+      <Text style={styles.titulo3}>1.4.1 Aliteração: repetição de consoantes ou sons consonantais</Text>
+      {parseAndRenderMath(
+        "**Exemplo 1:**"
+      )}
+      {parseAndRenderMath(
+        "**Ch**ove **ch**uva **ch**overando"
+      )}
+      {parseAndRenderMath(
+        "que a cidade de meu bem"
+      )}
+      {parseAndRenderMath(
+        "está-se toda se lavando (Oswald de Andrade)"
+      )}
+      {parseAndRenderMath(
+        "**Exemplo 2:**"
+      )}
+      {parseAndRenderMath(
+        "Toda **g**ente homena**g**eia"
+      )}
+      {parseAndRenderMath(
+        "**J**anuária na **j**anela"
+      )}
+      {parseAndRenderMath(
+        "Até o mar faz maré cheia"
+      )}
+      {parseAndRenderMath(
+        "Pra chegar mais perto dela (Chico Buarque)"
+      )}
+
+      <Text style={styles.titulo3}>1.4.2 Assonância: repetição de som vocálico</Text>
+      {parseAndRenderMath(
+        "Minha foz do Iguaç**u**"
+      )}
+      {parseAndRenderMath(
+        "Pólo s**u**l, meu az**u**l"
+      )}
+      {parseAndRenderMath(
+        "L**u**z do sentimento n**u** (Djavan)"
+      )}
+
+      <Text style={styles.titulo3}>1.4.3 Onomatopeia: palavras que representam sons e/ou ruídos.</Text>
+      {parseAndRenderMath(
+        "Troc...troc...troc....troc..."
+      )}
+      {parseAndRenderMath(
+        "ligeirinhos, ligeirinhos,"
+      )}
+      {parseAndRenderMath(
+        "troc...troc...troc....troc..."
+      )}
+      {parseAndRenderMath(
+        "vão cantando os tamanquinhos. (Cecília Meireles)"
+      )}
+
+    </View>,
+
+    <View key="Gêneros Literários">
+      <Text style={styles.titulo2}>2 Gêneros Literários</Text>
+
+
+      {/* <Text style={styles.titulo3}>O que é Literatura?</Text>
+      {parseAndRenderMath(
         ""
       )}
+      <View style={styles.imageView}>
+        <Image
+          source={require("@/app/(linguagens)/imagens/fig5.2.png")}
+          style={styles.image}
+        ></Image>
+      </View> */}
 
     </View>,
   ];

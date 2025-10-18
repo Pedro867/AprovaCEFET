@@ -1,6 +1,14 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { useRouter, useFocusEffect } from "expo-router";
-import { StyleSheet, View, Text, Alert, Image , TouchableOpacity, ScrollView,} from "react-native";
+import {
+  StyleSheet,
+  View,
+  Text,
+  Alert,
+  Image,
+  TouchableOpacity,
+  ScrollView,
+} from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Personagem } from "@/components/ui/Personagem";
 import { Colors, Fonts, Spacing } from "@/constants/Colors";
@@ -9,17 +17,15 @@ import { LOJA_CATEGORIAS, LOJA_ITENS } from "@/constants/LojaItems";
 import { CategoriaTab } from "@/components/loja/categoriasTab";
 import { GradeItems } from "@/components/loja/gradeItems";
 import { LinearGradient } from "expo-linear-gradient";
-import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs"; 
+import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs";
 import { updatePersonalizacoesBD } from "../../utils/api/conexaoFetch";
 import { updateCoinsBD } from "../../utils/api/conexaoFetch";
 
 const CORES_ROSTO = [
-  {id: 1, principal: "#F8B788", sombra: "#D1A37E"},
-  {id: 2, principal: "#D9A481", sombra: "#B98460"},
-  {id: 3, principal:  "#A67A5F", sombra: "#855F47"},
-  {id: 4, principal: "#734E39", sombra: "#5A3C2A"},
-  
-  
+  { id: 1, principal: "#F8B788", sombra: "#D1A37E" },
+  { id: 2, principal: "#D9A481", sombra: "#B98460" },
+  { id: 3, principal: "#A67A5F", sombra: "#855F47" },
+  { id: 4, principal: "#734E39", sombra: "#5A3C2A" },
 ];
 
 type CustomizacoesType = React.ComponentProps<
@@ -41,7 +47,7 @@ export default function LojaScreen() {
     bangs: "franja1",
     hair: "cabelo1",
     nose: "nariz1",
-    faceColor: CORES_ROSTO[0].principal, 
+    faceColor: CORES_ROSTO[0].principal,
     faceShadowColor: CORES_ROSTO[0].sombra,
   });
   const [unlockedItems, setUnlockedItems] = useState<string[]>([]); //itens bloqueados e desbloqueados
@@ -55,17 +61,18 @@ export default function LojaScreen() {
           const savedCustomizations = await AsyncStorage.getItem(
             "userCharacter"
           );
-          if (savedCustomizations)
-          {
+          if (savedCustomizations) {
             const parsed = JSON.parse(savedCustomizations);
-            
-            
-            if(!parsed.faceColor){
+
+            if (!parsed.faceColor) {
               parsed.faceColor = CORES_ROSTO[0];
+            }
+            if (!parsed.faceColor || !parsed.faceShadowColor) {
+              parsed.faceColor = CORES_ROSTO[0].principal;
+              parsed.faceShadowColor = CORES_ROSTO[0].sombra;
             }
             setCustomizacoes(parsed);
           }
-            
 
           const savedCoins = await AsyncStorage.getItem("userPontuacao");
           if (savedCoins) setCefetCoins(parseInt(savedCoins, 10));
@@ -85,27 +92,30 @@ export default function LojaScreen() {
   );
 
   const handleColorSelect = async (corPrincipal: string) => {
-    const corSelecionada = CORES_ROSTO.find(c => c.principal === corPrincipal);
-    
-    const newCustomizations = {
-      ...customizacoes, 
-      faceColor: corSelecionada.principal,
-      faceShadowColor: corSelecionada.sombra,
-    };
+    const corSelecionada = CORES_ROSTO.find(
+      (c) => c.principal === corPrincipal
+    );
 
-    setCustomizacoes(newCustomizations);
-
-    await AsyncStorage.setItem(
+    if (corSelecionada) {
+      const newCustomizations = {
+        ...customizacoes,
+        faceColor: corSelecionada.principal,
+        faceShadowColor: corSelecionada.sombra,
+      };
+      setCustomizacoes(newCustomizations);
+       await AsyncStorage.setItem(
       "userCharacter",
       JSON.stringify(newCustomizations)
     );
+    }
 
   };
 
   const ItemSelecionado = async (itemId: string, itemPrice: number) => {
     const isUnlocked = unlockedItems.includes(itemId) || itemPrice === 0; //verifica se o item ja foi comprado
 
-    if (isUnlocked) { //só equipa
+    if (isUnlocked) {
+      //só equipa
       const newCustomizations = {
         ...customizacoes,
         [selectedCategory]: itemId,
@@ -116,7 +126,8 @@ export default function LojaScreen() {
         JSON.stringify(newCustomizations)
       );
     } else {
-      if (cefetCoins >= itemPrice) { //verifica se o usuario tem moedas suficientes
+      if (cefetCoins >= itemPrice) {
+        //verifica se o usuario tem moedas suficientes
 
         /*Alert.alert( "Confirmar Compra", `Você deseja comprar este item por ${itemPrice} CefetCoins?`,
           [
@@ -124,105 +135,111 @@ export default function LojaScreen() {
             {
               text: "Comprar",
               onPress: async () => {*/
-                
-                const newBalance = cefetCoins - itemPrice;
-                const newUnlockedItems = [...unlockedItems, itemId];
 
-                // atualiza os estados
-                setCefetCoins(newBalance);
-                setUnlockedItems(newUnlockedItems);
-                updateCoinsBD(cefetCoins - itemPrice);
+        const newBalance = cefetCoins - itemPrice;
+        const newUnlockedItems = [...unlockedItems, itemId];
 
-                // salva no AsyncStorage
-                await AsyncStorage.setItem(
-                  "userPontuacao",
-                  newBalance.toString()
-                );
-                await AsyncStorage.setItem("unlockedItems", JSON.stringify(newUnlockedItems)
-                );
+        // atualiza os estados
+        setCefetCoins(newBalance);
+        setUnlockedItems(newUnlockedItems);
+        updateCoinsBD(cefetCoins - itemPrice);
 
-                // equipa o item comprado
-                const newCustomizations = {
-                  ...customizacoes,
-                  [selectedCategory]: itemId,
-                };
-                setCustomizacoes(newCustomizations);
-                await updatePersonalizacoesBD(itemId) //SALVA NO BD
-                await AsyncStorage.setItem("userCharacter",JSON.stringify(newCustomizations)
-                );
-              /*},
+        // salva no AsyncStorage
+        await AsyncStorage.setItem("userPontuacao", newBalance.toString());
+        await AsyncStorage.setItem(
+          "unlockedItems",
+          JSON.stringify(newUnlockedItems)
+        );
+
+        // equipa o item comprado
+        const newCustomizations = {
+          ...customizacoes,
+          [selectedCategory]: itemId,
+        };
+        setCustomizacoes(newCustomizations);
+        await updatePersonalizacoesBD(itemId); //SALVA NO BD
+        await AsyncStorage.setItem(
+          "userCharacter",
+          JSON.stringify(newCustomizations)
+        );
+        /*},
             },
           ]
         );*/
       } else {
-        Alert.alert("Saldo Insuficiente", "Você não tem CefetCoins para comprar este item.");
+        Alert.alert(
+          "Saldo Insuficiente",
+          "Você não tem CefetCoins para comprar este item."
+        );
       }
     }
   };
 
   return (
-    
-      <LinearGradient
-        colors={[Colors.gradientEnd, Colors.gradientStart, Colors.gradientStart]}
-        style={styles.container}
-      >
-        <View style={{ flex: 1, paddingBottom: tabBarHeight }}>
-          <View style={styles.headerContainer}>
-            <View style={styles.coinContainer}>
-              <Image
-                source={require("@/assets/images/pontos.png")}
-                style={styles.coinIcon}
-              />
-              <Text style={styles.coinText}>{cefetCoins}</Text>
-            </View>
-            <ThemedText style={styles.title}>Loja de Personagem</ThemedText>
-          </View>
-
-          <View style={styles.personagemContainer}>
-            <Personagem size={200} customizations={customizacoes} />
-          </View>
-
-          <View style={styles.customizationContainer}>
-            <CategoriaTab
-              categories={LOJA_CATEGORIAS}
-              selectedCategory={selectedCategory}
-              onSelectCategory={setSelectedCategory}
-              faceColor={customizacoes.faceColor}
-              faceShadowColor={customizacoes.faceShadowColor}
+    <LinearGradient
+      colors={[Colors.gradientEnd, Colors.gradientStart, Colors.gradientStart]}
+      style={styles.container}
+    >
+      <View style={{ flex: 1, paddingBottom: tabBarHeight }}>
+        <View style={styles.headerContainer}>
+          <View style={styles.coinContainer}>
+            <Image
+              source={require("@/assets/images/pontos.png")}
+              style={styles.coinIcon}
             />
-            {/* PALETA DE CORES ROSTO*/}
-            {selectedCategory === "face" && (
-              <View style = {styles.paletaDeCoresContainer}>
-                {CORES_ROSTO.map((cor) => (
-                  <TouchableOpacity
-                  key = {cor.id}
-                  style = {[styles.corMostrada, {backgroundColor: cor.principal}, customizacoes.faceColor === cor.principal && styles.corSelecionada,]}
+            <Text style={styles.coinText}>{cefetCoins}</Text>
+          </View>
+          <ThemedText style={styles.title}>Loja de Personagem</ThemedText>
+        </View>
+
+        <View style={styles.personagemContainer}>
+          <Personagem size={200} customizations={customizacoes} />
+        </View>
+
+        <View style={styles.customizationContainer}>
+          <CategoriaTab
+            categories={LOJA_CATEGORIAS}
+            selectedCategory={selectedCategory}
+            onSelectCategory={setSelectedCategory}
+            faceColor={customizacoes.faceColor}
+            faceShadowColor={customizacoes.faceShadowColor}
+          />
+          {/* PALETA DE CORES ROSTO*/}
+          {selectedCategory === "face" && (
+            <View style={styles.paletaDeCoresContainer}>
+              {CORES_ROSTO.map((cor) => (
+                <TouchableOpacity
+                  key={cor.id}
+                  style={[
+                    styles.corMostrada,
+                    { backgroundColor: cor.principal },
+                    customizacoes.faceColor === cor.principal &&
+                      styles.corSelecionada,
+                  ]}
                   onPress={() => handleColorSelect(cor.principal)}
-                  />
-                ))}
-              </View>
-            )}
-    
-            <GradeItems
-              items={LOJA_ITENS[selectedCategory as keyof typeof LOJA_ITENS]}
-              selectedItemId={
-                customizacoes[selectedCategory as keyof CustomizacoesType]
-              }
-              unlockedItemIds={unlockedItems}
-              onSelectItem={ItemSelecionado}
-              faceColor={customizacoes.faceColor}
-              faceShadowColor={customizacoes.faceShadowColor}
-              selectedCategory={selectedCategory}
-            />
-          </View>
-       </View>
-      </LinearGradient>
-    
+                />
+              ))}
+            </View>
+          )}
+
+          <GradeItems
+            items={LOJA_ITENS[selectedCategory as keyof typeof LOJA_ITENS]}
+            selectedItemId={
+              customizacoes[selectedCategory as keyof CustomizacoesType] || ''
+            }
+            unlockedItemIds={unlockedItems}
+            onSelectItem={ItemSelecionado}
+            faceColor={customizacoes.faceColor}
+            faceShadowColor={customizacoes.faceShadowColor}
+            selectedCategory={selectedCategory}
+          />
+        </View>
+      </View>
+    </LinearGradient>
   );
 }
 
 const styles = StyleSheet.create({
-  
   container: {
     paddingHorizontal: Spacing.medium,
     flex: 1,
@@ -230,11 +247,11 @@ const styles = StyleSheet.create({
   headerContainer: {
     paddingTop: Spacing.large,
     flexDirection: "row",
-    justifyContent: "center", 
+    justifyContent: "center",
     alignItems: "center",
     position: "relative",
     marginBottom: 75,
-    marginTop:Spacing.giga,
+    marginTop: Spacing.giga,
     gap: Spacing.medium,
   },
   title: {
@@ -250,18 +267,18 @@ const styles = StyleSheet.create({
     flexDirection: "row", // alinha icone e texto
     alignItems: "center",
     backgroundColor: "#fff",
-    borderRadius: 40, 
+    borderRadius: 40,
     paddingVertical: Spacing.small,
     paddingHorizontal: Spacing.medium,
     gap: Spacing.xsmall,
-    // sombra 
+    // sombra
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
     shadowRadius: 4,
     elevation: 3,
   },
-   coinIcon: {
+  coinIcon: {
     width: 30,
     height: 30,
   },
@@ -276,7 +293,7 @@ const styles = StyleSheet.create({
   customizationContainer: {
     marginTop: Spacing.giga,
     flex: 1,
-    //height: 400, 
+    //height: 400,
   },
 
   paletaDeCoresContainer: {
@@ -293,10 +310,10 @@ const styles = StyleSheet.create({
     borderWidth: 3,
     borderColor: "transparent",
     elevation: 3,
-    shadowColor: '#000',
+    shadowColor: "#000",
     shadowOpacity: 0.2,
     shadowRadius: 2,
-    shadowOffset: {width: 0, height: 2}
+    shadowOffset: { width: 0, height: 2 },
   },
   corSelecionada: {
     borderColor: Colors.white,

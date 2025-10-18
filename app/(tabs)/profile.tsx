@@ -30,6 +30,8 @@ const personagemInicial = {
   bangs: "franja1",
   hair: "cabelo1",
   nose: "nariz1",
+  faceColor: "#F8B788",
+  faceShadowColor: "#D1A37E",
 };
 
 export default function ProfileScreen() {

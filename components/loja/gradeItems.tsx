@@ -9,6 +9,7 @@ interface ItemGridProps {
   unlockedItemIds: string[]; //lista de itens desbloqueados
   onSelectItem: (itemId: string,itemPrice: number) => void;
   faceColor?:string;
+  faceShadowColor?: string;
   selectedCategory:string,
 }
 

@@ -1533,9 +1533,711 @@ export default function TeoriaConjuntosScreen() {
 
     <View key="Gêneros Literários">
       <Text style={styles.titulo2}>2 Gêneros Literários</Text>
+      {parseAndRenderMath(
+        "Vimos que a literatura se configura por apresentar um trabalho diferenciado com a linguagem, deslocando os sentidos das palavras, atribuindo-lhes significados inusitados, inovadores, proporcionando nossas possibilidades no uso da língua e da linguagem. Essas formas de uso da linguagem se materializa em textos, daí falarmos em *gêneros textuais literários.**"
+      )}
+      <Text style={styles.titulo3}>2.1 O poema</Text>
+      {parseAndRenderMath(
+        "Uma distinção simples que devemos conhecer é quanto à forma do texto, que pode ser em prosa ou em verso. "
+      )}
+      {parseAndRenderMath(
+        "**Verso** é uma sucessão de sílabas ou fonemas que formam uma unidade rítmica e melódica correspondendo, em geral, a uma linha do poema. O verso pode ou não ter uma extensão definida, ocupando de forma livre a página. Um agrupamento de versos forma uma **estrofe**. O texto que apresenta essa característica de composição denomina-se **POEMA.**"
+      )}
 
+      {parseAndRenderMath(
+        "**Infância**"
+      )}
+      {parseAndRenderMath(
+        "Meu pai montava a cavalo, ia para o campo."
+      )}
+      {parseAndRenderMath(
+        "Minha mãe ficava sentada cosendo."
+      )}
+      {parseAndRenderMath(
+        "Meu irmão pequeno dormia."
+      )}
+      {parseAndRenderMath(
+        "Eu sozinho menino entre mangueiras"
+      )}
+      {parseAndRenderMath(
+        "lia a história de Robinson Crusoé,"
+      )}
+      {parseAndRenderMath(
+        "comprida história que não acaba mais."
+      )}
+      {parseAndRenderMath(
+        ""
+      )}
+      {parseAndRenderMath(
+        "No meio-dia branco de luz uma voz que aprendeu"
+      )}
+      {parseAndRenderMath(
+        "a ninar nos longes da senzala - e nunca se "
+      )}
+      {parseAndRenderMath(
+        "esqueceu"
+      )}
+      {parseAndRenderMath(
+        "chamava para o café."
+      )}
+      {parseAndRenderMath(
+        "Café preto que nem a preta velha"
+      )}
+      {parseAndRenderMath(
+        "café gostoso"
+      )}
+      {parseAndRenderMath(
+        "café bom"
+      )}
+      {parseAndRenderMath(
+        ""
+      )}
+      {parseAndRenderMath(
+        "Minha mãe ficava sentada cosendo"
+      )}
+      {parseAndRenderMath(
+        "olhando para mim:"
+      )}
+      {parseAndRenderMath(
+        "- Psiu... Não acorde o menino."
+      )}
+      {parseAndRenderMath(
+        "Para o berço onde pousou um mosquito."
+      )}
+      {parseAndRenderMath(
+        "E dava um suspiro... que fundo!"
+      )}
+      {parseAndRenderMath(
+        ""
+      )}
+      {parseAndRenderMath(
+        "Lá longe meu pai campeava"
+      )}
+      {parseAndRenderMath(
+        "no mato sem fim da fazenda."
+      )}
+      {parseAndRenderMath(
+        ""
+      )}
+      {parseAndRenderMath(
+        "E eu não sabia que minha história"
+      )}
+      {parseAndRenderMath(
+        "era mais bonita que a de Robinson Crusoé. (Carlos Drummond de Andrade)"
+      )}
+      {parseAndRenderMath(
+        ""
+      )}
 
-      {/* <Text style={styles.titulo3}>O que é Literatura?</Text>
+      {parseAndRenderMath(
+        "Uma característica comum aos poemas é a intensa subjetividade e emotividade que ele apresenta, através de uma voz individual, a que chamamos eu lírico. Veja como no poema de Drummond, embora se fale de diversos seres - o mãe, o pai, o bebê, a empregada- todos são filtrados pela lembrança e memória do eu lírico."
+      )}
+      {parseAndRenderMath(
+        "Embora essa seja a forma mais tradicional do poema, não podemos deixar de levar em conta que outras formas de construção poética são possíveis, como os poemas visuais, que trabalham no campo da imagem ou os poemas cinéticos, entre outras tantas formas inventivas que a literatura oferece. Veja alguns exemplos abaixo:"
+      )}
+      <View style={styles.imageView}>
+        <Image
+          source={require("@/app/(linguagens)/imagens/fig7.1.png")}
+          style={styles.image}
+        ></Image>
+      </View>
+      {parseAndRenderMath(
+        "Diferentemente do poema “Infância”, de Drummond, em “Pêndulo” não temos um texto disposto em versos e estrofes, mas sim, um poema que solicita a visualidade. A palavra evoca o objeto a que se refere, ao mesmo tempo que a disposição gráfica na página remete ao movimento desse mesmo objeto"
+      )}
+      {parseAndRenderMath(
+        "Algo semelhante ocorre no “Poeminha cinético”, de Millôr Fernandes, em que é fundamental ler/ver o poema, já que o “Assim” é um referente que não recuperamos pela simples leitura, mas somente pela leitura associada à visualidade do texto."
+      )}
+      <View style={styles.imageView}>
+        <Image
+          source={require("@/app/(linguagens)/imagens/fig7.2.png")}
+          style={styles.image}
+        ></Image>
+      </View>
+
+      <Text style={styles.titulo3}>2.2 A narrativa</Text>
+      {parseAndRenderMath(
+        "A narrativa é um tipo textual que se caracteriza pela ação, geralmente situada em um tempo e espaço. Nela, há uma série de fatos que desencadeiam a movimentação das personagens, criando situações diversas até chegar ao desfecho."
+      )}
+      {parseAndRenderMath(
+        "Há várias maneiras de se contar uma história, essa escolha designa o gênero literário a que o texto pertence. São gêneros literários narrativos:"
+      )}
+      {parseAndRenderMath(
+        "**Conto:** o conto caracteriza-se por conter uma história curta, condensada em uma só ação, com unidade de tempo e espaço. "
+      )}
+      {parseAndRenderMath(
+        "**Fábula/Apólogo:** são narrativas breves, de caráter alegórico e ensinamento moral. O que diferencia a fábula do apólogo é que, neste, as personagens são seres inanimados, enquanto naquela são animais. "
+      )}
+      {parseAndRenderMath(
+        "**Romance:** o romance é uma narrativa longa, com enredo denso, geralmente apresentando uma história nuclear - centrada nas personagens principais -, e outras pequenas tramas e personagens secundários. O romance pode apresentar diversidade de espaços e ampla caracterização do tempo."
+      )}
+      {parseAndRenderMath(
+        "Para entendermos melhor os aspectos que caracterizam a narrativa, passaremos a estudar cada um de seus elementos."
+      )}
+
+      <Text style={styles.titulo3}>2.2.1 Elementos da narrativa</Text>
+      {parseAndRenderMath(
+        "Construímos uma narrativa a partir do enredo, que é a forma como a trama da história se desenvolve. Essa história chegará até nós pela voz do narrador e dela participarão as personagens, que estarão localizados em um determinado tempo e espaço. No entanto, a forma como são dispostos e elaborados esses elementos são diversas, o que nos leva a algumas categorias, que passarão a ser estudadas."
+      )}
+      <Text style={styles.titulo3}>2.2.1.1 Narrador</Text>
+      {parseAndRenderMath(
+        "O narrador é aquele que conta a história. Devemos ter em mente que o narrador também é uma criação ficcional, portanto narrador e autor não são sinônimos. Dependendo da posição que o narrador assume frente à história, dizemos que ele é em 1ª ou 3ª pessoa."
+      )}
+      {parseAndRenderMath(
+        "**Foco narrativa na 1ª pessoa:** quando o narrador participa da história, sendo um personagem dela, dizemos que é um narrador personagem ou narrador em 1ª pessoa, como no trecho a seguir, de Dom Casmurro:"
+      )}
+      {parseAndRenderMath(
+        "'E Capitu deu-me as costas, voltando-se para o espelho. Peguei-lhe dos cabelos, colhios todos e entrei a alisá-los com o pente, desde a testa até as últimas pontas, que lhe desciam à cintura. Em pé não dava jeito: não esquecestes que ela era um nadinha mais alta que eu, mas ainda que fosse da mesma altura. Pedi-lhe que se sentasse.' (Dom Casmurro, Machado de Assis)"
+      )}
+      {parseAndRenderMath(
+        "**Foco narrativa na 3ª pessoa:** ocorre quando o narrador não participa da história, contando o que ocorreu a outros. Na terceira pessoa, podemos ter:"
+      )}
+      {parseAndRenderMath(
+        "**Narrador observador:** esse tipo de narrador, limita-se a relatar os fatos percebidos pela exterioridade da personagens, registrando suas ações e falas."
+      )}
+      {parseAndRenderMath(
+        "'Daí a pouco, em volta das bicas era um zunzum crescente, uma aglomeração tumultuosa de machos e fêmeas. Uns, após outros, lavavam a cara, incomodamente, debaixo do fio de água que escorria da altura de uns cinco palmos. O chão inundava-se. As mulheres precisavam já prender as saias entre as coxas para não as molhar; via-se-lhes a tostada nudez dos braços e do pescoço, que elas despiam, suspendendo o cabelo todo para o alto do casco; os homens, esses não se preocupavam em não molhar o pelo, ao contrário metiam a cabeça bem debaixo da água e esfregavam com força as ventas e as barbas, fossando e fungando contra as palmas das mãos.' (O cortiço, Aluísio de Azevedo)"
+      )}
+      {parseAndRenderMath(
+        "**Narrador onisciente:** onisciência significa conhecimento pleno de todas as coisas. Assim, esse tipo de narrador, vai além das aparências, trazendo ao leitor os pensamentos, sentimentos e sensações das personagens."
+      )}
+      {parseAndRenderMath(
+        "'Noel sente que agora em todo seu ser só existe lugar para um desejo - um desejo sem nome ainda, mas delicioso, envolvente, inquietantemente misterioso.' (Caminhos Cruzados, Erico Veríssimo)"
+      )}
+
+      <Text style={styles.titulo3}>2.2.1.2 Personagem</Text>
+      {parseAndRenderMath(
+        "Personagem é quem vive a ação narrada na história. Elemento de extrema importância na narrativa, a personagem é um ser dotado de características físicas, psicológicas, sociais, culturais, as quais contribuirão para traçar seu perfil. De acordo com sua atuação no enredo, pode ser: "
+      )}
+      {parseAndRenderMath(
+        "**Personagem principal:** personagem que vive as ações ou principais ações da trama. Seu papel é o mais relevante na história."
+      )}
+      {parseAndRenderMath(
+        "**Personagem secundária:** apresenta participação menor na história, com poucas ações em torno da personagem principal."
+      )}
+
+      <Text style={styles.titulo3}>2.2.1.3 Tempo</Text>
+      {parseAndRenderMath(
+        "O tempo é o “quando” da narrativa. Tanto pode ser cronológico quanto psicológico."
+      )}
+      {parseAndRenderMath(
+        "**Tempo cronológico:** ocorre quando a narrativa traz um tempo mensurável, seja por horas, dias, meses, anos, etc. Nesse sentido, o leitor é capaz e perceber o tempo de duração dos acontecimentos narrados. "
+      )}
+      {parseAndRenderMath(
+        "'Era isto uma declaração em forma, segundo os usos da terra: levaram o **resto do dia** de namoro cerrado; **ao anoitecer** passou-se a mesma cena de pisadela e beliscão, com a diferença de serem desta vez um pouco mais fortes; e **no dia seguinte** estavam os dois amantes tão extremosos e familiares, que pareciam sê-los de muito.' (Memórias de um sargento de milícias, Manuel Antônio de Almeida)"
+      )}
+      {parseAndRenderMath(
+        "**Tempo psicológico:** O tempo psicológico, que não é mensurável, flui na mente das personagens. Nesse caso, transmite-se a sensação experimentada durante o tempo em que o fato ocorreu: a personagem pode ter passado por situações que pareceram extremamente longas, mas que, na realidade, duraram apenas alguns minutos."
+      )}
+      {parseAndRenderMath(
+        "Houve um momento grande, parado, sem nada dentro. Dilatou os olhos, esperou. Nada ve io. Branco. Mas de repente num estremecimento deram corda no dia e tudo recomeçou a funcionar. (Perto do coração selvagem, Clarice Lespector)"
+      )}
+
+      <Text style={styles.titulo3}>2.2.1.4 Espaço</Text>
+      {parseAndRenderMath(
+        "O espaço é o local onde se passam as ações. Pode ser múltiplo, ou seja, a narrativa pode usar vários espaços na mesma história, ou poder ser limitado, como uma casa, um bar, uma escola, etc. "
+      )}
+      {parseAndRenderMath(
+        "Em alguns casos, o espaço se torna elemento fundamental da narrativa, influindo e interferindo no enredo. Em outros, ele não tem relevância na trama, servindo como mero localizador."
+      )}
+
+      <Text style={styles.titulo3}>2.2.1.5 Enredo</Text>
+      {parseAndRenderMath(
+        "O enredo corresponde à maneira como a história se desenrola, a forma como a trama vai se desenvolvendo. O enredo da narração pode ser assim estruturado: **exposição** -apresentação das personagens e/ou do cenário e/ou da época; **desenvolvimento**, que compreende o desenrolar dos fatos, apresentando complicações e clímax (clímax é o momento “auge” da narrativa, aquele de maior tensão, que coloca em perspectiva uma mudança, ruptura, surpresa, etc.) e **desfecho**, que pode ser a solução do conflito, o desenlace dos fatos."
+      )}
+      {parseAndRenderMath(
+        "É importante ressaltar que, como dito, a Literatura é arte e, como tal, inova constantemente em suas produções. Assim, a estrutura narrativa acima apresentada, não corresponde a uma organização fixa, de estrutura fechada. Nesse sentido, podemos encontrar histórias que iniciam no clímax, por exemplo, ou outras que terminam nele e deixam a história em aberto. Outras iniciam no desfecho e irá mostrar o que levou até aquela situação em retrospecto. Cabe a nós, leitores, analisarmos cada texto e percebermos os meandros de sua construção."
+      )}
+
+      <Text style={styles.titulo3}>2.2.2 Os tipos de discurso na narrativa</Text>
+      {parseAndRenderMath(
+        "Embora seja o narrador quem conte a história, a voz das personagens também chegam até nós, leitores. É a essa “fala” da personagem que chamamos “discurso”. Dependendo da forma como o narrador expõe a voz da personagem, teremos os tipos de discurso:"
+      )}
+      {parseAndRenderMath(
+        "**Discurso direto:** o discurso direto é a tradução fiel da fala da personagem. Através desse tipo de discurso, presentificamos a personagem, além de criar um caráter mais dinâmica na narrativa. No discurso direto, indica-se o interlocutor, cuja fala é marcada por pontuação específica, geralmente o travessão ( - ) ou as aspas ( “ “). Também costuma-se usar os verbos de elocução: dizer, falar, responder, replicar, etc."
+      )}
+      {parseAndRenderMath(
+        "O texto abaixo, de Luis Fernando Veríssimo, é praticamente todo construído em discurso direto:"
+      )}
+      {parseAndRenderMath(
+        "**Pai não entende nada**"
+      )}
+      {parseAndRenderMath(
+        "- Um biquíni novo?"
+      )}
+      {parseAndRenderMath(
+        "- É, pai."
+      )}
+      {parseAndRenderMath(
+        "- Você comprou um no ano passado!"
+      )}
+      {parseAndRenderMath(
+        "- Não serve mais, pai. Eu cresci."
+      )}
+      {parseAndRenderMath(
+        "- Como não serve? No ano passado você tinha 14 anos, este ano tem 15. Não cresceu tanto assim"
+      )}
+      {parseAndRenderMath(
+        "- Não serve, pai."
+      )}
+      {parseAndRenderMath(
+        "- Está bem, está bem. Toma o dinheiro. Compra um biquíni maior"
+      )}
+      {parseAndRenderMath(
+        "- Maior não, pai. Menor."
+      )}
+      {parseAndRenderMath(
+        "Aquele pai, também, não entendia nada. (Luis Fernando Veríssimo)"
+      )}
+      {parseAndRenderMath(
+        "**Discurso indireto:** no discurso indireto, ao invés de a personagem “falar”, é o narrador quem reproduz aquilo que foi dito pela personagem. Assim, os verbos aparecerão em 3ª pessoa, sendo imprescindível a presença dos verbos de elocução, seguidos dos conectivos que ou se para introduzirem a fala da personagem na voz do narrador."
+      )}
+      {parseAndRenderMath(
+        "'O juiz resolveu anular o casamento por causa do episódio, revoltado com o cinismo de nosso nefando parente. O magistrado quis saber se ele vira a sogra levar uma surra do padeiro e não ajudara . Mirinho **respondeu que** não à excelência. O juiz estranhou e **perguntou** por que não ajudara. Ele **respondeu que** era porque não ficava bem dois homens batendo numa velha só.'"
+      )}
+      {parseAndRenderMath(
+        "**Discurso indireto livre:** nesse tipo de discurso, a voz do personagem e do narrador se encontram. Não há verbos de elocução, nem pontuação específica para marcar o discurso. Funciona como uma espécie de monólogo interior, traduzindo pensamentos e/ou reflexões da personagem."
+      )}
+      {parseAndRenderMath(
+        "Deu um passo na catingueira. Se ele gritasse 'desafasta', que faria a polícia? Não se afastaria, ficaria colado ao pé de pau. Uma lazeira, a gente podia xingar a mãe dele. Mas então... Fabiano estirava o braço e rosnava. Aquela coisa arreada e achacada metia as pessoas na cadeia, dava-lhes surra. Não entendia. "
+      )}
+
+    </View>,
+
+    <View key="Intertextualidade">
+      <Text style={styles.titulo2}>3 Intertextualidade</Text>
+      {parseAndRenderMath(
+        "Ao criar uma obra, o artista pode estabelecer diálogo com outras obras já existentes. Quando o texto apresenta uma relação com um texto anterior, dizemos que ocorre a INTERTEXTUALIDADE. Analisemos o quadrinho abaixo, de Maurício de Sousa:"
+      )}
+      <View style={styles.imageView}>
+        <Image
+          source={require("@/app/(linguagens)/imagens/fig8.1.png")}
+          style={styles.image}
+        ></Image>
+      </View>
+      {parseAndRenderMath(
+        "No segundo quadro, aparece uma personagem bastante conhecida dos contos de infantis: Pinóquio. Todos sabem que, se Pinóquio mentisse, o nariz dele crescia; assim, o autor da tirinha faz uma brincadeira com essa clássica personagem da literatura infantil, explorando uma de suas mais marcantes características na construção do quadrinho. Assim, podemos afirmar que o texto de Maurício de Sousa estabelece uma relação intertextual com a história de Pinóquio."
+      )}
+      {parseAndRenderMath(
+        "O uso da intertextualidade tanto pode preservar a ideia do texto original, criando uma PARÁFRASE, quanto pode modificá-lo, a fim de estabelecer uma crítica, uma sátira ou efeito irônico, o que é o caso da PARÓDIA"
+      )}
+      {parseAndRenderMath(
+        "O poema que iremos ler (Texto I) é do escritor brasileiro Gonçalves Dias e foi escrito em 1843, quando o poeta encontrava-se em Coimbra, Portugal. O exílio de que fala o poeta é justamente por se encontrar fora de sua terra natal, o que o faz estabelecer a comparação entre os dois países: lá - Brasil; cá - Portugal. O eu lírico expressa saudosismo e desejo intenso de retornar a seu país, onde tudo é melhor. Assim, “Canção do exílio” é uma celebração, um hino de louvor à pátria."
+      )}
+      {parseAndRenderMath(
+        "Na sequência do poema de Gonçalves Dias, leremos dois textos que dialogam com a “Canção do exílio”; um, trabalhando no campo da paráfrase (Texto II) e, outro, da paródia (Texto III)."
+      )}
+      {parseAndRenderMath(
+        "**Texto I**"
+      )}
+      {parseAndRenderMath(
+        "**Canção do Exílio**"
+      )}
+      {parseAndRenderMath(
+        "Minha terra tem palmeiras,"
+      )}
+      {parseAndRenderMath(
+        "Onde canta o Sabiá;"
+      )}
+      {parseAndRenderMath(
+        "As aves, que aqui gorjeiam,"
+      )}
+      {parseAndRenderMath(
+        "Não gorjeiam como lá."
+      )}
+      {parseAndRenderMath(
+        ""
+      )}
+      {parseAndRenderMath(
+        "Nosso céu tem mais estrelas,"
+      )}
+      {parseAndRenderMath(
+        "Nossas várzeas têm mais flores,"
+      )}
+      {parseAndRenderMath(
+        "Nossos bosques têm mais vida,"
+      )}
+      {parseAndRenderMath(
+        "Nossa vida mais amores."
+      )}
+      {parseAndRenderMath(
+        ""
+      )}
+      {parseAndRenderMath(
+        "Em cismar, sozinho, à noite,"
+      )}
+      {parseAndRenderMath(
+        "Mais prazer encontro eu lá;"
+      )}
+      {parseAndRenderMath(
+        "Minha terra tem palmeiras,"
+      )}
+      {parseAndRenderMath(
+        "Onde canta o Sabiá."
+      )}
+      {parseAndRenderMath(
+        ""
+      )}
+      {parseAndRenderMath(
+        "Minha terra tem primores,"
+      )}
+      {parseAndRenderMath(
+        "Que tais não encontro eu cá;"
+      )}
+      {parseAndRenderMath(
+        "Em cismar — sozinho, à noite —"
+      )}
+      {parseAndRenderMath(
+        "Mais prazer encontro eu lá;"
+      )}
+      {parseAndRenderMath(
+        "Minha terra tem palmeiras,"
+      )}
+      {parseAndRenderMath(
+        "Onde canta o Sabiá."
+      )}
+      {parseAndRenderMath(
+        ""
+      )}
+      {parseAndRenderMath(
+        "Não permita Deus que eu morra,"
+      )}
+      {parseAndRenderMath(
+        "Sem que eu volte para lá;"
+      )}
+      {parseAndRenderMath(
+        "Sem que desfrute os primores"
+      )}
+      {parseAndRenderMath(
+        "Que não encontro por cá;"
+      )}
+      {parseAndRenderMath(
+        "Sem qu'inda aviste as palmeiras,"
+      )}
+      {parseAndRenderMath(
+        "Onde canta o Sabiá. (Gonçalves Dias)"
+      )}
+
+      {parseAndRenderMath(
+        "**Texto II**"
+      )}
+      {parseAndRenderMath(
+        "**Canção do Exílio**"
+      )}
+      {parseAndRenderMath(
+        "Eu nasci além dos mares:"
+      )}
+      {parseAndRenderMath(
+        "Os meus lares, "
+      )}
+      {parseAndRenderMath(
+        "Meus amores ficam lá!"
+      )}
+      {parseAndRenderMath(
+        "- Onde canta nos retiros"
+      )}
+      {parseAndRenderMath(
+        "Seus suspiros,"
+      )}
+      {parseAndRenderMath(
+        "Suspiros o sabiá! "
+      )}
+      {parseAndRenderMath(
+        ""
+      )}
+      {parseAndRenderMath(
+        "Oh que céu, que terra aquela, "
+      )}
+      {parseAndRenderMath(
+        "Rica e bela"
+      )}
+      {parseAndRenderMath(
+        "Como o céu de claro anil!"
+      )}
+      {parseAndRenderMath(
+        "Que seiva, que luz, que galas, "
+      )}
+      {parseAndRenderMath(
+        "Não exalas"
+      )}
+      {parseAndRenderMath(
+        "Não exalas, meu Brasil! "
+      )}
+      {parseAndRenderMath(
+        ""
+      )}
+      {parseAndRenderMath(
+        "Oh! que saudades tamanhas "
+      )}
+      {parseAndRenderMath(
+        "Das montanhas,"
+      )}
+      {parseAndRenderMath(
+        "Daqueles campos natais!!"
+      )}
+      {parseAndRenderMath(
+        "Daquele céu de safira "
+      )}
+      {parseAndRenderMath(
+        "Que se mira, "
+      )}
+      {parseAndRenderMath(
+        "Que se mira nos cristais! "
+      )}
+      {parseAndRenderMath(
+        ""
+      )}
+      {parseAndRenderMath(
+        "Não amo a terra do exílio,  "
+      )}
+      {parseAndRenderMath(
+        "Sou bom filho,"
+      )}
+      {parseAndRenderMath(
+        "Quero a pátria, o meu país, !"
+      )}
+      {parseAndRenderMath(
+        "Quero a terra das mangueiras"
+      )}
+      {parseAndRenderMath(
+        "E as palmeiras,"
+      )}
+      {parseAndRenderMath(
+        "E as palmeiras tão gentis! "
+      )}
+      {parseAndRenderMath(
+        ""
+      )}
+      {parseAndRenderMath(
+        "Como a ave dos palmares  "
+      )}
+      {parseAndRenderMath(
+        "Pelos ares"
+      )}
+      {parseAndRenderMath(
+        "Fugindo do caçador;"
+      )}
+      {parseAndRenderMath(
+        "Eu vivo longe do ninho,"
+      )}
+      {parseAndRenderMath(
+        "Sem carinho;"
+      )}
+      {parseAndRenderMath(
+        "Sem carinho e sem amor!"
+      )}
+      {parseAndRenderMath(
+        ""
+      )}
+      {parseAndRenderMath(
+        "Debalde eu olho e procuro..."
+      )}
+      {parseAndRenderMath(
+        "Tudo escuro"
+      )}
+      {parseAndRenderMath(
+        "Só vejo em roda de mim!"
+      )}
+      {parseAndRenderMath(
+        "Falta a luz do lar paterno"
+      )}
+      {parseAndRenderMath(
+        "Doce e terno, "
+      )}
+      {parseAndRenderMath(
+        "Doce e terno para mim."
+      )}
+      {parseAndRenderMath(
+        ""
+      )}
+      {parseAndRenderMath(
+        "Distante do solo amado"
+      )}
+      {parseAndRenderMath(
+        "- Desterrado -"
+      )}
+      {parseAndRenderMath(
+        "A vida não é feliz"
+      )}
+      {parseAndRenderMath(
+        "Nessa eterna primavera"
+      )}
+      {parseAndRenderMath(
+        "Quem me dera,"
+      )}
+      {parseAndRenderMath(
+        "Quem me dera o meu país! (Casimiro de Abreu)"
+      )}
+
+      {parseAndRenderMath(
+        "**Texto III**"
+      )}
+      {parseAndRenderMath(
+        "**Jogos Florais**"
+      )}
+      {parseAndRenderMath(
+        "I"
+      )}
+      {parseAndRenderMath(
+        "Minha terra tem palmeiras"
+      )}
+      {parseAndRenderMath(
+        "onde canta o tico-tico."
+      )}
+      {parseAndRenderMath(
+        "Enquanto isso o sabiá"
+      )}
+      {parseAndRenderMath(
+        "vive comendo o meu fubá."
+      )}
+      {parseAndRenderMath(
+        ""
+      )}
+      {parseAndRenderMath(
+        "Ficou moderno o Brasil"
+      )}
+      {parseAndRenderMath(
+        "ficou moderno o milagre:"
+      )}
+      {parseAndRenderMath(
+        "a água já não vira vinho,"
+      )}
+      {parseAndRenderMath(
+        "vira direto vinagre."
+      )}
+      {parseAndRenderMath(
+        "II"
+      )}
+      {parseAndRenderMath(
+        "Minha terra tem Palmares"
+      )}
+      {parseAndRenderMath(
+        "memória cala-te já."
+      )}
+      {parseAndRenderMath(
+        "Peço licença poética"
+      )}
+      {parseAndRenderMath(
+        "Belém capital Pará."
+      )}
+      {parseAndRenderMath(
+        ""
+      )}
+      {parseAndRenderMath(
+        "Bem, meus prezados senhores"
+      )}
+      {parseAndRenderMath(
+        "dado o avançado da hora"
+      )}
+      {parseAndRenderMath(
+        "errata e efeitos do vinho"
+      )}
+      {parseAndRenderMath(
+        "o poeta sai de fininho. (Cacaso)"
+      )}
+      {parseAndRenderMath(
+        "(será mesmo com 2 esses que se escreve paçarinho?)"
+      )}
+      {parseAndRenderMath(
+        "Na “Canção do exílio”, de Casimiro de Abreu, o eu lírico se encontra distante de seu país de origem e demonstra saudades e quer voltal a sua terra natal, onde estão seus amores e as coisas que ele aprecia e admira. Além dessa similaridade entre os sentimentos expressos pelas vozes poéticas, o texto de Casimiro de Abreu retoma os elementos do poema de Gonçalves Dias, como as palmeiras, o sabiá, o céu, além do próprio título. Assim, é nítida a retomada que Casimiro de Abreu faz da “Canção do exílio” e, como ambos os textos celebram os encantos do Brasil, dizemos que ocorre uma PARÁFRASE."
+      )}
+      {parseAndRenderMath(
+        "O mesmo não acontece em “Jogos Florais”, de Cacaso. Esse poema foi escrito nos anos da ditadura militar no Brasil e, nesse sentido, o poeta fará uma crítica ao país. O fato de serem retomados elementos da “Canção do Exílio”, enfatiza ainda mais esse aspecto crítico, pois retira a áurea de “país perfeita”, lugar de prazeres e amores, tal como postulado no poema de Gonçalves Dias."
+      )}
+      {parseAndRenderMath(
+        "Inicialmente, o primeiro verso de “Jogos Floras” é idêntico ao de Gonçalves Dias, mas, logo na sequência, ao invés do sabiá, aparece a figura do tico-tico, pássaro muito comum no Brasil, o que nos faz associá-lo à imagem do povo. Já o sabiá é o opressor, aquele que “rouba” o fubá, o que remete à opressão dos militares. Na segunda estrofe, percebe-se uma remissão ao “milagre econômico”, termo muito propagado pelo governo da época. No entanto - e aí estamos em uma outra intertextualidade com o texto bíblico -, nesse milagre não há vinho, bebida representativa de festa, de celebração, mas vinagre, bebida ácida, associada a sofrimento. "
+      )}
+      {parseAndRenderMath(
+        "Na segunda parte do poema, a terra tem “palmares”, lembrando Zumbi dos palmares, símbolo de luta e resistência contra a escravidão. Mas esse símbolo deve ser silenciado “memória cala-te já”, pois os ideias de liberdade eram contrário aos ideias da ditadura. E o final do texto fecha em uma ironia magistral, certamente fazendo referência ao ministro da educação da época, Jarbas Passarinho, “(será mesmo com esses dois esses / que se escreve pacarinho?)”. Assim, por inverter o sentido texto de Gonçalves Dias, concluímos que o poema de Cacaso estabelece com ele uma PARÓDIA."
+      )}
+      <Text style={styles.titulo3}>3.1 Formas de intertextualidade</Text>
+      {parseAndRenderMath(
+        "Além da paródia e da paráfrase, que aparece no conteúdo do texto, dependendo da maneira como são retomados os elementos de um texto, falamos em **formas de intertextualidade**, as quais passaremos a conhecer."
+      )}
+      <Text style={styles.titulo3}>3.1.1 Citação</Text>
+      {parseAndRenderMath(
+        "A citação é a transcrição literal de um texto, geralmente marcada por aspas e com indicação da fonte, como nesse trecho do romance “Memórias Póstumas de Brás Cubas”, de Machado de Assis:"
+      )}
+      {parseAndRenderMath(
+        "Já o leitor compreendeu que era a Razão que voltava à casa, e convidava a Sandice a sair, clamando, e com melhor jus, as palavras de Tartufo:"
+      )}
+      {parseAndRenderMath(
+        "La masion est à moi, c'est à vous d'en sortir."
+      )}
+      {parseAndRenderMath(
+        "(A casa é minha, vós é que deveis sair dela)"
+      )}
+
+      <Text style={styles.titulo3}>3.1.2 Alusão</Text>
+      {parseAndRenderMath(
+        "Ocorre alusão, quando se faz uma referência a uma obra, sem indicar-lhe a fonte. O poema “Infância”, de Drummond (no item 2.1) é um exemplo dessa forma de intertextualidade. Na última estrofe “e eu não sabia que minha história/ era mais bonita que a de **Robison Crusoé**”, ocorre alusão a Robison Crusoé, protagonista do romance de mesmo nome, que conta a história de um náufrago que ficou 28 anos em uma ilha deserta."
+      )}
+
+      <Text style={styles.titulo3}>3.1.3 Epígrafe</Text>
+      {parseAndRenderMath(
+        "Epígrafe é um texto que colocamos na abertura de um texto: capítulo, livro, conto, poema, etc. A “Canção do exílio”, de Gonçalves Dias, traz uma epígrafe, que consiste em versos do poema alemão Goethe."
+      )}
+
+    </View>,
+
+    <View key="Metalinguagem">
+      <Text style={styles.titulo2}>4 Metalinguagem</Text>
+      {parseAndRenderMath(
+        "Um outro recurso, bastante utilizado na Literatura, é a METALINGUAGEM, que é a propriedade que a língua tem de voltar-se para si mesma. Isso ocorre, por exemplo, quando um narrador fala da forma como elabora a história ou quando um poema reflete sobre o próprio fazer poético, como nos exemplos abaixo:"
+      )}
+      {parseAndRenderMath(
+        "**Exemplo I:**"
+      )}
+      {parseAndRenderMath(
+        "Algum tempo hesitei se devia abrir estas memórias pelo princípio ou pelo fim, isto é, se poria em primeiro lugar o eu nascimento ou a minha morte."
+      )}
+      {parseAndRenderMath(
+        "**Exemplo II:**"
+      )}
+      {parseAndRenderMath(
+        "**Poética**"
+      )}
+      {parseAndRenderMath(
+        "Que é a poesia?"
+      )}
+      {parseAndRenderMath(
+        "uma ilha"
+      )}
+      {parseAndRenderMath(
+        "cercada"
+      )}
+      {parseAndRenderMath(
+        "de palavras"
+      )}
+      {parseAndRenderMath(
+        "por todos os lados"
+      )}
+      {parseAndRenderMath(
+        ""
+      )}
+      {parseAndRenderMath(
+        "Que é o poeta? um homem"
+      )}
+      {parseAndRenderMath(
+        "que trabalha o poema"
+      )}
+      {parseAndRenderMath(
+        "com o suor dos eu rosto"
+      )}
+      {parseAndRenderMath(
+        "um homem"
+      )}
+      {parseAndRenderMath(
+        "que tem fome"
+      )}
+      {parseAndRenderMath(
+        "como qualquer outro"
+      )}
+      {parseAndRenderMath(
+        "homem (Cassiano Ricardo)"
+      )}
+
+      {/* // usei de molde para copia-cola
+      <Text style={styles.titulo3}>O que é Literatura?</Text>
       {parseAndRenderMath(
         ""
       )}
@@ -1546,7 +2248,7 @@ export default function TeoriaConjuntosScreen() {
         ></Image>
       </View> */}
 
-    </View>,
+    </View>
   ];
 
   const totalPages = paginasDeConteudo.length;

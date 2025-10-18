@@ -191,6 +191,7 @@ import background13 from "@/assets/images/Personagem/background/13.svg";
 import background14 from "@/assets/images/Personagem/background/14.svg";
 
 import { EMBLEMAS } from '@/constants/dadosEmblemas';
+const CABELOS_FEMININOS = ["cabelo21", "cabelo22", "cabelo23", "cabelo24", "cabelo25", "cabelo26", "cabelo27", "cabelo28", "cabelo29", "cabelo30", "cabelo31", "cabelo32", "cabelo33", "cabelo34", "cabelo35", "cabelo36", "cabelo37", "cabelo38", "cabelo39", "cabelo40"];
 
 const partesPersonagem = {
   background: {
@@ -412,6 +413,8 @@ export function Personagem({ size, customizations, emblemId }: CharacterProps) {
   const { background, ears, cheeks, face, eyes, mouth, bangs, hair, nose, faceColor,faceShadowColor } =
     customizations;
 
+  const isCabeloFeminino = CABELOS_FEMININOS.includes(hair);
+
   // componentes SVG
   const BackgroundComponent = partesPersonagem.background[background];
   const EarsComponent = partesPersonagem.orelha[ears];
@@ -480,7 +483,7 @@ export function Personagem({ size, customizations, emblemId }: CharacterProps) {
         </View>
       )}
       {HairComponent && (
-        <View style={[styles.hairLayer, { zIndex: 2 }]}>
+        <View style={[styles.hairLayer, isCabeloFeminino && styles.hairLayerFeminino,{ zIndex: 2 }]}>
           <HairComponent width="100%" height="100%" />
         </View>
       )}
@@ -501,6 +504,9 @@ const styles = StyleSheet.create({
   hairLayer: {
     ...StyleSheet.absoluteFillObject,
     transform: [{ translateY: "-5%" }, { scale: 1.2 }], 
+  },
+  hairLayerFeminino:{
+    transform: [{ translateY: "7%" }, { scale: 1.25 }],
   },
   faceLayer: {
     ...StyleSheet.absoluteFillObject,

@@ -228,6 +228,7 @@ export const LOJA_ITENS = {
   ],
   hair: [
     { id: "cabelo1", thumbnail: cabelo1, preco: 0 },
+    { id: "cabelo24", thumbnail: cabelo24, preco: 0 },
     { id: "cabelo2", thumbnail: cabelo2, preco: 100 },
     { id: "cabelo3", thumbnail: cabelo3, preco: 100 },
     { id: "cabelo4", thumbnail: cabelo4, preco: 100 },
@@ -250,7 +251,6 @@ export const LOJA_ITENS = {
     { id: "cabelo21", thumbnail: cabelo21, preco: 100 },
     { id: "cabelo22", thumbnail: cabelo22, preco: 100 },
     { id: "cabelo23", thumbnail: cabelo23, preco: 100 },
-    { id: "cabelo24", thumbnail: cabelo24, preco: 100 },
     { id: "cabelo25", thumbnail: cabelo25, preco: 100 },
     { id: "cabelo26", thumbnail: cabelo26, preco: 100 },
     { id: "cabelo27", thumbnail: cabelo27, preco: 100 },

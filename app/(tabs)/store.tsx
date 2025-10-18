@@ -43,7 +43,7 @@ export default function LojaScreen() {
     cheeks: "bochecha1",
     face: "rosto1",
     eyes: "olhos1",
-    mouth: "boca1",
+    mouth: "boca39",
     bangs: "franja1",
     hair: "cabelo1",
     nose: "nariz1",

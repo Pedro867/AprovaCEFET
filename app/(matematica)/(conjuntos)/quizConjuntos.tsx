@@ -21,7 +21,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { Colors, Fonts } from "@/constants/Colors";
 import initialQuestions from "./questoesConjuntos.json";
-import { updateCoinsBD, updateStreakBD } from "@/utils/api/conexaoFetch";
+import { updateCoinsBD, updatelastStreakDateBD, updateStreakBD } from "@/utils/api/conexaoFetch";
 import { MathJaxSvg } from "react-native-mathjax-html-to-svg";
 import { streakEventEmitter } from "@/utils/events/streakEvents";
 
@@ -250,9 +250,9 @@ const QuizScreen = () => {
           setStreak(parseInt(streakValue, 10));
         }
         const lastStreakDate = await AsyncStorage.getItem(LAST_STREAK_DATE_KEY);
-        if (lastStreakDate != null) {
+        /*if (lastStreakDate != null) {
           setLastStreakDate(new Date(lastStreakDate));
-        }
+        }*///comentando pra ver se funciona sem ASS: torres
       } catch (error) {
         console.error("Erro ao carregar as coins do usuário", error);
       }
@@ -331,7 +331,7 @@ const QuizScreen = () => {
     if (selectedAnswer === questions[currentQuestionIndex].correctAnswer) {
       // Lógica da streak diária
       const today = new Date();
-      const todayString = today.toDateString();
+      const todayString = today.toISOString().slice(0, 10);
 
       // A streak so aumenta se for a primeira resposta correta do dia
       if (lastStreakDate !== todayString) {
@@ -340,7 +340,7 @@ const QuizScreen = () => {
 
         let newStreak = 1; // inicia ou reinicia a streak
 
-        if (lastStreakDate === yestarday.toDateString()) {
+        if (lastStreakDate === yestarday.toISOString().slice(0, 10)) {
           newStreak = streak + 1; // continua a streak
         }
 
@@ -350,11 +350,10 @@ const QuizScreen = () => {
 
           await AsyncStorage.setItem("userStreak", newStreak.toString());
           await AsyncStorage.setItem("lastStreakDate", todayString);
-          const respostaBD = await updateStreakBD(newStreak);
-          console.log(
-            "Resposta do servidor ao atualizar streak:",
-            respostaBD
-          );
+          await updateStreakBD(newStreak);
+          const today = new Date();
+          const todayStr = today.toISOString().slice(0, 10);
+          await updatelastStreakDateBD(todayStr);
           streakEventEmitter.emit("streakAtualizada");
 
           if (newStreak == 1) {

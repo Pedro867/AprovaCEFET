@@ -21,6 +21,7 @@ import { BlurView } from "expo-blur";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import {
   checkCompletedQuizes,
+  getLastStreakDateBD,
   updateStreakBD,
 } from "../../utils/api/conexaoFetch";
 import { SECOES_PARA_EMBLEMAS, EMBLEMAS } from "@/constants/dadosEmblemas";
@@ -128,12 +129,14 @@ export default function TelaSecao() {
     try {
       //logica de verificar se o streak ta ativo ou n
       const today = new Date();
-      const todayStr = today.toDateString();
+      const todayStr = today.toISOString().slice(0, 10);
 
       const yesterday = new Date();
       yesterday.setDate(yesterday.getDate() - 1);
-      const yesterdayStr = yesterday.toDateString();
+      const yesterdayStr = yesterday.toISOString().slice(0, 10);
+      //ANA, DESSE JEITO AQUI FICA IGUAL TA SALVO NO BD (2025-10-18)
 
+      await AsyncStorage.setItem("lastStreakDate", await getLastStreakDateBD()); //pega a ultima data do BD
       const lastDateStr = await AsyncStorage.getItem("lastStreakDate");
       const currentStreakStr = await AsyncStorage.getItem("userStreak");
       let currentStreak = currentStreakStr ? parseInt(currentStreakStr, 10) : 0;
@@ -146,7 +149,7 @@ export default function TelaSecao() {
         //se a ultima data for diferente de hoje e ontem, zerar streak
         currentStreak = 0;
         await AsyncStorage.setItem("userStreak", "0");
-        //await updateStreakBD(0);
+        await updateStreakBD(0);
       }
       setStreakUsuario(currentStreak);
       setIsStreakActive(lastDateStr === todayStr);

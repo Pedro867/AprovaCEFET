@@ -60,15 +60,14 @@ export default function UnidadeConjuntos() {
       <View style={styles.header}>
         <TouchableOpacity
           onPress={() => router.replace('/(matematica)/telaUnidadesMat')}
-          style={styles.backButton}
         >
           <Ionicons name="arrow-back" size={24} color="black" />
         </TouchableOpacity>
 
         <View style={styles.textHeader}>
-          <View>
-            <ThemedText style={styles.headerTitle}>Fatoração e Sistemas Lineares</ThemedText>
-          </View>
+         
+            <ThemedText style={styles.headerTitle} numberOfLines={2}>Fatoração e Sistemas Lineares</ThemedText>
+          
         </View>
         <View style={styles.streakContainer}>
           <Image
@@ -124,55 +123,38 @@ const styles = StyleSheet.create({
   header: {
     flexDirection: "row",
     justifyContent: "space-between",
+    alignItems: "center",
     paddingHorizontal: 20,
-    paddingTop: 20,
-    marginBottom: 20,
+    paddingVertical: 10,
+    marginBottom: "5%",
     marginTop: "15%",
     borderBottomWidth: 2,
     borderTopWidth: 2,
     borderColor: "rgba(0, 0, 0, 0.1)",
   },
   textHeader: {
-    flexDirection: "row",
+    flex: 1,
     alignItems: "center",
-    justifyContent: "center",
-    paddingHorizontal: 20,
-    marginBottom: 20,
-    position: "relative",
   },
   streakContainer: {
     alignItems: "center",
-    right: "5%",
-    bottom: "10%",
   },
   streakIcon: {
     width: 40,
     height: 40,
   },
   streakNumber: {
-    fontSize: 12,
+    fontSize: 14,
     color: "#060302",
     fontWeight: "bold",
-    textShadowColor: "rgba(0,0,0,0.25)",
-    textShadowOffset: { width: 0, height: 4 },
-    textShadowRadius: 4,
-  },
-  backButton: {
-    left: "2%",
-    top: "5%",
   },
   headerTitle: {
-    fontSize: 30,
+    fontSize: 20,
     fontFamily: "Kumbh Sans",
     fontWeight: "600",
     color: "#121212",
-    marginBottom: 10,
-  },
-  headerSubtitle: {
-    fontSize: 16,
-    fontFamily: "Kumbh Sans",
-    color: "#060302",
-    marginLeft: 28,
+    paddingVertical: 20,
+    
   },
 
   buttonsListContainer: {

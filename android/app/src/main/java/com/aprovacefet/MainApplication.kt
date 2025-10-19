@@ -1,4 +1,4 @@
-package com.anonymous.AprovaCEFET
+package com.aprovacefet
 
 import android.app.Application
 import android.content.res.Configuration

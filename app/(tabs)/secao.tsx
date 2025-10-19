@@ -27,6 +27,7 @@ import {
 import { SECOES_PARA_EMBLEMAS, EMBLEMAS } from "@/constants/dadosEmblemas";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { streakEventEmitter } from "@/utils/events/streakEvents";
+import { ModalConquista } from "@/components/ui/ModalConquista";
 
 // estado inicial do personagem
 const personagemInicial = {
@@ -51,6 +52,9 @@ export default function TelaSecao() {
     4: 0,
   });
 
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [emblemaDesbloqueado, setEmblemaDesbloqueado] = useState<any | null>(null);
+
   const verificarEmblemasDesbloqueados = async (progressoAtual: {
     [key: number]: number;
   }) => {
@@ -70,14 +74,15 @@ export default function TelaSecao() {
           "unlockedEmblems",
           JSON.stringify(unlockedEmblems)
         );
-        Alert.alert(
-          "Emblema Desbloqueado!",
-          "Você completou a seção de Matemática e ganhou o emblema 'Mestre da Matemática'!"
-        );
+        //ATIVA MODAL 
+        const emblemaInfo = EMBLEMAS.matematica; 
+        setEmblemaDesbloqueado(emblemaInfo);    
+        setIsModalVisible(true);
       }
     }
     //adicionar checagem de outros emblemas aqui dps
   };
+
 
   const subjectAreas = [
     {
@@ -284,6 +289,13 @@ export default function TelaSecao() {
       console.error("Erro ao atualizar a data", error);
     }
   };
+
+  const handleNavigateToProfile = () => { // navega para a tela de perfil
+    setIsModalVisible(false); 
+    router.push("/(tabs)/profile"); 
+  };
+
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
@@ -323,7 +335,7 @@ export default function TelaSecao() {
       <Card style={styles.progressCard}>
         <LinearGradient
           colors={["rgba(34,75,244,0.29)", "rgba(103, 114, 160, 0.78)"]}
-          style={{ width: '100%', padding: 16, borderRadius: 12.38 }}
+          style={{ width: "100%", padding: 16, borderRadius: 12.38 }}
         >
           <View style={styles.progressHeader}>
             <Text style={styles.progressLabel}>Faltam</Text>
@@ -337,14 +349,12 @@ export default function TelaSecao() {
             <Text style={styles.daysLabel}>para a sua prova!</Text>
           </View>
 
-            <ProgressBar
-              progress={progresso}
-              height={10}
-              style={[styles.dateProgressBarContainer, styles.progressDateBar]}
-              progressColor="#0D1B52"
-            
-            />
-          
+          <ProgressBar
+            progress={progresso}
+            height={10}
+            style={[styles.dateProgressBarContainer, styles.progressDateBar]}
+            progressColor="#0D1B52"
+          />
         </LinearGradient>
       </Card>
 
@@ -412,6 +422,12 @@ export default function TelaSecao() {
           </TouchableOpacity>
         </BlurView>
       )}
+      <ModalConquista
+        visible={isModalVisible}
+        emblema={emblemaDesbloqueado}
+        onClose={() => setIsModalVisible(false)}
+        onNavigateToProfile={handleNavigateToProfile}
+      />
     </SafeAreaView>
   );
 }
@@ -474,7 +490,7 @@ const styles = StyleSheet.create({
   progressCardContent: {
     padding: 16,
     borderRadius: 12.38,
-    justifyContent: 'space-between',
+    justifyContent: "space-between",
   },
   progressHeader: {
     flexDirection: "row",
@@ -510,7 +526,7 @@ const styles = StyleSheet.create({
     width: "80%",
   },
   dateProgressBarContainer: {
-    width: '100%', 
+    width: "100%",
   },
   progressBarContainer: {
     alignItems: "center",

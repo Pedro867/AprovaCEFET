@@ -159,41 +159,7 @@ const QuizScreen = () => {
   const finalizarQuiz = async () => {
     try {
       await updateQuizBD(score, 401); //401 eh o id do quiz
-      const p4 = await checkCompletedQuizes(4); // 4 = Matemática
-
-      const getCompletedCount = (
-        r: any // normaliza: aceita tanto number quanto { completados: number }
-      ) =>
-        typeof r === "number"
-          ? r
-          : r && typeof r.completados === "number"
-          ? r.completados
-          : 0;
-
-      const completados = getCompletedCount(p4);
-
-      const totalQuizzesMatematica = SECOES_PARA_EMBLEMAS.matematica.length;
-
-      if (completados >= totalQuizzesMatematica) {
-        const unlockedEmblemsStr = await AsyncStorage.getItem(
-          "unlockedEmblems"
-        );
-        const unlockedEmblems = unlockedEmblemsStr
-          ? JSON.parse(unlockedEmblemsStr)
-          : [];
-
-        if (!unlockedEmblems.includes("matematica")) {
-          unlockedEmblems.push("matematica");
-          await AsyncStorage.setItem(
-            "unlockedEmblems",
-            JSON.stringify(unlockedEmblems)
-          );
-          Alert.alert(
-            "Emblema Desbloqueado!",
-            "Você completou Matemática e ganhou o emblema 'Mestre da Matemática'!"
-          );
-        }
-      }
+      
     } catch (err) {
       console.error("Erro ao atualizar quiz:", err);
     }

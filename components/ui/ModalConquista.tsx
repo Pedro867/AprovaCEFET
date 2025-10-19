@@ -54,7 +54,7 @@ export function ModalConquista({
         <BotaoCustomizado
           title="IR PARA O PERFIL"
           onPress={onNavigateToProfile}
-          style={{ width: "90%", marginBottom: 15 }}
+          style={{ width: "60%", marginBottom: 15 }}
         />
 
         <TouchableOpacity onPress={onClose}>

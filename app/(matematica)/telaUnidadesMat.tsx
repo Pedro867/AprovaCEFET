@@ -14,37 +14,10 @@ import { ThemedText } from "@/components/ThemedText";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { unidadesMatematica } from "@/constants/dadosUnidades";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { StreakDisplay } from "@/components/ui/StreakDisplay";
 
 export default function telaUnidadesMatMatematica() {
   const router = useRouter();
-
-  const [streakUsuario, setStreakUsuario] = useState(0);
-
-  useEffect(() => {
-    const carregarDados = async () => {
-      try {
-        const streak = await AsyncStorage.getItem("userStreak");
-        setStreakUsuario(streak);
-      } catch (error) {
-        console.error("Erro ao carregar o streak do usuário", error);
-      }
-    };
-
-    carregarDados();
-  }, []);
-
-  //customizacao do personagem
-  const customizacoes = {
-    background: "cor1",
-    ears: "orelha1",
-    cheeks: "bochecha1",
-    face: "rosto1",
-    eyes: "olhos1",
-    mouth: "boca1",
-    bangs: "franja1",
-    hair: "cabelo1",
-    nose: "nariz1",
-  };
 
   return (
     <View style={styles.container}>
@@ -63,13 +36,7 @@ export default function telaUnidadesMatMatematica() {
             <ThemedText style={styles.headerSubtitle}>Matemática</ThemedText> 
           </View>
         </View>
-        <View style={styles.streakContainer}>
-          <Image
-            source={require("@/assets/images/foguin--ativado-.png")}
-            style={styles.streakIcon}
-          />
-          <Text style={styles.streakNumber}>{streakUsuario}</Text>
-        </View>
+        <StreakDisplay />
       </View>
       <ScrollView
         contentContainerStyle={styles.scrollViewContent}
@@ -140,23 +107,7 @@ const styles = StyleSheet.create({
     color: "#121212",
     textAlign: "center",
   },
-  streakContainer: {
-    alignItems: "center",
-    right: "5%",
-    bottom: "10%",
-  },
-  streakIcon: {
-    width: 40,
-    height: 40,
-  },
-  streakNumber: {
-    fontSize: 12,
-    color: "#060302",
-    fontWeight: "bold",
-    textShadowColor: "rgba(0,0,0,0.25)",
-    textShadowOffset: { width: 0, height: 4 },
-    textShadowRadius: 4,
-  },
+  
   backButton: {
     left: "2%",
     top: "5%",

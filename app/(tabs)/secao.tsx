@@ -28,6 +28,7 @@ import { SECOES_PARA_EMBLEMAS, EMBLEMAS } from "@/constants/dadosEmblemas";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { streakEventEmitter } from "@/utils/events/streakEvents";
 import { ModalConquista } from "@/components/ui/ModalConquista";
+import { StreakDisplay } from "@/components/ui/StreakDisplay";
 
 // estado inicial do personagem
 const personagemInicial = {
@@ -132,32 +133,6 @@ export default function TelaSecao() {
 
   const carregarTodosOsDados = useCallback(async () => {
     try {
-      //logica de verificar se o streak ta ativo ou n
-      const today = new Date();
-      const todayStr = today.toISOString().slice(0, 10);
-
-      const yesterday = new Date();
-      yesterday.setDate(yesterday.getDate() - 1);
-      const yesterdayStr = yesterday.toISOString().slice(0, 10);
-      //ANA, DESSE JEITO AQUI FICA IGUAL TA SALVO NO BD (2025-10-18)
-
-      await AsyncStorage.setItem("lastStreakDate", await getLastStreakDateBD()); //pega a ultima data do BD
-      const lastDateStr = await AsyncStorage.getItem("lastStreakDate");
-      const currentStreakStr = await AsyncStorage.getItem("userStreak");
-      let currentStreak = currentStreakStr ? parseInt(currentStreakStr, 10) : 0;
-
-      if (
-        lastDateStr &&
-        lastDateStr !== todayStr &&
-        lastDateStr !== yesterdayStr
-      ) {
-        //se a ultima data for diferente de hoje e ontem, zerar streak
-        currentStreak = 0;
-        await AsyncStorage.setItem("userStreak", "0");
-        await updateStreakBD(0);
-      }
-      setStreakUsuario(currentStreak);
-      setIsStreakActive(lastDateStr === todayStr);
 
       //carrega nome do usuario
       const primeiroNome = await AsyncStorage.getItem("userPrimeiroNome");
@@ -311,17 +286,7 @@ export default function TelaSecao() {
 
           <Text style={styles.subtitle}>Vamos começar a aprender!</Text>
         </View>
-        <View style={styles.streakContainer}>
-          <Image
-            source={
-              isStreakActive
-                ? require("@/assets/images/foguin--ativado-.png")
-                : require("@/assets/images/foguin--desativado-.png")
-            }
-            style={styles.streakIcon}
-          />
-          <Text style={styles.streakNumber}>{streakUsuario}</Text>
-        </View>
+        <StreakDisplay />
         <View style={styles.streakContainer}>
           <Image
             source={require("@/assets/images/pontos.png")}
@@ -470,6 +435,8 @@ const styles = StyleSheet.create({
   },
   streakContainer: {
     alignItems: "center",
+    right: "5%",
+    bottom: "10%",
   },
   streakIcon: {
     width: 40,

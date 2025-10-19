@@ -13,6 +13,7 @@ import { ThemedText } from "@/components/ThemedText";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { Feather } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { StreakDisplay } from "@/components/ui/StreakDisplay";
 
 const opcoesDaUnidade = [
   {
@@ -39,20 +40,6 @@ const opcoesDaUnidade = [
 
 export default function UnidadeConjuntos() {
   const router = useRouter();
-  const [streakUsuario, setStreakUsuario] = useState(0);
-
-  useEffect(() => {
-    const carregarDados = async () => {
-      try {
-        const streak = await AsyncStorage.getItem("userStreak");
-        setStreakUsuario(streak);
-      } catch (error) {
-        console.error("Erro ao carregar o streak do usuário", error);
-      }
-    };
-
-    carregarDados();
-  }, []);
 
   return (
     <View style={styles.container}>
@@ -70,13 +57,7 @@ export default function UnidadeConjuntos() {
             <ThemedText style={styles.headerTitle}>Estudo das Funções</ThemedText>
          
         </View>
-        <View style={styles.streakContainer}>
-          <Image
-            source={require("@/assets/images/foguin--ativado-.png")}
-            style={styles.streakIcon}
-          />
-          <Text style={styles.streakNumber}>{streakUsuario}</Text>
-        </View>
+        <StreakDisplay />
       </View>
 
       <ScrollView contentContainerStyle={styles.buttonsListContainer}>
@@ -137,18 +118,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
   },
-  streakContainer: {
-    alignItems: "center",
-  },
-  streakIcon: {
-    width: 40,
-    height: 40,
-  },
-  streakNumber: {
-    fontSize: 14,
-    color: "#060302",
-    fontWeight: "bold",
-  },
+  
   headerTitle: {
     fontSize: 25,
     fontFamily: "Kumbh Sans",

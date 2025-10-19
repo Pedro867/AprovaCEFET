@@ -15,6 +15,7 @@ import { ThemedText } from "@/components/ThemedText";
 import { Personagem } from "@/components/ui/Personagem";
 import { Feather } from "@expo/vector-icons";
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { StreakDisplay } from "@/components/ui/StreakDisplay";
 
 const opcoesDaUnidade = [
   {
@@ -42,34 +43,6 @@ const opcoesDaUnidade = [
 export default function UnidadeConjuntos() {
   const router = useRouter();
 
-  const [streakUsuario, setStreakUsuario] = useState(0);
-
-  useEffect(() => {
-    const carregarDados = async () => {
-      try {
-        const streak = await AsyncStorage.getItem("userStreak");
-        setStreakUsuario(streak);
-      } catch (error) {
-        console.error("Erro ao carregar o streak do usuário", error);
-      }
-    }
-
-    carregarDados();
-  }, []);
-
-  //customizacao do personagem
-  const customizacoes = {
-    background: 'cor1',
-    ears: 'orelha1',
-    cheeks: 'bochecha1',
-    face: 'rosto1',
-    eyes: 'olhos1',
-    mouth: 'boca1',
-    bangs: 'franja1',
-    hair: 'cabelo1',
-    nose: 'nariz1',
-  };
-
   return (
     <View style={styles.container}>
 
@@ -84,13 +57,7 @@ export default function UnidadeConjuntos() {
          
             <ThemedText style={styles.headerTitle} numberOfLines={2}>Potenciação e Radiciação</ThemedText>
         </View>
-        <View style={styles.streakContainer}>
-          <Image
-            source={require("@/assets/images/foguin--ativado-.png")}
-            style={styles.streakIcon}
-          />
-          <Text style={styles.streakNumber}>{streakUsuario}</Text>
-        </View>
+        <StreakDisplay />
       </View>
 
 
@@ -152,20 +119,8 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
   },
-  streakContainer: {
-    alignItems: "center",
-  },
-  streakIcon: {
-    width: 40,
-    height: 40,
-  },
-  streakNumber: {
-    fontSize: 14,
-    color: "#060302",
-    fontWeight: "bold",
-  },
   headerTitle: {
-    fontSize: 24,
+    fontSize: 22,
     fontFamily: "Kumbh Sans",
     fontWeight: "600",
     color: "#121212",

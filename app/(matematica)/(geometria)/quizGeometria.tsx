@@ -378,6 +378,31 @@ const QuizScreen = () => {
     }
   };
 
+    const handleNextQuestion = () => {
+    const nextQuestion = currentQuestionIndex + 1;
+    if (nextQuestion < questions.length) {
+      setCurrentQuestionIndex(nextQuestion);
+      setSelectedAnswer(null);
+      setAnswered(false);
+    } else {
+      setShowScore(true);
+      saveQuizState({
+        currentQuestionIndex: nextQuestion,
+        score:
+          score +
+          (selectedAnswer === questions[currentQuestionIndex].correctAnswer
+            ? 1
+            : 0),
+        incorrectQuestions:
+          selectedAnswer === questions[currentQuestionIndex].correctAnswer
+            ? incorrectQuestions
+            : [...incorrectQuestions, questions[currentQuestionIndex]],
+        quizMode,
+        questions: questions,
+      });
+    }
+  };
+
   const resetQuiz = () => {
     setQuizStarted(false); // volta para a tela inicial
     setShowScore(false);

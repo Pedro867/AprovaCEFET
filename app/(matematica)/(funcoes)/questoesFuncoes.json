@@ -9,7 +9,7 @@
       "30"
     ],
     "image": "./q1.png",
-    "correctAnswer": "12"
+    "correctAnswer": "24"
   },
   {
     "id": "2",
@@ -20,7 +20,7 @@
       "60%",
       "65%"
     ],
-    "correctAnswer": "12"
+    "correctAnswer": "55%"
   },
   {
     "id": "3",
@@ -42,7 +42,7 @@
       "3° quadrante e eixo das abscissas.",
       "eixo das ordenadas e 2° quadrante."
     ],
-    "correctAnswer": "12"
+    "correctAnswer": "3° quadrante e eixo das abscissas."
   },
   {
     "id": "5",
@@ -54,7 +54,7 @@
       "d)"
     ],
     "image": "./q5.png",
-    "correctAnswer": "12"
+    "correctAnswer": "b)"
   },
   {
     "id": "6",
@@ -65,7 +65,7 @@
       "5",
       "$\\frac{11}{2}$"
     ],
-    "correctAnswer": "12"
+    "correctAnswer": "5"
   },
   {
     "id": "7",
@@ -76,6 +76,6 @@
       "C = {$y \\in \\mathbb{R}|y \\leq -\\frac{25}{4}$}",
       "D = {$y \\in \\mathbb{R}|y \\geq -\\frac{25}{4}$}"
     ],
-    "correctAnswer": "12"
+    "correctAnswer": "D = {$y \\in \\mathbb{R}|y \\geq -\\frac{25}{4}$}"
   }
 ]

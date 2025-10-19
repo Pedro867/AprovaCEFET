@@ -38,7 +38,7 @@ export default function ProfileScreen() {
   const router = useRouter();
 
   const [nomeUsuario, setNomeUsuario] = useState(null);
-  const [streakUsuario, setStreakUsuario] = useState(0);
+  const [bestStreak, setBestStreak] = useState(0);
   const [coinsUsuario, setCoinsUsuario] = useState(0);
   const [customizacoes, setCustomizacoes] = useState(personagemInicial);
   const [unlockedEmblems, setUnlockedEmblems] = useState<string[]>([]);
@@ -60,6 +60,12 @@ export default function ProfileScreen() {
           setCoinsUsuario(coins);
         } catch (error) {
           console.error("Erro ao carregar as coins do usuário", error);
+        }
+        try {
+          const melhorStreak = await AsyncStorage.getItem("bestStreak");
+          setBestStreak(melhorStreak);
+        } catch (error) {
+          console.error("Erro ao carregar a melhor streak do usuário", error);
         }
         //carrega personagem atual
         try {
@@ -141,7 +147,7 @@ export default function ProfileScreen() {
               source={require("@/assets/images/foguin--ativado-.png")}
               style={styles.statsIcon}
             />
-            <ThemedText style={styles.statValue}>{streakUsuario}</ThemedText>
+            <ThemedText style={styles.statValue}>{bestStreak}</ThemedText>
             <ThemedText style={styles.statLabel}>Melhor streak</ThemedText>
           </View>
           <View style={styles.verticalDivider} />

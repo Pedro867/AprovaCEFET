@@ -3,89 +3,89 @@
     "id": "1",
     "question": "Resolva a seguinte equação: $5x^2 - 3x = 0$",
     "options": [
-      "a",
-      "b",
-      "c",
-      "d"
+      "x₁ = 0 e x₂ = $\\frac{3}{5}$",
+      "x₁ = 0 e x₂ = -$\\frac{3}{5}$",
+      "x₁ = 0 e x₂ = $\\frac{5}{3}$",
+      "x₁ = 0 e x₂ = -$\\frac{5}{3}$"
     ],
-    "correctAnswer": "a"
+    "correctAnswer": "x₁ = 0 e x₂ = $\\frac{3}{5}$"
   },
   {
     "id": "2",
     "question": "Resolva a seguinte equação: $x^2 - 14x + 50 = 0$",
     "options": [
-      "a",
-      "b",
-      "c",
-      "d"
+      "x₁ = 6 e x₂ = 8",
+      "x₁ = -6 e x₂ = -8",
+      "x₁ = 6 e x₂ = -8",
+      "Não existe solução com x ∈ ℝ"
     ],
-    "correctAnswer": "a"
+    "correctAnswer": "Não existe solução com x ∈ ℝ"
   },
   {
     "id": "3",
     "question": "Resolva a seguinte equação: $9x^2 + 6x - 48 = 0$",
     "options": [
-      "a",
-      "b",
-      "c",
-      "d"
+      "x₁ = -$\\frac{16}{3}$ e x₂ = 4",
+      "x₁ = -$\\frac{8}{3}$ e x₂ = 2",
+      "x₁ = -3 e x₂ = 2",
+      "x₁ = -5 e x₂ = 4"
     ],
-    "correctAnswer": "a"
+    "correctAnswer": "x₁ = -$\\frac{8}{3}$ e x₂ = 2"
   },
   {
     "id": "4",
     "question": "Determine o valor de m para que a equação $x^2 - (m + 1)x - 28 = 0$ tenha duas raízes cuja soma seja igual a -3.",
     "options": [
-      "a",
-      "b",
-      "c",
-      "d"
+      "10",
+      "4",
+      "-4",
+      "-10"
     ],
-    "correctAnswer": "a"
+    "correctAnswer": "-4"
   },
   {
     "id": "5",
     "question": "Utilizando a relação de soma e produto das raízes de uma equação do 2º grau, resolva: $x^2 + 4x + 4 = 0$",
     "options": [
-      "a",
-      "b",
-      "c",
-      "d"
+      "(x + 2).(x + 2), logo x₁ = x₂ = -2",
+      "(x - 2).(x - 2), logo x₁ = 2 e x₂ = -2",
+      "(x + 2).(x + 2), logo x₁ = 2 e x₂ = -2",
+      "(x - 2).(x - 2), logo x₁ = x₂ = -2"
     ],
-    "correctAnswer": "a"
+    "correctAnswer": "(x + 2).(x + 2), logo x₁ = x₂ = -2"
   },
   {
     "id": "6",
     "question": "Utilizando a relação de soma e produto das raízes de uma equação do 2º grau, resolva: $x^2 - x - 6 = 0$",
     "options": [
-      "a",
-      "b",
-      "c",
-      "d"
+      "(x + 3).(x - 2), logo x₁ = 3 e x₂ = -2",
+      "(x + 3).(x - 2), logo x₁ = - 3 e x₂ = 2",
+      "(x - 3).(x + 2), logo x₁ = 3 e x₂ = -2",
+      "(x - 3).(x + 2), logo x₁ = -3 e x₂ = 2"
     ],
-    "correctAnswer": "a"
+    "correctAnswer": "(x - 3).(x + 2), logo x₁ = 3 e x₂ = -2"
   },
   {
     "id": "7",
     "question": "Resolva a equação biquadrada em $\\mathbb{R}$: $9x^4 - 13x^2 + 4 = 0$",
     "options": [
-      "a",
-      "b",
-      "c",
-      "d"
+      "x₁ = 1, x₂ = -1, x₃ = $\\frac{4}{9}$ e x₄ = -$\\frac{4}{9}$",
+      "x₁ = 1, x₂ = -1, x₃ = $\\frac{2}{3}$ e x₄ = -$\\frac{2}{3}$",
+      "x₁ = 1, x₂ = $\\frac{4}{9}$",
+      "x₁ = 1, x₂ = $\\frac{2}{3}$"
     ],
-    "correctAnswer": "a"
+    "correctAnswer": "x₁ = 1, x₂ = -1, x₃ = $\\frac{2}{3}$ e x₄ = -$\\frac{2}{3}$"
   },
   {
     "id": "8",
     "question": "Resolva a equação biquadrada em $\\mathbb{R}$: $x^4 + 6x^2 + 8 = 0$",
     "options": [
-      "a",
-      "b",
-      "c",
-      "d"
+      "x₁ = -4, x₂ = -2",
+      "x₁ = 2, x₂ = -2, x₃ = $\\sqrt{2}$ e x₄ = $\\sqrt{-2}$",
+      "Existem infinitas soluções",
+      "Não existe solução com x ∈ ℝ"
     ],
-    "correctAnswer": "a"
+    "correctAnswer": "Não existe solução com x ∈ ℝ"
   },
   {
     "id": "9",
@@ -96,6 +96,6 @@
       "3",
       "$\\frac{50}{3}$"
     ],
-    "correctAnswer": "nao sei"
+    "correctAnswer": "$\\frac{50}{3}$"
   }
 ]

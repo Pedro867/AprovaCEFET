@@ -1,4 +1,4 @@
-[
+  [
   {
     "id": "1",
     "question": "(CEFET/MG-2008) Uma piscina foi projetada em forma de um retângulo cujo comprimento é o triplo da largura, conforme FIG. 1. Antes de ser construída, seu proprietário decidiu modificá-la, conforme FIG. 2, na qual AB, BC e CD são diâmetros dos semicírculos anexados. Se o preço da construção for proporcional ao seu perímetro, e o custo da primeira piscina com 16m de comprimento for de R$ 1 888, 00, então o segundo projeto custará (use: π = 3, 14)",
@@ -9,7 +9,7 @@
       "R$2560,60"
     ],
     "image": "./q1.png",
-    "correctAnswer": "nao sei"
+    "correctAnswer": "R$2535,80"
   },
   {
     "id": "2",
@@ -21,7 +21,7 @@
       "$\\frac{25\\pi - 48}{8}$"
     ],
     "image": "./q2.png",
-    "correctAnswer": "nao sei"
+    "correctAnswer": "$\\frac{25\\pi - 48}{8}$"
   },
   {
     "id": "3",
@@ -32,7 +32,7 @@
       "$[5,9]$",
       "$[2,10]$"
     ],
-    "correctAnswer": "nao sei"
+    "correctAnswer": "$[1,5]$"
   },
   {
     "id": "4",
@@ -44,7 +44,7 @@
       "$\\frac{2.\\sqrt{3}}{3}$"
     ],
     "image": "./q4.png",
-    "correctAnswer": "nao sei"
+    "correctAnswer": "$\\frac{2.\\sqrt{3}}{3}$"
   },
   {
     "id": "5",

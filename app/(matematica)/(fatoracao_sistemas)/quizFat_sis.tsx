@@ -21,8 +21,9 @@ import { LinearGradient } from "expo-linear-gradient";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { Colors, Fonts } from "@/constants/Colors";
 import initialQuestions from "./questoesFatoracao_sistemas.json";
-import { updateCoinsBD, updateStreakBD } from "@/utils/api/conexaoFetch";
+import { updateCoinsBD, updateStreakBD, updatelastStreakDateBD } from "@/utils/api/conexaoFetch";
 import { MathJaxSvg } from "react-native-mathjax-html-to-svg";
+import { streakEventEmitter } from "@/utils/events/streakEvents";
 
 import { updateQuizBD } from "@/utils/api/conexaoFetch";
 
@@ -38,7 +39,7 @@ const personagemInicial = {
   nose: "nariz1",
   faceColor: "#F8B788",
   faceShadowColor: "#D1A37E",
-};
+}as const;
 
 // --- TIPAGEM ---
 interface Question {
@@ -58,13 +59,13 @@ const imageMap: { [key: string]: any } = {
 
 let tamanhoMathJax = 0;
 //TAMANHO DO MATHJAX
-if (Platform.OS == 'web') {
+if (Platform.OS == "web") {
   tamanhoMathJax = 2.5;
 }
-if (Platform.OS == 'android') {
+if (Platform.OS == "android") {
   tamanhoMathJax = 17;
 }
-if (Platform.OS == 'ios') {
+if (Platform.OS == "ios") {
   tamanhoMathJax = 17; //testar dps
 }
 
@@ -82,10 +83,12 @@ const QuizScreen = () => {
   const [coins, setCoinsUsuario] = useState(0);
   const [showCoinsIncrease, setShowCoinsIncrease] = useState(false);
   const [coinsIncreaseAmount, setCoinsIncreaseAmount] = useState(0);
-  const [lastStreakDate, setLastStreakDate] = useState<Date | null>(null);
-  const [streak, setStreak] = useState(0);
   const [customizacoes, setCustomizacoes] = useState(personagemInicial);
   const [userName, setUserName] = useState("");
+  const [selectedEmblem, setSelectedEmblem] = useState<string | null>(null);
+
+  const [lastStreakDate, setLastStreakDate] = useState<string | null>(null);
+  const [streak, setStreak] = useState(0);
 
   const router = useRouter();
 
@@ -108,9 +111,9 @@ const QuizScreen = () => {
     }*/
   };
 
+  //CARREGA DADOS DO USUÁRIO (NOME, PERSONAGEM, STREAK, EMBLEMA)
   useFocusEffect(
     useCallback(() => {
-
       const carregaDadosUsuario = async () => {
         try {
           const savedName = await AsyncStorage.getItem("userPrimeiroNome");
@@ -127,10 +130,27 @@ const QuizScreen = () => {
           );
           if (savedCustomizations) {
             setCustomizacoes(JSON.parse(savedCustomizations));
-
           }
         } catch (error) {
           console.error("Erro ao carregar o personagem do usuário", error);
+        }
+
+        try {
+          // carrega o emblema selecionado
+          const emblem = await AsyncStorage.getItem("selectedEmblem");
+          setSelectedEmblem(emblem);
+        } catch (error) {
+          console.error("Erro ao carregar emblema na tela de seção", error);
+        }
+
+        try {
+          const streakArmazenada = await AsyncStorage.getItem("userStreak");
+          setStreak(streakArmazenada ? parseInt(streakArmazenada, 10) : 0);
+
+          const lastDate = await AsyncStorage.getItem("lastStreakDate");
+          setLastStreakDate(lastDate);
+        } catch (error) {
+          console.error("Erro ao carregar dados do streak", error);
         }
       };
 
@@ -140,7 +160,8 @@ const QuizScreen = () => {
 
   const finalizarQuiz = async () => {
     try {
-      await updateQuizBD(score, 403); //403 eh o id do quiz
+      await updateQuizBD(score, 401); //401 eh o id do quiz
+      
     } catch (err) {
       console.error("Erro ao atualizar quiz:", err);
     }
@@ -151,23 +172,6 @@ const QuizScreen = () => {
       await updateCoinsBD(newCoin);
     } catch (e) {
       console.error("Erro ao salvar o coin:", e);
-    }
-  };
-
-  const saveStreak = async (newStreak: number) => {
-    try {
-      await updateStreakBD(newStreak);
-      console.log(newStreak);
-    } catch (e) {
-      console.error("Erro ao salvar o streak:", e);
-    }
-  };
-
-  const saveLastStreakDate = async (date: Date) => {
-    try {
-      await AsyncStorage.setItem(LAST_STREAK_DATE_KEY, date.toISOString());
-    } catch (e) {
-      console.error("Erro ao salvar a data do streak:", e);
     }
   };
 
@@ -214,9 +218,9 @@ const QuizScreen = () => {
           setStreak(parseInt(streakValue, 10));
         }
         const lastStreakDate = await AsyncStorage.getItem(LAST_STREAK_DATE_KEY);
-        if (lastStreakDate != null) {
+        /*if (lastStreakDate != null) {
           setLastStreakDate(new Date(lastStreakDate));
-        }
+        }*///comentando pra ver se funciona sem ASS: torres
       } catch (error) {
         console.error("Erro ao carregar as coins do usuário", error);
       }
@@ -281,7 +285,7 @@ const QuizScreen = () => {
     }
   };
 
-  const handleConfirmAnswer = () => {
+  const handleConfirmAnswer = async () => {
     if (!selectedAnswer) {
       Alert.alert(
         "Atenção",
@@ -293,6 +297,47 @@ const QuizScreen = () => {
     setAnswered(true);
 
     if (selectedAnswer === questions[currentQuestionIndex].correctAnswer) {
+      // Lógica da streak diária
+      const today = new Date();
+      const todayString = today.toISOString().slice(0, 10);
+
+      // A streak so aumenta se for a primeira resposta correta do dia
+      if (lastStreakDate !== todayString) {
+        const yestarday = new Date(today);
+        yestarday.setDate(today.getDate() - 1);
+
+        let newStreak = 1; // inicia ou reinicia a streak
+
+        if (lastStreakDate === yestarday.toISOString().slice(0, 10)) {
+          newStreak = streak + 1; // continua a streak
+        }
+
+        try {
+          setStreak(newStreak);
+          setLastStreakDate(todayString);
+
+          await AsyncStorage.setItem("userStreak", newStreak.toString());
+          await AsyncStorage.setItem("lastStreakDate", todayString);
+          await updateStreakBD(newStreak);
+          const today = new Date();
+          const todayStr = today.toISOString().slice(0, 10);
+          await updatelastStreakDateBD(todayStr);
+          streakEventEmitter.emit("streakAtualizada");
+
+          if (newStreak == 1) {
+            Alert.alert(
+              "Sequencia iniciada!",
+              `Você iniciou uma streak de ${newStreak} dia! Mantenha o ritmo!`
+            );
+          } else {
+            Alert.alert(
+              "Sequencia atualizada!",
+              `Sua streak diária é de ${newStreak} dias! Continue assim!`
+            );
+          }
+        } catch (error) {}
+      }
+
       setScore(score + 1);
       let pointsToAdd = 0;
       if (quizMode === "initial") {
@@ -311,7 +356,7 @@ const QuizScreen = () => {
 
       Animated.parallel([
         Animated.timing(animatedValue, {
-          toValue: 20, // Move para cima
+          toValue: 20, // Move para a direita
           duration: 800,
           useNativeDriver: true,
         }),
@@ -324,21 +369,6 @@ const QuizScreen = () => {
       ]).start(() => {
         setShowCoinsIncrease(false); // Esconde o componente no final da animação
       });
-
-      // Lógica da streak diária
-      const today = new Date();
-      const isNewDay =
-        !lastStreakDate ||
-        today.toDateString() !== lastStreakDate.toDateString();
-
-      // LÓGICA DE AUMENTAR SÓ UMA VEZ POR DIA
-      if (isNewDay) {
-        setStreak((prevStreak) => prevStreak + 1);
-        setLastStreakDate(today);
-        saveStreak(streak + 1);
-        saveLastStreakDate(today);
-      }
-      // saveStreak(streak + 1);
     } else {
       setIncorrectQuestions([
         ...incorrectQuestions,

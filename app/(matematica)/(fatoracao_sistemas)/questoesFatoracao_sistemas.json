@@ -8,7 +8,7 @@
       "88",
       "98"
     ],
-    "correctAnswer": "12"
+    "correctAnswer": "68"
   },
   {
     "id": "2",
@@ -20,7 +20,7 @@
       "7,10.$10^6$, Belo Horizonte e São Paulo."
     ],
     "image": "./q2.png",
-    "correctAnswer": "12"
+    "correctAnswer": "1,68.$10^8$, 5561 municípios."
   },
   {
     "id": "3",
@@ -32,7 +32,7 @@
       "diminuiu entre os meses de fevereiro e março."
     ],
     "image": "./q3.png",
-    "correctAnswer": "12"
+    "correctAnswer": "diminuiu entre os meses de fevereiro e março."
   },
   {
     "id": "4",
@@ -43,7 +43,7 @@
       "o líder será o aluno D, se n = 2132.",
       "o líder será o aluno F, se n = 2133."
     ],
-    "correctAnswer": "12"
+    "correctAnswer": "o aluno C jamais será líder."
   },
   {
     "id": "5",
@@ -54,7 +54,7 @@
       "$a^2$",
       "$\\sqrt{a}$"
     ],
-    "correctAnswer": "12"
+    "correctAnswer": "$\\sqrt{a}$"
   },
   {
     "id": "6",
@@ -66,7 +66,7 @@
       "51"
     ],
     "image": "./q6.png",
-    "correctAnswer": "12"
+    "correctAnswer": "45"
   },
   {
     "id": "7",
@@ -88,7 +88,7 @@
       "20",
       "22"
     ],
-    "correctAnswer": "12"
+    "correctAnswer": "18"
   },
   {
     "id": "9",
@@ -99,7 +99,7 @@
       "118",
       "120"
     ],
-    "correctAnswer": "12"
+    "correctAnswer": "114"
   },
   {
     "id": "10",
@@ -110,7 +110,7 @@
       "1/4",
       "4"
     ],
-    "correctAnswer": "12"
+    "correctAnswer": "1/27"
   },
   {
     "id": "11",
@@ -122,7 +122,7 @@
       "9"
     ],
     "image": "./q11.png",
-    "correctAnswer": "12"
+    "correctAnswer": "7"
   },
   {
     "id": "12",
@@ -133,6 +133,6 @@
       "12345678.9 + 9",
       "123456789.9 + 10"
     ],
-    "correctAnswer": "12"
+    "correctAnswer": "123456789.9 + 10"
   }
 ]

@@ -5,6 +5,7 @@ import {
     saveToken,
 } from "./manipulacaoTokens";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { Personagem } from "@/components/ui/Personagem";
 
 export async function validaCadastro(nome, email, senha, todayString) {
     try {
@@ -95,6 +96,26 @@ export async function validaLogin(email, senha) {
             await AsyncStorage.setItem("dataProva", data.dataProva);
             await AsyncStorage.setItem("inicioEstudo", data.dataInicio);
             await AsyncStorage.setItem("lastStreakDate", data.lastStreakDate);
+            await AsyncStorage.setItem("bestStreak", data.bestStreak.toString());
+            
+            //SALVANDO PERSONAGEM
+            const customizacoes = ({
+                background: data.background,
+                ears: data.ears,
+                cheeks: data.cheeks,
+                face: data.face,
+                eyes: data.eyes,
+                mouth: data.mouth,
+                bangs: data.bangs,
+                hair: data.hair,
+                nose: data.nose,
+                //faceColor: data.faceColor,
+                //faceShadowColor: CORES_ROSTO[0].sombra,
+            });
+            await AsyncStorage.setItem(
+                "userCharacter",
+                JSON.stringify(customizacoes)
+            );
             Alert.alert("Sucesso", data.message);
             return true;
         } else {
@@ -125,7 +146,7 @@ export async function checkQuizCompleted(idQuiz) {
 
         const text = await response.text();
         let data;
-        
+
         try {
             data = JSON.parse(text);
         } catch (err) {
@@ -165,7 +186,7 @@ export async function updateQuizBD(acertos, idQuiz) {
 
         const text = await response.text();
         let data;
-        
+
         try {
             data = JSON.parse(text);
         } catch (err) {
@@ -204,7 +225,7 @@ export async function updatePersonalizacoesBD(itemId) {
 
         const text = await response.text();
         let data;
-        
+
         try {
             data = JSON.parse(text);
         } catch (err) {

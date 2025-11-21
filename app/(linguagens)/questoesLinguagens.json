@@ -1,0 +1,119 @@
+[
+  {
+    "id": "1",
+    "question": "(PUCCAMP/SP) Identifique a alternativa em que o pensamento é formulado de forma contraditória:",
+    "options": [
+      "A) O compositor Pestana expirou naquela madrugada, às quatro horas e cinco minutos, bem com os homens e mal consigo mesmo.",
+      "B) Na falta de alternativas, acabou optando pela que lhe pareceu a mais barata: passar as férias com os pais.",
+      "C) “Nem vem que não tem”, disse-me o menino ressabiado, pensando que eu fosse algum agente do Juizado.",
+      "D) Há males que vêm para bem: a gripe que me obrigou ao repouso deu-me a oportunidade de descobrir Cervantes."
+    ],
+    "correctAnswer": ""
+  },
+  {
+    "id": "2",
+    "question": "Numere os períodos de modo a constituírem um texto coeso e coerente e, depois, indique a sequência numérica correta.\n\n( ) Por isso era desprezado por amplos setores, visto como resquício da era do capitalismo desalmado.\n( ) Durante décadas, Friedman - que hoje tem 85 anos e há muito aposentou-se da Universidade de Chicago - foi visto como uma espécie de pária brilhante.\n( ) Mas isso mudou; o impacto de Friedman foi tão grande que ele já se aproxima do status de John Maynard Keynes (1883-1945) como o economista mais importante do século.\n( ) Foi apenas nos últimos 10 a 15 anos que Milton Friedman começou a ser visto como realmente é: o mais influente economista vivo desde a Segunda Guerra Mundial.\n( ) Ele exaltava a 'liberdade', louvava os 'livres mercados' e criticava o 'excesso de intervenção governamental.'",
+    "options": [
+      "A) 4, 2, 5, 1, 3",
+      "B) 1, 2, 5, 3, 4",
+      "C) 3, 1, 5, 2, 4",
+      "D) 5, 2, 4, 1, 3",
+      "E) 2, 5, 4, 3, 1."
+    ],
+    "correctAnswer": ""
+  },
+  {
+    "id": "3",
+    "question": "Numere os períodos de modo a constituírem um texto coeso e coerente e, depois, indique a sequência numérica correta.\n\n( ) Na verdade, significa aquilo que um liberal americano descreveria (sem estar totalmente correto, porém) como conservadorismo.\n( ) Nos Estados Unidos, liberalismo significa a atuação de um governo ativista e intervencionista, que expande seu envolvimento e as responsabilidades que assume, estendendo-os à economia e à tomada centralizada de decisões.\n( ) A guerra global entre estado e mercado contrapõe 'liberalismo' a 'liberalismo'.\n( ) No resto do mundo, liberalismo significa quase o oposto.\n( ) Esta última definição contém o sentido tradicional dado ao liberalismo.\n( ) Esse tipo de liberalismo defende a redução do papel do Estado, a maximização da liberdade individual, da liberdade econômica e do papel do mercado.",
+    "options": [
+      "A) 1, 5, 3, 4, 2, 6",
+      "B) 3, 1, 4, 5, 6, 2",
+      "C) 2, 4, 5, 3, 6, 1",
+      "D) 4, 2, 1, 3, 6, 5",
+      "E) 1, 3, 2, 6, 5, 4"
+    ],
+    "correctAnswer": ""
+  },
+  {
+    "id": "4",
+    "question": "Assinale o segmento que apresenta erro de concordância.",
+    "options": [
+      "A) As empresas estrangeiras registram o capital que investe no país como empréstimos feitos pela matriz para poder remeter os juros às matrizes sem pagar imposto de renda. Há muitas propostas para reduzir a evasão fiscal no país. Uma delas é a cobrança de imposto sobre o faturamento das empresas.",
+      "B) No sistema financeiro, 34% dos créditos reconhecidos com a Receita estão com o pagamento suspenso por causa de liminares. As empresas deixaram de pagar cerca de 12 bilhões de reais em impostos nos últimos cinco anos, dos quais 3,5 bilhões seriam devidos pelos bancos.",
+      "C) O motivo: a Lei no 8200, de 1991, permitiu a correção monetária das despesas nos balanços, mas não fez o mesmo com as receitas. Boa parte dos dólares aplicados por investidores estrangeiros no país seria de brasileiros. O dinheiro, depositado em paraísos fiscais, retorna ao país sob a forma de investimento em ações e em aplicações de renda fixa, sem identificação do titular da conta, e sai sem pagar imposto algum.",
+      "D) As empresas acumulam prejuízos de 183 bilhões de reais e querem transformá-los em créditos com o Fisco. Desse total, 23 bilhões são contabilizados nas instituições financeiras. Se esse volume de recursos fosse usado de uma só vez, equivaleria a mais de um ano de arrecadação.",
+      "E) Das 530 maiores empresas do país, metade não pagou imposto de renda em 1997. O mesmo ocorreu com os bancos. Das 66 maiores instituições financeiras, 42% não recolheram imposto de renda. A Receita tem 115 bilhões de reais a receber em impostos devidos pelas empresas que não foram pagos por causa do que se chamou de “indústria de liminares”."
+    ],
+    "correctAnswer": ""
+  },
+  {
+    "id": "5",
+    "question": "Assinale a opção que preenche, de forma coesa e coerente, as lacunas do texto abaixo. O fenômeno da globalização econômica ocasionou uma série ampla e complexa de mudanças sociais no nível interno e externo da sociedade, afetando, em especial, o poder regulador do Estado. __________________ a estonteante rapidez e abrangência ________ tais mudanças ocorrem, é preciso considerar que em qualquer sociedade, em todos os tempos, a mudança existiu como algo inerente ao sistema social.",
+    "options": [
+      "A) Não obstante - com que",
+      "B) Portanto - de que",
+      "C) De maneira que - a que",
+      "D) Porquanto - ao que",
+      "E) Quando - de que"
+    ],
+    "correctAnswer": ""
+  },
+  {
+    "id": "6",
+    "question": "Marque a sequência que completa corretamente as lacunas para que o trecho a seguir seja coerente. A visão sistêmica exclui o diálogo, de resto necessário numa sociedade ________ forma de codificação das relações sociais encontrou no dinheiro uma linguagem universal. A validade dessa linguagem não precisa ser questionada, ________ o sistema funciona na base de imperativos automáticos que jamais foram objeto de discussão dos interessados.",
+    "options": [
+      "A) em que - posto que",
+      "B) onde - em que",
+      "C) cuja - já que",
+      "D) na qual - todavia",
+      "E) já que - porque"
+    ],
+    "correctAnswer": ""
+  },
+  {
+    "id": "7",
+    "question": "Assinale a alternativa que traz consideração ADEQUADA sobre o cartum a seguir.",
+    "options": [
+      "A) A situação retratada explica as razões do desemprego no País.",
+      "B) O humor é produzido pela interpretação maliciosa que o patrão dá à pergunta do empregado.",
+      "C) No cartum, tematiza-se a falta de ética de empresários.",
+      "D) A informação contida no último balão é decisiva para que o leitor consiga identificar o papel social dos interlocutores envolvidos: patrão e empregado."
+    ],
+    "image": "./imagens/q7.png",
+    "correctAnswer": ""
+  },
+  {
+    "id": "8",
+    "question": "Coloque D se a palavra entre asteriscos (*) estiver no sentido denotativo ou C se estiver no sentido conotativo.\n__'Amor é *fogo* que arde sem se ver' (Camões)\n__'Um *trem-de-ferro* é coisa mecânica...'(Adélia Prado)\n__'Um *fogo* queimou dentro de mim'(Boca Livre)\n__'O time *explodiu* de alegria ao ganhar a partida.'\n__'A bomba *explodiu* matando várias pessoas.'",
+    "options": [
+      "A) C - D - C - C - D",
+      "B) D - D - C - D - C",
+      "C) C - C - C - D - D",
+      "D) D - C - D - C - D",
+      "E) C - D - D - C - C"
+    ],
+    "correctAnswer": ""
+  },
+  {
+    "id": "9",
+    "question": "Poema do nadador\n\nA água é falsa, a água é boa.\nNada, nadador!\nA água é manda, a água é doida,\nAqui é fria, ali é morna,\nA água é fêmea.\nNada, nadador!\nA água sobe, a água desce,\nA água é mansa, a água é doida.\nNada, nadador!\nA água te lambe, a água te abraça\nA água te leva, a água te mata.\nNada, nadador!\nSenão, que restará de ti, nadador?\nNada, nadador.\n\nJorge de Lima\n\nA leitura do poema nos permite todas as interpretações abaixo, EXCETO:",
+    "options": [
+      "A) A luta não é vã: o homem deve continuar lutando, insistindo.",
+      "B) Nadar, na verdade, é o próprio nada e reflete a inutilidade de tudo.",
+      "C) O poema apresenta uma oposição básica entre o nadador, uno e a água, ambígua.",
+      "D) A água, no poema, simboliza a condição humana: instável, alternando momentos grandiosos e mesquinhos."
+    ],
+    "correctAnswer": ""
+  },
+  {
+    "id": "10",
+    "question": "(MACKENZIE/2010) Planeta sustentável: conhecimento por um mundo melhor\n\nVocê sabia que com pouco esforço é possível ajudar o planeta e o seu bolso? Ao usarmos a energia elétrica para aparelhos eletrônicos e lâmpadas também emitimos 1gás carbônico, um dos principais gases do 6efeito estufa. Atitudes simples como trocar lâmpadas incandescentes pelas 4 fluorescentes e puxar da tomada os aparelhos que não estão em uso reduzirão a sua conta de luz e as nossas emissões de 2CO2 na atmosfera. Assinale a alternativa que indica recurso empregado no texto.",
+    "options": [
+      "A) Intertextualidade, já que se pode notar apropriação explícita e marcada, por meio de citações, de trechos de outros textos.",
+      "B) Conotação, uma vez que o texto emprega em toda a sua extensão uma linguagem que adota tom pessoal e subjetivo.",
+      "C) Denotação, pois há a utilização objetiva de palavras e expressões que destacam a presença da função referencial.",
+      "D) Metalinguagem, uma vez que a linguagem adotada serve exclusivamente para tratar da própria linguagem."
+    ],
+    "correctAnswer": ""
+  }
+]

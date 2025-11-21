@@ -20,12 +20,13 @@ import { useRouter, useFocusEffect } from "expo-router";
 import { LinearGradient } from "expo-linear-gradient";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { Colors, Fonts } from "@/constants/Colors";
-import initialQuestions from "./questoesFatoracao_sistemas.json";
-import { updateCoinsBD, updateStreakBD, updatelastStreakDateBD } from "@/utils/api/conexaoFetch";
+import initialQuestions from "./questoesLinguagens.json";
+import { updateCoinsBD, updatelastStreakDateBD, updateStreakBD } from "@/utils/api/conexaoFetch";
 import { MathJaxSvg } from "react-native-mathjax-html-to-svg";
 import { streakEventEmitter } from "@/utils/events/streakEvents";
 
-import { updateQuizBD } from "@/utils/api/conexaoFetch";
+import { updateQuizBD, checkCompletedQuizes } from "@/utils/api/conexaoFetch";
+import { SECOES_PARA_EMBLEMAS, EMBLEMAS } from "@/constants/dadosEmblemas";
 
 const personagemInicial = {
   background: "background1",
@@ -51,10 +52,7 @@ interface Question {
 }
 
 const imageMap: { [key: string]: any } = {
-  "./q2.png": require("./q2.png"),
-  "./q3.png": require("./q3.png"),
-  "./q6.png": require("./q6.png"),
-  "./q11.png": require("./q11.png"),
+  "./imagens/q7.png": require("./imagens/q7.png"),
 };
 
 let tamanhoMathJax = 0;
@@ -408,7 +406,7 @@ const QuizScreen = () => {
     }
   };
 
-  const handleNextQuestion = () => {
+  const handleNextQuestion = async () => {
     //Limpa o timer e seta o tempo para 120s de novo
     clearInterval(timerRef.current!);
     setTimer(tempoDeCadaQuestao);
@@ -420,20 +418,7 @@ const QuizScreen = () => {
       setAnswered(false);
     } else {
       setShowScore(true);
-      saveQuizState({
-        currentQuestionIndex: nextQuestion,
-        score:
-          score +
-          (selectedAnswer === questions[currentQuestionIndex].correctAnswer
-            ? 1
-            : 0),
-        incorrectQuestions:
-          selectedAnswer === questions[currentQuestionIndex].correctAnswer
-            ? incorrectQuestions
-            : [...incorrectQuestions, questions[currentQuestionIndex]],
-        quizMode,
-        questions: questions,
-      });
+      finalizarQuiz(); //salva  a pontuação no BD
     }
   };
 
@@ -476,14 +461,20 @@ const QuizScreen = () => {
       <View style={styles.startScreen}>
         <View style={styles.startHeader}>
           <TouchableOpacity
-            onPress={() => router.replace("/(matematica)/(fatoracao_sistemas)/fat_sis")}
+            onPress={() =>
+              router.replace("/(linguagens)/telaUnidadesLing")
+            }
             style={styles.backButton}
           >
             <Ionicons name="arrow-back" size={24} color="black" />
           </TouchableOpacity>
         </View>
         <View style={styles.personagemContainer}>
-          <Personagem size={150} customizations={customizacoes} />
+          <Personagem
+            size={150}
+            customizations={customizacoes}
+            emblemId={selectedEmblem}
+          />
         </View>
 
         <View style={styles.startTextContainer}>
@@ -493,7 +484,7 @@ const QuizScreen = () => {
 
           <Text style={styles.startTitle}>
             Preparado para o Quiz sobre{" "}
-            <Text style={styles.differentText}>Fatoração e Sistemas Lineares?</Text>
+            <Text style={styles.differentText}>Linguagens?</Text>
           </Text>
 
           <Text style={styles.startSubtitle}>
@@ -522,11 +513,11 @@ const QuizScreen = () => {
         locations={[0, 1]}
         colors={["rgba(107, 145, 226, 0.8)", "rgba(255, 255, 255, 0.8)"]}
       >
-
-
         <View style={styles.startHeader}>
           <TouchableOpacity
-            onPress={() => router.replace("/(matematica)/(fatoracao_sistemas)/fat_sis")}
+            onPress={() =>
+              router.replace("/(linguagens)/telaUnidadesLing")
+            }
             style={styles.backButton2}
           >
             <Ionicons name="arrow-back" size={24} color="black" />
@@ -549,10 +540,11 @@ const QuizScreen = () => {
                   },
                 ]}
               >
-                <Text style={styles.coinsIncreaseText}>+{coinsIncreaseAmount}</Text>
+                <Text style={styles.coinsIncreaseText}>
+                  +{coinsIncreaseAmount}
+                </Text>
               </Animated.View>
             )}
-
           </View>
         </View>
 
@@ -577,11 +569,9 @@ const QuizScreen = () => {
           }}>
             ⏳ {timer}s
           </Text>
-          
         </View>
 
         <ScrollView contentContainerStyle={styles.quizScrollViewContent}>
-
           <View style={styles.questionContainer}>
             <View style={styles.questionBox}>
               {currentQuestion.image && (
@@ -591,7 +581,7 @@ const QuizScreen = () => {
                 />
               )}
               <Text style={styles.questionText}>
-                {parseAndRenderMathOptions2(currentQuestion.question)}
+                {currentQuestion.question}
               </Text>
             </View>
 
@@ -636,7 +626,7 @@ const QuizScreen = () => {
             )}
           </View>
         </ScrollView>
-      </LinearGradient >
+      </LinearGradient>
     );
   };
 
@@ -649,10 +639,9 @@ const QuizScreen = () => {
       locations={[0, 1]}
       colors={["rgba(107, 145, 226, 0.8)", "rgba(255, 255, 255, 0.8)"]}
     >
-
       <View style={styles.startHeader}>
         <TouchableOpacity
-          onPress={() => router.replace("/(matematica)/(fatoracao_sistemas)/fat_sis")}
+          onPress={() => router.replace("/(linguagens)/telaUnidadesLing")}
           style={styles.backButton2}
         >
           <Ionicons name="arrow-back" size={24} color="black" />
@@ -675,15 +664,15 @@ const QuizScreen = () => {
                 },
               ]}
             >
-              <Text style={styles.coinsIncreaseText}>+{coinsIncreaseAmount}</Text>
+              <Text style={styles.coinsIncreaseText}>
+                +{coinsIncreaseAmount}
+              </Text>
             </Animated.View>
           )}
-
         </View>
       </View>
 
       <ScrollView contentContainerStyle={styles.scoreScrollViewContent}>
-
         <View style={styles.scoreContent}>
           <Image
             style={styles.trofeuIcon}
@@ -701,15 +690,10 @@ const QuizScreen = () => {
             title="REFAZER QUESTÕES ERRADAS"
             disabled={incorrectQuestions.length === 0}
           />
-          <BotaoCustomizado
-            onPress={() =>
-              router.replace("/(matematica)/(equacoes)/equacoes")
-            }
-            title="IR PARA O PRÓXIMO MÓDULO"
-          />
+          {/* Tirei a opção de ir para o próximo módulo pq não tem */}
         </View>
       </ScrollView>
-    </LinearGradient >
+    </LinearGradient>
   );
 
   // --- renderização ---
@@ -773,31 +757,33 @@ const parseAndRenderMathOptions2 = (text: string) => {
   return (
     <Text style={styles.optionText}>
       {parts.map((part, index) => {
-        if (part.startsWith('$$') && part.endsWith('$$')) {
+        if (part.startsWith("$$") && part.endsWith("$$")) {
           // Fórmulas em display mode
           return (
             <View key={index}>
               <MathJaxSvg
                 key={`math-display-${index}`}
                 fontSize={tamanhoMathJax}
-                color={styles.optionText.color}>
+                color={styles.optionText.color}
+              >
                 {part}
               </MathJaxSvg>
             </View>
           );
         }
-        if (part.startsWith('$') && part.endsWith('$')) {
+        if (part.startsWith("$") && part.endsWith("$")) {
           // Fórmulas inline
           return (
             <MathJaxSvg
               key={`math-inline-${index}`}
               fontSize={tamanhoMathJax}
-              color={styles.optionText.color}>
+              color={styles.optionText.color}
+            >
               {part}
             </MathJaxSvg>
           );
         }
-        if (part.startsWith('**') && part.endsWith('**')) {
+        if (part.startsWith("**") && part.endsWith("**")) {
           // Texto em negrito
           return (
             <Text key={`bold-${index}`} style={styles.boldText}>
@@ -919,13 +905,13 @@ const styles = StyleSheet.create({
 
   coinIcon: {
     width: 30,
-    height: 30
+    height: 30,
   },
 
   coinNumber: {
     fontSize: 18,
     fontWeight: "bold",
-    marginLeft: 5
+    marginLeft: 5,
   },
 
   questionContainer: { flex: 1, justifyContent: "center" },
@@ -999,7 +985,7 @@ const styles = StyleSheet.create({
   scoreButtonContainer: {
     width: "90%",
     gap: 40,
-    alignItems: "center"
+    alignItems: "center",
   },
 
   //animação de pontuação

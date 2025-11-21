@@ -509,59 +509,45 @@ export const unidadesGeografia = [
 
 export const unidadesHistoria = [
   {
-    title: "Carga Elétrica",
+    title: "Brasil Império (1822-1889)",
     // description:
     //   "Conceitos básicos, tipos de conjuntos numéricos (naturais, inteiros, racionais, etc.) e operações como MMC e MDC.",
     Icon: IconConjuntos,
-    route: "/(eletricidade)/(carga)/carga", 
+    route: "/(historia)/(imperio)/imperio", 
   },
   {
-    title: "Processos de Eletrização",
+    title: "Primeira/Velha República (1889-1930)",
     // description:
     //   "Propriedades e regras das operações, notação científica e racionalização de denominadores.",
     Icon: IconPotencia,
-    route: "/(eletricidade)/(eletrizacao)/eletrizacao",
+    route: "/(historia)/(republica)/republica",
   },
   {
-    title: "Corrente Elétrica",
+    title: "Era Vargas (1930-1945 e 1951-1954)",
     // description:
     //   "Simplificação de expressões algébricas e métodos de adição e substituição para resolver sistemas.",
     Icon: IconFatoracao,
-    route: "/(eletricidade)/(corrente)/corrente",
+    route: "/(historia)/(vargas)/vargas",
   },
   {
-    title: "Resistência Elétrica",
+    title: "Nacional-Desenvolvimentismo (1955-1964)",
     // description:
     //   "Simplificação de expressões algébricas e métodos de adição e substituição para resolver sistemas.",
     Icon: IconFatoracao,
-    route: "/(eletricidade)/(resistencia)/resistencia",
+    route: "/(historia)/(desenvolvimentismo)/desenvolvimentismo",
   },
   {
-    title: "Geradores de Corrente Elétrica",
+    title: "Ditadura Militar (1964-1985)",
     // description:
     //   "Simplificação de expressões algébricas e métodos de adição e substituição para resolver sistemas.",
     Icon: IconFatoracao,
-    route: "/(eletricidade)/(geradores)/geradores",
+    route: "/(historia)/(ditadura)/ditadura",
   },
   {
-    title: "Resistores",
+    title: "Nova República (1985 em diante)",
     // description:
     //   "Simplificação de expressões algébricas e métodos de adição e substituição para resolver sistemas.",
     Icon: IconFatoracao,
-    route: "/(eletricidade)/(resistores)/resistores",
-  },
-  {
-    title: "Potência Elétrica e Efeito Joule",
-    // description:
-    //   "Simplificação de expressões algébricas e métodos de adição e substituição para resolver sistemas.",
-    Icon: IconFatoracao,
-    route: "/(eletricidade)/(potencia)/potencia",
-  },
-  {
-    title: "Consumo de Energia Elétrica",
-    // description:
-    //   "Simplificação de expressões algébricas e métodos de adição e substituição para resolver sistemas.",
-    Icon: IconFatoracao,
-    route: "/(eletricidade)/(consumo)/consumo",
+    route: "/(historia)/(nova)/nova",
   },
 ];

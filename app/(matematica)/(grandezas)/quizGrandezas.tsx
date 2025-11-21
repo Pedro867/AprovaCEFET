@@ -39,7 +39,7 @@ const personagemInicial = {
   nose: "nariz1",
   faceColor: "#F8B788",
   faceShadowColor: "#D1A37E",
-}as const;
+} as const;
 
 // --- TIPAGEM ---
 interface Question {
@@ -89,6 +89,10 @@ const QuizScreen = () => {
 
   const [lastStreakDate, setLastStreakDate] = useState<string | null>(null);
   const [streak, setStreak] = useState(0);
+
+  const tempoDeCadaQuestao = 120; // 120 segundos por questão
+  const [timer, setTimer] = useState(tempoDeCadaQuestao);
+  const timerRef = useRef<NodeJS.Timeout | null>(null);
 
   const router = useRouter();
 
@@ -161,7 +165,7 @@ const QuizScreen = () => {
   const finalizarQuiz = async () => {
     try {
       await updateQuizBD(score, 401); //401 eh o id do quiz
-      
+
     } catch (err) {
       console.error("Erro ao atualizar quiz:", err);
     }
@@ -275,6 +279,31 @@ const QuizScreen = () => {
     loadInitialData();
   }, []);
 
+  // Cronômetro de cada questão
+  useEffect(() => {
+    if (answered) return; // para de contar quando a pessoa já respondeu
+
+    setTimer(tempoDeCadaQuestao); // tempo inicial
+
+    timerRef.current = setInterval(() => {
+      setTimer((prev) => {
+        if (prev <= 1) {
+          clearInterval(timerRef.current!);
+
+          // Marca automaticamente como errado
+          setAnswered(true);
+          setIncorrectQuestions((old) => [
+            ...old,
+            questions[currentQuestionIndex],
+          ]);
+        }
+        return prev - 1;
+      });
+    }, 1000);
+
+    return () => clearInterval(timerRef.current!);
+  }, [currentQuestionIndex, answered]);
+
   const handleStartQuiz = () => {
     setQuizStarted(true);
   };
@@ -293,6 +322,8 @@ const QuizScreen = () => {
       );
       return;
     }
+
+    clearInterval(timerRef.current!);// limpa o timer
 
     setAnswered(true);
 
@@ -335,7 +366,7 @@ const QuizScreen = () => {
               `Sua streak diária é de ${newStreak} dias! Continue assim!`
             );
           }
-        } catch (error) {}
+        } catch (error) { }
       }
 
       setScore(score + 1);
@@ -377,6 +408,10 @@ const QuizScreen = () => {
     }
   };
   const handleNextQuestion = () => {
+    //Limpa o timer e seta o tempo para 120s de novo
+    clearInterval(timerRef.current!);
+    setTimer(tempoDeCadaQuestao);
+
     const nextQuestion = currentQuestionIndex + 1;
     if (nextQuestion < questions.length) {
       setCurrentQuestionIndex(nextQuestion);
@@ -487,52 +522,62 @@ const QuizScreen = () => {
         colors={["rgba(107, 145, 226, 0.8)", "rgba(255, 255, 255, 0.8)"]}
       >
 
-          <View style={styles.startHeader}>
-            <TouchableOpacity
-              onPress={() => router.replace("/(matematica)/(grandezas)/grandezas")}
-              style={styles.backButton2}
-            >
-              <Ionicons name="arrow-back" size={24} color="black" />
-            </TouchableOpacity>
+        <View style={styles.startHeader}>
+          <TouchableOpacity
+            onPress={() => router.replace("/(matematica)/(grandezas)/grandezas")}
+            style={styles.backButton2}
+          >
+            <Ionicons name="arrow-back" size={24} color="black" />
+          </TouchableOpacity>
 
-            <View style={styles.coinContainer}>
-              <Image
-                source={require("@/assets/images/pontos.png")}
-                style={styles.coinIcon}
-              />
-              <Text style={styles.coinNumber}>{coins}</Text>
-
-              {showCoinsIncrease && (
-                <Animated.View
-                  style={[
-                    styles.coinsIncreaseContainer,
-                    {
-                      opacity: animatedOpacity,
-                      transform: [{ translateX: animatedValue }],
-                    },
-                  ]}
-                >
-                  <Text style={styles.coinsIncreaseText}>+{coinsIncreaseAmount}</Text>
-                </Animated.View>
-              )}
-
-            </View>
-          </View>
-
-          <View style={styles.header}>
-            <ProgressBar
-              progress={progress}
-              height={10}
-              backgroundColor="#E5E5E5"
-              progressColor="#0D1B52" // azul escuro
-              style={styles.progressBar}
+          <View style={styles.coinContainer}>
+            <Image
+              source={require("@/assets/images/pontos.png")}
+              style={styles.coinIcon}
             />
-            <Text style={styles.progressText}>
-              {currentQuestionIndex + 1} / {questions.length}
-            </Text>
-          </View>
+            <Text style={styles.coinNumber}>{coins}</Text>
 
-          <ScrollView contentContainerStyle={styles.quizScrollViewContent}>
+            {showCoinsIncrease && (
+              <Animated.View
+                style={[
+                  styles.coinsIncreaseContainer,
+                  {
+                    opacity: animatedOpacity,
+                    transform: [{ translateX: animatedValue }],
+                  },
+                ]}
+              >
+                <Text style={styles.coinsIncreaseText}>+{coinsIncreaseAmount}</Text>
+              </Animated.View>
+            )}
+
+          </View>
+        </View>
+
+        <View style={styles.header}>
+          <ProgressBar
+            progress={progress}
+            height={10}
+            backgroundColor="#E5E5E5"
+            progressColor="#0D1B52" // azul escuro
+            style={styles.progressBar}
+          />
+          <Text style={styles.progressText}>
+            {currentQuestionIndex + 1} / {questions.length}
+          </Text>
+
+          <Text style={{
+            fontSize: 22,
+            fontFamily: Fonts.family.bold,
+            paddingLeft: 5,
+            textAlign: "center",
+            color: timer <= 5 ? "red" : "#0D1B52"
+          }}>
+            ⏳ {timer}s
+          </Text>
+        </View>
+
+        <ScrollView contentContainerStyle={styles.quizScrollViewContent}>
 
           <View style={styles.questionContainer}>
             <View style={styles.questionBox}>

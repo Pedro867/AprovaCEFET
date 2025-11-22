@@ -1,5 +1,5 @@
 import {
-    Alert
+    Alert, useState
 } from "react-native";
 import {
     saveToken,
@@ -116,6 +116,13 @@ export async function validaLogin(email, senha) {
                 "userCharacter",
                 JSON.stringify(customizacoes)
             );
+
+            //SALVANDO OQ TA DESBLOQUEADO
+            await AsyncStorage.setItem(
+          "unlockedItems",
+          JSON.stringify(data.desbloqueados)
+            );
+
             Alert.alert("Sucesso", data.message);
             return true;
         } else {

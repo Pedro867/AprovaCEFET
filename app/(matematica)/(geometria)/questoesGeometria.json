@@ -56,7 +56,7 @@
       "$3(\\sqrt{3} + 2)$"
     ],
     "image": "./q5.png",
-    "correctAnswer": "nao sei"
+    "correctAnswer": "$2(\\sqrt{2} + 1)$"
   },
   {
     "id": "6",
@@ -68,6 +68,6 @@
       "30 e 75"
     ],
     "image": "./q6.png",
-    "correctAnswer": "nao sei"
+    "correctAnswer": "10 e 21"
   }
 ]

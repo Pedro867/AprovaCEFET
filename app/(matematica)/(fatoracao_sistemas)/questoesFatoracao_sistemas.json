@@ -70,14 +70,14 @@
   },
   {
     "id": "7",
-    "question": "Seja $x + y = -2$ e $3x - 2y = 19$, logo o valor de $\\frac{(y-x)^6}{(3x+y)^4}$ é:",
+    "question": "Seja $x + y = -2$ e $3x - 2y = 19$, logo o valor de $\\frac{(y-x)^6}{(3x+y)^-4}$ é:",
     "options": [
-      "226",
-      "326",
-      "-326",
-      "-226"
+      "2^26",
+      "3^26",
+      "-3^26",
+      "-2^26"
     ],
-    "correctAnswer": "12"
+    "correctAnswer": "2^26"
   },
   {
     "id": "8",

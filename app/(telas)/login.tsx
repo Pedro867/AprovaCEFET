@@ -92,11 +92,6 @@ export default function LoginScreen() {
             placeholder='Digite sua senha'
             isPassword
           />
-
-
-          <TouchableOpacity onPress={() => router.push('/forgotPassword')}>
-            <Text style={styles.forgotPassword}>Esqueceu a senha?</Text>
-          </TouchableOpacity>
         </View>
 
         <View style={styles.footerContainer}>
